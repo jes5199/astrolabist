@@ -1,0 +1,55 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import { isAfter } from "date-fns";
+
+export async function getBlogPosts() {
+  const allPosts = (await getCollection("blog"))
+    .filter((post) => post.data.published)
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+  if (allPosts.length > 0) {
+    // Add a link to the next post in each post
+    allPosts.forEach((post, index, array) => {
+      post.data.previous =
+        index < allPosts.length - 1 ? getPostData(array[index + 1]) : undefined;
+      post.data.next = index > 0 ? getPostData(array[index - 1]) : undefined;
+    });
+  }
+  return allPosts;
+}
+
+export async function getFeaturedBlogPosts() {
+  return (await getBlogPosts()).filter((post) => post.data.featured);
+}
+
+export async function getAllPosts() {
+  const [blog] = await Promise.all([getBlogPosts()]);
+  const allPosts = [...blog];
+  return allPosts.sort((a, b) => {
+    return a.data.pubDate.getTime() - b.data.pubDate.getTime();
+  });
+}
+
+export function getPostData(post: any) {
+  return {
+    slug: `/${post.collection}/${post.slug}`,
+    title: post.data.title,
+  };
+}
+
+export function formattedTime(time: string): string {
+  if (!time) return "";
+
+  // Remove any leading 0 before single digit hours
+  const withoutLeadingZero = time.replace(/^0(\d:)/, "$1");
+
+  // Remove space before AM/PM and convert to lowercase
+  return withoutLeadingZero.replace(/\s*(AM|PM)/i, (match) =>
+    match.trim().toLowerCase(),
+  );
+}
+
+export function getCollectionSlug(collection: string) {
+  return collection;
+}
+---

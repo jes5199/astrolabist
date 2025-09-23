@@ -1,0 +1,33 @@
+name: Optimize Images
+
+on:
+  push:
+    paths:
+      - "**/*.jpg"
+      - "**/*.jpeg"
+      - "**/*.png"
+  workflow_dispatch:
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up ImageMagick
+        run: |
+          sudo apt-get update
+          sudo apt-get install imagemagick -y
+
+      - name: Find and optimize large images
+        run: |
+          find . -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' \) -size +1M -exec convert {} -resize "1500x>" -strip -interlace Plane -quality 85% {} \;
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git add -A
+          git commit -m "Optimize images" -a || echo "No changes to commit"
+          git push origin HEAD:${{ github.ref }} --force

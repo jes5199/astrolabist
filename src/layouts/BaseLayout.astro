@@ -1,0 +1,71 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+}
+
+const { title, description, image = "/assets/share-img.png" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} image={image} />
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <div class="page-padding">
+        <Header />
+        <main id="main">
+          <slot />
+        </main>
+      </div>
+      <Footer />
+    </div>
+
+    <!-- replace page content with mobile menu, vice versa -->
+    <script is:inline type="text/javascript">
+      function menuToggle() {
+        var closeIcon = document.getElementById("close-icon");
+        var hamburgerIcon = document.getElementById("hamburger-icon");
+        var menu = document.getElementById("mobile-nav");
+        const body = document.body;
+        const main = document.getElementById("main");
+        const footer = document.getElementById("footer");
+
+        if (menu.style.display === "block") {
+          // Close the menu, show the hamburger icon
+          menu.style.display = "none";
+          body.classList.remove("no-scroll"); // Enable scrolling
+          closeIcon.style.display = "none";
+          hamburgerIcon.style.display = "block";
+        } else {
+          // Open the menu, show the close icon
+          menu.style.display = "block";
+          body.classList.add("no-scroll"); //disable scrolling
+          closeIcon.style.display = "block";
+          hamburgerIcon.style.display = "none";
+        }
+      }
+    </script>
+    <!-- if mobile menu is open and resize to desktop, kill menu and restore page contents -->
+    <script is:inline type="text/javascript">
+      function handleResize() {
+        const width = window.innerWidth; // Get the current viewport width
+        const mobileWidthThreshold = 768; // Set the threshold width
+        var menu = document.getElementById("mobile-nav");
+
+        if (width > mobileWidthThreshold && menu.style.display === "block") {
+          menuToggle();
+        }
+      }
+      // Add the resize event listener to the window
+      window.addEventListener("resize", handleResize);
+    </script>
+  </body><!-- if mobile menu is open and resize to desktop, kill menu and restore page contents -->
+</html>

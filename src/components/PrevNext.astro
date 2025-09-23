@@ -1,0 +1,105 @@
+---
+const { previous, next, noun = "" } = Astro.props;
+---
+
+<div class="prev-next">
+  {
+    next ? (
+      <a href={next.slug}>
+        <div class="next">
+          <div class="arrow-and-label">
+            <img src="/assets/arrow-left.svg" />
+            <p>NEXT{noun && ` ${noun}`}</p>
+          </div>
+          <div class="title">{next.title}</div>
+        </div>
+      </a>
+    ) : (
+      <div />
+    )
+  }
+  {
+    previous ? (
+      <a href={previous.slug}>
+        <div class="previous">
+          <div class="arrow-and-label">
+            <p>PREVIOUS{noun && ` ${noun}`}</p>
+            <img src="/assets/arrow-right.svg" />
+          </div>
+          <div class="title">{previous.title}</div>
+        </div>
+      </a>
+    ) : (
+      <div />
+    )
+  }
+</div>
+<style>
+  .prev-next {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 2.5rem;
+    margin-bottom: 4.5rem;
+    margin-top: 3rem;
+
+    a {
+      font-size: 1rem;
+      text-decoration: none;
+    }
+  }
+  .previous {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    a {
+      text-align: right;
+    }
+  }
+  .next {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .arrow-and-label {
+    display: flex;
+    align-items: center;
+    column-gap: 0.75rem;
+    max-width: 17rem
+    height: 3.375rem;
+    p {
+      font-size: 0.75rem;
+      margin: 0;
+      text-transform: uppercase;
+      color: var(--text-color)
+    }
+
+    img {
+      width: 22px;
+      height: 7px;
+      margin: 0;
+    }
+  }
+  .title {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--accent-2);
+
+    &:hover {
+        color: var(--accent-2);
+    }
+  }
+  @media (max-width: 680px) {
+    .prev-next {
+      margin-top: 3rem;
+
+      img {
+        height: 0.5rem;
+      }
+
+      a {
+        line-height: 1.2rem;
+      }
+    }
+  }
+</style>

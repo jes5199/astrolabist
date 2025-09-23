@@ -1,0 +1,85 @@
+---
+import Categories from "./Categories.astro";
+import PrevNext from "./PrevNext.astro";
+import FormattedDate from "./FormattedDate.astro";
+const { title, pubDate, imageUrl, imageAltText, previous, next, categories } =
+  Astro.props;
+---
+
+<article>
+  <div class="prose">
+    <div class="title">
+      <h1>{title}</h1>
+    </div>
+    <div class="date">
+      <div><FormattedDate date={pubDate} /></div>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    {imageUrl && <img src={imageUrl} alt={imageAltText} />}
+  </div>
+
+  <div class="content">
+    <slot />
+  </div>
+</article>
+{categories && <Categories categories={categories} />}
+<PrevNext previous={previous} next={next} />
+
+<style>
+  h1 {
+    margin-bottom: 1.5rem;
+  }
+  article {
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-image {
+    width: 100%;
+  }
+  .hero-image img {
+    display: block;
+    margin: 2.5rem 0;
+    width: 100%;
+  }
+
+  .content {
+    text-align: left;
+  }
+  .title {
+    line-height: 1;
+    margin: 2.5rem 0 0.5rem;
+
+    a {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      h1 {
+        margin: 0 0 0.5em 0;
+      }
+    }
+  }
+  .horizontal-line {
+    display: inline-block;
+    width: 30px;
+    height: 2px;
+    margin-right: 0.625rem;
+  }
+  .date {
+    font-size: 1rem;
+    .last-updated-on {
+      font-style: italic;
+      color: var(--accent-2);
+    }
+  }
+
+  @media (max-width: 768px) {
+    article {
+      margin-bottom: 1rem;
+    }
+  }
+</style>

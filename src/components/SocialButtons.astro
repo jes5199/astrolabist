@@ -1,0 +1,97 @@
+---
+import { getCollection } from "astro:content";
+
+const settings = await getCollection("settings");
+const socialLinks = settings[0]?.data?.social || {};
+---
+
+<div class="socialbuttons">
+  {
+    socialLinks.threads && (
+      <a href={socialLinks.threads} target="_blank" rel="noopener noreferrer">
+        <img src="/assets/social-threads.svg" alt="Threads" />
+      </a>
+    )
+  }
+  {
+    socialLinks.pinterest && (
+      <a href={socialLinks.pinterest} target="_blank" rel="noopener noreferrer">
+        <img src="/assets/social-pinterest.svg" alt="Pinterest" />
+      </a>
+    )
+  }
+  {
+    socialLinks.instagram && (
+      <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer">
+        <img src="/assets/social-instagram.svg" alt="Instagram" />
+      </a>
+    )
+  }
+  {
+    socialLinks.tiktok && (
+      <a href={socialLinks.tiktok} target="_blank" rel="noopener noreferrer">
+        <img src="/assets/social-tiktok.svg" alt="TikTok" />
+      </a>
+    )
+  }
+  {
+    socialLinks.youtube && (
+      <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer">
+        <img src="/assets/social-youtube.svg" alt="YouTube" />
+      </a>
+    )
+  }
+  {
+    socialLinks.linkedin && (
+      <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
+        <img src="/assets/social-linkedin.svg" alt="LinkedIn" />
+      </a>
+    )
+  }
+  {
+    socialLinks.facebook && (
+      <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer">
+        <img src="/assets/social-facebook.svg" alt="Facebook" />
+      </a>
+    )
+  }
+  {
+    socialLinks.bluesky && (
+      <a href={socialLinks.bluesky} target="_blank" rel="noopener noreferrer">
+        <img src="/assets/social-bluesky.svg" alt="Bluesky" />
+      </a>
+    )
+  }
+  {
+    socialLinks.mastodon && (
+      <a href={socialLinks.mastodon} target="_blank" rel="noopener noreferrer">
+        <img src="/assets/social-mastodon.svg" alt="Mastodon" />
+      </a>
+    )
+  }
+</div>
+
+<style>
+  .socialbuttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .socialbuttons a {
+    display: flex;
+    align-items: center;
+    transition: opacity 0.2s ease;
+  }
+
+  .socialbuttons a:hover {
+    opacity: 0.8;
+  }
+
+  .socialbuttons img {
+    height: 28px;
+    width: 28px;
+  }
+</style>

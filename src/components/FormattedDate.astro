@@ -1,0 +1,39 @@
+---
+interface Props {
+  date: Date;
+  short?: boolean;
+  time?: string;
+}
+
+const { date, short = false, time = "" } = Astro.props;
+const formattedDate = date
+  .toLocaleDateString("en-us", {
+    year: short
+      ? undefined
+      : new Date().getFullYear() === date.getFullYear()
+        ? undefined
+        : "numeric",
+    month: short ? "short" : "long",
+    day: "numeric",
+  })
+  .trim();
+---
+
+<span><time datetime={date.toISOString()}>{formattedDate}</time></span>
+{time && <span class="time">{time}</span>}
+<style>
+  time {
+    margin: 0;
+    color: var(--accent-2);
+    font-size: 1rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+  }
+  .time {
+    color: var(--accent-2);
+    font-size: 1rem;
+    line-height: 1.25rem;
+    margin-left: 0.25rem;
+    font-weight: 400;
+  }
+</style>

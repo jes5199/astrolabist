@@ -1,0 +1,511 @@
+@import url("./utility.css");
+
+:root {
+  --background-color: #FFFAEE;
+  --text-color: #303548;
+  --accent-color-1: #BF7B63;
+  --accent-color-2: #7B6D94;
+  --accent-color-3: #7A61A6;
+  --accent-color-4: #B85300;
+  --header-color: #9C521D;
+  --nav-selected-color: #4D2000;
+  --quote-color: #7B6D94;
+  --link-color: #7B6D94;
+  --footer-color: #392263;
+  --header-font: "Erode", sans-serif;
+  --body-font: "Erode", sans-serif;
+}
+
+@font-face {
+  font-family: "Erode";
+  src: url("/fonts/Erode-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Erode";
+  src: url("/fonts/Erode-BoldItalic.otf") format("opentype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Erode";
+  src: url("/fonts/Erode-Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Erode";
+  src: url("/fonts/Erode-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Erode";
+  src: url("/fonts/Erode-LightItalic.otf") format("opentype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Erode";
+  src: url("/fonts/Erode-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Erode";
+  src: url("/fonts/Erode-MediumItalic.otf") format("opentype");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Erode";
+  src: url("/fonts/Erode-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Erode";
+  src: url("/fonts/Erode-Semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Erode";
+  src: url("/fonts/Erode-SemiboldItalic.otf") format("opentype");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+
+body {
+  font-family: var(--body-font);
+  text-align: left;
+  background-color: var(--background-color);
+  animation: colorShift 60s infinite linear;
+  background-size: 100% 600px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  color: var(--text-color);
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.625rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  width: 100%;
+}
+
+main {
+  width: 100%;
+}
+
+main * {
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--accent-color-1);
+  font-family: var(--header-font);
+}
+
+
+h1 {
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+  font-weight: 600;
+  margin: 2.75rem 0;
+}
+
+h2 {
+  font-size: 1.75rem;
+  line-height: 1.875rem;
+  font-weight: 700;
+}
+
+h3 {
+  color: var(--accent-color-2);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.625rem;
+}
+
+h4 {
+  color: var(--accent-color-3);
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+}
+
+h5 {
+  color: var(--accent-color-4);
+  font-size: 1rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+}
+
+h6 {
+  color: var(--accent-color-4);
+  font-size: 1rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+strong,
+b {
+  font-weight: 700;
+}
+
+a {
+  color: var(--link-color);
+  font-weight: 700;
+}
+
+a:hover {
+  color: var(--accent-color-1);
+}
+
+p {
+  margin-bottom: 1em;
+  font-size: 1.25rem;
+  line-height: 2rem;
+}
+
+.prose p {
+  margin-bottom: 2em;
+}
+
+textarea {
+  width: 100%;
+  font-size: 16px;
+}
+
+input {
+  font-size: 16px;
+}
+
+table {
+  width: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+code {
+  padding: 2px 5px;
+
+  border-radius: 2px;
+}
+
+pre {
+  padding: 1.5em;
+  border-radius: 8px;
+}
+
+pre>code {
+  all: unset;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  background-color: var(--background-color);
+  color: var(--link-color);
+  font-family: var(--body-font);
+  text-decoration: none;
+  padding: 0.5rem 0;
+  margin: 1.75rem 0;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.625rem;
+
+  &:hover {
+    color: var(--accent-color-1);
+  }
+
+}
+
+blockquote {
+  margin: 2rem 0;
+  padding: 20px 0 20px 36px;
+  font-size: 1.75rem;
+  line-height: 2rem;
+  border-left: 1px solid var(--accent-color-3);
+
+  p {
+    margin: 0;
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--quote-color);
+  }
+}
+
+hr {
+  border: none;
+}
+
+figure {
+  margin: 0.75rem 0 1.125rem;
+
+  img {
+    margin: 0;
+  }
+
+  figcaption {
+    margin: 0.75rem 0 0;
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+  }
+
+  &.float-left,
+  &.float-right {
+    max-width: max(40%, 300px);
+  }
+
+  &.float-left {
+    float: left;
+    margin-right: 1.75rem;
+  }
+
+  &.float-right {
+    float: right;
+    margin-left: 1.75rem;
+  }
+}
+
+iframe {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 560 / 315;
+}
+
+ul,
+ol {
+  margin: 1rem 0;
+}
+
+/* Nested lists */
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+  margin: 0.5rem 0 0;
+}
+
+/* Style for nested unordered lists */
+ul ul {
+  list-style-type: disc;
+}
+
+ul ul ul {
+  list-style-type: circle;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+.markdown {
+  h1 {
+    font-size: 2.25rem;
+    line-height: 2.625rem;
+    margin: 3rem 0 1rem;
+  }
+}
+
+.sr-only {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  /* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
+  clip: rect(1px 1px 1px 1px);
+  /* maybe deprecated but we need to support legacy browsers */
+  clip: rect(1px, 1px, 1px, 1px);
+  /* modern browsers, clip-path works inwards from each corner */
+  clip-path: inset(50%);
+  /* added line to stop words getting smushed together (as they go onto seperate lines and some screen readers do not understand line feeds as a space */
+  white-space: nowrap;
+}
+
+.desktop-only {
+  display: block;
+}
+
+.mobile-only {
+  display: none;
+}
+
+.no-scroll {
+  overflow: hidden;
+  position: fixed;
+  /* Keep the body position fixed to prevent scrolling */
+  max-width: 100%;
+  /* Prevent horizontal scrollbar */
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-padding {
+  padding: 50px 124px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  flex: 1;
+  margin-bottom: 4rem;
+}
+
+.extra-wide {
+  width: 100%;
+  margin: 0;
+}
+
+.button-link {
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  main {
+    padding: 0;
+  }
+
+  h1 {
+    font-size: 2.25rem;
+    line-height: 2.625rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+    line-height: 2rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+  }
+
+  h4 {
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+  }
+
+  h5 {
+    font-size: 1.375rem;
+    line-height: 1.5rem;
+  }
+
+  h6 {
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+  }
+
+  figcaption {
+    font-size: 1rem;
+    line-height: 1.25rem;
+  }
+
+  blockquote,
+  blockquote p {
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+  }
+
+  button {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .page-padding {
+    padding: 1rem 2rem 0;
+    margin: 0;
+  }
+
+  .desktop-only {
+    display: none;
+  }
+
+  .mobile-only {
+    display: block;
+  }
+}
+
+@media (min-width: 1028px) {
+  .extra-wide {
+    position: relative;
+    max-width: none;
+    width: 100vw;
+    /* Full viewport width */
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    /* Align to the left edge of the viewport */
+    padding-left: 124px;
+    padding-right: 124px;
+    box-sizing: border-box;
+  }
+}
+
+@media (min-width: 1278px) {
+  .extra-wide {
+    width: 1030px;
+    padding: 0;
+    left: 50%;
+    /* Start from the center of the viewport */
+    margin-left: -515px;
+  }
+}

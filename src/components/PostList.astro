@@ -1,0 +1,139 @@
+---
+import type { CollectionEntry } from "astro:content";
+import FormattedDate from "./FormattedDate.astro";
+import { getCollectionSlug } from "../lib/postUtils.astro";
+
+const { posts } = Astro.props;
+---
+
+<ul>
+    {
+        posts.map((post: any) => (
+            <li>
+                {post.data.imageUrl && (
+                    <a href={`/${post.collection}/${post.slug}/`}>
+                        <img src={post.data.imageUrl} alt="" />
+                    </a>
+                )}
+                <a
+                    href={`/${getCollectionSlug(post.collection)}/${post.slug}/`}
+                >
+                    <h2 class="title">{post.data.title}</h2>
+                    <p class="date">
+                        <FormattedDate date={post.data.pubDate} />
+                    </p>
+                    {post.data.blurb && (
+                        <p class="excerpt">{post.data.blurb}</p>
+                    )}
+                </a>
+            </li>
+        ))
+    }
+</ul>
+<style>
+    ul {
+        max-width: 800px;
+        display: flex;
+        flex-direction: column;
+        list-style-type: none;
+        padding: 0;
+
+        a {
+            text-decoration: none;
+        }
+
+        li {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            column-gap: 1.5rem;
+            margin-bottom: 2.5rem;
+
+            h2 {
+                margin: 0;
+                color: var(--accent-color-1);
+                font-size: 1.75rem;
+                line-height: 2rem;
+            }
+
+            &:hover {
+                h2 {
+                    color: var(--accent-color-4);
+                }
+            }
+
+            a:has(img) {
+                min-width: 43%;
+                width: 43%;
+
+                img {
+                    margin: 0;
+                    aspect-ratio: 16/9;
+                    object-fit: cover;
+                    width: 100%;
+                }
+            }
+
+            a:last-child {
+                padding-top: 0.75rem;
+            }
+
+            .excerpt {
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -moz-box;
+                -moz-box-orient: vertical;
+                display: box;
+                box-orient: vertical;
+                margin: 0;
+                max-height: 6rem;
+                font-size: 1.25rem;
+                font-weight: 400;
+                color: var(--text-color);
+                line-height: 2rem;
+            }
+
+            .date {
+                margin: 0.25rem 0 0.5rem;
+                color: var(--header-color);
+                font-weight: 600;
+                font-size: 1rem;
+                line-height: 1.25rem;
+                margin: 0.75rem 0;
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        ul {
+            margin: 0;
+            li {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 2.75rem;
+
+                a,
+                a:first-child {
+                    display: block;
+                    width: 100%;
+                }
+
+                h2 {
+                    font-size: 1.5rem;
+                    line-height: 1.75rem;
+                }
+
+                .date {
+                    margin: 0.5rem 0 0.75rem;
+                }
+
+                p {
+                    font-size: 1.125rem;
+                }
+            }
+        }
+    }
+</style>
