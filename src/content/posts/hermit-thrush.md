@@ -1,8 +1,12 @@
 ---
+heroImage: /img/hermit-thrush.jpeg
 title: The Hermit Thrush
-pubDate: 2025-08-07
-blurb: "The Hermit Thrush, with its hauntingly beautiful song and elusive nature, is a treasured inhabitant of Vermont's forests. Explore the life and habits of this remarkable songbird."
-heroImage: "/img/hermit-thrush.jpeg"
+blurb: >-
+  The Hermit Thrush, with its hauntingly beautiful song and elusive nature, is a
+  treasured inhabitant of Vermont's forests. Explore the life and habits of this
+  remarkable songbird.
+pubDate: 2025-08-07T00:00:00.000Z
+published: true
 ---
 
 The Hermit Thrush (_Catharus guttatus_) is renowned for its hauntingly beautiful song, often described as the most beautiful of all North American bird songs. This shy forest dweller is a summer resident in Vermont's woodlands.
@@ -45,7 +49,7 @@ Key aspects of their breeding behavior:
 - Both parents care for young
 - Nestlings fledge in about 12 days
 
-![Hermit Thrush in Vermont forest](/img/tiger pajamas logo.png)
+!\[Hermit Thrush in Vermont forest]\(/img/tiger pajamas logo.png)
 
 ## Conservation and Threats
 

@@ -1,12 +1,17 @@
 ---
-title: "The Black-capped Chickadee"
-pubDate: 2024-08-10
-blurb: "Discover the charming Black-capped Chickadee, a small but mighty bird known for its distinctive 'chick-a-dee-dee-dee' call and remarkable memory for food caches."
-imageUrl: "/img/chickadee.jpg"
-imageAltText: "some cool thing"
-featured: true
+title: The Black-capped Chickadee
+blurb: >-
+  Discover the charming Black-capped Chickadee, a small but mighty bird known
+  for its distinctive 'chick-a-dee-dee-dee' call and remarkable memory for food
+  caches.
+pubDate: 2024-08-10T00:00:00.000Z
+imageUrl: /img/chickadee.jpg
+imageAltText: some cool thing
+tags:
+  - "2025"
+  - favorites
 published: true
-
+featured: true
 ---
 
 The Black-capped Chickadee (_Poecile atricapillus_) is Vermont's state bird and a beloved year-round resident. Known for its distinctive call and friendly nature, this small bird is a favorite among birdwatchers.
@@ -40,7 +45,7 @@ Chickadees are primarily insectivores but adapt their diet seasonally:
 - Suet and sunflower seeds at feeders
 - Caterpillars (especially important for nestlings)
 
-![Black-capped Chickadee at feeder](/img/tiger pajamas logo.png)
+!\[Black-capped Chickadee at feeder]\(/img/tiger pajamas logo.png)
 
 ## Nesting and Reproduction
 

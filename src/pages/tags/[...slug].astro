@@ -1,0 +1,62 @@
+---
+import { SITE_TITLE } from "../../consts";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import {
+  getAllPostsInOrder,
+  getBuckets,
+  getCollectionSlug,
+} from "../../lib/postUtils.astro";
+
+export async function getStaticPaths() {
+  const buckets = await getBuckets();
+  return buckets.map((bucket) => ({
+    params: { slug: bucket },
+    props: { bucket },
+  }));
+}
+
+const { bucket } = Astro.props;
+
+const allPosts = await getAllPostsInOrder();
+const filteredContent = allPosts.filter((item) =>
+  item.data.buckets?.includes(bucket)
+);
+---
+
+<BaseLayout
+  title={`${bucket} bucket - ${SITE_TITLE}`}
+  description={`Items in the ${bucket} bucket by ${SITE_TITLE}`}
+>
+  <h1 id="title">BUCKET: {bucket}</h1>
+  {
+    filteredContent.length > 0 && (
+      <section>
+        <ul>
+          {filteredContent.map((item) => (
+            <li>
+              <a href={`/${getCollectionSlug(item.collection)}/${item.slug}`}>
+                {item.data.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+  {filteredContent.length === 0 && <p>No items found in this category.</p>}
+</BaseLayout>
+
+<style>
+  h1 {
+    margin-bottom: 2.25rem;
+    color: var(--theme-lilac);
+  }
+  section {
+    margin-bottom: 4rem;
+  }
+
+  li {
+    margin-bottom: 1rem;
+    list-style: none;
+  }
+</style>

@@ -1,9 +1,9 @@
 import { defineConfig } from "tinacms";
-import categoriesData from "../src/content/categories/categories.json";
+import tagsData from "../src/content/tags/tags.json";
 
-const categoriesOptions = categoriesData.categories.map((topic: { name: string }) => ({
-  value: topic.name,
-  label: topic.name,
+const tagsOptions = tagsData.tags.map((tag: { name: string, pinToNav: boolean }) => ({
+  value: tag.name,
+  label: tag.name,
 }));
 
 // Your hosting provider likely exposes this as an environment variable
@@ -35,31 +35,37 @@ export default defineConfig({
   schema: {
     collections: [
       {
-        name: "categories",
-        label: "Categories",
-        path: "src/content/categories",
+        name: "tags",
+        label: "Tags",
+        path: "src/content/tags",
         format: "json",
         defaultItem: {
-          topics: [],
+          tags: [],
         },
         fields: [
           {
             type: "object",
-            name: "categories",
-            label: "Categories",
+            name: "tags",
+            label: "Tags",
             list: true,
             ui: {
               itemProps: (item) => ({
-                label: item.name || "New Category",
+                label: item.name || "New Tag",
               }),
             },
             fields: [
               {
                 type: "string",
                 name: "name",
-                label: "Category Name",
+                label: "Tag Name",
                 required: true,
               },
+              {
+                type: "boolean",
+                name: "pinToNav",
+                label: "Pin to Nav (recommend max 3)",
+                required: false,
+              }
             ],
           },
         ],
@@ -111,7 +117,7 @@ export default defineConfig({
             type: "string",
             name: "imageAltText",
             label: "Image Alt Text",
-            required: true,
+            required: false,
           },
           {
             type: "rich-text",
@@ -120,11 +126,11 @@ export default defineConfig({
             isBody: true,
           },
           {
-            label: "Categories",
-            name: "categories",
+            label: "Tags",
+            name: "tags",
             type: "string",
             list: true,
-            options: categoriesOptions,
+            options: tagsOptions,
           },
           {
             type: "boolean",

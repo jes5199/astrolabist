@@ -1,0 +1,17 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+import { SITE_TITLE } from "../../consts";
+import { getTags } from "../../lib/postUtils.astro";
+import TagList from "../../components/TagList.astro";
+
+const tags = await getTags();
+---
+
+<BaseLayout
+  title={`Tags - ${SITE_TITLE}`}
+  description={`Tags by ${SITE_TITLE}`}
+>
+  <h1 id="title">Tags</h1>
+  <TagList tags={tags} />
+</BaseLayout>

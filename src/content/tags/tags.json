@@ -1,0 +1,12 @@
+{
+  "tags": [
+    {
+      "name": "favorites",
+      "pinToNav": true
+    },
+    {
+      "name": "2025",
+      "pinToNav": false
+    }
+  ]
+}

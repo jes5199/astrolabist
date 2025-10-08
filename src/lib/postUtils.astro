@@ -43,4 +43,15 @@ export function formattedTime(time: string): string {
 export function getCollectionSlug(collection: string) {
   return collection;
 }
+
+export async function getTags(): Promise<string[]> {
+  const allTags = new Set<string>();
+  const allContent = await getPosts();
+
+  allContent.forEach((item) => {
+    item.data.tags?.forEach((tag: string) => allTags.add(tag));
+  });
+
+  return Array.from(allTags);
+}
 ---

@@ -1,0 +1,9 @@
+---
+import { map } from "astro:schema";
+
+const { tags } = Astro.props;
+---
+
+<ul>
+  {tags.map((tag) => <li>{tag}</li>)}
+</ul>
