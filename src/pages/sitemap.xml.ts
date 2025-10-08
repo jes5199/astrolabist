@@ -1,4 +1,4 @@
-import { getAllPosts } from "../lib/postUtils.astro";
+import { getPosts } from "../lib/postUtils.astro";
 import { BASE_URL } from "../consts";
 
 export const prerender = true;
@@ -21,7 +21,7 @@ export async function GET() {
             priority: 0.8,
         },
     ];
-    const posts = await getAllPosts();
+    const posts = await getPosts();
     const dynamicPages = posts.map((post: any) => {
         const updatedDate = post.data.pubDate;
         return {
