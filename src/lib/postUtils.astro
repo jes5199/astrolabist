@@ -1,9 +1,8 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
-import { isAfter } from "date-fns";
 
-export async function getBlogPosts() {
-  const allPosts = (await getCollection("blog"))
+export async function getPosts() {
+  const allPosts = (await getCollection("posts"))
     .filter((post) => post.data.published)
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
@@ -18,16 +17,8 @@ export async function getBlogPosts() {
   return allPosts;
 }
 
-export async function getFeaturedBlogPosts() {
-  return (await getBlogPosts()).filter((post) => post.data.featured);
-}
-
-export async function getAllPosts() {
-  const [blog] = await Promise.all([getBlogPosts()]);
-  const allPosts = [...blog];
-  return allPosts.sort((a, b) => {
-    return a.data.pubDate.getTime() - b.data.pubDate.getTime();
-  });
+export async function getFeaturedPosts() {
+  return (await getPosts()).filter((post) => post.data.featured);
 }
 
 export function getPostData(post: any) {
@@ -45,7 +36,7 @@ export function formattedTime(time: string): string {
 
   // Remove space before AM/PM and convert to lowercase
   return withoutLeadingZero.replace(/\s*(AM|PM)/i, (match) =>
-    match.trim().toLowerCase(),
+    match.trim().toLowerCase()
   );
 }
 

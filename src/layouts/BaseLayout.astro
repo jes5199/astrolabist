@@ -67,5 +67,30 @@ const { title, description, image = "/assets/share-img.png" } = Astro.props;
       // Add the resize event listener to the window
       window.addEventListener("resize", handleResize);
     </script>
+    <script>
+      const themeToggleButton = document.getElementById("theme-toggle");
+      let currentTheme = localStorage.getItem("theme");
+
+      if (currentTheme === "dark") {
+        document.body.classList.add("dark-theme");
+      } else if (currentTheme === "light") {
+        document.body.classList.remove("dark-theme");
+      } else if (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        document.body.classList.add("dark-theme");
+      }
+
+      themeToggleButton?.addEventListener("click", () => {
+        if (document.body.classList.contains("dark-theme")) {
+          document.body.classList.remove("dark-theme");
+          localStorage.setItem("theme", "light");
+        } else {
+          document.body.classList.add("dark-theme");
+          localStorage.setItem("theme", "dark");
+        }
+      });
+    </script>
   </body><!-- if mobile menu is open and resize to desktop, kill menu and restore page contents -->
 </html>

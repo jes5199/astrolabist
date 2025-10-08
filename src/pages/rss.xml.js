@@ -6,14 +6,14 @@ import MarkdownIt from 'markdown-it';
 const parser = new MarkdownIt();
 
 export async function GET(context) {
-	const posts = (await getCollection('blog')).filter((post) => post.data.published);
+	const posts = (await getCollection('posts')).filter((post) => post.data.published);
 	return rss({
 		title: SITE_TITLE,
 		description: SITE_DESCRIPTION,
 		site: context.site,
 		items: posts.map((post) => ({
 			...post.data,
-			link: `/blog/${post.slug}/`,
+			link: `/posts/${post.slug}/`,
 			content: sanitizeHtml(parser.render(post.body)),
 		})),
 	});

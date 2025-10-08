@@ -66,9 +66,9 @@ export default defineConfig({
       },
 
       {
-        name: "blog",
-        label: "Blog",
-        path: "src/content/blog",
+        name: "posts",
+        label: "Posts",
+        path: "src/content/posts",
         ui: {
           filename: {
             // if disabled, the editor can not edit the filename

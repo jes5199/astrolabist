@@ -1,0 +1,12 @@
+@font-face {
+	font-family: 'Chiswick Text Web';
+	src: url('ChiswickText-LightItalic-Web.woff2') format('woff2');
+	font-weight: 300;
+	font-style: italic;
+	}
+
+.ChiswickText-LightItalic-Web {
+	font-family: 'Chiswick Text Web';
+	font-weight: 300;
+	font-style: italic;
+	}

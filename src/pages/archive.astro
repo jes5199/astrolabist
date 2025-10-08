@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import { getPosts } from "../lib/postUtils.astro";
+import PostList from "../components/PostList.astro";
+
+const posts = await getPosts();
+---
+
+<BaseLayout
+  title={`Archive - ${SITE_TITLE}`}
+  description=`All posts in order - ${SITE_DESCRIPTION}`
+>
+  <section>
+    <h1>Archive</h1>
+    <PostList posts={posts} />
+  </section>
+</BaseLayout>
+<style>
+  section {
+    margin-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+  }
+  h1 {
+    width: 100%;
+    text-align: start;
+    margin-top: 0;
+  }
+</style>

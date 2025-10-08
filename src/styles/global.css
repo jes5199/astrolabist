@@ -1,111 +1,104 @@
 @import url("./utility.css");
 
 :root {
-  --background-color: #FFFAEE;
-  --text-color: #303548;
-  --accent-color-1: #BF7B63;
-  --accent-color-2: #7B6D94;
-  --accent-color-3: #7A61A6;
-  --accent-color-4: #B85300;
-  --header-color: #9C521D;
-  --nav-selected-color: #4D2000;
-  --quote-color: #7B6D94;
-  --link-color: #7B6D94;
+  --background-light: #f8f3e7;
+  --background-dark: #001045;
+  --text-light: #092686;
+  --text-dark: #f8f3e7;
+  --accent-color-1: #bf7b63;
+  --accent-color-2: #7b6d94;
+  --accent-color-3: #7a61a6;
+  --accent-color-4: #b85300;
+  --header-color: #9c521d;
+  --nav-selected-color: #4d2000;
+  --quote-color: #7b6d94;
+  --link-color: #7b6d94;
   --footer-color: #392263;
-  --header-font: "Erode", sans-serif;
-  --body-font: "Erode", sans-serif;
+  --header-font: "Chiswick", serif;
+  --body-font: "Satoshi", sans-serif;
+
+  /* Light theme */
+
+  --theme-background: var(--background-light);
+  --theme-text: var(--text-light);
 }
 
+.dark-theme {
+  --theme-background: var(--background-dark);
+  --theme-text: var(--text-dark);
+}
 @font-face {
-  font-family: "Erode";
-  src: url("/fonts/Erode-Bold.otf") format("opentype");
+  font-family: "Chiswick";
+  src: url("/fonts/ChiswickText-Bold-Web.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
-  font-display: swap;
 }
 
 @font-face {
-  font-family: "Erode";
-  src: url("/fonts/Erode-BoldItalic.otf") format("opentype");
+  font-family: "Chiswick";
+  src: url("/fonts/ChiswickText-BoldItalic-Web.woff2") format("woff2");
   font-weight: 700;
   font-style: italic;
-  font-display: swap;
 }
 
 @font-face {
-  font-family: "Erode";
-  src: url("/fonts/Erode-Italic.otf") format("opentype");
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Erode";
-  src: url("/fonts/Erode-Light.otf") format("opentype");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Erode";
-  src: url("/fonts/Erode-LightItalic.otf") format("opentype");
+  font-family: "Chiswick";
+  src: url("/fonts/ChiswickText-LightItalic-Web.woff2") format("woff2");
   font-weight: 300;
   font-style: italic;
-  font-display: swap;
 }
 
 @font-face {
-  font-family: "Erode";
-  src: url("/fonts/Erode-Medium.otf") format("opentype");
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi-BlackItalic.woff2") format("woff2");
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
-  font-display: swap;
 }
 
 @font-face {
-  font-family: "Erode";
-  src: url("/fonts/Erode-MediumItalic.otf") format("opentype");
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi-MediumItalic.woff2") format("woff2");
   font-weight: 500;
   font-style: italic;
-  font-display: swap;
 }
-
-@font-face {
-  font-family: "Erode";
-  src: url("/fonts/Erode-Regular.otf") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Erode";
-  src: url("/fonts/Erode-Semibold.otf") format("opentype");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Erode";
-  src: url("/fonts/Erode-SemiboldItalic.otf") format("opentype");
-  font-weight: 600;
-  font-style: italic;
-  font-display: swap;
-}
-
 
 body {
   font-family: var(--body-font);
   text-align: left;
-  background-color: var(--background-color);
+  background-color: var(--theme-background);
   animation: colorShift 60s infinite linear;
   background-size: 100% 600px;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  color: var(--text-color);
+  color: var(--theme-text);
   font-size: 1.25rem;
   font-weight: 500;
   line-height: 1.625rem;
@@ -130,50 +123,48 @@ h3,
 h4,
 h5,
 h6 {
-  color: var(--accent-color-1);
+  color: var(--theme-text);
   font-family: var(--header-font);
 }
 
-
 h1 {
-  font-size: 2.5rem;
-  line-height: 2.5rem;
-  font-weight: 600;
+  font-size: 2.75rem;
+  line-height: 3.25rem;
+  font-weight: 700;
   margin: 2.75rem 0;
 }
 
 h2 {
-  font-size: 1.75rem;
-  line-height: 1.875rem;
+  font-size: 2rem;
+  line-height: 2.25rem;
   font-weight: 700;
 }
 
 h3 {
-  color: var(--accent-color-2);
-  font-size: 1.5rem;
-  font-weight: 600;
-  line-height: 1.625rem;
+  font-size: 1.625rem;
+  font-weight: 700;
+  line-height: 2rem;
 }
 
 h4 {
-  color: var(--accent-color-3);
+  font-family: var(--body-font);
   font-size: 1.25rem;
-  line-height: 1.5rem;
-  font-weight: 600;
+  line-height: 1.75rem;
+  font-weight: 900;
 }
 
 h5 {
-  color: var(--accent-color-4);
+  font-family: var(--body-font);
   font-size: 1rem;
   line-height: 1.25rem;
-  font-weight: 700;
+  font-weight: 900;
 }
 
 h6 {
-  color: var(--accent-color-4);
+  font-family: var(--body-font);
   font-size: 1rem;
   line-height: 1.25rem;
-  font-weight: 700;
+  font-weight: 900;
   text-transform: uppercase;
 }
 
@@ -194,7 +185,7 @@ a:hover {
 p {
   margin-bottom: 1em;
   font-size: 1.25rem;
-  line-height: 2rem;
+  line-height: 1.75rem;
 }
 
 .prose p {
@@ -230,7 +221,7 @@ pre {
   border-radius: 8px;
 }
 
-pre>code {
+pre > code {
   all: unset;
 }
 
@@ -253,7 +244,6 @@ button {
   &:hover {
     color: var(--accent-color-1);
   }
-
 }
 
 blockquote {
@@ -408,7 +398,6 @@ li {
 }
 
 @media (max-width: 768px) {
-
   html,
   body {
     max-width: 100%;

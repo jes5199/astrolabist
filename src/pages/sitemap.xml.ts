@@ -16,17 +16,7 @@ export async function GET() {
             priority: 0.8,
         },
         {
-            loc: `${BASE_URL}/gallery`,
-            lastmod: new Date().toISOString(),
-            priority: 0.8,
-        },
-        {
-            loc: `${BASE_URL}/artwork`,
-            lastmod: new Date().toISOString(),
-            priority: 0.8,
-        },
-        {
-            loc: `${BASE_URL}/all-posts`,
+            loc: `${BASE_URL}/archive`,
             lastmod: new Date().toISOString(),
             priority: 0.8,
         },
