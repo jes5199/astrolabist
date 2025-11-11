@@ -2,23 +2,33 @@
   "tags": [
     {
       "name": "Favorites",
+      "slug": "favorites",
       "pinToNav": true,
       "featured": true
     },
     {
       "name": "2025",
+      "slug": "2025",
       "pinToNav": false,
       "featured": false
     },
     {
       "name": "Another Tag",
+      "slug": "another-tag",
       "pinToNav": true,
       "featured": false
     },
     {
       "name": "Tags for Days",
+      "slug": "tags-for-days",
       "pinToNav": false,
       "featured": true
+    },
+    {
+      "name": "Max Nav Size",
+      "slug": "max-nav-size",
+      "pinToNav": true,
+      "featured": false
     }
   ]
 }

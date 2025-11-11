@@ -1,16 +1,18 @@
 ---
-import { map } from "astro:schema";
-
 const { tags } = Astro.props;
 ---
 
 <ul>
   {
-    tags.map((tag: string) => (
-      <a href={`/tags/${tag}`}>
-        <li>{tag}</li>
-      </a>
-    ))
+    tags.map((tag: any) => {
+      const tagSlug = typeof tag === 'string' ? tag : tag.slug || tag.name;
+      const tagName = typeof tag === 'string' ? tag : tag.name;
+      return (
+        <a href={`/tags/${tagSlug}`}>
+          <li>{tagName}</li>
+        </a>
+      );
+    })
   }
 </ul>
 

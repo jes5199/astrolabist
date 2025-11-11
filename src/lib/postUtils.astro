@@ -1,6 +1,7 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 import tagsData from "../content/tags/tags.json";
+import { nav } from "../content/nav.astro";
 
 export async function getPosts() {
   const allPosts = (await getCollection("posts"))
@@ -57,5 +58,23 @@ export async function getTagNames() {
 export async function getFeaturedTags() {
   const allTags = await getTags();
   return allTags.filter((tag) => tag.featured).map((tag) => tag.name);
+}
+
+export async function getNavTags() {
+  const allTags = await getTags();
+  return allTags.filter((tag) => tag.pinToNav);
+}
+
+export async function getNavLinks() {
+  const navTags = await getNavTags();
+  
+  // Map navTags to the same format as nav items (title and href)
+  const tagLinks = navTags.map((tag) => ({
+    title: tag.name,
+    href: `/tags/${tag.slug}`,
+  }));
+  
+  // Combine nav items and tag links
+  return [...tagLinks, ...nav];
 }
 ---

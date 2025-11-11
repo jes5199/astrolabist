@@ -6,7 +6,6 @@ import { getTags } from "../../lib/postUtils.astro";
 import TagList from "../../components/TagList.astro";
 
 const tags = await getTags();
-const tagNames = tags.map((tag) => tag.name);
 ---
 
 <BaseLayout
@@ -14,5 +13,5 @@ const tagNames = tags.map((tag) => tag.name);
   description={`Tags by ${SITE_TITLE}`}
 >
   <h1 id="title">Tags</h1>
-  <TagList tags={tagNames} />
+  <TagList tags={tags} />
 </BaseLayout>

@@ -1,10 +1,10 @@
 import { defineConfig } from "tinacms";
 import tagsData from "../src/content/tags/tags.json";
 
-const tagsOptions = tagsData.tags.map((tag: { name: string, pinToNav: boolean }) => ({
-  value: tag.name,
-  label: tag.name,
-}));
+const tagsOptions = (tagsData?.tags || []).map((tag: { name: string, pinToNav: boolean }) => ({
+  value: tag?.name || "",
+  label: tag?.name || "",
+})).filter((option) => option.value); // Filter out any empty values
 
 // Your hosting provider likely exposes this as an environment variable
 const branch =
@@ -49,9 +49,13 @@ export default defineConfig({
             label: "Tags",
             list: true,
             ui: {
-              itemProps: (item) => ({
-                label: item.data.name || "New Tag",
-              }),
+              itemProps: (item: any) => {
+                // For JSON list items, the properties are directly on the item object
+                // The item should be the tag object itself: { name: "...", slug: "...", ... }
+                return {
+                  label: item?.name || "New Tag",
+                };
+              },
             },
             fields: [
               {
@@ -59,6 +63,26 @@ export default defineConfig({
                 name: "name",
                 label: "Tag Name",
                 required: true,
+              },
+              {
+                type: "string",
+                name: "slug",
+                label: "Slug",
+                required: true,
+                ui: {
+                  component: "hidden", // Hide the field from the UI
+                  parse: (value: string, allValues: any) => {
+                    // Generate slug from the tag name field in the same object
+                    const nameValue = allValues?.name || "";
+                    if (nameValue) {
+                      return nameValue
+                        .toLowerCase()
+                        .replace(/[^a-z0-9 ]/g, "")
+                        .replace(/ /g, "-");
+                    }
+                    return value || "";
+                  },
+                },
               },
               {
                 type: "boolean",

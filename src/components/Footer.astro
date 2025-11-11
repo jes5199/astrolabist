@@ -1,45 +1,64 @@
 ---
 import { SITE_TITLE } from "../consts";
 import SocialButtons from "./SocialButtons.astro";
-import { nav } from "../content/nav.astro";
+import { getNavLinks } from "../lib/postUtils.astro";
 
+const navLinks = await getNavLinks();
 const currentYear = new Date().getFullYear();
 ---
-
+<button id="theme-toggle">theme</button>
 <footer id="footer">
+  <div class="site-title">
+    <a href="/">{SITE_TITLE}</a>
+  </div>
   <nav class="footer-links">
-    {nav.map((item) => <a href={item.href}>{item.title}</a>)}
+    {navLinks.map((item) => <a href={item.href}>{item.title}</a>)}
   </nav>
-  <button id="theme-toggle">theme</button>
-  <div class="copyright">
-    <div>
-      © {currentYear}
-      {SITE_TITLE}. All rights reserved.
-    </div>
-    <a><img src="/assets/instagram.svg" /></a>
+  <div class="social-links">
+    <SocialButtons />
   </div>
 </footer>
 <style>
+  #theme-toggle {
+    margin: 0 auto;
+  }
   footer {
     padding: 80px 124px 60px;
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     box-sizing: border-box;
+
+    * {
+      color: var(--theme-text);
+      fill: var(--theme-text);
+    }
+  }
+
+  .site-title {
+    font-family: var(--header-font);
+    font-weight: 600;
+    font-size: 1.25rem;
+    line-height: 1.25rem;
+    
+    a {
+      text-decoration: none;
+    }
   }
 
   .footer-links {
     display: flex;
-    gap: 1.5rem;
-    justify-content: flex-start;
+    gap: 1.25rem;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
   }
 
   .footer-links a {
-    font-size: 1rem;
-    font-weight: 400;
+    font-size: 0.875rem;
+    font-weight: 500;
     text-decoration: none;
     color: var(--theme-text);
   }

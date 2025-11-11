@@ -7,12 +7,12 @@ import { getPosts, getTags } from "../../lib/postUtils.astro";
 export async function getStaticPaths() {
   const tags = await getTags();
   return tags.map((tag) => ({
-    params: { slug: tag.name },
-    props: { tag: tag.name },
+    params: { slug: tag.slug },
+    props: { tag: tag.name, tagSlug: tag.slug },
   }));
 }
 
-const { tag } = Astro.props;
+const { tag, tagSlug } = Astro.props;
 
 const allPosts = await getPosts();
 const filteredContent = allPosts.filter((item) =>
