@@ -1,14 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { Content as PrimaryContent } from "../content/static/Home-Page-Primary-Content.md";
-import { Content as SecondaryContent } from "../content/static/Home-Page-Secondary-Content.md";
 
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 
 import PostList from "../components/PostList.astro";
-import { getFeaturedPosts } from "../lib/postUtils.astro";
+import TagList from "../components/TagList.astro";
+import { getFeaturedPosts, getFeaturedTags } from "../lib/postUtils.astro";
 
 let posts = await getFeaturedPosts();
+let featuredTags = await getFeaturedTags();
 ---
 
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
@@ -21,82 +22,31 @@ let posts = await getFeaturedPosts();
     <h2>Featured Posts</h2>
     <PostList posts={posts} />
   </section>
-
-  <div class="markdown">
-    <SecondaryContent />
-  </div>
+  <section>
+    <h2>Featured Tags</h2>
+    <TagList tags={featuredTags} />
+  </section>
+  <a class="archive-link" href="/archive"><span>Explore the archive</span><img src="/assets/arrow-right.svg" alt="right facing arrow" /></a>
 </BaseLayout>
+  
 
 <style>
   section h2 {
     font-size: 2rem;
     margin: 3rem 0 2rem;
-    color: var(--text-color);
+    color: var(--theme-text);
+    font-style: italic;
   }
 
-  ul {
+  .archive-link {
     display: flex;
-    gap: 1.5rem;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-
-    li {
-      * {
-        text-decoration: none;
-        transition: 0.2s ease;
-      }
-
-      a {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-
-        img {
-          margin: 0;
-          aspect-ratio: 16/9;
-          object-fit: cover;
-          width: 100%;
-          height: auto;
-        }
-
-        h3 {
-          margin: 0;
-          font-weight: 700;
-          font-size: 1.25rem;
-          line-height: 1.625rem;
-          color: var(--accent-3);
-        }
-        time {
-          color: var(--accent-2);
-          font-weight: 600;
-          font-size: 1rem;
-          line-height: 1.25rem;
-        }
-        .time {
-          color: var(--accent-2);
-          font-size: 1rem;
-          line-height: 1.25rem;
-        }
-      }
-
-      &:hover {
-        h3 {
-          color: var(--text-color);
-          text-decoration: underline;
-        }
-        time {
-          color: var(--accent-2);
-        }
-        .time {
-          color: var(--accent-2);
-        }
-      }
-    }
-  }
-
-  .all-posts {
-    margin: 2.5rem 0 4.5rem;
+    align-items: center;
+    gap: 0.625rem;
+    text-decoration: none;
+    font-family: var(--header-font);
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
   }
 
   @media (max-width: 768px) {
@@ -105,35 +55,9 @@ let posts = await getFeaturedPosts();
       margin: 2rem 0 1.5rem;
     }
 
-    ul {
-      flex-direction: column;
-      li {
-        display: flex;
-        flex-direction: column;
-
-        a,
-        a:first-child {
-          display: block;
-          width: 100%;
-        }
-
-        h2 {
-          font-size: 1.5rem;
-          line-height: 1.75rem;
-        }
-
-        .date {
-          margin: 0.5rem 0 0.75rem;
-        }
-
-        p {
-          font-size: 1.125rem;
-        }
-      }
-    }
-
     .intro {
       margin-top: 3rem;
     }
   }
+  
 </style>

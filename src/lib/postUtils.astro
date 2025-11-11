@@ -1,5 +1,6 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
+import tagsData from "../content/tags/tags.json";
 
 export async function getPosts() {
   const allPosts = (await getCollection("posts"))
@@ -36,7 +37,7 @@ export function formattedTime(time: string): string {
 
   // Remove space before AM/PM and convert to lowercase
   return withoutLeadingZero.replace(/\s*(AM|PM)/i, (match) =>
-    match.trim().toLowerCase()
+    match.trim().toLowerCase(),
   );
 }
 
@@ -44,14 +45,17 @@ export function getCollectionSlug(collection: string) {
   return collection;
 }
 
-export async function getTags(): Promise<string[]> {
-  const allTags = new Set<string>();
-  const allContent = await getPosts();
+export async function getTags() {
+  return tagsData.tags || [];
+}
 
-  allContent.forEach((item) => {
-    item.data.tags?.forEach((tag: string) => allTags.add(tag));
-  });
+export async function getTagNames() {
+  const allTags = await getTags();
+  return allTags.map((tag) => tag.name);
+}
 
-  return Array.from(allTags);
+export async function getFeaturedTags() {
+  const allTags = await getTags();
+  return allTags.filter((tag) => tag.featured).map((tag) => tag.name);
 }
 ---

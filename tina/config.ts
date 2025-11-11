@@ -50,7 +50,7 @@ export default defineConfig({
             list: true,
             ui: {
               itemProps: (item) => ({
-                label: item.name || "New Tag",
+                label: item.data.name || "New Tag",
               }),
             },
             fields: [
@@ -65,7 +65,13 @@ export default defineConfig({
                 name: "pinToNav",
                 label: "Pin to Nav (recommend max 3)",
                 required: false,
-              }
+              },
+              {
+                type: "boolean",
+                name: "featured",
+                label: "Featured",
+                required: false,
+              },
             ],
           },
         ],

@@ -1,12 +1,24 @@
 {
   "tags": [
     {
-      "name": "favorites",
-      "pinToNav": true
+      "name": "Favorites",
+      "pinToNav": true,
+      "featured": true
     },
     {
       "name": "2025",
-      "pinToNav": false
+      "pinToNav": false,
+      "featured": false
+    },
+    {
+      "name": "Another Tag",
+      "pinToNav": true,
+      "featured": false
+    },
+    {
+      "name": "Tags for Days",
+      "pinToNav": false,
+      "featured": true
     }
   ]
 }

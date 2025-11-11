@@ -27,13 +27,12 @@ const { categories } = Astro.props;
       line-height: 1.125rem;
       font-weight: 600;
       margin: 0 0 0.5rem;
-      color: var(--text-color);
+      color: var(--theme-text);
     }
     ul {
       list-style: none;
       padding: 0;
       margin: 0;
-      color: var(--accent-color-3);
     }
     li {
       display: inline-block;
@@ -48,10 +47,8 @@ const { categories } = Astro.props;
       a {
         font-weight: 400;
         text-decoration: none;
-        color: var(--accent-color-3);
 
         &:hover {
-          color: var(--accent-color-1);
         }
       }
     }

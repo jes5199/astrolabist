@@ -20,20 +20,12 @@ const formattedDate = date
 ---
 
 <span><time datetime={date.toISOString()}>{formattedDate}</time></span>
-{time && <span class="time">{time}</span>}
+{time && <span>{time}</span>}
 <style>
   time {
     margin: 0;
-    color: var(--accent-2);
     font-size: 1rem;
     line-height: 1.25rem;
-    font-weight: 600;
-  }
-  .time {
-    color: var(--accent-2);
-    font-size: 1rem;
-    line-height: 1.25rem;
-    margin-left: 0.25rem;
-    font-weight: 400;
+    color: var(--theme-text);
   }
 </style>

@@ -5,15 +5,14 @@
   --background-dark: #001045;
   --text-light: #092686;
   --text-dark: #f8f3e7;
-  --accent-color-1: #bf7b63;
-  --accent-color-2: #7b6d94;
-  --accent-color-3: #7a61a6;
-  --accent-color-4: #b85300;
-  --header-color: #9c521d;
-  --nav-selected-color: #4d2000;
-  --quote-color: #7b6d94;
-  --link-color: #7b6d94;
-  --footer-color: #392263;
+  --text-hover-light: #B62518;
+  --text-hover-dark: #E93F30;
+  --tag-border-light: #5374DF;
+  --tag-border-dark: #DCD0B4;
+  --tag-border-hover-light: #E93F30;
+  --tag-border-hover-dark: #B62518;
+  --header-color-light: #926400;
+  --header-color-dark: #DCD0B4;
   --header-font: "Chiswick", serif;
   --body-font: "Satoshi", sans-serif;
 
@@ -21,12 +20,21 @@
 
   --theme-background: var(--background-light);
   --theme-text: var(--text-light);
+  --tag-border: var(--tag-border-light);
+  --text-hover: var(--text-hover-light);
+  --tag-border-hover: var(--tag-border-hover-light);
+  --header-color: var(--header-color-light);
 }
 
 .dark-theme {
   --theme-background: var(--background-dark);
   --theme-text: var(--text-dark);
+  --tag-border: var(--tag-border-dark);
+  --text-hover: var(--text-hover-dark);
+  --tag-border-hover: var(--tag-border-hover-dark);
+  --header-color: var(--header-color-dark);
 }
+
 @font-face {
   font-family: "Chiswick";
   src: url("/fonts/ChiswickText-Bold-Web.woff2") format("woff2");
@@ -174,13 +182,10 @@ b {
 }
 
 a {
-  color: var(--link-color);
   font-weight: 700;
 }
 
-a:hover {
-  color: var(--accent-color-1);
-}
+a:hover {}
 
 p {
   margin-bottom: 1em;
@@ -221,7 +226,7 @@ pre {
   border-radius: 8px;
 }
 
-pre > code {
+pre>code {
   all: unset;
 }
 
@@ -230,7 +235,6 @@ button {
   align-items: center;
   column-gap: 0.5rem;
   background-color: var(--background-color);
-  color: var(--link-color);
   font-family: var(--body-font);
   text-decoration: none;
   padding: 0.5rem 0;
@@ -241,9 +245,7 @@ button {
   font-size: 1.25rem;
   line-height: 1.625rem;
 
-  &:hover {
-    color: var(--accent-color-1);
-  }
+  &:hover {}
 }
 
 blockquote {
@@ -259,7 +261,6 @@ blockquote {
     line-height: 2.25rem;
     font-weight: 300;
     font-style: italic;
-    color: var(--quote-color);
   }
 }
 
@@ -398,6 +399,7 @@ li {
 }
 
 @media (max-width: 768px) {
+
   html,
   body {
     max-width: 100%;
