@@ -15,7 +15,7 @@ published: true
 featured: true
 ---
 
-The Black-capped Chickadee (*Poecile atricapillus*) is Vermont's state bird and a beloved year-round resident. Known for its distinctive call and friendly nature, this small bird is a favorite among birdwatchers.
+The Black-capped [Chickadee](https://chickadee.com) (*Poecile atricapillus*) is Vermont's state bird and a beloved year-round resident. Known for its distinctive call and friendly nature, this small bird is a favorite among birdwatchers.
 
 ## Identification Features
 
@@ -27,6 +27,9 @@ The Black-capped Chickadee (*Poecile atricapillus*) is Vermont's state bird and 
 * Wingspan: 6.3-8.3 inches
 
 > "The chickadee's 'chick-a-dee-dee-dee' call is not just a song, but a complex language that communicates everything from food sources to predator warnings." - Vermont Ornithology Institute
+
+<a href="#" class="solid-button">Solid Button</a>
+<a href="#" class="outline-button">Outline Button</a>
 
 ## Behavior and Adaptations
 
@@ -46,7 +49,8 @@ Chickadees are primarily insectivores but adapt their diet seasonally:
 * Suet and sunflower seeds at feeders
 * Caterpillars (especially important for nestlings)
 
-!\[Black-capped Chickadee at feeder]\(/img/tiger pajamas logo.png)
+![Black-capped Chickadee at feeder](/img/chickadee.jpg)
+<p class="image-caption">Optional caption! See markdown code for implementation details</p>
 
 ## Nesting and Reproduction
 

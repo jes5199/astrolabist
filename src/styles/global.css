@@ -11,8 +11,14 @@
   --tag-border-dark: #DCD0B4;
   --tag-border-hover-light: #E93F30;
   --tag-border-hover-dark: #B62518;
+  --link-color: #E93F30;
   --header-color-light: #926400;
   --header-color-dark: #DCD0B4;
+  --button-color-light: #1C4AC7;
+  --button-color-dark: #E93F30;
+  --caption-color-light: #B62518;
+  --caption-color-dark: #DFBA53;
+  --pull-quote-color: #DFBA53;
   --header-font: "Chiswick", serif;
   --body-font: "Satoshi", sans-serif;
 
@@ -20,19 +26,25 @@
 
   --theme-background: var(--background-light);
   --theme-text: var(--text-light);
+  --theme-text-swap: var(--text-dark);
   --tag-border: var(--tag-border-light);
   --text-hover: var(--text-hover-light);
   --tag-border-hover: var(--tag-border-hover-light);
   --header-color: var(--header-color-light);
+  --button-color: var(--button-color-light);
+  --caption-color: var(--caption-color-light);
 }
 
 .dark-theme {
   --theme-background: var(--background-dark);
   --theme-text: var(--text-dark);
+  --theme-text-swap: var(--text-light);
   --tag-border: var(--tag-border-dark);
   --text-hover: var(--text-hover-dark);
   --tag-border-hover: var(--tag-border-hover-dark);
   --header-color: var(--header-color-dark);
+  --button-color: var(--button-color-dark);
+  --caption-color: var(--caption-color-dark);
 }
 
 @font-face {
@@ -183,9 +195,8 @@ b {
 
 a {
   font-weight: 700;
+  color: var(--link-color);
 }
-
-a:hover {}
 
 p {
   margin-bottom: 1em;
@@ -213,6 +224,7 @@ table {
 img {
   max-width: 100%;
   height: auto;
+
 }
 
 code {
@@ -233,19 +245,42 @@ pre>code {
 button {
   display: flex;
   align-items: center;
-  column-gap: 0.5rem;
-  background-color: var(--background-color);
-  font-family: var(--body-font);
+  background-color: var(--button-color);
+  color: var(--theme-text);
   text-decoration: none;
-  padding: 0.5rem 0;
+  padding: 1rem 2.25rem;
   margin: 1.75rem 0;
   border: none;
   cursor: pointer;
   font-weight: 700;
   font-size: 1.25rem;
   line-height: 1.625rem;
+}
 
-  &:hover {}
+.solid-button,
+.outline-button {
+  display: flex;
+  align-items: center;
+  color: var(--theme-text);
+  text-decoration: none;
+  padding: 1rem 2.25rem;
+  margin: 1.75rem 0;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.625rem;
+  width: fit-content;
+}
+
+.solid-button {
+  background-color: var(--button-color);
+  border: none;
+  color: var(--theme-text-swap);
+}
+
+.outline-button {
+  background-color: transparent;
+  border: 1px solid var(--button-color);
 }
 
 blockquote {
@@ -253,7 +288,7 @@ blockquote {
   padding: 20px 0 20px 36px;
   font-size: 1.75rem;
   line-height: 2rem;
-  border-left: 1px solid var(--accent-color-3);
+  border-left: 1px solid var(--pull-quote-color);
 
   p {
     margin: 0;
@@ -268,34 +303,9 @@ hr {
   border: none;
 }
 
-figure {
-  margin: 0.75rem 0 1.125rem;
-
-  img {
-    margin: 0;
-  }
-
-  figcaption {
-    margin: 0.75rem 0 0;
-    font-style: italic;
-    font-size: 1.25rem;
-    line-height: 1.5rem;
-  }
-
-  &.float-left,
-  &.float-right {
-    max-width: max(40%, 300px);
-  }
-
-  &.float-left {
-    float: left;
-    margin-right: 1.75rem;
-  }
-
-  &.float-right {
-    float: right;
-    margin-left: 1.75rem;
-  }
+img,
+p>img {
+  min-width: 100%;
 }
 
 iframe {
@@ -362,6 +372,15 @@ li {
 
 .mobile-only {
   display: none;
+}
+
+.image-caption {
+  color: var(--caption-color);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  margin-top: 0;
 }
 
 .no-scroll {
@@ -457,6 +476,12 @@ li {
   }
 
   button {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .solid-button,
+  .outline-button {
     font-size: 1rem;
     line-height: 1.5rem;
   }

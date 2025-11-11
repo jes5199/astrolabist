@@ -33,6 +33,12 @@ const { title, pubDate, imageUrl, imageAltText, previous, next, categories } =
   }
   article {
     margin-bottom: 2.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+
+  p:has(img) {
+    margin: 2rem 0 1rem;
+  }
   }
 
   .hero-image {
@@ -76,6 +82,8 @@ const { title, pubDate, imageUrl, imageAltText, previous, next, categories } =
       color: var(--accent-2);
     }
   }
+
+  
 
   @media (max-width: 768px) {
     article {
