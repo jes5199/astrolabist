@@ -1,0 +1,71 @@
+---
+import { getTags } from "../lib/postUtils.astro";
+
+const { tags } = Astro.props;
+const allTags = await getTags();
+
+// Create a map of tag names to slugs
+const tagMap = new Map(allTags.map((tag) => [tag.name, tag.slug]));
+
+// Convert tag names to slugs, falling back to slugified name if not found
+function getTagSlug(tagName: string): string {
+  return (
+    tagMap.get(tagName) || tagName.toLowerCase().replace(/[^a-z0-9]+/g, "-")
+  );
+}
+---
+
+<div class="tags">
+  <h3>TAGS</h3>
+  <ul>
+    {
+      tags.map((tag: string, index: number) => (
+        <li>
+          <a href={`/tags/${getTagSlug(tag)}`}>{tag}</a>
+          {index < tags.length - 1 && <span>, </span>}
+        </li>
+      ))
+    }
+  </ul>
+</div>
+<style>
+  .tags {
+    padding: 1.25rem 0 0;
+    border: 1px solid var(--utility-color);
+    margin: 2rem 0 3.75rem;
+
+    h3 {
+      font-family: var(--body-font);
+      font-size: 0.875rem;
+      line-height: 1.125rem;
+      font-weight: 600;
+      margin: 0 0 0.5rem;
+      color: var(--footer-label);
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    li {
+      display: inline-block;
+      font-size: 1rem;
+      line-height: 1.25rem;
+      padding: 0;
+      span {
+        margin-left: -0.25rem;
+        margin-right: 0.5rem;
+      }
+
+      a {
+        font-weight: 400;
+        text-decoration: none;
+        color: var(--footer-link);
+
+        &:hover {
+          color: var(--footer-link);
+        }
+      }
+    }
+  }
+</style>

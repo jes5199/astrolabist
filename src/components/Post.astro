@@ -1,8 +1,8 @@
 ---
-import Categories from "./Categories.astro";
+import Tags from "./Tags.astro";
 import PrevNext from "./PrevNext.astro";
 import FormattedDate from "./FormattedDate.astro";
-const { title, pubDate, imageUrl, imageAltText, previous, next, categories } =
+const { title, pubDate, imageUrl, imageAltText, previous, next, tags } =
   Astro.props;
 ---
 
@@ -24,8 +24,10 @@ const { title, pubDate, imageUrl, imageAltText, previous, next, categories } =
     <slot />
   </div>
 </article>
-{categories && <Categories categories={categories} />}
-<PrevNext previous={previous} next={next} />
+<div class="tags-and-prev-next">
+  {tags && <Tags tags={tags} />}
+  <PrevNext previous={previous} next={next} />
+</div>
 
 <style>
   h1 {
@@ -35,10 +37,17 @@ const { title, pubDate, imageUrl, imageAltText, previous, next, categories } =
     margin-bottom: 2.5rem;
     max-width: 800px;
     margin: 0 auto;
+    padding-bottom: 3.75rem;
+    border-bottom: 1px solid var(--footer-stroke);
 
-  p:has(img) {
-    margin: 2rem 0 1rem;
+    p:has(img) {
+      margin: 2rem 0 1rem;
+    }
   }
+
+  .tags-and-prev-next {
+    max-width: 800px;
+    margin: 0 auto;
   }
 
   .hero-image {
@@ -82,8 +91,6 @@ const { title, pubDate, imageUrl, imageAltText, previous, next, categories } =
       color: var(--accent-2);
     }
   }
-
-  
 
   @media (max-width: 768px) {
     article {

@@ -19,6 +19,12 @@
   --caption-color-light: #B62518;
   --caption-color-dark: #DFBA53;
   --pull-quote-color: #DFBA53;
+  --footer-stroke-light: #DCD0B4;
+  --footer-stroke-dark: #092686;
+  --footer-label-light: #092686;
+  --footer-label-dark: #E93F30;
+  --footer-link-light: #1C4AC7;
+  --footer-link-dark: #F8F3E7;
   --header-font: "Chiswick", serif;
   --body-font: "Satoshi", sans-serif;
 
@@ -33,6 +39,9 @@
   --header-color: var(--header-color-light);
   --button-color: var(--button-color-light);
   --caption-color: var(--caption-color-light);
+  --footer-stroke: var(--footer-stroke-light);
+  --footer-label: var(--footer-label-light);
+  --footer-link: var(--footer-link-light);
 }
 
 .dark-theme {
@@ -45,6 +54,9 @@
   --header-color: var(--header-color-dark);
   --button-color: var(--button-color-dark);
   --caption-color: var(--caption-color-dark);
+  --footer-stroke: var(--footer-stroke-dark);
+  --footer-label: var(--footer-label-dark);
+  --footer-link: var(--footer-link-dark);
 }
 
 @font-face {
