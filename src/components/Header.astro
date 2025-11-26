@@ -8,7 +8,7 @@ const navLinks = await getNavLinks();
 ---
 
 <header>
-  <div class="desktop-only">
+  <div class="desktop-header">
     <div class="header-container">
       <a class="title title-text" href="/">{SITE_TITLE}</a>
 
@@ -21,7 +21,7 @@ const navLinks = await getNavLinks();
       </nav>
     </div>
   </div>
-  <div class="mobile-only">
+  <div class="mobile-header">
     <div class="header-container">
       <a class="title" href="/">{SITE_TITLE}</a>
       <div class="mobile-menu">
@@ -125,21 +125,32 @@ const navLinks = await getNavLinks();
     nav {
       column-gap: 1rem;
     }
-    .title-img {
-      display: none;
-    }
   }
 
-  @media (max-width: 768px) {
-    .title {
-      display: block;
-    }
-    .hamburger {
-      display: flex;
-      align-items: center;
-    }
-    #close-icon {
+  .desktop-header {
+    display: block;
+  }
+  .mobile-header {
+    display: none;
+  }
+
+  .title {
+    display: block;
+  }
+  .hamburger {
+    display: flex;
+    align-items: center;
+  }
+  #close-icon {
+    display: none;
+  }
+
+  @media (max-width: 820px) {
+    .desktop-header {
       display: none;
+    }
+    .mobile-header {
+      display: block;
     }
   }
 

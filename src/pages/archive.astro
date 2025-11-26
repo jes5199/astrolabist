@@ -2,10 +2,12 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
-import { getPosts } from "../lib/postUtils.astro";
-import PostList from "../components/PostList.astro";
+import { getPosts, getTags } from "../lib/postUtils.astro";
+import ArchivePostList from "../components/ArchivePostList.astro";
+import TagList from "../components/TagList.astro";
 
 const posts = await getPosts();
+const tags = await getTags();
 ---
 
 <BaseLayout
@@ -14,7 +16,8 @@ const posts = await getPosts();
 >
   <section>
     <h1>Archive</h1>
-    <PostList posts={posts} />
+    <TagList tags={tags} />
+    <ArchivePostList posts={posts} />
   </section>
 </BaseLayout>
 <style>

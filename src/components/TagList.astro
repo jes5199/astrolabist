@@ -5,8 +5,8 @@ const { tags } = Astro.props;
 <ul>
   {
     tags.map((tag: any) => {
-      const tagSlug = typeof tag === 'string' ? tag : tag.slug || tag.name;
-      const tagName = typeof tag === 'string' ? tag : tag.name;
+      const tagSlug = typeof tag === "string" ? tag : tag.slug || tag.name;
+      const tagName = typeof tag === "string" ? tag : tag.name;
       return (
         <a href={`/tags/${tagSlug}`}>
           <li>{tagName}</li>
@@ -22,6 +22,7 @@ const { tags } = Astro.props;
     flex-wrap: wrap;
     padding: 0;
     gap: 0.625rem;
+    width: 100%;
   }
   li {
     list-style: none;
@@ -32,6 +33,7 @@ const { tags } = Astro.props;
     color: var(--theme-text);
     border: 1px solid var(--tag-border);
     border-radius: 2rem;
+    margin: 0;
   }
   a {
     text-decoration: none;
