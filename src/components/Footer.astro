@@ -89,19 +89,12 @@ const currentYear = new Date().getFullYear();
       padding: 20px 20px 60px;
       gap: 2rem;
     }
-  }
-
-  @media (max-width: 768px) {
-    footer {
-      padding: 3rem 2rem;
-      section {
-        flex-direction: column;
-        align-items: center;
-        gap: 1.5rem;
-        margin-bottom: 2rem;
-      }
+    section {
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
     }
-
     .footer-links {
       justify-content: center;
       margin-bottom: 1rem;
@@ -110,6 +103,18 @@ const currentYear = new Date().getFullYear();
 
     .copyright {
       text-align: center;
+    }
+  }
+
+  @media (max-width: 580px) {
+    footer {
+      flex-direction: column;
+      row-gap: 0.75rem;
+      padding-bottom: 40px;
+    }
+    .footer-links {
+      flex-direction: column;
+      row-gap: 0.75rem;
     }
   }
 </style>
