@@ -406,6 +406,8 @@ li {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  position: relative;
+  z-index: 1;
 }
 
 .page-padding {
@@ -417,6 +419,8 @@ li {
   box-sizing: border-box;
   flex: 1;
   margin-bottom: 4rem;
+  position: relative;
+  z-index: 2;
 }
 
 .extra-wide {
@@ -558,5 +562,40 @@ li {
     left: 50%;
     /* Start from the center of the viewport */
     margin-left: -515px;
+  }
+}
+
+/* Decorative top-right artwork: sits above background but below page content */
+.decor-topright {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 0;
+  pointer-events: none;
+  min-width: 0;
+  max-width: none;
+  width: 60vw;
+  height: auto;
+  display: block;
+}
+
+/* Decorative footer artwork that hugs the bottom and spans full viewport width */
+.decor-footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  pointer-events: none;
+  min-width: 0;
+  max-width: none;
+  width: 100vw;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 820px) {
+  .decor-topright {
+    display: none;
   }
 }

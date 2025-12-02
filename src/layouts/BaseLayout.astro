@@ -19,6 +19,15 @@ const { title, description, image = "/assets/share-img.png" } = Astro.props;
   </head>
   <body>
     <div class="page-wrapper">
+      <img
+        id="decor-artwork"
+        src="/assets/backgrounds/art-home%20light%20max.svg"
+        alt=""
+        aria-hidden="true"
+        role="presentation"
+        class="decor-topright"
+        loading="lazy"
+      />
       <div class="page-padding">
         <Header />
         <main id="main">
@@ -26,6 +35,15 @@ const { title, description, image = "/assets/share-img.png" } = Astro.props;
         </main>
       </div>
       <Footer />
+      <img
+        id="decor-footer"
+        src="/assets/footers/footer%20art%20large-med%20light.svg"
+        alt=""
+        aria-hidden="true"
+        role="presentation"
+        class="decor-footer"
+        loading="lazy"
+      />
     </div>
 
     <!-- replace page content with mobile menu, vice versa -->
@@ -69,8 +87,80 @@ const { title, description, image = "/assets/share-img.png" } = Astro.props;
     </script>
     <script>
       const themeToggleButton = document.getElementById("theme-toggle");
+      /** @type {HTMLImageElement | null} */
+      const decorImg = document.getElementById("decor-artwork");
+      /** @type {HTMLImageElement | null} */
+      const footerImg = document.getElementById("decor-footer");
       let currentTheme = localStorage.getItem("theme");
 
+      function getArtworkBaseName() {
+        if (typeof window === "undefined") return null;
+        const path = window.location.pathname || "/";
+        if (path === "/" || path === "" || path === "/index") return "art-home";
+        if (path.startsWith("/archive")) return "art-archive";
+        if (path === "/tags" || path.startsWith("/tags/"))
+          return "art-collection";
+        if (path === "/posts" || path.startsWith("/posts/"))
+          return "art-general";
+        if (path === "/about" || path.startsWith("/about/"))
+          return "art-static";
+        return null; // no artwork for other pages
+      }
+
+      function updateDecorArtwork() {
+        if (!(decorImg instanceof HTMLImageElement)) return;
+        const artBase = getArtworkBaseName();
+        if (!artBase) {
+          decorImg.style.display = "none";
+          return;
+        }
+
+        const vw = window.innerWidth || document.documentElement.clientWidth;
+        let sizeSuffix = "max";
+        // For archive and about pages, use the 820-580 variant when viewport is <= 820px
+        if (artBase === "art-archive" || artBase === "art-static") {
+          if (vw <= 820) {
+            sizeSuffix = "820-580";
+          } else {
+            sizeSuffix = "max";
+          }
+        }
+        // For collection, general, and home pages, use '820' when viewport is between 580 and 820, '580' when <580
+        else if (
+          artBase === "art-collection" ||
+          artBase === "art-general" ||
+          artBase === "art-home"
+        ) {
+          if (vw <= 820 && vw >= 580) {
+            sizeSuffix = "820";
+          } else if (vw < 580) {
+            sizeSuffix = "580";
+          } else {
+            sizeSuffix = "max";
+          }
+        }
+
+        const variant = document.body.classList.contains("dark-theme")
+          ? "dark"
+          : "light";
+
+        // ensure the image is shown (override small-screen CSS when needed)
+        decorImg.style.display = "block";
+        decorImg.src = `/assets/backgrounds/${artBase}%20${variant}%20${sizeSuffix}.svg`;
+      }
+
+      function updateFooterArtwork() {
+        if (!(footerImg instanceof HTMLImageElement)) return;
+        const vw = window.innerWidth || document.documentElement.clientWidth;
+        const sizeSuffix = vw <= 580 ? "small" : "large-med";
+        const variant = document.body.classList.contains("dark-theme")
+          ? "dark"
+          : "light";
+        footerImg.style.display = "block";
+        footerImg.src = `/assets/footers/footer%20art%20${sizeSuffix}%20${variant}.svg`;
+      }
+
+      // initial theme detection
       if (currentTheme === "dark") {
         document.body.classList.add("dark-theme");
       } else if (currentTheme === "light") {
@@ -82,6 +172,11 @@ const { title, description, image = "/assets/share-img.png" } = Astro.props;
         document.body.classList.add("dark-theme");
       }
 
+      // set artwork initially (path + theme)
+      updateDecorArtwork();
+      updateFooterArtwork?.();
+
+      // update artwork when theme toggles
       themeToggleButton?.addEventListener("click", () => {
         if (document.body.classList.contains("dark-theme")) {
           document.body.classList.remove("dark-theme");
@@ -90,7 +185,16 @@ const { title, description, image = "/assets/share-img.png" } = Astro.props;
           document.body.classList.add("dark-theme");
           localStorage.setItem("theme", "dark");
         }
+        updateDecorArtwork();
+        updateFooterArtwork();
       });
+
+      // handle back/forward navigation updates
+      window.addEventListener("popstate", updateDecorArtwork);
+      window.addEventListener("popstate", updateFooterArtwork);
+      // update artwork when viewport size changes
+      window.addEventListener("resize", updateDecorArtwork);
+      window.addEventListener("resize", updateFooterArtwork);
     </script>
   </body><!-- if mobile menu is open and resize to desktop, kill menu and restore page contents -->
 </html>
