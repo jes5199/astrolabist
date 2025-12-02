@@ -24,23 +24,38 @@ const navLinks = await getNavLinks();
   <div class="mobile-header">
     <div class="header-container">
       <a class="title" href="/">{SITE_TITLE}</a>
-      <div class="mobile-menu">
+      <div class="mobile-menu" onclick="menuToggle()">
         <span>Menu</span>
         <div class="hamburger">
-          <div
-            class="mobile-only hamburger image-container"
-            onclick="menuToggle()"
-          >
-            <img
+          <div class="mobile-only hamburger image-container">
+            <svg
               id="hamburger-icon"
-              src="/assets/astrolabist-menu-burger.svg"
-              alt="Menu"
-            />
-            <img
+              class="menu-icon"
+              width="16"
+              height="9"
+              viewBox="0 0 16 9"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-label="Menu"
+            >
+              <path
+                d="M16 1H0V0H16V1ZM16 4H0V5H16V4ZM16 8H0V9H16V8Z"
+                fill="currentColor"></path>
+            </svg>
+            <svg
               id="close-icon"
-              src="/assets/astrolabist-menu-close.svg"
-              alt="Close Menu"
-            />
+              class="menu-icon"
+              width="16"
+              height="9"
+              viewBox="0 0 16 9"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-label="Close Menu"
+            >
+              <path
+                d="M16 0.89L15.56 0L8 3.94L0.44 0L0 0.89L6.93 4.5L0 8.11L0.44 9L8 5.06L15.56 9L16 8.11L9.07 4.5L16 0.89Z"
+                fill="currentColor"></path>
+            </svg>
           </div>
         </div>
       </div>
@@ -80,11 +95,12 @@ const navLinks = await getNavLinks();
   .mobile-menu {
     display: flex;
     align-items: center;
-    column-gap: 1rem;
+    column-gap: 0.5rem;
+    cursor: pointer;
 
     span {
-      font-size: 1.25rem;
-      line-height: 2.5rem;
+      font-size: 1rem;
+      line-height: 1.125rem;
     }
   }
 
@@ -97,6 +113,13 @@ const navLinks = await getNavLinks();
     line-height: 2.25rem;
     font-family: var(--header-font);
     text-decoration: none;
+
+    &:hover {
+      text-decoration: dotted underline;
+      text-decoration-skip-ink: none;
+      text-decoration-thickness: 4%;
+      text-underline-offset: 0.25rem;
+    }
   }
 
   nav {
@@ -141,6 +164,13 @@ const navLinks = await getNavLinks();
     display: flex;
     align-items: center;
   }
+  .menu-icon {
+    color: var(--header-color);
+    width: 16px;
+    height: 9px;
+    display: inline-block;
+    margin-top: 3px;
+  }
   #close-icon {
     display: none;
   }
@@ -151,6 +181,9 @@ const navLinks = await getNavLinks();
     }
     .mobile-header {
       display: block;
+    }
+    .title {
+      font-size: 1.5rem;
     }
   }
 

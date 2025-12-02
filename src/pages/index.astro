@@ -28,12 +28,20 @@ let featuredTags = await getFeaturedTags();
   </section>
   <a class="archive-link" href="/archive">
     <span>Explore the archive</span>
-    <svg width="30" height="11" viewBox="0 0 30 11" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M30 5.06C27.91 6.33 26.05 8.05 24.74 10.12H23.49C24.8 8.12 26.38 6.37 28.32 5.06C26.37 3.73 24.74 1.97 23.47 0H24.74C25.99 2.11 27.93 3.77 30 5.06ZM26.99 5.06C24.92 3.77 22.98 2.11 21.73 0H20.46C21.58 1.74 23 3.3 24.66 4.56H0V5.56H24.66C23.02 6.8 21.64 8.35 20.48 10.12H21.73C23.04 8.05 24.9 6.33 26.99 5.06Z" fill="currentColor"/>
+    <svg
+      width="30"
+      height="11"
+      viewBox="0 0 30 11"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="M30 5.06C27.91 6.33 26.05 8.05 24.74 10.12H23.49C24.8 8.12 26.38 6.37 28.32 5.06C26.37 3.73 24.74 1.97 23.47 0H24.74C25.99 2.11 27.93 3.77 30 5.06ZM26.99 5.06C24.92 3.77 22.98 2.11 21.73 0H20.46C21.58 1.74 23 3.3 24.66 4.56H0V5.56H24.66C23.02 6.8 21.64 8.35 20.48 10.12H21.73C23.04 8.05 24.9 6.33 26.99 5.06Z"
+        fill="currentColor"></path>
     </svg>
   </a>
 </BaseLayout>
-  
 
 <style>
   section h2 {
@@ -60,6 +68,12 @@ let featuredTags = await getFeaturedTags();
     width: auto;
   }
 
+  @media (max-width: 820px) {
+    section h2 {
+      font-size: 1.75rem;
+    }
+  }
+
   @media (max-width: 768px) {
     section h2 {
       font-size: 1.75rem;
@@ -70,5 +84,4 @@ let featuredTags = await getFeaturedTags();
       margin-top: 3rem;
     }
   }
-  
 </style>

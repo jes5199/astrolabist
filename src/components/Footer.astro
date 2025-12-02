@@ -6,6 +6,7 @@ import { getNavLinks } from "../lib/postUtils.astro";
 const navLinks = await getNavLinks();
 const currentYear = new Date().getFullYear();
 ---
+
 <button id="theme-toggle">theme</button>
 <footer id="footer">
   <div class="site-title">
@@ -41,7 +42,7 @@ const currentYear = new Date().getFullYear();
     font-weight: 600;
     font-size: 1.25rem;
     line-height: 1.25rem;
-    
+
     a {
       text-decoration: none;
     }
@@ -80,6 +81,13 @@ const currentYear = new Date().getFullYear();
     a {
       display: block;
       height: 19px;
+    }
+  }
+
+  @media (max-width: 820px) {
+    footer {
+      padding: 20px 20px 60px;
+      gap: 2rem;
     }
   }
 
