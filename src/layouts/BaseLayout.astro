@@ -112,6 +112,7 @@ const { title, description, image = "/assets/share-img.png" } = Astro.props;
         const artBase = getArtworkBaseName();
         if (!artBase) {
           decorImg.style.display = "none";
+          decorImg.style.width = "";
           return;
         }
 
@@ -146,6 +147,44 @@ const { title, description, image = "/assets/share-img.png" } = Astro.props;
 
         // ensure the image is shown (override small-screen CSS when needed)
         decorImg.style.display = "block";
+        // Adjust width based on artwork type:
+        // - art-home: keep the default wide treatment (60vw from CSS)
+        // - art-general & art-archive: smoothly scale from ~60vw on small screens to ~20vw on large screens
+        // - art-static: smoothly scale from ~90vw on small screens to ~20vw on large screens
+        // - art-collection: smoothly scale from ~110vw on small screens to ~60vw on large screens
+        // - others: fall back to CSS default (60vw)
+        if (
+          artBase === "art-general" ||
+          artBase === "art-static" ||
+          artBase === "art-archive" ||
+          artBase === "art-collection"
+        ) {
+          const viewportWidthPx = vw;
+          const smallBreakpoint = 480; // px
+          const largeBreakpoint = 820; // px
+          const minVw = artBase === "art-collection" ? 40 : 20; // target on large screens
+          const maxVw =
+            artBase === "art-static"
+              ? 90
+              : artBase === "art-archive"
+                ? 80
+                : artBase === "art-collection"
+                  ? 110
+                  : 60; // target on small screens
+
+          const clampedWidth = Math.max(
+            smallBreakpoint,
+            Math.min(largeBreakpoint, viewportWidthPx)
+          );
+          const t =
+            (clampedWidth - smallBreakpoint) /
+            (largeBreakpoint - smallBreakpoint); // 0 → 1
+          const widthVw = maxVw - t * (maxVw - minVw); // 60 → 20
+
+          decorImg.style.width = `${widthVw}vw`;
+        } else {
+          decorImg.style.width = "60vw";
+        }
         decorImg.src = `/assets/backgrounds/${artBase}%20${variant}%20${sizeSuffix}.svg`;
       }
 

@@ -38,7 +38,7 @@ export function formattedTime(time: string): string {
 
   // Remove space before AM/PM and convert to lowercase
   return withoutLeadingZero.replace(/\s*(AM|PM)/i, (match) =>
-    match.trim().toLowerCase(),
+    match.trim().toLowerCase()
   );
 }
 
@@ -57,7 +57,7 @@ export async function getTagNames() {
 
 export async function getFeaturedTags() {
   const allTags = await getTags();
-  return allTags.filter((tag) => tag.featured).map((tag) => tag.name);
+  return allTags.filter((tag) => tag.featured);
 }
 
 export async function getNavTags() {
@@ -67,13 +67,13 @@ export async function getNavTags() {
 
 export async function getNavLinks() {
   const navTags = await getNavTags();
-  
+
   // Map navTags to the same format as nav items (title and href)
   const tagLinks = navTags.map((tag) => ({
     title: tag.name,
     href: `/tags/${tag.slug}`,
   }));
-  
+
   // Combine nav items and tag links
   return [...tagLinks, ...nav];
 }

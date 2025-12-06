@@ -4,6 +4,27 @@ const navLinks = await getNavLinks();
 ---
 
 <nav id="mobile-nav" class="mobile-only">
+  <div class="mobile-menu" onclick="menuToggle()">
+    <span>Menu</span>
+    <div class="hamburger">
+      <div class="mobile-only hamburger image-container">
+        <svg
+          id="close-icon"
+          class="menu-icon"
+          width="16"
+          height="9"
+          viewBox="0 0 16 9"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-label="Close Menu"
+        >
+          <path
+            d="M16 0.89L15.56 0L8 3.94L0.44 0L0 0.89L6.93 4.5L0 8.11L0.44 9L8 5.06L15.56 9L16 8.11L9.07 4.5L16 0.89Z"
+            fill="currentColor"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
   <div class="nav-container">
     <ul>
       {
@@ -22,16 +43,31 @@ const navLinks = await getNavLinks();
   }
 
   @media (max-width: 820px) {
+    .mobile-menu {
+      display: flex;
+      align-items: center;
+      column-gap: 0.5rem;
+      cursor: pointer;
+      justify-content: flex-end;
+      padding: 1rem 2rem;
+      color: var(--header-color);
+      max-height: 2.25rem;
+      min-height: 2.25rem;
+
+      span {
+        font-size: 1rem;
+        line-height: 1.125rem;
+      }
+    }
     nav {
       display: none;
       background-color: var(--theme-background);
       width: 240px;
       position: fixed;
-      top: 56px;
       right: 0;
       bottom: 0;
       z-index: 10;
-      height: calc(100vh - 56px);
+      height: 100vh;
 
       .nav-container {
         display: flex;
@@ -77,6 +113,11 @@ const navLinks = await getNavLinks();
   @media (max-width: 580px) {
     nav {
       width: 100%;
+    }
+  }
+  @media (max-width: 575px) {
+    .mobile-menu span {
+      display: none;
     }
   }
 </style>

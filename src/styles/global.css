@@ -432,6 +432,50 @@ li {
   text-decoration: none;
 }
 
+.divider-1,
+.divider-2,
+.divider-3,
+.divider-4 {
+  width: 100%;
+  background-size: cover;
+  border: none;
+  margin: 2rem 0;
+}
+
+.divider-1 {
+  height: 48px;
+  background: url("/assets/dividers/divider-01 light.svg") no-repeat center;
+}
+
+.divider-2 {
+  height: 91px;
+  background: url("/assets/dividers/divider-02 light.svg") no-repeat center;
+}
+
+.divider-3 {
+  height: 114px;
+  background: url("/assets/dividers/divider-03 light.svg") no-repeat center;
+}
+
+.divider-4 {
+  height: 58px;
+  background: url("/assets/dividers/divider-04 light.svg") no-repeat center;
+}
+
+.dark-theme {
+  .divider-1 {
+    background: url("/assets/dividers/divider-01 dark.svg") no-repeat center;
+  }
+  .divider-2 {
+    background: url("/assets/dividers/divider-02 dark.svg") no-repeat center;
+  }
+  .divider-3 {
+    background: url("/assets/dividers/divider-03 dark.svg") no-repeat center;
+  }
+  .divider-4 {
+    background: url("/assets/dividers/divider-04 dark.svg") no-repeat center;
+  }
+}
 @media (max-width: 820px) {
   .page-padding {
     padding: 20px;
