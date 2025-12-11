@@ -208,6 +208,20 @@ b {
 
 a {
   color: var(--link-color);
+
+  &:hover {
+    color: #092686;
+    text-decoration: dotted underline;
+    text-decoration-skip-ink: none;
+    text-decoration-thickness: 7%;
+    text-underline-offset: 0.2rem;
+  }
+}
+
+.dark-theme a {
+  &:hover {
+    color: #f8f3e7;
+  }
 }
 
 p {
@@ -287,11 +301,39 @@ button {
   background-color: var(--button-color);
   border: none;
   color: var(--theme-text-swap);
+
+  &:hover {
+    background-color: #001045;
+    color: #f7eed8;
+  }
+}
+
+.dark-theme .solid-button {
+  color: var(--theme-text);
+
+  &:hover {
+    background-color: #b62518;
+    color: #f8f3e7;
+  }
 }
 
 .outline-button {
   background-color: transparent;
   border: 1px solid var(--button-color);
+
+  &:hover {
+    background-color: #1c4ac7;
+    color: #f7eed8;
+  }
+}
+
+.dark-theme .outline-button {
+  color: var(--button-color);
+
+  &:hover {
+    background-color: #e93f30;
+    color: #f8f3e7;
+  }
 }
 
 blockquote {
@@ -440,7 +482,7 @@ li {
   width: 100%;
   background-size: cover;
   border: none;
-  margin: 2rem 0;
+  margin: 1.5rem 0;
 }
 
 .divider-1 {
@@ -515,6 +557,7 @@ li {
   h2 {
     font-size: 1.75rem;
     line-height: 2rem;
+    margin: 3rem 0 0.5rem;
   }
 
   h3 {
