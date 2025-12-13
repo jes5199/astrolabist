@@ -87,11 +87,25 @@ const { title, description, image = "/assets/share-img.png" } = Astro.props;
     </script>
     <script>
       const themeToggleButton = document.getElementById("theme-toggle");
+      const hasThemeToggle = !!themeToggleButton;
       /** @type {HTMLImageElement | null} */
       const decorImg = document.getElementById("decor-artwork");
       /** @type {HTMLImageElement | null} */
       const footerImg = document.getElementById("decor-footer");
-      let currentTheme = localStorage.getItem("theme");
+      let currentTheme = null;
+
+      try {
+        // Only respect a stored theme when there is a visible toggle.
+        // If there is no toggle, clear any legacy preference so system
+        // dark-mode settings can take effect.
+        if (hasThemeToggle) {
+          currentTheme = localStorage.getItem("theme");
+        } else {
+          localStorage.removeItem("theme");
+        }
+      } catch {
+        currentTheme = null;
+      }
 
       function getArtworkBaseName() {
         if (typeof window === "undefined") return null;
