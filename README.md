@@ -21,3 +21,7 @@ To use the cool custom dividers, put one of the following in your markdown:
 ```
 
 A content note: the nav currently has 3 tags with pretty long names to test out how big we can make it, and it works but looks a little awkward.  You are in control of which tags end up in the nav (max 3) so keep number and size of tag name in mind when designing your nav.
+
+In addition to using npm install to get dependencies and rpm run dev to run the site in dev mode, the only additional instructions are that you can view your dev site at localhost:4321 and your dev admin panel at localhost:4321/admin/index.html.  The advantage to using the Tina backend locally is that changes you make will update on the dev site instantaneously, rather than take a minute or two for a production update.  You can also make a bunch of changes and push them up as a single commit, which will trigger a single build, which will help you stay in the free Netlify tier.
+
+Occasionally you may get failed Netlify builds where it’s complaining about mismatching Tina schemas.  It’s very annoying when it happens, but the resolution is simple: pull changes from GitHub, run npm run dev, stage and commit any changes to the Tina lockfile, and push.  I will add all of this to the README (except for the secrets).
