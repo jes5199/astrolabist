@@ -9,8 +9,7 @@ pubDate: 2024-08-13T00:00:00.000Z
 imageUrl: /img/robin.jpeg
 imageAltText: A robin
 tags:
-  - Favorites
-  - '2025'
+  - test
 published: true
 ---
 

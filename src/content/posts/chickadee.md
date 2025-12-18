@@ -8,10 +8,9 @@ pubDate: 2024-08-10T00:00:00.000Z
 imageUrl: /img/chickadee.jpg
 imageAltText: some cool thing
 tags:
-  - "2025"
-  - Favorites
+  - test
 published: true
-featured: true
+featured: false
 ---
 
 The Black-capped [Chickadee](https://chickadee.com) (_Poecile atricapillus_) is Vermont's state bird and a beloved year-round resident. Known for its distinctive call and friendly nature, this small bird is a favorite among birdwatchers.

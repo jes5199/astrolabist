@@ -2,7 +2,7 @@
 import Tags from "./Tags.astro";
 import PrevNext from "./PrevNext.astro";
 import FormattedDate from "./FormattedDate.astro";
-const { title, pubDate, imageUrl, imageAltText, previous, next, tags } =
+const { title, pubDate, imageUrl, imageAltText, hideHeroImage, previous, next, tags } =
   Astro.props;
 ---
 
@@ -17,7 +17,7 @@ const { title, pubDate, imageUrl, imageAltText, previous, next, tags } =
   </div>
 
   <div class="hero-image">
-    {imageUrl && <img src={imageUrl} alt={imageAltText} />}
+    {imageUrl && !hideHeroImage && <img src={imageUrl} alt={imageAltText} />}
   </div>
 
   <div class="content">

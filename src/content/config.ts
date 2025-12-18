@@ -11,6 +11,7 @@ const posts = defineCollection({
     tags: z.array(z.string()).optional(),
     published: z.boolean().optional(),
     featured: z.boolean().optional(),
+    hideHeroImage: z.boolean().optional(),
     next: z
       .object({
         slug: z.string(),

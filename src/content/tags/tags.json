@@ -1,33 +1,33 @@
 {
   "tags": [
     {
-      "name": "Favorites",
-      "slug": "favorites",
+      "name": "Space Math",
+      "slug": "space-math",
       "pinToNav": true,
       "featured": true
     },
     {
-      "name": "2025",
-      "slug": "2025",
-      "pinToNav": false,
-      "featured": false
-    },
-    {
-      "name": "Another Tag",
-      "slug": "another-tag",
-      "pinToNav": true,
-      "featured": false
-    },
-    {
-      "name": "Tags for Days",
-      "slug": "tags-for-days",
+      "name": "Planetary Magic",
+      "slug": "planetary-magic",
       "pinToNav": false,
       "featured": true
     },
     {
-      "name": "Max Nav Size",
-      "slug": "max-nav-size",
-      "pinToNav": true,
+      "name": "Sacred Geometry",
+      "slug": "sacred-geometry",
+      "pinToNav": false,
+      "featured": true
+    },
+    {
+      "name": "Astrolabe",
+      "slug": "astrolabe",
+      "pinToNav": false,
+      "featured": false
+    },
+    {
+      "name": "test",
+      "slug": "test",
+      "pinToNav": false,
       "featured": false
     }
   ]

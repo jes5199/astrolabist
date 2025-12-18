@@ -6,6 +6,8 @@ blurb: >-
   treasured inhabitant of Vermont's forests. Explore the life and habits of this
   remarkable songbird.
 pubDate: 2025-08-07T00:00:00.000Z
+tags:
+  - test
 published: true
 ---
 
