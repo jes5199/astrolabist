@@ -2,6 +2,6 @@
 title: Primary Home Page Content
 ---
 
-# Short site title on the home page
+# Not Difficult, Just Arcane
 
-This the first content area on the home page. Jes can place any kind of formatting here that’s also available on the general page. The black-capped chickadee is a small, nonmigratory, North American passerine bird that lives in deciduous and mixed forests. It is a member of the Paridae family.
+I'm moving in to my new website. The store will be up and running again, soon-ish.
