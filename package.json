@@ -27,11 +27,11 @@
     "slate-dom": "^0.118.1",
     "slate-history": "^0.113.1",
     "slate-react": "^0.117.4",
-    "tinacms": "^1.6.2",
+    "tinacms": "^3.14.2",
     "typescript": "^5.4.5"
   },
   "devDependencies": {
-    "@tinacms/cli": "^1.5.44",
+    "@tinacms/cli": "^4.0.1",
     "@types/node": "^20.19.19"
   }
 }
