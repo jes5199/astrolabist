@@ -43,6 +43,7 @@
   "litel": {
    "gloss": "little",
    "source": "oxf6",
+   "line": "little",
    "ref": {
     "head": "Litel",
     "page": "153",
@@ -52,6 +53,7 @@
   "lowis": {
    "gloss": "Lewis",
    "source": "oxf6n",
+   "line": "Lewis",
    "ref": {
     "head": "Lowis",
     "page": "371",
@@ -68,6 +70,7 @@
   "sone": {
    "gloss": "son",
    "source": "oxf6",
+   "line": "son",
    "ref": {
     "head": "Sone",
     "page": "240",
@@ -77,6 +80,7 @@
   "wel": {
    "gloss": "well",
    "source": "oxf6",
+   "line": "well",
    "ref": {
     "head": "Wel",
     "page": "287",
@@ -89,6 +93,7 @@
   "certeyne": {
    "gloss": "certain",
    "source": "oxf6",
+   "line": "certain",
    "ref": {
     "head": "Certeyne",
     "page": "44",
@@ -101,6 +106,7 @@
   "thyn": {
    "gloss": "thine",
    "source": "oxf6",
+   "line": "thine",
    "ref": {
     "head": "Thyn",
     "page": "266",
@@ -112,23 +118,28 @@
   },
   "thy": {
    "gloss": "your",
-   "source": "ours"
+   "source": "ours",
+   "line": "your"
   },
   "thee": {
    "gloss": "you",
-   "source": "ours"
+   "source": "ours",
+   "line": "you"
   },
   "thou": {
    "gloss": "you",
-   "source": "ours"
+   "source": "ours",
+   "line": "you"
   },
   "abilite": {
    "gloss": "ability",
-   "source": "ours"
+   "source": "ours",
+   "line": "ability"
   },
   "lerne": {
    "gloss": "learn",
    "source": "oxf6",
+   "line": "learn",
    "ref": {
     "head": "Lerne",
     "page": "148",
@@ -138,6 +149,7 @@
   "science": {
    "gloss": "science, knowledge",
    "source": "oxf6",
+   "line": "science",
    "ref": {
     "head": "Science",
     "page": "224",
@@ -147,6 +159,7 @@
   "touchinge": {
    "gloss": "concerning",
    "source": "oxf6",
+   "line": "concerning",
    "ref": {
     "head": "Touchinge",
     "page": "269",
@@ -156,6 +169,7 @@
   "nombre": {
    "gloss": "number",
    "source": "eets",
+   "line": "number",
    "ref": {
     "head": "Nombre",
     "page": "114",
@@ -166,6 +180,7 @@
   "proporciouns": {
    "gloss": "proportions, ratios",
    "source": "eets",
+   "line": "proportions",
    "ref": {
     "head": "Proporciouns",
     "page": "115",
@@ -179,6 +194,7 @@
   "preyere": {
    "gloss": "prayer",
    "source": "oxf6",
+   "line": "prayer",
    "ref": {
     "head": "Preyere",
     "page": "200",
@@ -188,6 +204,7 @@
   "special": {
    "gloss": "especially, in particular",
    "source": "oxf6",
+   "line": "especially",
    "ref": {
     "head": "Special",
     "page": "243",
@@ -200,6 +217,7 @@
   "tretis": {
    "gloss": "treatise",
    "source": "eets",
+   "line": "treatise",
    "ref": {
     "head": "Tretis",
     "page": "118",
@@ -210,6 +228,7 @@
   "astrolabie": {
    "gloss": "astrolabe",
    "source": "eets",
+   "line": "astrolabe",
    "ref": {
     "head": "Astrelabie",
     "page": "107",
@@ -226,6 +245,7 @@
   "than": {
    "gloss": "then",
    "source": "oxf6",
+   "line": "then",
    "ref": {
     "head": "Than",
     "page": "260",
@@ -235,6 +255,7 @@
   "mechel": {
    "gloss": "for as much",
    "source": "eets",
+   "line": "for as much",
    "ref": {
     "head": "Mechel",
     "page": "113",
@@ -248,6 +269,7 @@
   "philosofre": {
    "gloss": "philosopher",
    "source": "oxf6",
+   "line": "philosopher",
    "ref": {
     "head": "Philosophre",
     "page": "192",
@@ -263,6 +285,7 @@
   "seith": {
    "gloss": "says",
    "source": "oxf6",
+   "line": "says",
    "ref": {
     "head": "Seith",
     "page": "226",
@@ -272,6 +295,7 @@
   "condescende": {
    "gloss": "stoop to",
    "source": "oxf6",
+   "line": "stoop to",
    "ref": {
     "head": "Condescende",
     "page": "54",
@@ -281,6 +305,7 @@
   "rightful": {
    "gloss": "just, lawful",
    "source": "oxf6",
+   "line": "just",
    "ref": {
     "head": "Rightful",
     "page": "217",
@@ -289,15 +314,18 @@
   },
   "frend": {
    "gloss": "friend",
-   "source": "ours"
+   "source": "ours",
+   "line": "friend"
   },
   "therfor": {
    "gloss": "therefore",
-   "source": "ours"
+   "source": "ours",
+   "line": "therefore"
   },
   "geven": {
    "gloss": "given",
    "source": "eets",
+   "line": "given",
    "ref": {
     "head": "Geuen",
     "page": "111",
@@ -311,6 +339,7 @@
   "suffisaunt": {
    "gloss": "sufficient, sufficiently good",
    "source": "eets",
+   "line": "sufficient",
    "ref": {
     "head": "Suffisaunt",
     "page": "117",
@@ -330,6 +359,7 @@
   "oure": {
    "gloss": "our",
    "source": "oxf6",
+   "line": "our",
    "ref": {
     "head": "Oure",
     "page": "184",
@@ -339,6 +369,7 @@
   "orizonte": {
    "gloss": "horizon",
    "source": "eets",
+   "line": "horizon",
    "ref": {
     "head": "Orizonte",
     "page": "114",
@@ -349,6 +380,7 @@
   "compowned": {
    "gloss": "composed, constructed, drawn",
    "source": "eets",
+   "line": "composed",
    "ref": {
     "head": "Compowned",
     "page": "108",
@@ -363,6 +395,7 @@
    "gloss": "the distance of any place on the globe, N. or S. of the equator",
    "source": "eets",
    "short": "distance",
+   "line": "distance",
    "ref": {
     "head": "Latitude",
     "page": "113",
@@ -374,6 +407,7 @@
    "gloss": "the angular distance of any body from the ecliptic",
    "source": "eets",
    "short": "angular distance",
+   "line": "angular distance",
    "ref": {
     "head": "Latitude",
     "page": "113",
@@ -390,6 +424,7 @@
   "oxenford": {
    "gloss": "Oxford",
    "source": "oxf6n",
+   "line": "Oxford",
    "ref": {
     "head": "Oxenford",
     "page": "374",
@@ -400,6 +435,7 @@
   "mediacion": {
    "gloss": "means, assistance",
    "source": "eets",
+   "line": "means",
    "ref": {
     "head": "Mediacion",
     "page": "113",
@@ -410,6 +446,7 @@
   "teche": {
    "gloss": "teach, instruct",
    "source": "oxf6",
+   "line": "teach",
    "ref": {
     "head": "Teche",
     "page": "258",
@@ -420,6 +457,7 @@
    "gloss": "mathematical propositions",
    "source": "eets",
    "short": "propositions",
+   "line": "propositions",
    "ref": {
     "head": "Conclusions",
     "page": "108",
@@ -436,6 +474,7 @@
   "apertening": {
    "gloss": "belonging",
    "source": "oxf6",
+   "line": "belonging",
    "ref": {
     "head": "Apertening",
     "page": "14",
@@ -446,6 +485,7 @@
   "seye": {
    "gloss": "say",
    "source": "oxf6",
+   "line": "say",
    "ref": {
     "head": "Seye",
     "page": "229",
@@ -455,6 +495,7 @@
   "certein": {
    "gloss": "certain",
    "source": "eets",
+   "line": "certain",
    "ref": {
     "head": "Certein",
     "page": "108",
@@ -470,11 +511,13 @@
   },
   "furst": {
    "gloss": "first",
-   "source": "ours"
+   "source": "ours",
+   "line": "first"
   },
   "han": {
    "gloss": "have, possess",
    "source": "eets",
+   "line": "have",
    "ref": {
     "head": "Han",
     "page": "111",
@@ -488,6 +531,7 @@
   "ben-are": {
    "gloss": "are",
    "source": "oxf6",
+   "line": "are",
    "ref": {
     "head": "Ben",
     "page": "25",
@@ -497,6 +541,7 @@
   "ben-pp": {
    "gloss": "been",
    "source": "oxf6",
+   "line": "been",
    "ref": {
     "head": "Ben",
     "page": "25",
@@ -506,6 +551,7 @@
   "ben-be": {
    "gloss": "be",
    "source": "oxf6",
+   "line": "be",
    "ref": {
     "head": "Ben",
     "page": "25",
@@ -515,6 +561,7 @@
   "fonde": {
    "gloss": "found",
    "source": "oxf6",
+   "line": "found",
    "ref": {
     "head": "Fonde",
     "page": "99",
@@ -524,6 +571,7 @@
   "elles": {
    "gloss": "else, otherwise",
    "source": "oxf6",
+   "line": "else",
    "ref": {
     "head": "Elles",
     "page": "84",
@@ -533,6 +581,7 @@
   "mighten": {
    "gloss": "might",
    "source": "oxf6",
+   "line": "might",
    "ref": {
     "head": "Mighten",
     "page": "172",
@@ -542,6 +591,7 @@
   "unknowe": {
    "gloss": "unknown",
    "source": "eets",
+   "line": "unknown",
    "ref": {
     "head": "Vnknowe",
     "page": "118",
@@ -555,6 +605,7 @@
   "perfitly": {
    "gloss": "perfectly",
    "source": "eets",
+   "line": "perfectly",
    "ref": {
     "head": "Perfitly",
     "page": "115",
@@ -564,11 +615,13 @@
   },
   "regioun": {
    "gloss": "region",
-   "source": "ours"
+   "source": "ours",
+   "line": "region"
   },
   "sothly": {
    "gloss": "verily, soothly",
    "source": "eets",
+   "line": "verily",
    "ref": {
     "head": "Sothly",
     "page": "117",
@@ -579,6 +632,7 @@
   "seyn": {
    "gloss": "seen",
    "source": "oxf6",
+   "line": "seen",
    "ref": {
     "head": "Seyn",
     "page": "229",
@@ -588,6 +642,7 @@
   "wole": {
    "gloss": "will",
    "source": "oxf6",
+   "line": "will",
    "ref": {
     "head": "Wole",
     "page": "297",
@@ -597,6 +652,7 @@
   "performe": {
    "gloss": "achieve",
    "source": "oxf6",
+   "line": "achieve",
    "ref": {
     "head": "Performe",
     "page": "191",
@@ -606,6 +662,7 @@
   "hir": {
    "gloss": "their",
    "source": "oxf6",
+   "line": "their",
    "ref": {
     "head": "Hir (4)",
     "page": "129",
@@ -618,6 +675,7 @@
   "bihestes": {
    "gloss": "promises",
    "source": "eets",
+   "line": "promises",
    "ref": {
     "head": "Byhestes",
     "page": "108",
@@ -634,6 +692,7 @@
   "hem": {
    "gloss": "them",
    "source": "eets",
+   "line": "them",
    "ref": {
     "head": "Hem",
     "page": "111",
@@ -646,6 +705,7 @@
   "to-too": {
    "gloss": "too",
    "source": "eets",
+   "line": "too",
    "ref": {
     "head": "To",
     "page": "118",
@@ -655,6 +715,7 @@
   "yeer": {
    "gloss": "year",
    "source": "oxf6",
+   "line": "year",
    "ref": {
     "head": "Yeer",
     "page": "304",
@@ -663,11 +724,13 @@
   },
   "conseyve": {
    "gloss": "conceive",
-   "source": "ours"
+   "source": "ours",
+   "line": "conceive"
   },
   "fyve": {
    "gloss": "five",
    "source": "oxf6",
+   "line": "five",
    "ref": {
     "head": "Fyve",
     "page": "110",
@@ -677,6 +740,7 @@
   "parties": {
    "gloss": "parts",
    "source": "oxf6",
+   "line": "parts",
    "ref": {
     "head": "Parties",
     "page": "189",
@@ -686,15 +750,18 @@
   },
   "shewe": {
    "gloss": "show",
-   "source": "ours"
+   "source": "ours",
+   "line": "show"
   },
   "shewed": {
    "gloss": "shown",
-   "source": "ours"
+   "source": "ours",
+   "line": "shown"
   },
   "ful": {
    "gloss": "very, quite",
    "source": "oxf6",
+   "line": "very",
    "ref": {
     "head": "Ful",
     "page": "109",
@@ -705,6 +772,7 @@
    "gloss": "light, i. e. easy",
    "source": "eets",
    "short": "easy",
+   "line": "easy",
    "ref": {
     "head": "Lihte",
     "page": "113",
@@ -715,6 +783,7 @@
   "rewles": {
    "gloss": "rules",
    "source": "eets",
+   "line": "rules",
    "ref": {
     "head": "Rewles",
     "page": "116",
@@ -728,6 +797,7 @@
   "naked": {
    "gloss": "simple, plain",
    "source": "eets",
+   "line": "simple",
    "ref": {
     "head": "Naked",
     "page": "114",
@@ -738,6 +808,7 @@
   "canstow": {
    "gloss": "knowest thou",
    "source": "eets",
+   "line": "knowest thou",
    "ref": {
     "head": "Kanstow",
     "page": "112",
@@ -748,6 +819,7 @@
   "yit": {
    "gloss": "as yet, hitherto",
    "source": "eets",
+   "line": "as yet",
    "ref": {
     "head": "Yit",
     "page": "119",
@@ -758,6 +830,7 @@
   "smal-adv": {
    "gloss": "but little",
    "source": "oxf6",
+   "line": "but little",
    "ref": {
     "head": "Smal",
     "page": "237",
@@ -767,6 +840,7 @@
   "smal": {
    "gloss": "small",
    "source": "oxf6",
+   "line": "small",
    "ref": {
     "head": "Smal",
     "page": "237",
@@ -776,6 +850,7 @@
   "lyte": {
    "gloss": "little",
    "source": "eets",
+   "line": "little",
    "ref": {
     "head": "Lite",
     "page": "113",
@@ -786,6 +861,7 @@
   "natheles": {
    "gloss": "never the less",
    "source": "eets",
+   "line": "never the less",
    "ref": {
     "head": "Natheles",
     "page": "114",
@@ -796,6 +872,7 @@
   "suffyse": {
    "gloss": "(let them) suffice",
    "source": "eets",
+   "line": "suffice",
    "ref": {
     "head": "Suffise",
     "page": "117",
@@ -806,6 +883,7 @@
   "suffyseth": {
    "gloss": "(it) suffices",
    "source": "oxf6",
+   "line": "suffices",
    "ref": {
     "head": "Suffyseth",
     "page": "252",
@@ -815,6 +893,7 @@
   "thise": {
    "gloss": "these",
    "source": "eets",
+   "line": "these",
    "ref": {
     "head": "Thise",
     "page": "118",
@@ -825,6 +904,7 @@
   "trewe": {
    "gloss": "true",
    "source": "oxf6",
+   "line": "true",
    "ref": {
     "head": "Trewe",
     "page": "272",
@@ -834,6 +914,7 @@
   "clerkes": {
    "gloss": "writers, scholars",
    "source": "oxf6",
+   "line": "writers",
    "ref": {
     "head": "Clerkes",
     "page": "49",
@@ -843,6 +924,7 @@
   "grekes": {
    "gloss": "Greeks",
    "source": "oxf6n",
+   "line": "Greeks",
    "ref": {
     "head": "Grekes",
     "page": "368",
@@ -853,6 +935,7 @@
   "arabiens": {
    "gloss": "Arabians",
    "source": "oxf6n",
+   "line": "Arabians",
    "ref": {
     "head": "Arabiens",
     "page": "362",
@@ -862,15 +945,18 @@
   },
   "arabik": {
    "gloss": "Arabic",
-   "source": "ours"
+   "source": "ours",
+   "line": "Arabic"
   },
   "iewes": {
    "gloss": "Jews",
-   "source": "ours"
+   "source": "ours",
+   "line": "Jews"
   },
   "ebrew": {
    "gloss": "Hebrew",
    "source": "eets",
+   "line": "Hebrew",
    "ref": {
     "head": "Ebrew",
     "page": "109",
@@ -881,6 +967,7 @@
   "writen": {
    "gloss": "wrote",
    "source": "oxf6",
+   "line": "wrote",
    "ref": {
     "head": "Writen",
     "page": "301",
@@ -893,6 +980,7 @@
   "tonge": {
    "gloss": "speech, language",
    "source": "oxf6",
+   "line": "speech",
    "ref": {
     "head": "Tonge",
     "page": "268",
@@ -902,6 +990,7 @@
   "sein": {
    "gloss": "that is to say",
    "source": "eets",
+   "line": "that is to say",
    "ref": {
     "head": "Sein",
     "page": "116",
@@ -912,6 +1001,7 @@
   "wot": {
    "gloss": "knows",
    "source": "eets",
+   "line": "knows",
    "ref": {
     "head": "Wot",
     "page": "119",
@@ -922,6 +1012,7 @@
   "mo": {
    "gloss": "more",
    "source": "eets",
+   "line": "more",
    "ref": {
     "head": "Mo",
     "page": "113",
@@ -935,6 +1026,7 @@
   "langage": {
    "gloss": "language",
    "source": "oxf6",
+   "line": "language",
    "ref": {
     "head": "Langage",
     "page": "144",
@@ -944,6 +1036,7 @@
   "suffisantly": {
    "gloss": "sufficiently",
    "source": "eets",
+   "line": "sufficiently",
    "ref": {
     "head": "Suffisantly",
     "page": "117",
@@ -954,6 +1047,7 @@
   "lerned": {
    "gloss": "learnt",
    "source": "oxf6",
+   "line": "learnt",
    "ref": {
     "head": "Lerned",
     "page": "148",
@@ -963,6 +1057,7 @@
   "leden": {
    "gloss": "lead, conduct",
    "source": "eets",
+   "line": "lead",
    "ref": {
     "head": "Leden",
     "page": "113",
@@ -973,6 +1068,7 @@
   "wey": {
    "gloss": "way",
    "source": "oxf6",
+   "line": "way",
    "ref": {
     "head": "Wey",
     "page": "291",
@@ -982,6 +1078,7 @@
   "wol": {
    "gloss": "(I) will",
    "source": "eets",
+   "line": "will",
    "ref": {
     "head": "Wol",
     "page": "119",
@@ -992,6 +1089,7 @@
   "prey": {
    "gloss": "to beseech",
    "source": "oxf6",
+   "line": "beseech",
    "ref": {
     "head": "Preye",
     "page": "200",
@@ -1001,6 +1099,7 @@
   "preye": {
    "gloss": "to pray",
    "source": "oxf6",
+   "line": "pray",
    "ref": {
     "head": "Preye",
     "page": "200",
@@ -1010,6 +1109,7 @@
   "persone": {
    "gloss": "person",
    "source": "oxf6",
+   "line": "person",
    "ref": {
     "head": "Persone",
     "page": "191",
@@ -1019,6 +1119,7 @@
   "rewde": {
    "gloss": "rude, plain, unadorned",
    "source": "eets",
+   "line": "rude",
    "ref": {
     "head": "Rewde",
     "page": "116",
@@ -1029,6 +1130,7 @@
   "endyting": {
    "gloss": "style of composition",
    "source": "eets",
+   "line": "style of composition",
    "ref": {
     "head": "Endytyng",
     "page": "110",
@@ -1039,6 +1141,7 @@
   "excused": {
    "gloss": "to excuse",
    "source": "eets",
+   "line": "to excuse",
    "ref": {
     "head": "For",
     "page": "111",
@@ -1055,6 +1158,7 @@
   "superfluite": {
    "gloss": "superfluity, superabundance",
    "source": "eets",
+   "line": "superfluity",
    "ref": {
     "head": "Superfluite",
     "page": "117",
@@ -1065,6 +1169,7 @@
   "curious": {
    "gloss": "ornate",
    "source": "eets",
+   "line": "ornate",
    "ref": {
     "head": "Curious",
     "page": "109",
@@ -1075,6 +1180,7 @@
   "sentence": {
    "gloss": "meaning, drift",
    "source": "oxf6",
+   "line": "meaning",
    "ref": {
     "head": "Sentence",
     "page": "228",
@@ -1084,6 +1190,7 @@
   "hevy": {
    "gloss": "heavy, difficult",
    "source": "eets",
+   "line": "heavy",
    "ref": {
     "head": "Heuy",
     "page": "111",
@@ -1094,6 +1201,7 @@
   "atones": {
    "gloss": "at once",
    "source": "eets",
+   "line": "at once",
    "ref": {
     "head": "Atones",
     "page": "107",
@@ -1104,6 +1212,7 @@
   "swich": {
    "gloss": "such",
    "source": "oxf6",
+   "line": "such",
    "ref": {
     "head": "Swich",
     "page": "254",
@@ -1113,6 +1222,7 @@
   "semeth": {
    "gloss": "it seems to me",
    "source": "eets",
+   "line": "it seems to me",
    "ref": {
     "head": "Semeth",
     "page": "116",
@@ -1123,6 +1233,7 @@
   "twyes": {
    "gloss": "twice",
    "source": "eets",
+   "line": "twice",
    "ref": {
     "head": "Twies",
     "page": "118",
@@ -1133,6 +1244,7 @@
   "ones": {
    "gloss": "once",
    "source": "eets",
+   "line": "once",
    "ref": {
     "head": "Ones",
     "page": "114",
@@ -1143,6 +1255,7 @@
   "yif": {
    "gloss": "if",
    "source": "eets",
+   "line": "if",
    "ref": {
     "head": "Yif",
     "page": "119",
@@ -1153,6 +1266,7 @@
   "matere": {
    "gloss": "matter, affair, subject",
    "source": "oxf6",
+   "line": "matter",
    "ref": {
     "head": "Matere",
     "page": "162",
@@ -1162,6 +1276,7 @@
   "naught": {
    "gloss": "not",
    "source": "oxf6",
+   "line": "not",
    "ref": {
     "head": "Naught",
     "page": "174",
@@ -1172,6 +1287,7 @@
   "subtil": {
    "gloss": "ingenious",
    "source": "oxf6",
+   "line": "ingenious",
    "ref": {
     "head": "Subtil",
     "page": "252",
@@ -1182,6 +1298,7 @@
   "commune": {
    "gloss": "general, common",
    "source": "oxf6",
+   "line": "general",
    "ref": {
     "head": "Commune",
     "page": "52",
@@ -1191,6 +1308,7 @@
   "con": {
    "gloss": "grant me thanks, thank me",
    "source": "eets",
+   "line": "grant me thanks",
    "ref": {
     "head": "Kon",
     "page": "112",
@@ -1208,6 +1326,7 @@
   "feyth": {
    "gloss": "faith",
    "source": "oxf6",
+   "line": "faith",
    "ref": {
     "head": "Feyth",
     "page": "96",
@@ -1217,6 +1336,7 @@
   "everech": {
    "gloss": "every one",
    "source": "eets",
+   "line": "every one",
    "ref": {
     "head": "Euerech",
     "page": "110",
@@ -1230,6 +1350,7 @@
   "more": {
    "gloss": "greater",
    "source": "eets",
+   "line": "greater",
    "ref": {
     "head": "More",
     "page": "114",
@@ -1240,6 +1361,7 @@
   "lasse": {
    "gloss": "less",
    "source": "eets",
+   "line": "less",
    "ref": {
     "head": "Lasse",
     "page": "112",
@@ -1250,6 +1372,7 @@
   "ne": {
    "gloss": "not",
    "source": "oxf6",
+   "line": "not",
    "ref": {
     "head": "Ne",
     "page": "174",
@@ -1259,6 +1382,7 @@
   "usurpe": {
    "gloss": "usurp, claim",
    "source": "eets",
+   "line": "usurp",
    "ref": {
     "head": "Vsurpe",
     "page": "118",
@@ -1272,6 +1396,7 @@
   "nat": {
    "gloss": "not",
    "source": "eets",
+   "line": "not",
    "ref": {
     "head": "Nat",
     "page": "114",
@@ -1282,6 +1407,7 @@
   "werk": {
    "gloss": "work",
    "source": "oxf6",
+   "line": "work",
    "ref": {
     "head": "Werk",
     "page": "290",
@@ -1291,6 +1417,7 @@
   "engin": {
    "gloss": "ingenuity, skill",
    "source": "eets",
+   "line": "ingenuity",
    "ref": {
     "head": "Engin",
     "page": "110",
@@ -1301,6 +1428,7 @@
   "myn": {
    "gloss": "mine",
    "source": "oxf6",
+   "line": "mine",
    "ref": {
     "head": "Myn",
     "page": "172",
@@ -1310,6 +1438,7 @@
   "nam": {
    "gloss": "am not",
    "source": "eets",
+   "line": "am not",
    "ref": {
     "head": "Nam",
     "page": "114",
@@ -1320,6 +1449,7 @@
   "lewd": {
    "gloss": "unlearned",
    "source": "eets",
+   "line": "unlearned",
    "ref": {
     "head": "Lewd",
     "page": "113",
@@ -1330,6 +1460,7 @@
   "compilatour": {
    "gloss": "compiler",
    "source": "eets",
+   "line": "compiler",
    "ref": {
     "head": "Compilatour",
     "page": "108",
@@ -1341,6 +1472,7 @@
    "gloss": "astrologer, or rather, astronomer",
    "source": "eets",
    "short": "astronomer",
+   "line": "astronomer",
    "ref": {
     "head": "Astrologien",
     "page": "107",
@@ -1351,6 +1483,7 @@
   "hit": {
    "gloss": "it",
    "source": "eets",
+   "line": "it",
    "ref": {
     "head": "Hit",
     "page": "111",
@@ -1361,6 +1494,7 @@
   "doctrine": {
    "gloss": "instruction",
    "source": "eets",
+   "line": "instruction",
    "ref": {
     "head": "Doctrine",
     "page": "109",
@@ -1371,6 +1505,7 @@
   "swerd": {
    "gloss": "sword",
    "source": "oxf6",
+   "line": "sword",
    "ref": {
     "head": "Swerd",
     "page": "254",
@@ -1381,6 +1516,7 @@
   "sleen": {
    "gloss": "to slay",
    "source": "oxf6",
+   "line": "slay",
    "ref": {
     "head": "Sleen",
     "page": "236",
@@ -1391,6 +1527,7 @@
   "envye": {
    "gloss": "envy",
    "source": "oxf6",
+   "line": "envy",
    "ref": {
     "head": "Envye",
     "page": "89",
@@ -1400,6 +1537,7 @@
   "partie": {
    "gloss": "part",
    "source": "eets",
+   "line": "part",
    "ref": {
     "head": "Partie",
     "page": "115",
@@ -1410,6 +1548,7 @@
   "reherse": {
    "gloss": "to rehearse, enumerate",
    "source": "eets",
+   "line": "rehearse",
    "ref": {
     "head": "Reherse",
     "page": "115",
@@ -1423,6 +1562,7 @@
   "membres": {
    "gloss": "parts",
    "source": "eets",
+   "line": "parts",
    "ref": {
     "head": "Membres",
     "page": "113",
@@ -1433,6 +1573,7 @@
   "bicause": {
    "gloss": "because",
    "source": "oxf6",
+   "line": "because",
    "ref": {
     "head": "By-cause",
     "page": "40",
@@ -1441,11 +1582,13 @@
   },
   "grettre": {
    "gloss": "greater",
-   "source": "ours"
+   "source": "ours",
+   "line": "greater"
   },
   "knowing": {
    "gloss": "knowledge",
    "source": "eets",
+   "line": "knowledge",
    "ref": {
     "head": "Knowyng",
     "page": "112",
@@ -1456,6 +1599,7 @@
   "werken": {
    "gloss": "work, act",
    "source": "oxf6",
+   "line": "work",
    "ref": {
     "head": "Werken",
     "page": "290",
@@ -1465,6 +1609,7 @@
   "verray": {
    "gloss": "very, exact, true",
    "source": "eets",
+   "line": "very",
    "ref": {
     "head": "Verray",
     "page": "118",
@@ -1475,6 +1620,7 @@
   "practik": {
    "gloss": "practice, practical working",
    "source": "eets",
+   "line": "practice",
    "ref": {
     "head": "Practik",
     "page": "115",
@@ -1485,6 +1631,7 @@
   "forseide": {
    "gloss": "aforesaid",
    "source": "oxf6",
+   "line": "aforesaid",
    "ref": {
     "head": "Forseid",
     "page": "105",
@@ -1498,6 +1645,7 @@
    "gloss": "far-forth, i. e. far",
    "source": "eets",
    "short": "far",
+   "line": "far",
    "ref": {
     "head": "Ferforth",
     "page": "111",
@@ -1509,6 +1657,7 @@
    "gloss": "closely, lit. narrowly",
    "source": "eets",
    "short": "closely",
+   "line": "closely",
    "ref": {
     "head": "Narwe",
     "page": "114",
@@ -1522,6 +1671,7 @@
   "portatif": {
    "gloss": "portable",
    "source": "eets",
+   "line": "portable",
    "ref": {
     "head": "Portatif",
     "page": "115",
@@ -1535,6 +1685,7 @@
   "fraccions": {
    "gloss": "fractions",
    "source": "oxf6",
+   "line": "fractions",
    "ref": {
     "head": "Fraccions",
     "page": "107",
@@ -1548,6 +1699,7 @@
   "thridde": {
    "gloss": "third",
    "source": "eets",
+   "line": "third",
    "ref": {
     "head": "Thridde",
     "page": "118",
@@ -1557,6 +1709,7 @@
   "contienen": {
    "gloss": "to contain",
    "source": "eets",
+   "line": "contain",
    "ref": {
     "head": "Contienen",
     "page": "109",
@@ -1567,6 +1720,7 @@
   "sterres": {
    "gloss": "stars",
    "source": "oxf6",
+   "line": "stars",
    "ref": {
     "head": "Sterres",
     "page": "247",
@@ -1576,6 +1730,7 @@
   "fixe": {
    "gloss": "fixed",
    "source": "eets",
+   "line": "fixed",
    "ref": {
     "head": "Fixe",
     "page": "111",
@@ -1587,6 +1742,7 @@
    "gloss": "the angular distance of a celestial object N. or S. of the equator",
    "source": "eets",
    "short": "angular distance",
+   "line": "angular distance",
    "ref": {
     "head": "Declinacioun",
     "page": "109",
@@ -1606,6 +1762,7 @@
   "sonne": {
    "gloss": "sun",
    "source": "eets",
+   "line": "sun",
    "ref": {
     "head": "Sonne",
     "page": "117",
@@ -1616,6 +1773,7 @@
   "citee": {
    "gloss": "city",
    "source": "oxf6",
+   "line": "city",
    "ref": {
     "head": "Citee",
     "page": "48",
@@ -1625,6 +1783,7 @@
   "governance": {
    "gloss": "regulation",
    "source": "eets",
+   "line": "regulation",
    "ref": {
     "head": "Gouernance",
     "page": "111",
@@ -1635,6 +1794,7 @@
   "clokke": {
    "gloss": "clock",
    "source": "eets",
+   "line": "clock",
    "ref": {
     "head": "Clokke",
     "page": "108",
@@ -1646,6 +1806,7 @@
    "gloss": "the elevation of a celestial object above the horizon",
    "source": "eets",
    "short": "elevation",
+   "line": "elevation",
    "ref": {
     "head": "Altitude",
     "page": "106",
@@ -1663,6 +1824,7 @@
    "gloss": "at the moment of southing",
    "source": "eets",
    "short": "southing",
+   "line": "southing",
    "ref": {
     "head": "Meridian",
     "page": "113",
@@ -1682,6 +1844,7 @@
   "notable": {
    "gloss": "noteworthy",
    "source": "eets",
+   "line": "noteworthy",
    "ref": {
     "head": "Notable",
     "page": "114",
@@ -1692,6 +1855,7 @@
   "kalendres": {
    "gloss": "a calendar",
    "source": "eets",
+   "line": "calendar",
    "ref": {
     "head": "Kalender",
     "page": "112",
@@ -1708,6 +1872,7 @@
   "reverent": {
    "gloss": "reverend",
    "source": "eets",
+   "line": "reverend",
    "ref": {
     "head": "Reuerent",
     "page": "116",
@@ -1718,6 +1883,7 @@
   "frere": {
    "gloss": "friar",
    "source": "eets",
+   "line": "friar",
    "ref": {
     "head": "Frere",
     "page": "111",
@@ -1728,6 +1894,7 @@
   "somer": {
    "gloss": "a friar",
    "source": "oxf6n",
+   "line": "Somer",
    "ref": {
     "head": "Somer",
     "page": "378",
@@ -1745,6 +1912,7 @@
   "lenne": {
    "gloss": "Lynn",
    "source": "oxf6n",
+   "line": "Lynn",
    "ref": {
     "head": "Lenne",
     "page": "371",
@@ -1762,6 +1930,7 @@
   "ferthe": {
    "gloss": "fourth",
    "source": "eets",
+   "line": "fourth",
    "ref": {
     "head": "Ferthe",
     "page": "111",
@@ -1771,6 +1940,7 @@
   "theorik": {
    "gloss": "theory, theoretical explanation",
    "source": "eets",
+   "line": "theory",
    "ref": {
     "head": "Theorik",
     "page": "118",
@@ -1781,6 +1951,7 @@
   "moeving": {
    "gloss": "moving, motion",
    "source": "oxf6",
+   "line": "moving",
    "ref": {
     "head": "Moeving",
     "page": "169",
@@ -1791,6 +1962,7 @@
   "mone": {
    "gloss": "moon",
    "source": "eets",
+   "line": "moon",
    "ref": {
     "head": "Mone",
     "page": "114",
@@ -1801,6 +1973,7 @@
   "houre": {
    "gloss": "hour",
    "source": "oxf6",
+   "line": "hour",
    "ref": {
     "head": "Houre",
     "page": "133",
@@ -1810,6 +1983,7 @@
   "almenak": {
    "gloss": "almanac",
    "source": "eets",
+   "line": "almanac",
    "ref": {
     "head": "Almenak",
     "page": "106",
@@ -1820,6 +1994,7 @@
   "folwen": {
    "gloss": "to follow",
    "source": "oxf6",
+   "line": "follow",
    "ref": {
     "head": "Folwen",
     "page": "102",
@@ -1829,6 +2004,7 @@
   "canon": {
    "gloss": "a rule, explanation",
    "source": "eets",
+   "line": "rule",
    "ref": {
     "head": "Canon",
     "page": "108",
@@ -1842,6 +2018,7 @@
   "suffisant": {
    "gloss": "able, sufficient",
    "source": "oxf6",
+   "line": "able",
    "ref": {
     "head": "Suffisant",
     "page": "252",
@@ -1851,6 +2028,7 @@
   "knowe": {
    "gloss": "know",
    "source": "oxf6",
+   "line": "know",
    "ref": {
     "head": "Knowe",
     "page": "142",
@@ -1860,6 +2038,7 @@
   "zodiac": {
    "gloss": "zodiac",
    "source": "eets",
+   "line": "zodiac",
    "ref": {
     "head": "Zodiac",
     "page": "119",
@@ -1876,6 +2055,7 @@
   "ariseth": {
    "gloss": "rises",
    "source": "oxf6",
+   "line": "rises",
    "ref": {
     "head": "Aryseth",
     "page": "16",
@@ -1885,6 +2065,7 @@
   "arising": {
    "gloss": "rising",
    "source": "oxf6",
+   "line": "rising",
    "ref": {
     "head": "Arysing",
     "page": "16",
@@ -1894,6 +2075,7 @@
   "planete": {
    "gloss": "planet",
    "source": "oxf6",
+   "line": "planet",
    "ref": {
     "head": "Planete",
     "page": "194",
@@ -1903,6 +2085,7 @@
   "his-its": {
    "gloss": "its",
    "source": "eets",
+   "line": "its",
    "ref": {
     "head": "His",
     "page": "111",
@@ -1913,6 +2096,7 @@
   "fro": {
    "gloss": "from",
    "source": "eets",
+   "line": "from",
    "ref": {
     "head": "Fro",
     "page": "111",
@@ -1922,6 +2106,7 @@
   "ecliptik": {
    "gloss": "ecliptic",
    "source": "eets",
+   "line": "ecliptic",
    "ref": {
     "head": "Ecliptik",
     "page": "109",
@@ -1941,6 +2126,7 @@
   "lyne": {
    "gloss": "line",
    "source": "oxf6",
+   "line": "line",
    "ref": {
     "head": "Lyne",
     "page": "158",
@@ -1950,6 +2136,7 @@
   "fifte": {
    "gloss": "fifth",
    "source": "oxf6",
+   "line": "fifth",
    "ref": {
     "head": "Fifte",
     "page": "99",
@@ -1959,6 +2146,7 @@
   "introductorie": {
    "gloss": "introduction",
    "source": "eets",
+   "line": "introduction",
    "ref": {
     "head": "Introductorie",
     "page": "112",
@@ -1969,6 +2157,7 @@
   "statutz": {
    "gloss": "statutes, rules",
    "source": "eets",
+   "line": "statutes",
    "ref": {
     "head": "Statutz",
     "page": "117",
@@ -1979,6 +2168,7 @@
   "doctours": {
    "gloss": "teachers",
    "source": "oxf6",
+   "line": "teachers",
    "ref": {
     "head": "Doctours",
     "page": "77",
@@ -1989,6 +2179,7 @@
   "maist": {
    "gloss": "mayest",
    "source": "oxf6",
+   "line": "mayest",
    "ref": {
     "head": "Mayst",
     "page": "171",
@@ -1998,6 +2189,7 @@
   "gret": {
    "gloss": "great",
    "source": "oxf6",
+   "line": "great",
    "ref": {
     "head": "Greet (Gret)",
     "page": "117",
@@ -2007,6 +2199,7 @@
   "astrologie": {
    "gloss": "astrology",
    "source": "eets",
+   "line": "astrology",
    "ref": {
     "head": "Astrologie",
     "page": "107",
@@ -2017,6 +2210,7 @@
   "shaltow": {
    "gloss": "shalt thou",
    "source": "eets",
+   "line": "shalt thou",
    "ref": {
     "head": "Shaltow",
     "page": "116",
@@ -2028,6 +2222,7 @@
    "gloss": "equal partition",
    "source": "eets",
    "short": "equal partition",
+   "line": "equal partition",
    "ref": {
     "head": "Equacion",
     "page": "110",
@@ -2045,6 +2240,7 @@
    "gloss": "twelve equal portions",
    "source": "eets",
    "short": "portions",
+   "line": "portions",
    "ref": {
     "head": "Howses",
     "page": "112",
@@ -2061,6 +2257,7 @@
   "after": {
    "gloss": "according to",
    "source": "eets",
+   "line": "according to",
    "ref": {
     "head": "Aftur",
     "page": "106",
@@ -2072,6 +2269,7 @@
    "gloss": "A term in astrology",
    "source": "eets",
    "short": "term in astrology",
+   "line": "term in astrology",
    "ref": {
     "head": "Dignetes",
     "page": "109",
@@ -2089,6 +2287,7 @@
   "noteful": {
    "gloss": "useful",
    "source": "eets",
+   "line": "useful",
    "ref": {
     "head": "Noteful",
     "page": "114",
@@ -2099,6 +2298,7 @@
   "vouche": {
    "gloss": "to vouchsafe, grant",
    "source": "eets",
+   "line": "vouchsafe",
    "ref": {
     "head": "Vouche",
     "page": "118",
@@ -2112,6 +2312,7 @@
   "modur": {
    "gloss": "mother",
    "source": "eets",
+   "line": "mother",
    "ref": {
     "head": "Modur",
     "page": "114",
@@ -2122,6 +2323,7 @@
   "mayde": {
    "gloss": "maid",
    "source": "oxf6",
+   "line": "maid",
    "ref": {
     "head": "Mayde",
     "page": "162",
@@ -2131,6 +2333,7 @@
   "behete": {
    "gloss": "promise",
    "source": "eets",
+   "line": "promise",
    "ref": {
     "head": "Behete",
     "page": "108",
@@ -2141,6 +2344,7 @@
   "putten": {
    "gloss": "put, lay",
    "source": "oxf6",
+   "line": "put",
    "ref": {
     "head": "Putten",
     "page": "204",
@@ -2150,6 +2354,7 @@
   "thoumbe": {
    "gloss": "thumb",
    "source": "eets",
+   "line": "thumb",
    "ref": {
     "head": "Thowmbe",
     "page": "118",
@@ -2160,6 +2365,7 @@
   "heighte": {
    "gloss": "height, altitude",
    "source": "eets",
+   "line": "height",
    "ref": {
     "head": "Heyhte",
     "page": "111",
@@ -2170,6 +2376,7 @@
   "kep": {
    "gloss": "take heed",
    "source": "eets",
+   "line": "take heed",
    "ref": {
     "head": "Kep",
     "page": "112",
@@ -2180,6 +2387,7 @@
   "hennes": {
    "gloss": "henceforth",
    "source": "eets",
+   "line": "henceforth",
    "ref": {
     "head": "Hennes-forthward",
     "page": "111",
@@ -2190,6 +2398,7 @@
   "clepe": {
    "gloss": "call, name",
    "source": "oxf6",
+   "line": "call",
    "ref": {
     "head": "Clepen",
     "page": "49",
@@ -2200,6 +2409,7 @@
    "gloss": "the revolving long and narrow plate or rod used for measuring and taking altitudes",
    "source": "oxf6",
    "short": "plate or rod",
+   "line": "plate or rod",
    "ref": {
     "head": "Rewle",
     "page": "216",
@@ -2219,6 +2429,7 @@
   "withoute": {
    "gloss": "without",
    "source": "oxf6",
+   "line": "without",
    "ref": {
     "head": "Withoute",
     "page": "296",
@@ -2228,6 +2439,7 @@
   "renneth": {
    "gloss": "goes easily",
    "source": "oxf6",
+   "line": "goes easily",
    "ref": {
     "head": "Renneth",
     "page": "213",
@@ -2238,6 +2450,7 @@
   "maner": {
    "gloss": "kind",
    "source": "eets",
+   "line": "kind",
    "ref": {
     "head": "Maner",
     "page": "113",
@@ -2255,6 +2468,7 @@
    "gloss": "the eye in which the ring of the Astrolabe turned",
    "source": "eets",
    "short": "the eye",
+   "line": "eye",
    "ref": {
     "head": "Turet",
     "page": "118",
@@ -2272,6 +2486,7 @@
    "gloss": "lit. mother",
    "source": "eets",
    "short": "mother",
+   "line": "mother",
    "ref": {
     "head": "Moder",
     "page": "114",
@@ -2288,6 +2503,7 @@
   "rowm": {
    "gloss": "roomy, large, wide",
    "source": "eets",
+   "line": "roomy",
    "ref": {
     "head": "Rowm",
     "page": "116",
@@ -2298,6 +2514,7 @@
   "desturbeth": {
    "gloss": "disturbs, prevents",
    "source": "eets",
+   "line": "disturbs",
    "ref": {
     "head": "Desturbith",
     "page": "109",
@@ -2308,6 +2525,7 @@
   "perced": {
    "gloss": "pierced",
    "source": "eets",
+   "line": "pierced",
    "ref": {
     "head": "Perced",
     "page": "115",
@@ -2318,6 +2536,7 @@
   "resseyveth": {
    "gloss": "receives",
    "source": "eets",
+   "line": "receives",
    "ref": {
     "head": "Resseyuyth",
     "page": "115",
@@ -2332,6 +2551,7 @@
    "gloss": "the depression in the front of an astrolabe",
    "source": "oxf6",
    "short": "the depression",
+   "line": "depression",
    "ref": {
     "head": "Wombe",
     "page": "298",
@@ -2342,6 +2562,7 @@
   "thinne": {
    "gloss": "thin",
    "source": "oxf6",
+   "line": "thin",
    "ref": {
     "head": "Thinne",
     "page": "263",
@@ -2352,6 +2573,7 @@
    "gloss": "climates, i. e. zones of latitude",
    "source": "eets",
    "short": "zones of latitude",
+   "line": "zones of latitude",
    "ref": {
     "head": "Clymat (pl. Clymatz)",
     "page": "108",
@@ -2368,6 +2590,7 @@
   "riet": {
    "gloss": "the \"rete\" or net",
    "source": "eets",
+   "line": "rete",
    "ref": {
     "head": "Riet",
     "page": "116",
@@ -2387,6 +2610,7 @@
   "manere": {
    "gloss": "manner, way",
    "source": "oxf6",
+   "line": "manner",
    "ref": {
     "head": "Manere",
     "page": "160",
@@ -2396,6 +2620,7 @@
   "webbe": {
    "gloss": "a cobweb",
    "source": "eets",
+   "line": "cobweb",
    "ref": {
     "head": "Webbe",
     "page": "119",
@@ -2406,6 +2631,7 @@
   "loppe": {
    "gloss": "a spider",
    "source": "eets",
+   "line": "spider",
    "ref": {
     "head": "Loppe",
     "page": "113",
@@ -2416,18 +2642,262 @@
   "declaracioun": {
    "gloss": "explanation",
    "source": "eets",
+   "line": "explanation",
    "ref": {
     "head": "Declaracioun",
     "page": "109",
     "ocr": "djvu.txt line 10819",
     "loc": "i. 3. 3"
    }
+  },
+  "anothr": {
+   "gloss": "another",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "another"
+  },
+  "aboute": {
+   "gloss": "about",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "about"
+  },
+  "alle": {
+   "gloss": "all",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "all"
+  },
+  "bereth": {
+   "gloss": "bears",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "bears"
+  },
+  "betre": {
+   "gloss": "better",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "better"
+  },
+  "calculed": {
+   "gloss": "calculated",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "calculated"
+  },
+  "considere": {
+   "gloss": "consider",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "consider"
+  },
+  "finde": {
+   "gloss": "find",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "find"
+  },
+  "firste": {
+   "gloss": "first",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "first"
+  },
+  "forgete": {
+   "gloss": "forget",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "forget"
+  },
+  "hangen": {
+   "gloss": "hang",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "hang"
+  },
+  "harde": {
+   "gloss": "hard",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "hard"
+  },
+  "hath": {
+   "gloss": "has",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "has"
+  },
+  "hereth": {
+   "gloss": "hears",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "hears"
+  },
+  "obeyeth": {
+   "gloss": "obeys",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "obeys"
+  },
+  "olde": {
+   "gloss": "old",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "old"
+  },
+  "othre": {
+   "gloss": "other",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "other"
+  },
+  "owne": {
+   "gloss": "own",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "own"
+  },
+  "pathes": {
+   "gloss": "paths",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "paths"
+  },
+  "redeth": {
+   "gloss": "reads",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "reads"
+  },
+  "righte": {
+   "gloss": "right",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "right"
+  },
+  "seconde": {
+   "gloss": "second",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "second"
+  },
+  "shal": {
+   "gloss": "shall",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "shall"
+  },
+  "shapen": {
+   "gloss": "shaped",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "shaped"
+  },
+  "smalest": {
+   "gloss": "smallest",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "smallest"
+  },
+  "tendre": {
+   "gloss": "tender",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "tender"
+  },
+  "thikkeste": {
+   "gloss": "thickest",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "thickest"
+  },
+  "thinges": {
+   "gloss": "things",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "things"
+  },
+  "townes": {
+   "gloss": "towns",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "towns"
+  },
+  "truste": {
+   "gloss": "trust",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "trust"
+  },
+  "unto": {
+   "gloss": "unto",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "unto"
+  },
+  "upon": {
+   "gloss": "upon",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "upon"
+  },
+  "whiche": {
+   "gloss": "which",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "which"
+  },
+  "wordes": {
+   "gloss": "words",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "words"
+  },
+  "wryten": {
+   "gloss": "write",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "write"
+  },
+  "wyrking": {
+   "gloss": "working",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "working"
+  },
+  "ther": {
+   "gloss": "there",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "there"
+  },
+  "wrappeth": {
+   "gloss": "wraps",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "wraps"
+  },
+  "hir-her": {
+   "gloss": "her",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "her"
+  },
+  "signe": {
+   "gloss": "sign",
+   "source": "ours",
+   "lineOnly": true,
+   "line": "sign"
   }
  },
  "forms": {
+  "a-nother": "anothr",
   "abilite": "abilite",
+  "aboute": "aboute",
   "after": "after",
   "aftur": "after",
+  "alle": "alle",
   "almenak": "almenak",
   "altitude": "altitude",
   "apertening": "apertening",
@@ -2442,8 +2912,11 @@
   "atones": "atones",
   "be-hete": "behete",
   "ben": "ben-are",
+  "bereth": "bereth",
+  "betre": "betre",
   "bi-cause": "bicause",
   "bihestes": "bihestes",
+  "calculed": "calculed",
   "canon": "canon",
   "canstow": "canstow",
   "certein": "certein",
@@ -2461,6 +2934,7 @@
   "conclusiouns": "conclusions",
   "condescendeth": "condescende",
   "conseyve": "conseyve",
+  "considere": "considere",
   "contienen": "contienen",
   "curious": "curious",
   "declaracioun": "declaracioun",
@@ -2481,8 +2955,11 @@
   "ferthe": "ferthe",
   "feyth": "feyth",
   "fifte": "fifte",
+  "finde": "finde",
+  "firste": "firste",
   "fixe": "fixe",
   "folwith": "folwen",
+  "for-gete": "forgete",
   "forseide": "forseide",
   "founde": "fonde",
   "fraccions": "fraccions",
@@ -2499,9 +2976,13 @@
   "gret": "gret",
   "grettre": "grettre",
   "han": "han",
+  "hangen": "hangen",
+  "harde": "harde",
+  "hath": "hath",
   "heighte": "heighte",
   "hem": "hem",
   "hennes-forthward": "hennes",
+  "hereth": "hereth",
   "hevy": "hevy",
   "hir": "hir",
   "hit": "hit",
@@ -2556,12 +3037,17 @@
   "notable": "notable",
   "noteful": "noteful",
   "noumbres": "nombre",
+  "obeyeth": "obeyeth",
+  "olde": "olde",
   "ones": "ones",
   "orizonte": "orizonte",
+  "othre": "othre",
   "oure": "oure",
+  "owne": "owne",
   "oxenford": "oxenford",
   "partie": "partie",
   "parties": "parties",
+  "pathes": "pathes",
   "perced": "perced",
   "perfitly": "perfitly",
   "performen": "performe",
@@ -2577,6 +3063,7 @@
   "preyers": "preyere",
   "proporciouns": "proporciouns",
   "putten": "putten",
+  "redeth": "redeth",
   "regioun": "regioun",
   "reherse": "reherse",
   "renneth": "renneth",
@@ -2586,21 +3073,28 @@
   "rewle": "rewle",
   "rewles": "rewles",
   "riet": "riet",
+  "righte": "righte",
   "rightful": "rightful",
   "rowm": "rowm",
   "sciencez": "science",
+  "seconde": "seconde",
   "sein": "sein",
   "seith": "seith",
   "semeth": "semeth",
   "sentence": "sentence",
   "seye": "seye",
   "seyn": "seyn",
+  "shal": "shal",
+  "shalt": "shal",
   "shaltow": "shaltow",
+  "shapen": "shapen",
   "shewe": "shewe",
   "shewed": "shewed",
   "shewen": "shewe",
+  "signe": "signe",
   "sleen": "sleen",
   "smal": "smal",
+  "smalest": "smalest",
   "somer": "somer",
   "sone": "sone",
   "sonne": "sonne",
@@ -2618,9 +3112,13 @@
   "swerd": "swerd",
   "swich": "swich",
   "teche": "teche",
+  "tendre": "tendre",
   "thee": "thee",
   "theorik": "theorik",
+  "ther": "ther",
   "ther-for": "therfor",
+  "thikkeste": "thikkeste",
+  "thinges": "thinges",
   "thinne": "thinne",
   "thise": "thise",
   "thou": "thou",
@@ -2631,11 +3129,15 @@
   "tonge": "tonge",
   "touching": "touchinge",
   "touchinge": "touchinge",
+  "townes": "townes",
   "tretis": "tretis",
   "trewe": "trewe",
+  "truste": "truste",
   "turet": "turet",
   "twyes": "twyes",
   "un-knowe": "unknowe",
+  "un-to": "unto",
+  "up-on": "upon",
   "usurpe": "usurpe",
   "verray": "verray",
   "verrey": "verray",
@@ -2645,12 +3147,17 @@
   "werk": "werk",
   "werken": "werken",
   "wey": "wey",
+  "whiche": "whiche",
   "with-oute": "withoute",
   "wol": "wol",
   "wole": "wole",
   "wombe": "wombe",
+  "wordes": "wordes",
   "wot": "wot",
+  "wrappeth": "wrappeth",
   "writen": "writen",
+  "wryten": "wryten",
+  "wyrking": "wyrking",
   "yeer": "yeer",
   "yif": "yif",
   "yit": "yit",
@@ -2755,13 +3262,361 @@
    "section": "p1-03",
    "match": "in hir wombe",
    "word": "hir",
-   "key": null
+   "key": "hir-her"
   },
   {
    "section": "p1-02",
    "match": "after his righte centre",
    "word": "his",
    "key": "his-its"
+  }
+ ],
+ "blank": [
+  "bisy",
+  "discret"
+ ],
+ "lineSpans": [
+  {
+   "section": "00-prologue",
+   "match": "thyn",
+   "line": "your",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "sciencez",
+   "line": "sciences",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "noumbres",
+   "line": "numbers",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "considere i",
+   "line": "I consider",
+   "kind": "reordered"
+  },
+  {
+   "section": "00-prologue",
+   "match": "wrappeth him",
+   "line": "wraps himself",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "condescendeth to",
+   "line": "stoops to",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "preyers",
+   "line": "prayers",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "have i geven",
+   "line": "I have given",
+   "kind": "reordered"
+  },
+  {
+   "section": "00-prologue",
+   "match": "latitude",
+   "line": "latitude",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "latitudes",
+   "line": "latitudes",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "certein of",
+   "line": "certain number of",
+   "kind": "added-word"
+  },
+  {
+   "section": "00-prologue",
+   "match": "to thy tendre age",
+   "line": "for your tender age",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "yeer",
+   "line": "years",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "ne canstow yit but smal",
+   "line": "you know as yet but little",
+   "kind": "reordered"
+  },
+  {
+   "section": "00-prologue",
+   "match": "suffyse",
+   "line": "let suffice",
+   "kind": "added-word"
+  },
+  {
+   "section": "00-prologue",
+   "match": "clerkes grekes",
+   "line": "Greek scholars",
+   "kind": "reordered"
+  },
+  {
+   "section": "00-prologue",
+   "match": "langages",
+   "line": "languages",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "god",
+   "line": "God",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "and yit by",
+   "line": "and yet by",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "right as",
+   "line": "just as",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "to have my rewde endyting for excused",
+   "line": "to hold my rude style of composition excused",
+   "kind": "paraphrase-phrase"
+  },
+  {
+   "section": "00-prologue",
+   "match": "for that curious",
+   "line": "because ornate",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "un-to",
+   "line": "to",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "than he",
+   "line": "than that he",
+   "kind": "added-word"
+  },
+  {
+   "section": "00-prologue",
+   "match": "con me the more thank",
+   "line": "thank me the more",
+   "kind": "reordered"
+  },
+  {
+   "section": "00-prologue",
+   "match": "him feyth bereth and obeyeth",
+   "line": "bear him faith and obey him",
+   "kind": "reordered"
+  },
+  {
+   "section": "00-prologue",
+   "match": "ne usurpe nat",
+   "line": "do not claim",
+   "kind": "paraphrase-phrase"
+  },
+  {
+   "section": "00-prologue",
+   "match": "myn",
+   "line": "my",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "nam but",
+   "line": "am but",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "a lewd",
+   "line": "an unlearned",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "astrologiens",
+   "line": "astronomers",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "werken",
+   "line": "to work",
+   "kind": "added-word"
+  },
+  {
+   "section": "00-prologue",
+   "match": "instrument portatif aboute",
+   "line": "instrument to carry about",
+   "kind": "paraphrase-phrase"
+  },
+  {
+   "section": "00-prologue",
+   "match": "smalest",
+   "line": "the smallest",
+   "kind": "added-word"
+  },
+  {
+   "section": "00-prologue",
+   "match": "ne wol nat",
+   "line": "will not",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "sterres fixe",
+   "line": "fixed stars",
+   "kind": "reordered"
+  },
+  {
+   "section": "00-prologue",
+   "match": "declinacions",
+   "line": "declinations",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "citeez",
+   "line": "cities",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "for to finde",
+   "line": "to find",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "altitude meridian",
+   "line": "meridian altitude",
+   "kind": "reordered"
+  },
+  {
+   "section": "00-prologue",
+   "match": "conclusioun",
+   "line": "proposition",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "kalendres",
+   "line": "calendars",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "folwith",
+   "line": "follows",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "maist",
+   "line": "may",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "shaltow",
+   "line": "you shall",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "equacions of houses",
+   "line": "equations of houses",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "00-prologue",
+   "match": "dignetes of planetes",
+   "line": "dignities of planets",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "p1-01",
+   "match": "thyn",
+   "line": "your",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "p1-01",
+   "match": "rewle",
+   "line": "rule",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "p1-01",
+   "match": "altitude",
+   "line": "altitude",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "p1-02",
+   "match": "thyn",
+   "line": "your",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "p1-02",
+   "match": "maner turet",
+   "line": "kind of eye",
+   "kind": "added-word"
+  },
+  {
+   "section": "p1-02",
+   "match": "desturbeth nat",
+   "line": "does not prevent",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "p1-02",
+   "match": "to hangen",
+   "line": "from hanging",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "p1-03",
+   "match": "thyn",
+   "line": "your",
+   "kind": "modernised-form"
+  },
+  {
+   "section": "p1-03",
+   "match": "in manere of",
+   "line": "in the manner of",
+   "kind": "added-word"
+  },
+  {
+   "section": "p1-03",
+   "match": "webbe of a loppe",
+   "line": "spider's web",
+   "kind": "reordered"
   }
  ]
 }

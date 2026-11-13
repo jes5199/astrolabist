@@ -57,11 +57,27 @@ Wedgwood (*con … thank*), Bailey (*dignetes*), Tyrwhitt (*Somer*), Brae (*Lenn
 | | |
 |---|---|
 | Word tokens in the sample | 985 |
-| Glossed token occurrences | 395 (40.1%), in 380 marked words or phrases |
-| Distinct glossed forms | 239 (including 8 phrases such as *tak keep*, *con me the more thank*) |
-| Entries | 227: EETS 120, Oxford glossary 87, Oxford names 6, ours 14 |
-| Token occurrences by gloss source | EETS 214, Oxford glossary 142, Oxford names 8, ours 31 |
+| Under each word, on the modern line | Skeat's gloss 364, ours 91, the same word (identity) 528, `·` 2 (*bisy*, *discret*) |
+| Distinct glossed forms | 279 (including 8 phrases such as *tak keep*, *con me the more thank*) |
+| Entries | 267: EETS 120, Oxford glossary 87, Oxford names 6, ours 54 (14 with a popover; 40 plain respellings for the line only) |
+| Departures in the minimal-translation line | 57 rows, 68 placements: modernised-form 38, reordered 9, added-word 7, paraphrase-phrase 3 |
 | Second paragraphs | 27: 18 glossary definitions (EETS 17, Oxford 1); 9 pieces of commentary, labelled as such: 6 "Skeat's note" (*Lowis, philosofre, suffisaunt, certein, Somer, Lenne*) and 3 "From Skeat's introduction" (*Astrolabie, rewle, clymatz*) |
+
+## The modern line
+
+Under every word of a glossed section is a modern word (a `<ruby>`): Skeat's gloss (his first sense, or a
+piece of it chosen in `LINE_STRICT` in `curate.py`; the gate checks it is his wording), our plain respelling,
+the word itself where modern English uses it unchanged (set quieter), or `·` where there is no clean
+equivalent. A modern word wider than the Middle English widens that word's column; a word and its gloss
+never part at a line end; punctuation rides with both.
+
+That is the **strict** line. The page shows the **translation** line: the same, with the authored spans in
+`TRANSLATION` (`curate.py`, `lineSpans` in the JSON) replacing it where word-for-word would not read as
+English: modern forms, a few added function words, short reorderings, three small paraphrases. Each span
+stands under exactly the words it renders. It is our text, built on Skeat's glosses, written from the
+Middle English, Skeat's glosses and notes and plain English only (no modern translation was consulted).
+The popover keeps Skeat's exact gloss. `LINE_MODE = "strict"` in `treatise.astro` switches back.
+Every span is listed in the wording ledger.
 
 ## Provenance in the data
 

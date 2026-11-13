@@ -49,15 +49,15 @@ rows = [
     ("Star accessible names and the caption under each star line, e.g. `Part II § 12: Special declaracioun of the houres of planetes`, `Part I § 1: Thyn Astrolabie hath a ring…`", where(P, "const starName = (s: (typeof sections)[number]) => {", '<p class="ts-cap" aria-hidden="true" lang="enm"></p>'), "Contents redesign. Part II: Skeat's whole rubric (sentence case, end stop dropped); otherwise his first five words plus our ellipsis. The caption shows the star under the pointer or focus, else the section being read; a tap goes straight to the section.", PROV),
     ("Contents sub-labels / full-list entries, e.g. `Thyn Astrolabie hath a ring…`, `To knowe the altitude of the…`", where(P, "const label = heading", '<span class="tl-t" lang="enm">'), "First 4–6 words of Skeat's text or rubric, Part II rubrics lower-cased, ellipsis added by us.", PROV),
     ("`Every section, by its first words` (disclosure for the full list)", where(P, "<summary>Every section, by its first words</summary>"), "New in the whole-treatise pass.", PROV),
-    ("`Glosses` (gloss bar group label, screen-reader only)", where(P, 'class="gl-bar" role="group" aria-label="Glosses"'), "Gloss variant; replaces the Middle English / Both / Modern toggle.", PROV),
-    ("`Hover or tap a marked word for its gloss` (wide) / `Tap a marked word` (under 600px)", where(P, '<span class="gl-hint-wide">Hover or tap a</span>'), "Gloss variant. Hint in the sticky bar; \"marked word\" carries the same dotted underline as the glossed words.", PROV),
-    ("`Show all glosses` (wide) / `All glosses` (under 600px) (switch)", where(P, '<span class="gl-hint-wide">Show&nbsp;</span>all glosses'), "Gloss variant. Turns on interlinear glosses under every glossed word; remembered per viewer.", PROV),
+    ("`Under Chaucer's words, a modern line. Tap or hover a gold word for its definition and source.` (hint under the contents)", where(P, "<p class=\"gl-hint\">Under Chaucer's words, a modern line."), "Replaces the sticky gloss bar and its hint; the modern line is always on (Jes, tg 17806).", PROV),
+    ("Subtitle `Bred and mylk for childeren`", where(P, '<p class="t-subtitle"><ruby lang="enm">Bred and mylk for childeren'), "Skeat, Oxford Chaucer vol. III (1894), introduction § 3 (Gutenberg #45027 line 2128): MS. E Museo 54 (his B) has the rubricated title 'Bred and mylk For childeren', 'boldly written at the beginning'; MS. Bodley 619 (his E, § 6, line 2149) has 'Brede and Milke for children'. B's form, `for` lowercased (the MS capital is scribal).", "decided (Jes tg 17815); spelling per Skeat's MS B"),
+    ("The subtitle's modern line `bread and milk for children`", where(P, "<rt>bread and milk for children</rt>"), "Ours, a plain modernisation.", PROV),
     ("Gloss popover: the word as printed, Skeat's gloss and definition, then `Shown in the figure` (only for words the section's figure shows)", where(P, '<p class="gp-fig">Shown in the figure</p>'), "Gloss variant. \"Shown in the figure\" is ours.", PROV),
     ("Gloss popover: second paragraph labelled `Skeat's note` (from his notes) or `From Skeat's introduction` (introduction § 28), set as an indented italic note; glossary definitions carry no label", where(P, 'q(".gp-dl").textContent = kind === "note"'), "Gloss variant. Commentary is never presented as a definition.", PROV),
     ("Gloss popover source line, e.g. `Skeat, EETS 1872, glossary · s.v. Turet, p. 118`; then `Definition: …` / `Note: Skeat, Oxford Chaucer 1894, vol. III, note to Prol. l. 7` / `Introduction: …`; `our gloss · provisional`", where(L, 'if (e.source === "ours") return "our gloss · provisional";') + "; " + where(P, 'const lab = kind === "note" ? "Note"'), "Gloss variant. Source names are written in the gloss builder (next row).", PROV),
     ("Source names: `Skeat, EETS 1872, glossary`, `Skeat, Oxford Chaucer 1894, glossary`, `Skeat, Oxford Chaucer 1894, index of names`, `Skeat, Oxford Chaucer 1894, vol. III`, `our gloss`; locators `note to Prol. l. 7`, `Introduction, § 28`", where(B, '"eets": "Skeat, EETS 1872, glossary"', 'OXF3_WHERE = {'), "Gloss variant. Our short names for the editions; full titles and URLs are in `glosses.json` and `docs/treatise-glosses.md`.", PROV),
     ("Screen-reader description of each glossed word: gloss, definition (or `Skeat's note: …` / `From Skeat's introduction: …`), then `Source: …` or `Our gloss.`", where(P, 'e.source === "ours" ? "Our gloss." : `Source: ${sourceLine(e)}.`'), "Gloss variant. Hidden text, read through aria-describedby.", PROV),
-    ("Interlinear (show-all) glosses: Skeat's first alternative, or a shorter piece of his gloss for long ones (e.g. `propositions`, `the eye`, `plate or rod`)", where(L, "const short = e.short ?? e.gloss.split"), "Gloss variant. Still Skeat's words (the builder checks every short form is a substring of his entry), but which piece to show is our choice.", PROV),
+    ("The modern line under every word of the glossed sections (always on): Skeat's gloss (his first sense, or a chosen piece of it), our plain respellings, the word itself where modern English uses it unchanged (quieter colour), `·` where there is no clean equivalent; in `translation` mode our minimal departures (tables below)", where(L, 'export function glossSection(slug: string, body: string, stats?: GlossStats, mode: LineMode = "translation")') + "; " + where(P, 'const LINE_MODE: LineMode = "translation";'), "Jes tg 17804/17806/17813. `LINE_MODE = \"strict\"` switches back to the word-for-word gloss line.", PROV),
     ("Which glossed words light their section's figure (e.g. `turet`, `moder` in § 2; `riet`, `wombe`, `loppe` in § 3; `swerd` in the Prologue)", where(P, "const FIGURE_TERMS: Record<string, string[]> = {"), "Gloss variant. Our reading of what each scene shows.", PROV),
     ("`Modern rendering (Morrison)` (disclosure under each section) and its credit `James E. Morrison. Draft preview; publication permission pending.`", where(P, "<summary>Modern rendering (Morrison)</summary>", '<p class="tm-credit">'), "Gloss variant. Collapsed by default. Required credit and notice kept. `SHOW_MORRISON = false` removes all of it.", PROV),
     ("`The glossed sample ends here.` / `From § 4 on, Skeat's text is shown without glosses.` (aria-label `End of the glossed sample`)", where(P, "<p>The glossed sample ends here.</p>", "<p>From § 4 on, Skeat's text is shown without glosses.</p>"), "Gloss variant. After Part I § 3.", PROV),
@@ -134,7 +134,8 @@ for k, e in G["entries"].items():
     if e["source"] != "ours":
         continue
     fs = sorted(f for f, kk in G["forms"].items() if kk == k)
-    out.append(f"| {', '.join('`' + f + '`' for f in fs)} | {e['gloss']} | {PROV} |")
+    note = " (modern line only, no popover)" if e.get("lineOnly") else ""
+    out.append(f"| {', '.join('`' + f + '`' for f in fs) or '(sense choice)'} | {e['gloss']}{note} | {PROV} |")
 out.append("")
 out.append("## Sense choices we made (`overrides` in `glosses.json`)\n")
 out.append("Where one spelling needs two of Skeat's senses, we chose the sense for these passages. The glosses")
@@ -145,10 +146,26 @@ for o in G["overrides"]:
     shown = G["entries"][o["key"]]["gloss"] if o["key"] else "(no gloss here)"
     out.append(f"| {o['section']}: \"{o['match']}\" | `{o['word']}` | {shown} | {PROV} |")
 out.append("")
+kinds = {}
+for sp in G.get("lineSpans", []):
+    kinds[sp["kind"]] = kinds.get(sp["kind"], 0) + 1
+out.append("## The modern line: departures from the strict gloss (`lineSpans` in `glosses.json`)\n")
+out.append("Our authored text, built on Skeat's glosses: where the word-for-word line would not read as English, we")
+out.append("changed it minimally. Each row replaces the strict line under those words (one modern phrase under the")
+out.append("whole span). The popover still shows Skeat's exact gloss. Written from the Middle English, Skeat's")
+out.append("glosses and notes and plain English only; no modern translation was consulted.\n")
+out.append("Counts: " + ", ".join(f"{k} {v}" for k, v in sorted(kinds.items())) + f"; {len(G.get('lineSpans', []))} rows.\n")
+out.append("| Section | Middle English | Modern line | Kind | Status |")
+out.append("|---|---|---|---|---|")
+for sp in G.get("lineSpans", []):
+    out.append(f"| {sp['section']} | {sp['match']} | {sp['line']} | {sp['kind']} | {PROV} |")
+out.append("")
+out.append("Words shown as `·` on the line (no Skeat gloss, and the modern look-alike would mislead): " + ", ".join(f"`{b}`" for b in G.get("blank", [])) + f". Status: {PROV}.\n")
 out.append("## Not on the page\n")
 out.append("- `public/scenes/night-window.js`, `public/scenes/demo-rete.js` and the Part I and Prologue scene modules draw no text.\n")
 out.append("## Change log\n")
 out.append("- Legibility pass: no wording changed. Lines were only moved or hidden.")
+out.append("- Modern line pass (Jes tg 17804, 17806, 17813, 17815): the show-all switch and the sticky gloss bar are gone; a modern line is always under the glossed sections, with 40 more plain respellings of ours (marked `lineOnly`, no popover) and the minimal-translation departures tabled above. New subtitle `Bred and mylk for childeren` (decided). Figures now sit inline at the start of their text; the Prologue's five part windows are new.")
 out.append("- Contents redesign: the all-sections constellation chart at the top is gone; the top contents list only the major divisions, and each part heading carries a line of star links. Dropped `The Conclusiouns, as a constellacioun` (it named only Part II and no longer fits a list of all the parts). New: the Prologue's subtitle `Litell Lowis my sone`, the star lines' nav labels, the full-rubric star names.")
 out.append("- Gloss review: Skeat's notes and introduction are no longer shown as definitions; labelled `Skeat's note` / `From Skeat's introduction` and set as notes (9 entries). Source name `Skeat's notes, Oxford Chaucer 1894` → `Skeat, Oxford Chaucer 1894, vol. III`.")
 out.append("- Gloss variant (`treatise/style-gloss`): the Middle English / Both / Modern toggle and the column tags (`Chaucer`, `In modern English`) and `Modern rendering — pending` are gone. New: the gloss bar, popover labels, source names, the sample-end note, the Morrison disclosure, the gloss credits, the figure-term choice, our 14 glosses and the sense choices (tables above). `Modern English: James E. Morrison.` now reads `Modern rendering, folded under each section: James E. Morrison.` (hero) and `Modern rendering: James E. Morrison.` (closing credit).")
