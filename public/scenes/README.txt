@@ -50,3 +50,4 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-p1-19-azimuths.js copied byte-for-byte from astrolabe-video 5ffa27a.
 2026-11-13: treatise-p1-20-unequal-hours.js copied byte-for-byte from astrolabe-video e6688c8.
 2026-11-13: treatise-p1-21-rete.js copied byte-for-byte from astrolabe-video 349d221.
+2026-11-13: treatise-p1-22-label.js copied byte-for-byte from astrolabe-video 1da41a4.
