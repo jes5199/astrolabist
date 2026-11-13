@@ -29,3 +29,5 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 3a89640 (larg
 Envy's flight clear of Lewis's hand). Libraries unchanged.
 2026-11-13: treatise-p1-1-ring.js, treatise-p1-3-mother-rete.js, treatise-p2-2-altitude.js and
 treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (instruments ~10% larger).
+2026-11-13: treatise-prologue-gift.js and lib/prologue-gift-data.js copied byte-for-byte from astrolabe-video bffc9b4
+(the Prologue opener: Chaucer gives Lewis the astrolabe). Prologue's opening window now uses it (was demo-rete).
