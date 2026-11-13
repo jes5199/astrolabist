@@ -121,7 +121,7 @@ export function mount(el) {
 
   // ---- for each example: the day's cell, where the rule's edge cuts the degrees of the signs, what is read
   const text = (x, y, str) => {
-    const t = node("text", { x, y, "text-anchor": "middle", "font-size": 10, fill: SILVER, opacity: 0, "font-family": "inherit" }, svg);
+    const t = node("text", { x, y, "text-anchor": "start", "font-size": 13.5, fill: SILVER, opacity: 0, "font-family": "inherit", stroke: NIGHT, "stroke-width": 3, "stroke-linejoin": "round", "paint-order": "stroke" }, svg);
     t.textContent = str;
     return t;
   };
@@ -134,7 +134,7 @@ export function mount(el) {
       const p = pt(at, r);
       return node("circle", { cx: f(p[0]), cy: f(p[1]), r: 4.6, fill: "none", stroke: SILVER, "stroke-width": 0.9, opacity: 0 }, turn);
     };
-    return { at, turn: a.at, cell, rings: [ring((T.ladder + T.spacer) / 2), ring((T.degrees + T.altitude) / 2)], texts: [text(-60, -34, a.text[0]), text(-58, 46, a.text[1])] };
+    return { at, turn: a.at, cell, rings: [ring((T.ladder + T.spacer) / 2), ring((T.degrees + T.altitude) / 2)], texts: [text(-86, -30, a.text[0]), text(-84, 48, a.text[1])] };
   });
 
   el.appendChild(svg);

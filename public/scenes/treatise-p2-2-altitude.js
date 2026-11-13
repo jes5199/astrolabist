@@ -137,7 +137,7 @@ export function mount(el) {
   const mark = node("circle", { r: 4.2, fill: "none", stroke: SILVER, "stroke-width": 0.9, opacity: 0 }, svg);
   const label = node(
     "text",
-    { x: -63, y: 38, "text-anchor": "end", "font-size": 10, fill: SILVER, opacity: 0, "font-family": "inherit" },
+    { x: -52, y: 66, "text-anchor": "middle", "font-size": 15, fill: SILVER, opacity: 0, "font-family": "inherit", stroke: NIGHT, "stroke-width": 3, "stroke-linejoin": "round", "paint-order": "stroke" },
     svg
   );
   label.textContent = "25½°";

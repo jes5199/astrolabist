@@ -23,3 +23,7 @@ drawing of Oxford, History of Science Museum, inv. 47869; the scenes' scales
 and projections are computed in the modules. The Prologue's figures, room and
 props are astrolabe-video's own drawing, made in code. Regenerate all of
 these there, not here.
+
+2026-11-13: treatise-prologue.js, treatise-p2-1-sun-degree.js, treatise-p2-2-altitude.js and
+treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 3a89640 (larger, haloed labels;
+Envy's flight clear of Lewis's hand). Libraries unchanged.

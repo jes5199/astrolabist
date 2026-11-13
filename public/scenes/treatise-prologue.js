@@ -14,7 +14,7 @@ import { build, along, spline } from "./lib/figures.js";
 const NS = "http://www.w3.org/2000/svg";
 const instances = new WeakMap();
 const LOOP = 12000;
-const STILL = 4300; // ms: the pen up, the sword on the wall, Envy in flight
+const STILL = 5000; // ms: the pen up, the sword on the wall, Envy in flight
 const VIEW = { x: -10, y: 380, s: 1100 }; // the square of the film's picture that fills the window
 const INK = "#17100d";
 const G = D.ground;
@@ -186,13 +186,13 @@ function draw(s, t) {
 
   // ---- Envy: squatting on the leaf he writes, bolts when the sword appears, steals back before the loop ends
   const perch = [604, 938];
-  const away = [1010, 330];
+  const away = [775, 290];
   const flee = es(t, 3.0, 6.2);
   const back = es(t, 9.6, 11.7);
   const p = t < 9.4 ? flee : 1 - back;
   const flying = t < 9.4 ? flee > 0 && flee < 1 : back > 0 && back < 1;
   const bob = flying ? 9 * Math.abs(Math.sin(t * 13)) : 1.5 * Math.sin((2 * Math.PI * t) / 2);
-  s.beast.set(lerp(perch[0], away[0], p), lerp(perch[1], away[1], p) - bob, 0.72, t >= 9.4 || flee === 0, flying ? Math.sin(t * 26) : 0.15 * Math.sin((2 * Math.PI * t) / 2));
+  s.beast.set(lerp(perch[0], away[0], p), lerp(perch[1], away[1], p) - bob, lerp(0.72, 1.0, clamp(p * 3)), t >= 9.4 || flee === 0, flying ? Math.sin(t * 26) : 0.15 * Math.sin((2 * Math.PI * t) / 2));
 }
 
 export function start(el) {

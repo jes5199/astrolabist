@@ -114,15 +114,15 @@ export function mount(el) {
   // ---- the count along the rim, the letter, the hour, the star's name
   const count = node("path", { fill: "none", stroke: SILVER, "stroke-width": 1.6, "stroke-linecap": "round", opacity: 0 }, svg);
   const text = (x, y, size, str) => {
-    const t = node("text", { x: f(x), y: f(y), "text-anchor": "middle", "font-size": size, fill: SILVER, opacity: 0, "font-family": "inherit" }, svg);
+    const t = node("text", { x: f(x), y: f(y), "text-anchor": "middle", "font-size": size, fill: SILVER, opacity: 0, "font-family": "inherit", stroke: NIGHT, "stroke-width": 3, "stroke-linejoin": "round", "paint-order": "stroke" }, svg);
     t.textContent = str;
     return t;
   };
-  const xp = rim(X_AT, R.outer * C.k + 9);
-  const letter = text(C.x + xp[0], C.y + xp[1] + 3.5, 11, "X");
-  const hour = text(-80, 46, 15, "");
-  const hour2 = text(80, 46, 15, "");
-  const name = text(70, -30, 8, "Alhabor");
+  const xp = rim(X_AT, R.outer * C.k + 11);
+  const letter = text(C.x + xp[0], C.y + xp[1] + 5, 15, "X");
+  const hour = text(-79, 50, 18, "");
+  const hour2 = text(79, 50, 18, "");
+  const name = text(64, -40, 13, "Alhabor");
 
   el.appendChild(svg);
   const s = { rete, label, circle, circle2, sunGlow, sunDisc, starGlow, count, letter, hour, hour2, name, raf: 0, t0: 0, at: 0 };
