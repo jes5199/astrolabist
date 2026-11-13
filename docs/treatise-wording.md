@@ -78,6 +78,8 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | `X`, the hour numerals (`1`…`9`), `Alhabor` | treatise-p2-3-time.js:122, :125 | Part II §3 (35daf72). The hour figure is computed (morning 9; night 9). | provisional; awaiting Jes |
 | `12 March`, `Aries 1°`, `13 December`, `Capricorn 1°` | treatise-p2-1-sun-degree.js:29, :30 | Part II §1 (96b870a). Chaucer's two examples. | provisional; awaiting Jes |
 | Engraved scale names `Aries`, `Pisces`, `Capricornus`, `Sagittarius`, `Marcius`, `Februarius`, `Aprilis`, `December`, `November`, `Januarius` | treatise-p2-1-sun-degree.js:105, :115 | Part II §1. Inscriptions on the instrument's back, in Latin as engraved. | provisional; awaiting Jes |
+| `south`, `north` | treatise-p1-4-meridional.js | Part I §4 (astrolabe-video bfe8a43). Ours; Chaucer says "south lyne / lyne meridional" and "north lyne / lyne of midnight". | provisional; awaiting Jes |
+| `east`, `west` | treatise-p1-5-east-west.js | Part I §5 (astrolabe-video e80e012). Ours; Chaucer says "Est lyne / lyne Orientale" and "West lyne / lyne Occidentale". | provisional; awaiting Jes |
 
 ## Not on the page
 
