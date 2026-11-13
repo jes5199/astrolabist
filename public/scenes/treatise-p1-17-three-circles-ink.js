@@ -18,7 +18,7 @@ import { front, node, f, rim, P, SILVER, NIGHT } from "./lib/front-ink.js";
 const instances = new WeakMap();
 const LOOP = 15000;
 const STILL = 7600; // ms: the three named, the ecliptic on them
-const C = { x: 0, y: 4, k: 0.9 };
+const C = { x: 0, y: 18, k: 0.62 }; // the hanging ring inside the window (its top 183 units up, at -95; astrolabist #47901)
 const W = (px) => f(px / C.k);
 const EC_R = (P.cancer + P.capricorn) / 2; // the ecliptic's radius
 const EC_OFF = (P.capricorn - P.cancer) / 2; // its centre's distance from the pole, toward the head of Capricorn
