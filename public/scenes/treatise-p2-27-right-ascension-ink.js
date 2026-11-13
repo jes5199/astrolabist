@@ -74,7 +74,12 @@ function draw(s, t) {
   const u = t - 9 * act;
   const A0 = ACTS[act];
   const out = 1 - span(u, 8.2, 8.9);
-  const r = u < 1.0 ? A0.rot0 - 20 + 20 * span(u, 0, 1.0) : A0.rot0 + (A0.rot1 - A0.rot0) * span(u, 2.6, 5.2);
+  let r = u < 1.0 ? A0.rot0 - 20 + 20 * span(u, 0, 1.0) : A0.rot0 + (A0.rot1 - A0.rot0) * span(u, 2.6, 5.2);
+  // as this example fades, the rete turns on to where the next one begins (no snap between them, or at the loop)
+  const next = ACTS[(act + 1) % ACTS.length].rot0 - 20;
+  let dr = next - A0.rot1;
+  dr -= 360 * Math.round(dr / 360);
+  r += dr * span(u, 8.2, 9.0);
   s.rete.setAttribute("transform", `rotate(${f(r)})`);
   s.acts.forEach((a, i) => {
     const on = i === act ? out : 0;
