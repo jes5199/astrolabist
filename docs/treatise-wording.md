@@ -143,6 +143,7 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | `Aries: 27.8° of the equator`, `Cancer: 32.3° of the equator` | treatise-p2-27-right-ascension.js | Part II §27 (astrolabe-video 798773d). Latin signs; modern captions. | **decided** |
 | `Aries: 12.3°, 0 h 49 m`, `Cancer: 38.3°, 2 h 33 m` | treatise-p2-28-oblique-ascension.js | Part II §28 (astrolabe-video 258e8ed). Latin signs; modern captions. | **decided** |
 | `north`, `south`, `east`, `west` (on the ground) | treatise-p2-29-four-quarters.js | Part II §29 (astrolabe-video 5dfc993). Instrument version (figure version possible later). Quarters named on the ground since the text does not settle which face lies up when "couched"; it does settle that the ring end lies south. | **decided: modern** |
+| `on the meridian`, `the sun's way`, `planet 3° north`, `planet 2° south`, scale `30°`–`45°` | treatise-p2-30-planet-latitude.js | Part II §30 (astrolabe-video 308c33b). Modern; illustrative planets (no specific planet named). | **decided: modern** |
 
 ## Not on the page
 
