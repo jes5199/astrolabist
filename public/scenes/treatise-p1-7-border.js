@@ -10,12 +10,13 @@
 // meridional line is reached; then the other three quarters fill at once, "by that same proporcioun".
 // Shared drawing of the back (lib/back.js, from our constructed drawing of Oxford inv. 47869).  Original line work.
 
-import { back, node, label, f, rim, SILVER, NSS, T } from "./lib/back.js";
+import { back, node, label, f, rim, SILVER, T } from "./lib/back.js";
 
 const instances = new WeakMap();
 const LOOP = 12000;
 const STILL = 8000; // ms: the quarter counted, its numbers shown
 const C = { x: -60, y: 60, k: 1.3 }; // the centre (down and to the left) and scale: the quarter fills the glass
+const W = (px) => f(px / C.k); // stroke widths in window units
 const CROSS = (T.altitude + T.border) / 2;
 
 const ease = (u) => (u < 0 ? 0 : u > 1 ? 1 : u * u * (3 - 2 * u));
@@ -32,20 +33,20 @@ export function mount(el) {
   svg.style.fontFamily = "inherit";
   svg.style.overflow = "visible"; // the limb runs on past the square to the round glass
   const g = node("g", { transform: `translate(${C.x} ${C.y}) scale(${C.k})` }, svg);
-  back(g, { ticks: false, faint: 0.45 });
+  back(g, { scale: C.k, ticks: false, faint: 0.45 });
   // the cross lines as I 4 and I 5 drew them, quiet
-  node("path", { d: `M0 -143V0H${f(CROSS - 4)}`, fill: "none", stroke: "currentColor", "stroke-width": 1, opacity: 0.5, ...NSS }, g);
-  node("path", { d: `M${f(CROSS)} -4V4M${f(CROSS - 4)} 0H${f(CROSS + 4)}`, fill: "none", stroke: SILVER, "stroke-width": 1.6, "stroke-linecap": "round", ...NSS }, g);
+  node("path", { d: `M0 -143V0H${f(CROSS - 4)}`, fill: "none", stroke: "currentColor", "stroke-width": W(1), opacity: 0.5 }, g);
+  node("path", { d: `M${f(CROSS)} -4V4M${f(CROSS - 4)} 0H${f(CROSS + 4)}`, fill: "none", stroke: SILVER, "stroke-width": W(1.6), "stroke-linecap": "round" }, g);
   // the first quarter's strokes, one element each (they come in one by one), from the cross (bearing 90) up to 0
   const strokes = [];
   for (let i = 1; i <= 90; i++) {
     const long = i % 5 === 0;
-    strokes.push(node("path", { d: seg(90 - i, long ? T.degrees : T.altitude, T.border), fill: "none", stroke: "currentColor", "stroke-width": long ? 1.1 : 0.6, opacity: 0, ...NSS }, g));
+    strokes.push(node("path", { d: seg(90 - i, long ? T.degrees : T.altitude, T.border), fill: "none", stroke: "currentColor", "stroke-width": W(long ? 1.1 : 0.6), opacity: 0 }, g));
   }
   // the other three quarters, all at once
   let d = "";
   for (let b = 90; b < 360; b++) d += seg(b, b % 5 ? T.altitude : T.degrees, T.border);
-  const rest = node("path", { d, fill: "none", stroke: "currentColor", "stroke-width": 0.6, opacity: 0, ...NSS }, g);
+  const rest = node("path", { d, fill: "none", stroke: "currentColor", "stroke-width": W(0.6), opacity: 0 }, g);
   // the numbers, every ten, just inside the scale
   const nums = [];
   for (let n = 10; n <= 90; n += 10) {
@@ -54,7 +55,7 @@ export function mount(el) {
     const y = C.y + C.k * p[1] + 5;
     nums.push(label(svg, x, y, String(n), 13));
   }
-  const bead = node("circle", { r: 2.4, fill: SILVER, opacity: 0, ...NSS }, g);
+  const bead = node("circle", { r: 2.4, fill: SILVER, opacity: 0 }, g);
   el.appendChild(svg);
   const s = { strokes, rest, nums, bead, raf: 0, t0: 0, tm: STILL };
   instances.set(el, s);

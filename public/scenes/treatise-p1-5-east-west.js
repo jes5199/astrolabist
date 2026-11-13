@@ -9,12 +9,13 @@
 // the east line; it goes on in silver to the left border: the west line.  Then the four quarters show in turn.
 // Shared drawing of the back (lib/back.js, from our constructed drawing of Oxford inv. 47869).  Original line work.
 
-import { back, node, label, f, SILVER, NSS, HOLE, T } from "./lib/back.js";
+import { back, node, label, f, SILVER, HOLE, T } from "./lib/back.js";
 
 const instances = new WeakMap();
 const LOOP = 13000;
 const STILL = 8200; // ms: the cross and both lines drawn and named
 const C = { x: 0, y: 26, k: 0.64 }; // as I 1 and I 4: the instrument hung plumb in the glass
+const W = (px) => f(px / C.k); // stroke widths in window units
 const TOP = -143; // where the meridional line leaves the ring (instrument units)
 const CROSS = (T.altitude + T.border) / 2; // the little cross, in the border at the east end
 
@@ -26,10 +27,10 @@ export function mount(el) {
   const svg = node("svg", { viewBox: "-100 -100 200 200", width: "100%", height: "100%", "aria-hidden": "true" });
   svg.style.fontFamily = "inherit";
   const g = node("g", { transform: `translate(${C.x} ${C.y}) scale(${C.k})` }, svg);
-  back(g);
+  back(g, { scale: C.k });
   // what I 4 drew: the south line (gold) and the north line (silver), quieter now
-  node("path", { d: `M0 ${TOP}V${-HOLE}`, fill: "none", stroke: "currentColor", "stroke-width": 1.4, opacity: 0.55, ...NSS }, g);
-  node("path", { d: `M0 ${HOLE}V${T.border}`, fill: "none", stroke: SILVER, "stroke-width": 1.4, opacity: 0.45, ...NSS }, g);
+  node("path", { d: `M0 ${TOP}V${-HOLE}`, fill: "none", stroke: "currentColor", "stroke-width": W(1.4), opacity: 0.55 }, g);
+  node("path", { d: `M0 ${HOLE}V${T.border}`, fill: "none", stroke: SILVER, "stroke-width": W(1.4), opacity: 0.45 }, g);
   // the four quarters, each lit in turn
   const quarters = [0, 1, 2, 3].map((q) => {
     const a = (q * Math.PI) / 2;
@@ -38,11 +39,11 @@ export function mount(el) {
     return node("path", { d: `M${p(a, HOLE)}L${p(a, 100)}A100 100 0 0 1 ${p(b, 100)}L${p(b, HOLE)}A${HOLE} ${HOLE} 0 0 0 ${p(a, HOLE)}Z`, fill: "currentColor", opacity: 0 }, g);
   });
   const line = (x0, x1, stroke) =>
-    node("path", { d: `M${x0} 0H${x1}`, pathLength: 1, "stroke-dasharray": "1 1", "stroke-dashoffset": 1, fill: "none", stroke, "stroke-width": 2.2, "stroke-linecap": "round", ...NSS }, g);
+    node("path", { d: `M${x0} 0H${x1}`, pathLength: 1, "stroke-dasharray": "1 1", "stroke-dashoffset": 1, fill: "none", stroke, "stroke-width": W(2.2), "stroke-linecap": "round" }, g);
   const east = line(CROSS - 4, HOLE, "currentColor");
   const west = line(-HOLE, -T.border, SILVER);
-  const cross = node("path", { d: `M${f(CROSS)} -5V5M${f(CROSS - 5)} 0H${f(CROSS + 5)}`, fill: "none", stroke: SILVER, "stroke-width": 2, "stroke-linecap": "round", opacity: 0, ...NSS }, g);
-  const glow = node("circle", { cx: f(CROSS), r: 9, fill: "none", stroke: SILVER, "stroke-width": 1, opacity: 0, ...NSS }, g);
+  const cross = node("path", { d: `M${f(CROSS)} -5V5M${f(CROSS - 5)} 0H${f(CROSS + 5)}`, fill: "none", stroke: SILVER, "stroke-width": W(2), "stroke-linecap": "round", opacity: 0 }, g);
+  const glow = node("circle", { cx: f(CROSS), r: 9, fill: "none", stroke: SILVER, "stroke-width": W(1), opacity: 0 }, g);
   const labels = [label(svg, C.x + C.k * 52, C.y - 7, "east", 15), label(svg, C.x - C.k * 52, C.y - 7, "west", 15)];
   labels[0].setAttribute("fill", "currentColor");
   el.appendChild(svg);

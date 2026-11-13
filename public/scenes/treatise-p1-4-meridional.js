@@ -8,12 +8,13 @@
 // south line, gold; the hole is marked; the line goes on down to the lowest border: the north line, silver.
 // Shared drawing of the back (lib/back.js, from our constructed drawing of Oxford inv. 47869).  Original line work.
 
-import { back, node, label, f, NIGHT, SILVER, NSS, HOLE, T } from "./lib/back.js";
+import { back, node, label, f, NIGHT, SILVER, HOLE, T } from "./lib/back.js";
 
 const instances = new WeakMap();
 const LOOP = 11000;
 const STILL = 8000; // ms: both lines drawn and named
 const C = { x: 0, y: 26, k: 0.64 }; // as I 1: the instrument hung plumb in the glass
+const W = (px) => f(px / C.k); // stroke widths in window units
 const TOP = -143; // where the line leaves the ring (instrument units)
 
 const ease = (u) => (u < 0 ? 0 : u > 1 ? 1 : u * u * (3 - 2 * u));
@@ -24,13 +25,13 @@ export function mount(el) {
   const svg = node("svg", { viewBox: "-100 -100 200 200", width: "100%", height: "100%", "aria-hidden": "true" });
   svg.style.fontFamily = "inherit";
   const g = node("g", { transform: `translate(${C.x} ${C.y}) scale(${C.k})` }, svg);
-  const b = back(g);
+  const b = back(g, { scale: C.k });
   // the two halves of the one line, each drawn from the top down (pathLength 1: the dash shows how much is drawn)
   const line = (y0, y1, stroke, w) =>
-    node("path", { d: `M0 ${y0}V${y1}`, pathLength: 1, "stroke-dasharray": "1 1", "stroke-dashoffset": 1, fill: "none", stroke, "stroke-width": w, "stroke-linecap": "round", ...NSS }, g);
+    node("path", { d: `M0 ${y0}V${y1}`, pathLength: 1, "stroke-dasharray": "1 1", "stroke-dashoffset": 1, fill: "none", stroke, "stroke-width": W(w), "stroke-linecap": "round" }, g);
   const south = line(TOP, -HOLE, "currentColor", 2.2);
   const north = line(HOLE, T.border, SILVER, 2.2);
-  const hole = node("circle", { r: f(HOLE + 2.5), fill: "none", stroke: SILVER, "stroke-width": 1.2, opacity: 0, ...NSS }, g);
+  const hole = node("circle", { r: f(HOLE + 2.5), fill: "none", stroke: SILVER, "stroke-width": W(1.2), opacity: 0 }, g);
   const ys = (y) => C.y + C.k * y;
   const labels = [label(svg, 7, ys(-58), "south", 15, "start"), label(svg, 7, ys(58), "north", 15, "start")];
   labels[0].setAttribute("fill", "currentColor");

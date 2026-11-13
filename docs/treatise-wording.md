@@ -83,6 +83,7 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | `east`, `west` | treatise-p1-6-right-left.js | Part I §6 (astrolabe-video 7ab74e2). Ours, as in §5. | **decided: modern** (Jes, 2026-11-13, tg 17771 "modern both") |
 | numerals `10`–`90` | treatise-p1-7-border.js | Part I §7 (astrolabe-video 7f49755). Modern figures every 10 (Chaucer's "nombres of augrim" run every 5; long strokes still mark 5s). | **decided: modern** (Jes, 2026-11-13, tg 17771 "modern both") |
 | twelve sign names `Aries` … `Pisces` | treatise-p1-8-signs.js | Part I §8 (astrolabe-video 2441d5e). Latin, as the text lists them. Degree numbers "in augrim" omitted at window size. | **decided: Latin** (Jes, tg 17769) |
+| counting numeral `1`…`365` | treatise-p1-9-days.js | Part I §9 (astrolabe-video b994c88). Modern figures. | **decided: modern** (Jes, tg 17771 "modern both") |
 
 ## Not on the page
 

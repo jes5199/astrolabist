@@ -10,7 +10,7 @@
 // from Aries at the right-hand point, as on our drawing of the instrument.
 // Shared drawing of the back (lib/back.js, from our constructed drawing of Oxford inv. 47869).  Original line work.
 
-import { back, node, f, rim, NSS, NIGHT, SILVER, T } from "./lib/back.js";
+import { back, node, f, rim, NIGHT, SILVER, T } from "./lib/back.js";
 
 const instances = new WeakMap();
 const NAMES = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricornus", "Aquarius", "Pisces"];
@@ -18,6 +18,7 @@ const STEP = 1.25; // s for each sign to come round
 const LOOP = 12 * STEP * 1000; // ms: once round (the loop joins without a seam)
 const STILL = 300; // ms: Aries just written at the foot, Pisces and Aquarius before it
 const C = { x: 0, y: -98, k: 1.6 }; // the centre (above the glass) and scale: the lower edge fills it
+const W = (px) => f(px / C.k); // stroke widths in window units
 const R_NAME = (T.signs + T.zodnum) / 2 - 2.6; // the names' baseline
 
 const ease = (u) => (u < 0 ? 0 : u > 1 ? 1 : u * u * (3 - 2 * u));
@@ -37,7 +38,7 @@ export function mount(el) {
   svg.style.fontFamily = "inherit";
   svg.style.overflow = "visible"; // the limb runs on past the square to the round glass
   const turn = node("g", {}, node("g", { transform: `translate(${C.x} ${C.y}) scale(${C.k})` }, svg));
-  const b = back(turn, { ticks: false, faint: 0.45 });
+  const b = back(turn, { scale: C.k, ticks: false, faint: 0.45 });
   b.throne.setAttribute("display", "none"); // the suspension would swing through the picture as it turns
   b.ring.setAttribute("display", "none");
   b.g.lastChild.previousSibling.setAttribute("display", "none"); // the ring's gold outline
@@ -48,8 +49,8 @@ export function mount(el) {
     if (b % 30 === 0) e += seg(b, T.signs, T.altitude);
     else d += seg(b, b % 5 ? T.degrees : T.zodnum + 2.2, T.altitude);
   }
-  node("path", { d, fill: "none", stroke: "currentColor", "stroke-width": 0.5, opacity: 0.85, ...NSS }, turn);
-  node("path", { d: e, fill: "none", stroke: "currentColor", "stroke-width": 1, ...NSS }, turn);
+  node("path", { d, fill: "none", stroke: "currentColor", "stroke-width": W(0.5), opacity: 0.85 }, turn);
+  node("path", { d: e, fill: "none", stroke: "currentColor", "stroke-width": W(1) }, turn);
   // the names: each on an arc of its own sign, drawn counter-clockwise (so the letters' tops are inwards)
   const defs = node("defs", {}, turn);
   const names = NAMES.map((name, i) => {
