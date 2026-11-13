@@ -9,19 +9,24 @@
 // back, hanging from the ring; the sun off to its east side (the little cross is at the viewer's right on this back),
 // at Chaucer's 25 1/2 degrees (12 March 1391).  The rule is moved up and down; only when it lies true does the beam
 // pass both holes; then the degrees are counted up from the cross.  COLOURED WOODCUT on vellum: shared lib/back-ink.js
-// (our constructed drawing of Oxford inv. 47869).  Nothing is traced.
+// (our constructed drawing of Oxford inv. 47869).  Nothing is traced.  On a phone (a container taller than wide, or
+// data-layout="stack") the window is 3:4, the steps under the instrument (lib/stage.js, astrolabist #47871).
 
 import A from "./lib/astrolabe-47869.js";
 import { back, node, f, PIVOT, T, SILVER, NIGHT, VELLUM, WASH } from "./lib/back-ink.js";
+import { VIEWBOX, layoutOf, watch, stepList } from "./lib/stage.js";
 
 const instances = new WeakMap();
 const LOOP = 22000;
 const STILL = 17000; // ms: the beam through both holes, 25 1/2 counted
-const C = { x: 40, y: 22, k: 0.62 };
+const LAYOUT = {
+  wide: { C: { x: 40, y: 22, k: 0.62 }, sun: 106, list: { x: -142, y: -60, size: 10.5, lh: 12, gap: 10, indent: 11 } },
+  stack: { C: { x: -30, y: -36, k: 0.86 }, sun: 128, list: { x: -136, y: 76, size: 13, lh: 15, gap: 10, indent: 15, width: 272 } },
+};
+let C = LAYOUT.wide.C; // the layout being built (set by build)
 const W = (px) => f(px / C.k);
 const RAD = Math.PI / 180;
 const ALT = A.morning.sunAlt; // 25.5
-const SUN = [C.x + 106 * Math.cos(ALT * RAD), C.y - 106 * Math.sin(ALT * RAD)];
 const STEPS = [
   { t: 0.5, lines: ["the ring on your", "right thumb"] },
   { t: 4.0, lines: ["your left side", "toward the sun"] },
@@ -43,14 +48,29 @@ function ruleAt(t) {
 
 export function mount(el) {
   if (instances.has(el)) return;
-  const svg = node("svg", { viewBox: "-150 -100 300 200", width: "100%", height: "100%", "aria-hidden": "true" });
+  const s = { raf: 0, t0: 0, tm: STILL };
+  instances.set(el, s);
+  build(el, s);
+  watch(el, s, () => {
+    s.svg.remove();
+    build(el, s);
+  });
+}
+
+function build(el, s) {
+  s.mode = layoutOf(el);
+  C = LAYOUT[s.mode].C;
+  const D = LAYOUT[s.mode].sun;
+  const SUN = [C.x + D * Math.cos(ALT * RAD), C.y - D * Math.sin(ALT * RAD)];
+  const svg = node("svg", { viewBox: VIEWBOX[s.mode], width: "100%", height: "100%", "aria-hidden": "true" });
   svg.style.fontFamily = "inherit";
+  el.appendChild(svg);
   // the sun: ochre, inked, with rays
   const sun = node("g", { transform: `translate(${f(SUN[0])} ${f(SUN[1])})`, opacity: 0 }, svg);
   node("circle", { r: 7, fill: WASH.ochre, stroke: "currentColor", "stroke-width": 1.3 }, sun);
   for (let i = 0; i < 8; i++) node("line", { x1: 0, y1: -10, x2: 0, y2: -14, stroke: "currentColor", "stroke-width": 1.3, "stroke-linecap": "round", transform: `rotate(${45 * i})` }, sun);
   // the beam, from the sun along the true line, on through both holes
-  const beam = node("line", { x1: f(SUN[0]), y1: f(SUN[1]), x2: f(C.x - 80 * Math.cos(ALT * RAD)), y2: f(C.y + 80 * Math.sin(ALT * RAD)), stroke: SILVER, "stroke-width": 1.6, "stroke-dasharray": "4 2.5", opacity: 0 }, svg);
+  const beam = node("line", { x1: f(SUN[0]), y1: f(SUN[1]), x2: f(C.x - ((80 * C.k) / 0.62) * Math.cos(ALT * RAD)), y2: f(C.y + ((80 * C.k) / 0.62) * Math.sin(ALT * RAD)), stroke: SILVER, "stroke-width": 1.6, "stroke-dasharray": "4 2.5", opacity: 0 }, svg);
   const g = node("g", { transform: `translate(${C.x} ${C.y}) scale(${C.k})` }, svg);
   const hang = node("g", {}, g);
   const b = back(hang, { scale: C.k, ticks: true });
@@ -73,22 +93,9 @@ export function mount(el) {
   reading.setAttribute("x", f(rp[0] + 2));
   reading.setAttribute("y", f(rp[1] + 5));
   // the steps
-  const list = node("g", {}, svg);
-  const X0 = -142;
-  let y = -60;
-  const rows = STEPS.map((st, i) => {
-    const els = st.lines.map((ln, j) => {
-      const t = node("text", { x: X0 + (j ? 11 : 0), y: y + j * 12, "font-size": 10.5, "font-weight": 600, fill: "currentColor", opacity: 0, "font-family": "inherit" }, list);
-      t.textContent = (j ? "" : `${i + 1}  `) + ln;
-      return t;
-    });
-    y += 12 * st.lines.length + 10;
-    return els;
-  });
-  el.appendChild(svg);
-  const s = { sun, beam, hang, rule, count, cross, reading, ring: b.ring, rows, R, raf: 0, t0: 0, tm: STILL };
-  instances.set(el, s);
-  draw(s, STILL / 1000);
+  const { rows } = stepList(node("g", {}, svg), STEPS, LAYOUT[s.mode].list);
+  Object.assign(s, { svg, sun, beam, hang, rule, count, cross, reading, ring: b.ring, rows, R });
+  draw(s, s.tm / 1000);
 }
 
 function draw(s, t) {
