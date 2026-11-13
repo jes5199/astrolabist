@@ -94,3 +94,10 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-p1-2-shackle-ink.js copied byte-for-byte from astrolabe-video 7bfb7b7.
 2026-11-13: treatise-p1-3-mother-rete-ink.js copied byte-for-byte from astrolabe-video 7bfb7b7.
 2026-11-13: treatise-p1-4-meridional-ink.js copied byte-for-byte from astrolabe-video 7bfb7b7.
+2026-11-13: treatise-p1-5-east-west-ink.js copied byte-for-byte from astrolabe-video ba5eac8.
+2026-11-13: treatise-p1-7-border-ink.js copied byte-for-byte from astrolabe-video ba5eac8.
+2026-11-13: treatise-p1-8-signs-ink.js copied byte-for-byte from astrolabe-video ba5eac8.
+2026-11-13: treatise-p1-9-days-ink.js copied byte-for-byte from astrolabe-video ba5eac8.
+2026-11-13: treatise-p1-10-months-ink.js copied byte-for-byte from astrolabe-video ba5eac8.
+2026-11-13: treatise-p1-11-holy-days-ink.js copied byte-for-byte from astrolabe-video ba5eac8.
+2026-11-13: treatise-p1-12-shadow-square-ink.js copied byte-for-byte from astrolabe-video ba5eac8.
