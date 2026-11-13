@@ -7,15 +7,18 @@ interface Props {
   title: string;
   description: string;
   image?: string;
+  /** Ask search engines not to index this page (e.g. unannounced pages). */
+  noindex?: boolean;
 }
 
-const { title, description, image = "/assets/share-img.png" } = Astro.props;
+const { title, description, image = "/assets/share-img.png", noindex = false } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <BaseHead title={title} description={description} image={image} />
+    {noindex && <meta name="robots" content="noindex" />}
   </head>
   <body>
     <div class="page-wrapper">

@@ -27,6 +27,35 @@ const posts = defineCollection({
   }),
 });
 
+// Chaucer, A Treatise on the Astrolabe (Skeat's text). See treatise/_SOURCE.md.
+const treatise = defineCollection({
+  type: "content",
+  schema: z.object({
+    order: z.number(),
+    part: z.enum(["Prologue", "Part I", "Part II"]),
+    section: z.string(),
+    heading: z.string().optional(),
+    latin: z.string().optional(),
+    scene: z.string().optional(),
+    modern: z.string().optional(),
+    // Skeat's own label for sections outside the main sequence
+    // ("SUPPLEMENTARY PROPOSITIONS." / his note on the spurious sections).
+    note: z.string().optional(),
+    // Skeat's closing Latin colophon, carried by the last section it follows.
+    colophon: z.string().optional(),
+    // Extra sky windows set into the text: each after the paragraph of the
+    // Middle English that contains `after` (the build fails if it is missing).
+    inlineScenes: z
+      .array(z.object({ name: z.string(), after: z.string(), label: z.string() }))
+      .optional(),
+    saintsTable: z.boolean().optional(),
+    plates: z
+      .array(z.object({ src: z.string(), button: z.string(), title: z.string(), caption: z.string().optional(), width: z.number(), height: z.number() }))
+      .optional(),
+  }),
+});
+
 export const collections = {
   posts,
+  treatise,
 };

@@ -1,0 +1,1975 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Scene from "../components/Scene.astro";
+import PlateViewer from "../components/treatise/PlateViewer.astro";
+import SaintsTable from "../components/treatise/SaintsTable.astro";
+import { SITE_TITLE } from "../consts";
+import fs from "node:fs";
+import path from "node:path";
+import {
+  GLOSS_SAMPLE,
+  glossSection,
+  glossEntries,
+  sourceLine,
+  defLine,
+  defKind,
+  type GlossStats,
+} from "../lib/treatise-gloss";
+
+// Scene terms: glossed words that the section's own figure shows. Opening one of
+// these glosses lights that figure's window.
+const FIGURE_TERMS: Record<string, string[]> = {
+  "00-prologue": ["swerd", "sleen", "envye"],
+  "p1-01": ["thoumbe", "heighte"],
+  "p1-02": ["turet", "renneth", "moder"],
+  "p1-03": ["moder", "riet", "wombe", "thinne", "clymatz", "webbe", "loppe"],
+};
+
+const entries = (await getCollection("treatise")).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+// Part-level rubrics from Skeat's text (see src/content/treatise/_SOURCE.md).
+const partRubric: Record<string, string> = {
+  "Part I": "HERE BIGINNETH THE DESCRIPCION OF THE ASTROLABIE.",
+  "Part II": "HERE BIGINNEN THE CONCLUSIONS OF THE ASTROLABIE.",
+};
+const partLatin: Record<string, string> = {
+  Prologue: "PROLOGUS",
+  "Part I": "PARS PRIMA",
+  "Part II": "PARS SECUNDA",
+};
+
+const partSlug: Record<string, string> = {
+  "Part I": "part-1",
+  "Part II": "part-2",
+};
+const anchor = (part: string, section: string) =>
+  part === "Prologue" ? "prologue" : `${partSlug[part]}-${section}`;
+
+
+const roman = (n: number) => {
+  const t: [number, string][] = [[40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
+  let s = "";
+  for (const [v, r] of t) while (n >= v) { s += r; n -= v; }
+  return s;
+};
+// First few words of a passage, used as a map label.
+const incipit = (text: string, words = 5) =>
+  text.replace(/\s+/g, " ").trim().split(" ").slice(0, words).join(" ").replace(/[,.;:]+$/, "");
+const sentence = (t: string) => t.charAt(0) + t.slice(1).toLowerCase();
+// Skeat's italics come through as _underscores_; for plain-text labels drop them.
+const plain = (t: string) => t.replace(/_/g, "");
+
+// Seeded scatter of stars for the sky-window backdrops (build time, static).
+// Six shared star fields, each window shows one of them at its own angle.
+const mulberry = (seed: number) => () => {
+  seed = (seed + 0x6d2b79f5) | 0;
+  let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+};
+const STARFIELDS = 6;
+const starfields = Array.from({ length: STARFIELDS }, (_, k) => {
+  const r = mulberry((k + 1) * 7919 + 17);
+  return Array.from({ length: 70 }, () => {
+    const d = 98 * Math.sqrt(r());
+    const a = r() * Math.PI * 2;
+    const m = r();
+    return { x: (d * Math.cos(a)).toFixed(1), y: (d * Math.sin(a)).toFixed(1), r: (0.3 + m * m * 0.9).toFixed(2), o: (0.25 + m * 0.6).toFixed(2) };
+  });
+});
+
+// Graduated ring round each window (one shared symbol).
+const ringTicks = Array.from({ length: 72 }, (_, i) => {
+  const a = (i * 5 * Math.PI) / 180;
+  const r2 = i % 3 === 0 ? 102 : 99;
+  return `M${(94 * Math.cos(a)).toFixed(2)} ${(94 * Math.sin(a)).toFixed(2)}L${(r2 * Math.cos(a)).toFixed(2)} ${(r2 * Math.sin(a)).toFixed(2)}`;
+}).join("");
+
+// Skeat sets some sections apart; `note` carries his own label for them.
+// Run in place, right after the Middle English, so the move happens before first paint:
+// each inline window goes after the paragraph it belongs to.
+const PLACE_INLINE = `(function (s) {
+  var me = s.parentElement;
+  var ps = me.querySelectorAll(":scope > p");
+  me.querySelectorAll(":scope > .inline-win").forEach(function (w) {
+    var p = ps[+w.dataset.after];
+    if (p) p.after(w);
+  });
+})(document.currentScript);`;
+
+const kindOf = (note?: string) =>
+  !note ? "main" : /spurious/i.test(note) ? "spurious" : "supplementary";
+
+const glossStats: GlossStats = { tokens: 0, glossed: 0, forms: new Set(), keys: new Set() };
+
+const sections = await Promise.all(
+  entries.map(async (entry, i) => {
+    const { Content } = await entry.render();
+    const { part, section } = entry.data;
+    // The Prologue's "heading" just repeats its name; label it by its first words.
+    const heading = part === "Prologue" ? "" : entry.data.heading;
+    const m = /^(\d+)([a-z]?)$/.exec(section);
+    const ring =
+      part === "Prologue"
+        ? "PROLOGUS · LITELL LOWIS MY SONE"
+        : `${partLatin[part]} · ${part === "Part II" ? "CONCLUSIO" : "CAPITULUM"} ${m ? roman(Number(m[1])) + (m[2] ? " " + m[2] : "") : section}`;
+    const kind = kindOf(entry.data.note);
+    // Inline sky windows: find the paragraph of the Middle English holding the phrase.
+    const paras = entry.body.split(/\n\s*\n/).map((t) => t.replace(/\s+/g, " ").trim()).filter(Boolean);
+    const inline = (entry.data.inlineScenes ?? []).map((sc) => {
+      const at = paras.findIndex((t) => t.includes(sc.after.replace(/\s+/g, " ")));
+      if (at < 0)
+        throw new Error(`treatise: inline scene "${sc.name}" in ${entry.id}: phrase "${sc.after}" not found in the Middle English`);
+      return { ...sc, at, legend: sc.label.replace(/^Figure:\s*/, "").toUpperCase() };
+    });
+    const kicker = part === "Prologue" ? "The Prologue" : `${part} · § ${section}`;
+    const label = heading
+      ? sentence(plain(incipit(heading, 6)))
+      : plain(incipit(entry.body, part === "Prologue" ? 4 : 5));
+    // The glossed sample: Skeat's paragraphs with each glossed word made focusable.
+    const glossed = GLOSS_SAMPLE.has(entry.slug) ? glossSection(entry.slug, entry.body, glossStats) : null;
+    return {
+      entry,
+      Content,
+      glossed,
+      figureTerms: FIGURE_TERMS[entry.slug] ?? [],
+      i,
+      kind,
+      kicker,
+      id: anchor(part, section),
+      ring,
+      title: heading || `${incipit(entry.body, part === "Prologue" ? 4 : 5)}…`,
+      label,
+      field: i % STARFIELDS,
+      inline,
+      spin: (i * 47) % 360,
+    };
+  })
+);
+const lastSample = sections.filter((s) => s.glossed).at(-1)?.entry.slug;
+
+// Gloss data for the page script, and one hidden description per entry for
+// assistive technology (each glossed word points at its entry by aria-describedby).
+const usedKeys = [...glossStats.keys].sort();
+const glossData = Object.fromEntries(
+  usedKeys.map((k) => {
+    const e = glossEntries[k];
+    return [k, { g: e.gloss, d: e.def ?? null, s: sourceLine(e), ds: defLine(e), k: defKind(e), o: e.source === "ours" ? 1 : 0 }];
+  })
+);
+const glossDesc = usedKeys.map((k) => {
+  const e = glossEntries[k];
+  const label = { def: "", note: "Skeat's note: ", intro: "From Skeat's introduction: " }[defKind(e) ?? "def"];
+  const parts = [e.gloss, e.def ? label + e.def : null, e.source === "ours" ? "Our gloss." : `Source: ${sourceLine(e)}.`].filter(Boolean);
+  return { id: `gd-${k}`, text: parts.join(". ").replace(/\.\./g, ".") };
+});
+console.log(
+  `[treatise glosses] sample: ${glossStats.tokens} word tokens, ${glossStats.glossed} glossed (${(
+    (100 * glossStats.glossed) / Math.max(1, glossStats.tokens)
+  ).toFixed(1)}%); ${glossStats.forms.size} distinct forms; ${usedKeys.length} entries`
+);
+
+const parts = ["Prologue", "Part I", "Part II"].map((name) => ({
+  name,
+  items: sections.filter((s) => s.entry.data.part === name),
+}));
+const partEndRubric: Record<string, string> = {
+  "Part I": "HERE ENDETH THE DESCRIPCION OF THE ASTROLABIE.",
+};
+
+// Contents: one small constellation per group, stars on a gentle wave.
+const tocGroups = [
+  { key: "prologue", title: "Prologue", items: sections.filter((s) => s.entry.data.part === "Prologue") },
+  { key: "p1", title: "Part I", sub: "The descripcioun", items: sections.filter((s) => s.entry.data.part === "Part I") },
+  { key: "p2", title: "Part II", sub: "The conclusiouns", items: sections.filter((s) => s.entry.data.part === "Part II" && s.kind === "main") },
+  { key: "supp", title: "Supplementary propositions", sub: "printed by Skeat after the Explicit", items: sections.filter((s) => s.kind === "supplementary") },
+  { key: "spur", title: "Spurious sections", sub: "so marked by Skeat", items: sections.filter((s) => s.kind === "spurious") },
+]
+  .filter((g) => g.items.length)
+  .map((g) => {
+    const jitter = mulberry(g.key.length * 131 + g.items.length);
+    // Balanced rows on wide screens: at most 20 stars to a row.
+    const rows = Math.ceil(g.items.length / 20);
+    return {
+    ...g,
+    cols: Math.ceil(g.items.length / rows),
+    items: g.items.map((s, k) => ({
+      ...s,
+      dy: Math.round((jitter() - 0.5) * 18),
+      dx: Math.round((jitter() - 0.5) * 8),
+      mag: k === 0 ? 2 : 1,
+      num: s.entry.data.part === "Prologue" ? "P" : s.entry.data.section,
+    })),
+  };
+  });
+const counts = {
+  prologue: tocGroups.find((g) => g.key === "prologue")?.items.length ?? 0,
+  p1: tocGroups.find((g) => g.key === "p1")?.items.length ?? 0,
+  p2: tocGroups.find((g) => g.key === "p2")?.items.length ?? 0,
+  supp: tocGroups.find((g) => g.key === "supp")?.items.length ?? 0,
+  spur: tocGroups.find((g) => g.key === "spur")?.items.length ?? 0,
+};
+---
+
+<BaseLayout
+  title={`A Treatise on the Astrolabe - ${SITE_TITLE}`}
+  description="Geoffrey Chaucer, A Treatise on the Astrolabe (c. 1391), in W. W. Skeat's Middle English text (1894)."
+  noindex={true}
+>
+  <div class="treatise" data-gloss="hover">
+    <div class="sky" aria-hidden="true">
+      <canvas class="sky-rete"></canvas>
+    </div>
+    <div class="dusk" aria-hidden="true">
+      <svg class="moon" viewBox="0 0 100 100" aria-hidden="true">
+        <defs>
+          <mask id="moon-cut">
+            <rect width="100" height="100" fill="#fff"></rect>
+            <circle cx="62" cy="42" r="30" fill="#000"></circle>
+          </mask>
+          <radialGradient id="moon-glow">
+            <stop offset="0" stop-color="#fff6dc" stop-opacity="0.55"></stop>
+            <stop offset="1" stop-color="#fff6dc" stop-opacity="0"></stop>
+          </radialGradient>
+        </defs>
+        <circle cx="50" cy="50" r="50" fill="url(#moon-glow)"></circle>
+        <circle cx="50" cy="50" r="27" fill="#fff4d6" mask="url(#moon-cut)"></circle>
+      </svg>
+      <span class="evening-star"></span>
+    </div>
+    <div class="dawn" aria-hidden="true"><span class="sun"></span></div>
+
+    <!-- Shared drawings for the sky windows: the graduated ring and six star fields. -->
+    <svg class="t-defs" width="0" height="0" aria-hidden="true" focusable="false">
+      <defs>
+        <path id="win-arc" d="M-108 0A108 108 0 1 1 108 0A108 108 0 1 1 -108 0"></path>
+        <symbol id="win-ring" viewBox="-120 -120 240 240" overflow="visible">
+          <g fill="none" stroke="#ecc978">
+            <circle r="117" stroke-width="1.2" opacity="0.7"></circle>
+            <circle r="94" stroke-width="0.8" opacity="0.6"></circle>
+            <circle r="102" stroke-width="0.5" opacity="0.5"></circle>
+            <path d={ringTicks} stroke-width="0.6" opacity="0.55"></path>
+          </g>
+          <path d="M0 117L3 110L0 104L-3 110Z" fill="#ecc978"></path>
+        </symbol>
+        {starfields.map((f, k) => (
+          <symbol id={`win-field-${k}`} viewBox="-100 -100 200 200">
+            <g fill="#e2e8ff">
+              {f.map((s) => <circle cx={s.x} cy={s.y} r={s.r} opacity={s.o}></circle>)}
+            </g>
+          </symbol>
+        ))}
+      </defs>
+    </svg>
+
+    <div class="t-inner">
+      <header class="t-hero">
+        <p class="t-kicker">Geoffrey Chaucer <span>✦</span> c. 1391</p>
+        <h1><span class="h1-a">A Treatise</span> <span class="h1-b">on the Astrolabe</span></h1>
+        <p class="t-dedication" lang="enm">“Litell Lowis my sone…”</p>
+        <p class="t-intro">
+          Middle English text: W. W. Skeat (1894). Glosses from Skeat's glossaries to the Treatise
+          (1872) and to Chaucer (1894), for the Prologue and Part I §§ 1–3.
+        </p>
+        <p class="t-hint">Read on, and the heavens turn about the lode-sterre.</p>
+      </header>
+
+      <nav class="t-toc" id="contents" aria-label="Contents">
+        <h2>The Conclusiouns, as a constellacioun</h2>
+        <div class="toc-chart">
+          {tocGroups.map((g) => (
+            <section class={`toc-group toc-${g.key}`} aria-labelledby={`toc-h-${g.key}`}>
+              <h3 id={`toc-h-${g.key}`}>
+                <span class="toc-gtitle">{g.title}</span>
+                {g.sub && <span class="toc-gsub">{g.sub}</span>}
+              </h3>
+              <div class="toc-band">
+                <svg class="toc-lines" aria-hidden="true"></svg>
+                <ol style={`--cols:${g.cols}`}>
+                  {g.items.map((s) => (
+                    <li style={`--dy:${s.dy}px;--dx:${s.dx}px`} data-mag={s.mag} data-kind={s.kind}>
+                      <a href={`#${s.id}`} data-toc={s.id} aria-label={`${s.kicker}: ${s.label}`} data-caption-kicker={s.kicker} data-caption={s.label}>
+                        <span class="toc-star" aria-hidden="true"></span>
+                        <span class="toc-n" aria-hidden="true">{s.num}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </section>
+          ))}
+        </div>
+        <p class="toc-caption" aria-hidden="true">
+          <span class="toc-ck">{sections[0].kicker}</span>
+          <span class="toc-ct" lang="enm">{sections[0].label}…</span>
+        </p>
+        <details class="toc-full">
+          <summary>Every section, by its first words</summary>
+          <div class="toc-cols">
+            {tocGroups.map((g) => (
+              <div class="toc-list">
+                <h3>{g.title}</h3>
+                <ol>
+                  {g.items.map((s) => (
+                    <li>
+                      <a href={`#${s.id}`}>
+                        <span class="tl-n">{s.entry.data.part === "Prologue" ? "" : `§ ${s.entry.data.section}`}</span>
+                        <span class="tl-t" lang="enm">{s.label}…</span>
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            ))}
+          </div>
+        </details>
+      </nav>
+
+      <div class="gl-bar" role="group" aria-label="Glosses">
+        <span class="gl-hint"><span class="gl-hint-wide">Hover or tap a</span><span class="gl-hint-narrow">Tap a</span> <span class="gl-cue">marked word</span><span class="gl-hint-wide"> for its gloss</span></span>
+        <button type="button" class="gl-all" aria-pressed="false"><span class="gl-hint-wide">Show&nbsp;</span>all glosses</button>
+      </div>
+
+      <div class="gl-descs" hidden>
+        {glossDesc.map((d) => <span id={d.id}>{d.text}</span>)}
+      </div>
+      <script type="application/json" id="gl-data" set:html={JSON.stringify(glossData).replace(/</g, "\\u003c")}></script>
+      <div class="gl-pop" id="gl-pop" role="tooltip" hidden>
+        <p class="gp-w" lang="enm"></p>
+        <p class="gp-g"></p>
+        <p class="gp-d"><span class="gp-dl"></span><span class="gp-dt"></span></p>
+        <p class="gp-fig">Shown in the figure</p>
+        <p class="gp-s"><span class="gp-s1"></span><span class="gp-s2"></span></p>
+      </div>
+
+      {
+        parts.map((p) => (
+          <section class="t-part" aria-label={p.name}>
+            {p.name !== "Prologue" && (
+              <header class="t-part-head">
+                <svg class="part-rose" viewBox="-50 -50 100 100" aria-hidden="true">
+                  <g fill="none" stroke="currentColor" stroke-width="0.5">
+                    <circle r="46"></circle>
+                    <circle r="30" stroke-dasharray="1 2"></circle>
+                  </g>
+                  <path d="M0-48L5-5L48 0L5 5L0 48L-5 5L-48 0L-5-5Z" fill="currentColor" opacity="0.85"></path>
+                  <path d="M0-30L3-3L30 0L3 3L0 30L-3 3L-30 0L-3-3Z" fill="currentColor" opacity="0.5" transform="rotate(45)"></path>
+                </svg>
+                <p class="t-part-latin">{partLatin[p.name]}</p>
+                <h2>{p.name}</h2>
+                <p class="t-part-rubric" lang="enm">{partRubric[p.name]}</p>
+              </header>
+            )}
+            {p.items.map(({ entry, Content, glossed, figureTerms, id, ring, title, field, spin, i, kind, kicker, inline }, k) => (
+              <>
+                {kind !== "main" && p.items[k - 1]?.kind !== kind && (
+                  <header class={`t-group-head t-group-${kind}`}>
+                    <p lang="enm">{plain(entry.data.note ?? "")}</p>
+                  </header>
+                )}
+                <article
+                  class="t-sec"
+                  id={id}
+                  data-side={i % 2 ? "r" : "l"}
+                  data-kind={kind}
+                  data-glossed={glossed ? "" : undefined}
+                  data-figure-terms={figureTerms.length ? figureTerms.join(" ") : undefined}
+                >
+                  <div class="t-aside">
+                    <div class="win">
+                      <svg class="win-ring" viewBox="-120 -120 240 240" aria-hidden="true">
+                        <use href="#win-ring" x="-120" y="-120" width="240" height="240"></use>
+                        <text class="ring-text">
+                          <textPath href="#win-arc" startOffset="25%" text-anchor="middle">{ring}</textPath>
+                        </text>
+                      </svg>
+                      <div class="win-glass">
+                        <svg class="win-stars" viewBox="-100 -100 200 200" aria-hidden="true">
+                          <use href={`#win-field-${field}`} x="-100" y="-100" width="200" height="200" transform={`rotate(${spin})`}></use>
+                        </svg>
+                        <Scene
+                          name={entry.data.scene ?? "night-window"}
+                          label={`Figure for ${entry.data.part}${entry.data.part === "Prologue" ? "" : ` § ${entry.data.section}`}`}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="t-main">
+                    <header class="t-sec-label">
+                      <p class="t-sec-kicker">
+                        {entry.data.part === "Prologue" ? kicker : <>{entry.data.part} · § <span class="t-num">{entry.data.section}</span></>}
+                        {kind !== "main" && <span class="t-sec-kind"> · {kind}</span>}
+                      </p>
+                      <h3 lang="enm">
+                        <span class="t-sec-title">{title}</span>
+                      </h3>
+                      {entry.data.latin && (
+                        <p class="t-latin" lang="la">
+                          {entry.data.latin}
+                        </p>
+                      )}
+                    </header>
+                    <div class="t-body">
+                      <div class="t-me" lang="enm">
+                        {glossed ? glossed.map((h) => <p set:html={h} />) : <Content />}
+                        {inline.map((sc, j) => (
+                          <div class="inline-win" data-after={sc.at}>
+                            <div class="win">
+                              <svg class="win-ring" viewBox="-120 -120 240 240" aria-hidden="true">
+                                <use href="#win-ring" x="-120" y="-120" width="240" height="240"></use>
+                                <text class="ring-text">
+                                  <textPath href="#win-arc" startOffset="25%" text-anchor="middle">{sc.legend}</textPath>
+                                </text>
+                              </svg>
+                              <div class="win-glass win-glass-full">
+                                <svg class="win-stars" viewBox="-100 -100 200 200" aria-hidden="true">
+                                  <use href={`#win-field-${(field + j + 1) % 6}`} x="-100" y="-100" width="200" height="200"></use>
+                                </svg>
+                                <Scene name={sc.name} label={sc.label} />
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                        {inline.length > 0 && (
+                          <script is:inline set:html={PLACE_INLINE}></script>
+                        )}
+                        {(entry.data.plates ?? []).map((pl) => (
+                          <PlateViewer src={pl.src} button={pl.button} title={pl.title} caption={pl.caption} width={pl.width} height={pl.height} />
+                        ))}
+                        {entry.data.saintsTable && <SaintsTable />}
+                      </div>
+<svg class="t-const" aria-hidden="true"></svg>
+                    </div>
+                  </div>
+                </article>
+                {entry.data.colophon && (
+                  <p class="t-colophon" lang="la">{entry.data.colophon}</p>
+                )}
+                {entry.slug === lastSample && (
+                  <aside class="t-sample-end" aria-label="End of the glossed sample">
+                    <p>The glossed sample ends here.</p>
+                    <p>From § 4 on, Skeat's text is shown without glosses.</p>
+                  </aside>
+                )}
+              </>
+            ))}
+            {partEndRubric[p.name] && (
+              <p class="t-part-end" lang="enm">{partEndRubric[p.name]}</p>
+            )}
+          </section>
+        ))
+      }
+
+      <footer class="t-end">
+        <p class="t-explicit">Explicit</p>
+        <p class="t-credit">
+          Middle English: W. W. Skeat (1894). Glosses: W. W. Skeat, Early English Text Society (1872) and
+          Oxford Chaucer (1894), except those marked as ours.
+          Sky drawn for the latitude of Oxford.
+        </p>
+      </footer>
+    </div>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  @font-face {
+    font-family: "Junicode 2";
+    src: url("/fonts/treatise/junicode/Junicode2-Roman.woff2") format("woff2");
+    font-weight: 400 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Texturina";
+    src: url("/fonts/treatise/texturina/Texturina-VF.woff2") format("woff2");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "EB Garamond";
+    src: url("/fonts/treatise/ebgaramond/EBGaramond-VF.woff2") format("woff2");
+    font-weight: 400 800;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  /* The night region runs full-bleed between the site header and footer. */
+  body:has(.treatise) {
+    overflow-x: clip;
+  }
+  .page-padding:has(.treatise) {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  main:has(> .treatise) {
+    max-width: 1240px;
+  }
+</style>
+
+<style>
+  .treatise {
+    --night: #060918;
+    --silver: #e4e7f3;
+    --gold: #ecc978;
+    --gold-soft: #ead9b0;
+    --faint: #a7b0d4;
+    --hair: rgba(236, 201, 120, 0.32);
+    --me-font: "Junicode 2", "Junicode", Georgia, serif;
+    --black-font: "Texturina", var(--me-font);
+    --modern-font: "EB Garamond", Georgia, serif;
+
+    position: relative;
+    z-index: 1;
+    width: 100vw;
+    max-width: none;
+    margin-left: calc(50% - 50vw);
+    margin-top: 1.5rem;
+    color: var(--silver);
+    background:
+      radial-gradient(120% 60% at 50% 40%, #0c1236 0%, rgba(12, 18, 54, 0) 70%),
+      linear-gradient(#0a0f2a, var(--night) 40%, #05070f);
+    isolation: isolate;
+    /* Keep the pinned sky inside the night region (clip, unlike hidden, keeps sticky working). */
+    overflow: clip;
+  }
+
+  /* --- the sky ------------------------------------------------------ */
+  .sky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100lvh;
+    margin-bottom: -100vh;
+    margin-bottom: -100lvh;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(70% 55% at 50% 32%, rgba(46, 58, 140, 0.32), rgba(46, 58, 140, 0) 70%);
+  }
+  .sky canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+  }
+  .sky-rete {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+  .sky.ready canvas {
+    opacity: 1;
+  }
+
+  .dusk,
+  .dawn {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .dusk {
+    top: 0;
+    height: 1150px;
+    background: linear-gradient(
+      180deg,
+      var(--theme-background) 0px,
+      #f4e1c6 60px,
+      #ebbf9f 140px,
+      #c98d8a 230px,
+      #8c5f86 330px,
+      rgba(75, 59, 116, 0.96) 450px,
+      rgba(35, 37, 89, 0.76) 600px,
+      rgba(16, 20, 56, 0.36) 820px,
+      rgba(10, 15, 42, 0) 1100px
+    );
+  }
+  /* Site dark theme: the page already starts at night, so no cream sunset;
+     just a violet afterglow between the navy header and the stars. */
+  :global(.dark-theme) .dusk {
+    background: linear-gradient(
+      180deg,
+      var(--theme-background) 0px,
+      #0a1650 110px,
+      #22205e 230px,
+      #3c2d6c 330px,
+      rgba(52, 40, 102, 0.96) 450px,
+      rgba(30, 32, 84, 0.76) 600px,
+      rgba(16, 20, 56, 0.36) 820px,
+      rgba(10, 15, 42, 0) 1100px
+    );
+  }
+  :global(.dark-theme) .dawn {
+    background: linear-gradient(
+      180deg,
+      rgba(10, 15, 42, 0) 0px,
+      rgba(22, 26, 70, 0.7) 220px,
+      #2a2a66 400px,
+      #46357a 560px,
+      #2a2a6c 700px,
+      #0c1a58 820px,
+      var(--theme-background) 900px
+    );
+  }
+  :global(.dark-theme) .sun {
+    opacity: 0.35;
+  }
+  .moon {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    right: 14%;
+    top: 90px;
+    filter: drop-shadow(0 0 12px rgba(255, 240, 200, 0.5));
+  }
+  .evening-star {
+    position: absolute;
+    left: 22%;
+    top: 250px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #fffaf0;
+    box-shadow:
+      0 0 6px 2px rgba(255, 250, 235, 0.9),
+      0 0 22px 6px rgba(255, 230, 200, 0.35);
+  }
+  .dawn {
+    bottom: 0;
+    height: 900px;
+    overflow: hidden;
+    background: linear-gradient(
+      180deg,
+      rgba(10, 15, 42, 0) 0px,
+      rgba(22, 26, 70, 0.7) 220px,
+      #33306a 380px,
+      #6c4d80 520px,
+      #b98490 650px,
+      #ecc2a0 770px,
+      #f6e3c8 840px,
+      var(--theme-background) 900px
+    );
+  }
+  .sun {
+    position: absolute;
+    left: 50%;
+    bottom: -260px;
+    width: 520px;
+    height: 520px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 238, 200, 0.85) 0%, rgba(255, 200, 150, 0.35) 30%, rgba(255, 190, 150, 0) 68%);
+  }
+
+  /* --- content column ---------------------------------------------- */
+  .t-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+    box-sizing: border-box;
+  }
+
+  .t-hero {
+    padding-top: 360px;
+    text-align: center;
+    max-width: 52rem;
+    margin: 0 auto;
+  }
+  .t-kicker {
+    font-family: var(--me-font);
+    font-size: 0.85rem;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: #fbe9c6;
+    margin: 0 0 1rem;
+  }
+  .t-kicker span {
+    color: var(--gold);
+    letter-spacing: 0;
+    margin: 0 0.6em;
+  }
+  .t-hero h1 {
+    font-family: var(--black-font);
+    font-weight: 600;
+    font-variation-settings: "opsz" 72;
+    font-size: clamp(2.8rem, 7.6vw, 6.6rem);
+    line-height: 1.02;
+    margin: 0 0 1.25rem;
+    color: #f5dc9b;
+    background: linear-gradient(180deg, #fff3cf 0%, #f0cf7f 55%, #c9993f 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 18px rgba(255, 214, 130, 0.28));
+  }
+  .h1-a,
+  .h1-b {
+    display: block;
+  }
+  .h1-a {
+    font-size: 0.62em;
+    letter-spacing: 0.04em;
+  }
+  .t-dedication {
+    font-family: var(--me-font);
+    font-size: 1.35rem;
+    color: var(--silver);
+    margin: 0 0 1.5rem;
+    letter-spacing: 0.02em;
+  }
+  .t-intro {
+    font-family: var(--modern-font);
+    font-size: 1.15rem;
+    line-height: 1.55;
+    color: #cfd5ec;
+    margin: 0 auto;
+    max-width: 36rem;
+  }
+  .t-private {
+    color: #ffb8a6;
+    font-weight: 600;
+  }
+  .t-hint {
+    display: none;
+    font-family: var(--me-font);
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-top: 2.25rem;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .t-hint {
+      display: block;
+    }
+  }
+
+  /* --- contents: a small constellation per part ------------------- */
+  .t-toc {
+    margin: 5rem auto 3rem;
+    max-width: 62rem;
+  }
+  .t-toc h2 {
+    font-family: var(--me-font);
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--gold);
+    margin: 0 0 2rem;
+  }
+  .toc-chart {
+    display: grid;
+    grid-template-columns: 11rem minmax(0, 1fr);
+    row-gap: 1.6rem;
+  }
+  .toc-group {
+    display: contents;
+  }
+  .toc-group h3 {
+    margin: 0;
+    padding-top: 0.55rem;
+    font-family: var(--me-font);
+    font-weight: 500;
+    line-height: 1.25;
+  }
+  .toc-gtitle {
+    display: block;
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .toc-gsub {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.86rem;
+    color: var(--faint);
+  }
+  .toc-band {
+    position: relative;
+  }
+  .toc-lines {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+  }
+  .toc-lines :global(path) {
+    fill: none;
+    stroke: rgba(190, 204, 255, 0.38);
+    stroke-width: 1;
+    stroke-dasharray: 2 4;
+  }
+  .toc-band ol {
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(var(--cols), 2.5rem);
+    gap: 1.1rem 0;
+  }
+  .toc-band li {
+    transform: translate(var(--dx), var(--dy));
+  }
+  .toc-band a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0;
+    color: inherit;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+  .toc-star {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #f6f8ff;
+    box-shadow: 0 0 7px 2px rgba(170, 190, 255, 0.5);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  li[data-mag="2"] .toc-star {
+    width: 9px;
+    height: 9px;
+    background: #fff3d6;
+    box-shadow: 0 0 10px 3px rgba(255, 220, 150, 0.5);
+  }
+  li[data-kind="supplementary"] .toc-star {
+    background: #e8cf95;
+    box-shadow: 0 0 6px 1px rgba(255, 220, 150, 0.35);
+  }
+  li[data-kind="spurious"] .toc-star {
+    background: transparent;
+    border: 1px solid rgba(214, 222, 255, 0.85);
+    box-shadow: none;
+  }
+  .toc-n {
+    font-family: var(--me-font);
+    font-size: 0.74rem;
+    line-height: 1;
+    color: #b9c1e0;
+    font-variant-numeric: oldstyle-nums;
+  }
+  .toc-band a:hover .toc-star,
+  .toc-band a:focus-visible .toc-star,
+  .toc-band a.active .toc-star {
+    transform: scale(1.7);
+    box-shadow: 0 0 14px 5px rgba(255, 220, 150, 0.7);
+  }
+  .toc-band a:hover .toc-n,
+  .toc-band a:focus-visible .toc-n,
+  .toc-band a.active .toc-n {
+    color: var(--gold);
+  }
+  .toc-band a:focus-visible,
+  .toc-full a:focus-visible,
+  .toc-full summary:focus-visible {
+    outline: 1px solid var(--gold);
+    outline-offset: 2px;
+  }
+  .toc-caption {
+    margin: 1.8rem 0 0 11rem;
+    min-height: 3.2em;
+    font-family: var(--me-font);
+  }
+  .toc-ck {
+    display: block;
+    font-size: 0.78rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .toc-ct {
+    display: block;
+    font-size: 1.1rem;
+    color: var(--silver);
+  }
+  .toc-full {
+    margin: 1.2rem 0 0 11rem;
+    font-family: var(--me-font);
+  }
+  .toc-full summary {
+    cursor: pointer;
+    width: max-content;
+    max-width: 100%;
+    font-size: 0.82rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--faint);
+    padding: 0.3rem 0;
+  }
+  .toc-full summary:hover {
+    color: var(--gold);
+  }
+  .toc-cols {
+    margin-top: 1rem;
+    columns: 2 19rem;
+    column-gap: 2.5rem;
+  }
+  .toc-list {
+    break-inside: avoid-column;
+  }
+  .toc-list h3 {
+    margin: 0.4rem 0 0.4rem;
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .toc-list ol {
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+  }
+  .toc-list li {
+    break-inside: avoid;
+  }
+  .toc-list a {
+    display: flex;
+    gap: 0.6rem;
+    padding: 0.18rem 0;
+    color: #d3d8ee;
+    text-decoration: none;
+    font-size: 0.98rem;
+    line-height: 1.35;
+  }
+  .toc-list a:hover {
+    color: #fff;
+  }
+  .tl-n {
+    flex: none;
+    width: 2.8rem;
+    color: var(--faint);
+    font-variant-numeric: oldstyle-nums;
+  }
+
+  @media (max-width: 999.98px) {
+    .toc-chart {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 0.4rem;
+    }
+    .toc-group h3 {
+      padding-top: 1rem;
+    }
+    .toc-gtitle,
+    .toc-gsub {
+      display: inline;
+    }
+    .toc-gsub::before {
+      content: " · ";
+    }
+    .toc-band ol {
+      grid-template-columns: repeat(auto-fill, minmax(2.4rem, 1fr));
+    }
+    .toc-caption,
+    .toc-full {
+      margin-left: 0;
+    }
+    .toc-cols {
+      columns: 1;
+    }
+  }
+
+  /* --- gloss bar: hint and the show-all switch --------------------- */
+  .gl-bar {
+    position: sticky;
+    top: 0.75rem;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    width: max-content;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto 1rem;
+    padding: 4px 4px 4px 1.1rem;
+    border-radius: 999px;
+    background: rgba(9, 12, 32, 0.95);
+    box-shadow: 0 6px 22px rgba(2, 3, 12, 0.55);
+    border: 1px solid var(--hair);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  .gl-hint {
+    font-family: var(--modern-font);
+    font-size: 0.95rem;
+    color: #cfd5ec;
+    white-space: nowrap;
+  }
+  .gl-hint-narrow {
+    display: none;
+  }
+  @media (max-width: 599.98px) {
+    .gl-hint-wide {
+      display: none;
+    }
+    .gl-hint-narrow {
+      display: inline;
+    }
+  }
+  .gl-cue {
+    font-family: var(--me-font);
+    color: var(--silver);
+    text-decoration: underline dotted rgba(236, 201, 120, 0.7);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+  }
+  .gl-all {
+    appearance: none;
+    border: 0;
+    margin: 0;
+    cursor: pointer;
+    padding: 0.45rem 1rem 0.4rem;
+    border-radius: 999px;
+    font: inherit;
+    font-family: var(--me-font);
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: #d9def2;
+    background: rgba(236, 201, 120, 0.1);
+    box-shadow: inset 0 0 0 1px var(--hair);
+  }
+  .gl-all:hover {
+    color: #fff;
+  }
+  .gl-all[aria-pressed="true"] {
+    color: #10142e;
+    background: linear-gradient(#f7e2a8, #dcb35c);
+    box-shadow: none;
+  }
+  .gl-all:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+
+  /* --- parts -------------------------------------------------------- */
+  .t-part-head {
+    position: relative;
+    text-align: center;
+    padding: 7rem 0 3rem;
+  }
+  .part-rose {
+    display: block;
+    width: 84px;
+    height: 84px;
+    margin: 0 auto 1rem;
+    color: var(--gold);
+    filter: drop-shadow(0 0 10px rgba(236, 201, 120, 0.45));
+  }
+  .t-part-latin {
+    font-family: var(--me-font);
+    font-size: 0.8rem;
+    letter-spacing: 0.5em;
+    color: var(--faint);
+    margin: 0;
+  }
+  .t-part-head h2 {
+    font-family: var(--black-font);
+    font-weight: 600;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    color: var(--gold);
+    margin: 0.2rem 0 0.6rem;
+    text-shadow: 0 0 24px rgba(236, 201, 120, 0.35);
+  }
+  .t-part-rubric {
+    display: inline-block;
+    font-family: var(--me-font);
+    font-size: 0.92rem;
+    letter-spacing: 0.22em;
+    color: var(--gold-soft);
+    margin: 0;
+    padding: 0.7rem 0;
+    border-top: 1px solid var(--hair);
+    border-bottom: 1px solid var(--hair);
+    max-width: 40rem;
+  }
+
+  /* Skeat's own labels for the sections outside the main sequence. */
+  .t-group-head {
+    text-align: center;
+    padding: 5rem 0 1rem;
+  }
+  .t-group-head p {
+    display: inline-block;
+    margin: 0;
+    padding: 0.7rem 0;
+    max-width: 36rem;
+    font-family: var(--me-font);
+    font-size: 0.92rem;
+    letter-spacing: 0.14em;
+    color: var(--gold-soft);
+    border-top: 1px solid var(--hair);
+    border-bottom: 1px solid var(--hair);
+  }
+  .t-group-supplementary p {
+    letter-spacing: 0.3em;
+  }
+  /* Skeat's "41a" keeps its small letter. */
+  .t-num {
+    text-transform: none;
+  }
+  .t-sec-kind {
+    color: var(--faint);
+    letter-spacing: 0.2em;
+  }
+  .t-colophon,
+  .t-part-end {
+    max-width: 40rem;
+    margin: 1rem auto 3rem;
+    text-align: center;
+    font-family: var(--me-font);
+    font-size: 0.86rem;
+    line-height: 1.6;
+    letter-spacing: 0.12em;
+    color: var(--gold-soft);
+  }
+
+  /* --- sections ----------------------------------------------------- */
+  .t-sec {
+    padding: 3.5rem 0 4.5rem;
+    scroll-margin-top: 3.5rem;
+    display: grid;
+    grid-template-columns: 21rem minmax(0, 41rem);
+    justify-content: center;
+    column-gap: 4.25rem;
+    align-items: start;
+  }
+  .t-sec[data-side="r"] {
+    grid-template-columns: minmax(0, 41rem) 21rem;
+  }
+  .t-sec[data-side="r"] .t-aside {
+    order: 2;
+  }
+  /* The figure stays in view beside its passage while it is read. */
+  .t-aside {
+    position: sticky;
+    top: max(5rem, calc(50vh - 11rem));
+  }
+  .t-sec-label {
+    margin-bottom: 2.25rem;
+  }
+
+  .win {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+  }
+  .win-ring {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  .t-defs {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+  .ring-text {
+    fill: var(--gold);
+    font-family: var(--me-font);
+    font-size: 8.6px;
+    letter-spacing: 2.6px;
+    font-weight: 600;
+  }
+  .win-glass {
+    position: absolute;
+    inset: 10.83%;
+    border-radius: 50%;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 38%, #18225a 0%, #0b1236 55%, #050816 100%);
+    box-shadow:
+      0 0 0 1px rgba(236, 201, 120, 0.35),
+      0 0 40px 6px rgba(80, 100, 220, 0.22),
+      inset 0 0 30px rgba(0, 0, 0, 0.7);
+    color: var(--gold);
+    /* Scene labels ("25½°", "X", "Alhabor") inherit the treatise's face. */
+    font-family: var(--me-font);
+    --text-hover: #cfdcff;
+    --header-color: var(--gold);
+  }
+  .win-stars {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    fill: #e2e8ff;
+  }
+  .win-glass :global(.scene) {
+    position: absolute;
+    inset: 6%;
+    width: 88%;
+    color: var(--gold);
+  }
+  .t-sec .win {
+    transition: filter 0.6s;
+    filter: saturate(0.75) brightness(0.85);
+  }
+  .t-sec.active .win {
+    filter: none;
+  }
+
+  .t-sec-kicker {
+    font-family: var(--me-font);
+    font-size: 0.82rem;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin: 0 0 0.6rem;
+  }
+  .t-sec-label h3 {
+    font-family: var(--me-font);
+    font-weight: 500;
+    font-size: 1.12rem;
+    line-height: 1.6;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 0.75rem;
+    text-shadow: 0 0 14px rgba(236, 201, 120, 0.25);
+  }
+  .t-sec-label h3::after {
+    content: "";
+    display: block;
+    width: 7rem;
+    height: 1px;
+    margin-top: 0.9rem;
+    background: linear-gradient(90deg, var(--gold), rgba(236, 201, 120, 0));
+  }
+  .t-sec[data-side="r"] .t-sec-label h3::after {
+    margin-left: auto;
+    background: linear-gradient(270deg, var(--gold), rgba(236, 201, 120, 0));
+  }
+  .t-latin {
+    font-family: var(--me-font);
+    font-size: 0.82rem;
+    line-height: 1.55;
+    letter-spacing: 0.08em;
+    color: var(--faint);
+    margin: 0;
+  }
+
+  /* Middle English only; the constellation runs down the left margin. */
+  .t-body {
+    position: relative;
+    isolation: isolate;
+    padding-left: 1.9rem;
+  }
+  /* A sky window set into the Middle English, after the words it shows.
+     Wide: floated beside the following lines, which wrap round its circle.
+     Narrow: on its own line. */
+  .inline-win {
+    float: right;
+    width: 15rem;
+    margin: 0.3rem 0 1rem 1.6rem;
+    shape-outside: circle(50%);
+    shape-margin: 0.6rem;
+  }
+  .inline-win .win {
+    width: 100%;
+  }
+  .t-me {
+    font-family: var(--me-font);
+    font-size: 1.24rem;
+    line-height: 1.72;
+    color: var(--silver);
+    hyphens: manual;
+  }
+  .t-me :global(p) {
+    margin: 0 0 1.1em;
+  }
+  .t-me > :global(p:first-of-type::first-letter) {
+    font-family: var(--black-font);
+    font-weight: 700;
+    font-variation-settings: "opsz" 72;
+    color: var(--gold);
+    float: left;
+    font-size: 3.7em;
+    line-height: 0.84;
+    padding: 0.06em 0.1em 0 0;
+    text-shadow:
+      0 0 18px rgba(236, 201, 120, 0.55),
+      0 0 2px rgba(255, 240, 200, 0.8);
+  }
+  /* The sky itself recedes behind text: see the veils in treatise-sky.ts. */
+  .t-const {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+  }
+  .t-const :global(path) {
+    fill: none;
+    stroke: rgba(200, 212, 255, 0.42);
+    stroke-width: 0.8;
+  }
+  .t-const :global(.c-star) {
+    fill: #f4f6ff;
+  }
+  .t-const :global(.c-glow) {
+    fill: rgba(160, 180, 255, 0.22);
+  }
+  .t-const :global(.c-star.gold) {
+    fill: #ffe7b0;
+  }
+
+  /* --- glossed words ------------------------------------------------ */
+  :global(.gw) {
+    position: relative;
+    cursor: help;
+    border-radius: 2px;
+    text-decoration: underline dotted rgba(236, 201, 120, 0.6);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.32em;
+    text-decoration-skip-ink: none;
+    transition: color 0.15s, text-shadow 0.15s, background-color 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  :global(.gw-minor) {
+    text-decoration-color: rgba(236, 201, 120, 0.3);
+  }
+  :global(.gw-ours) {
+    text-decoration-color: rgba(190, 200, 235, 0.3);
+  }
+  :global(.gw:hover),
+  :global(.gw[aria-expanded="true"]) {
+    color: #fff6dc;
+    text-decoration-color: var(--gold);
+    text-shadow: 0 0 12px rgba(255, 220, 150, 0.55);
+  }
+  :global(.gw:focus) {
+    outline: none;
+  }
+  :global(.gw:focus-visible) {
+    outline: 1.5px solid var(--gold);
+    outline-offset: 2px;
+  }
+  :global(.gw[data-fig]) {
+    text-decoration-style: solid;
+    text-decoration-thickness: 1px;
+    text-decoration-color: rgba(236, 201, 120, 0.62);
+  }
+  /* Interlinear glosses (show-all mode): small, centred under the word. */
+  :global(.gw-i) {
+    display: none;
+  }
+  .treatise[data-gloss="all"] .t-sec[data-glossed] .t-me > :global(p) {
+    line-height: 2.4;
+  }
+  .treatise[data-gloss="all"] :global(.gw-i) {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 1.3em;
+    transform: translateX(-50%);
+    max-width: max(calc(100% + 0.6em), 5.4em);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: var(--modern-font);
+    font-style: italic;
+    font-size: 0.64em;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+    color: #ead9b0;
+    text-shadow: 0 0 6px rgba(6, 9, 24, 0.9);
+    pointer-events: none;
+  }
+  .treatise[data-gloss="all"] :global(.gw) {
+    text-decoration-color: transparent;
+  }
+
+  /* The popover: one shared element, placed by script. */
+  .gl-pop {
+    position: fixed;
+    z-index: 50;
+    left: 0;
+    top: 0;
+    width: min(21rem, calc(100vw - 24px));
+    box-sizing: border-box;
+    padding: 0.85rem 1rem 0.75rem;
+    border-radius: 10px;
+    background: #0b1030;
+    border: 1px solid rgba(236, 201, 120, 0.45);
+    box-shadow:
+      0 14px 40px rgba(0, 0, 0, 0.6),
+      0 0 0 4px rgba(11, 16, 48, 0.55),
+      0 0 30px rgba(120, 140, 255, 0.16);
+    color: #eef0fa;
+    font-family: var(--modern-font);
+    font-size: 1.04rem;
+    line-height: 1.42;
+    pointer-events: auto;
+  }
+  .gl-pop[hidden] {
+    display: none;
+  }
+  .gl-pop::before {
+    content: "";
+    position: absolute;
+    left: var(--ax, 50%);
+    width: 10px;
+    height: 10px;
+    background: #0b1030;
+    border: solid rgba(236, 201, 120, 0.45);
+    transform: translateX(-50%) rotate(45deg);
+  }
+  .gl-pop[data-place="below"]::before {
+    top: -6px;
+    border-width: 1px 0 0 1px;
+  }
+  .gl-pop[data-place="above"]::before {
+    bottom: -6px;
+    border-width: 0 1px 1px 0;
+  }
+  .gl-pop p {
+    margin: 0;
+    line-height: inherit;
+  }
+  .gp-w {
+    font-family: var(--me-font);
+    font-size: 0.86rem;
+    letter-spacing: 0.08em;
+    color: #f3dfa8;
+    margin-bottom: 0.2rem !important;
+  }
+  .gp-g {
+    font-size: 1.14rem;
+    font-weight: 500;
+    color: #ffffff;
+  }
+  .gp-d {
+    margin-top: 0.4rem !important;
+    font-size: 0.96rem;
+    color: #e0e4f3;
+  }
+  /* Commentary (Skeat's notes, his introduction), set apart from a definition. */
+  .gp-d[data-kind="note"],
+  .gp-d[data-kind="intro"] {
+    margin-top: 0.55rem !important;
+    padding-left: 0.7rem;
+    border-left: 2px solid rgba(236, 201, 120, 0.5);
+    font-style: italic;
+    font-size: 0.93rem;
+  }
+  .gp-dl {
+    display: block;
+    font-family: var(--me-font);
+    font-style: normal;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #f3dfa8;
+    margin-bottom: 0.15rem;
+  }
+  .gp-dl:empty {
+    display: none;
+  }
+  .gp-d[hidden],
+  .gl-pop:not([data-fig]) .gp-fig {
+    display: none;
+  }
+  .gp-fig {
+    margin-top: 0.45rem !important;
+    font-family: var(--me-font);
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #f3dfa8;
+  }
+  .gp-fig::before {
+    content: "✦ ";
+  }
+  .gp-s {
+    margin-top: 0.55rem !important;
+    padding-top: 0.45rem;
+    border-top: 1px solid rgba(236, 201, 120, 0.22);
+    font-size: 0.8rem;
+    line-height: 1.35;
+    color: #c9cfe6;
+  }
+  .gp-s1,
+  .gp-s2 {
+    display: block;
+  }
+  .gp-s2:empty {
+    display: none;
+  }
+  .gl-pop[data-ours] .gp-s {
+    font-style: italic;
+  }
+
+  /* A figure lights up while one of the words it shows is glossed. */
+  .t-sec .win.lit,
+  .inline-win .win.lit {
+    filter: none;
+  }
+  .win.lit .win-glass {
+    box-shadow:
+      0 0 0 2px rgba(255, 226, 160, 0.95),
+      0 0 60px 16px rgba(255, 214, 130, 0.38),
+      inset 0 0 30px rgba(0, 0, 0, 0.7);
+  }
+  .win.lit .win-ring {
+    filter: drop-shadow(0 0 6px rgba(255, 220, 150, 0.8));
+  }
+
+  .t-sample-end {
+    max-width: 34rem;
+    margin: 0.5rem auto 3rem;
+    padding: 1rem 1.4rem;
+    text-align: center;
+    font-family: var(--modern-font);
+    font-size: 1.02rem;
+    line-height: 1.5;
+    color: #d6dbef;
+    border: 1px dashed var(--hair);
+    border-radius: 999px;
+  }
+  .t-sample-end p {
+    margin: 0;
+  }
+
+  /* --- the end ------------------------------------------------------ */
+  .t-end {
+    text-align: center;
+    padding: 6rem 0 560px;
+  }
+  .t-explicit {
+    font-family: var(--black-font);
+    font-weight: 600;
+    font-size: 2.6rem;
+    color: var(--gold);
+    margin: 0 0 1rem;
+    text-shadow: 0 0 20px rgba(236, 201, 120, 0.35);
+  }
+  .t-credit {
+    font-family: var(--modern-font);
+    font-size: 1.02rem;
+    color: #d6dbef;
+    max-width: 34rem;
+    margin: 0 auto;
+  }
+
+  /* --- narrow screens ----------------------------------------------- */
+  @media (max-width: 999.98px) {
+    .t-inner {
+      padding: 0 1.25rem;
+    }
+    .t-hero {
+      padding-top: 370px;
+    }
+    .moon {
+      width: 110px;
+      height: 110px;
+      right: 8%;
+      top: 70px;
+    }
+    .evening-star {
+      left: 16%;
+      top: 200px;
+    }
+    .t-kicker {
+      letter-spacing: 0.24em;
+      font-size: 0.78rem;
+    }
+    .t-toc {
+      margin-top: 3.5rem;
+    }
+    .t-sec {
+      padding: 2.5rem 0 3rem;
+    }
+    .t-sec,
+    .t-sec[data-side="r"] {
+      display: block;
+    }
+    .t-aside {
+      position: static;
+      margin-bottom: 1.5rem;
+    }
+    .t-sec-label,
+    .t-sec[data-side="r"] .t-sec-label {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .win {
+      width: min(15rem, 68vw);
+      margin: 0 auto;
+    }
+    /* Long Part II rubrics: small capitals, tighter tracking. */
+    .t-sec-label h3 {
+      font-size: 1.15rem;
+      line-height: 1.45;
+      letter-spacing: 0.07em;
+      font-variant-caps: all-small-caps;
+    }
+    .t-sec-label h3::after,
+    .t-sec[data-side="r"] .t-sec-label h3::after {
+      margin: 0.9rem auto 0;
+      background: linear-gradient(90deg, rgba(236, 201, 120, 0), var(--gold), rgba(236, 201, 120, 0));
+    }
+    .t-body {
+      padding-left: 1.6rem;
+    }
+    .inline-win {
+      float: none;
+      width: min(15rem, 68vw);
+      margin: 0.4rem auto 1.6rem;
+      shape-outside: none;
+    }
+    .t-me {
+      font-size: 1.16rem;
+      line-height: 1.68;
+    }
+    .gl-bar {
+      padding-left: 0.9rem;
+      gap: 0.6rem;
+    }
+    .gl-all {
+      letter-spacing: 0.1em;
+      padding-inline: 0.8rem;
+    }
+    .gl-hint {
+      font-size: 0.88rem;
+    }
+    .t-end {
+      padding-bottom: 520px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sky-rete,
+    .t-sec .win,
+    .toc-star {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  import { initSky } from "../scripts/treatise-sky";
+
+  const root = document.querySelector<HTMLElement>(".treatise");
+  if (root) {
+    initSky(root);
+
+    // --- Glosses ---------------------------------------------------------
+    // Every glossed word is a span[role=button] with data-g (its entry) and
+    // aria-describedby (a hidden description, for screen readers). One shared
+    // popover shows the gloss: on hover (mouse), on tap (touch: tap again or tap
+    // elsewhere to close), and on keyboard focus (Enter toggles, Escape closes).
+    type GD = { g: string; d: string | null; s: string; ds: string | null; k: "def" | "note" | "intro" | null; o: 0 | 1 };
+    const GLOSS: Record<string, GD> = JSON.parse(document.getElementById("gl-data")?.textContent || "{}");
+    const pop = document.getElementById("gl-pop") as HTMLElement | null;
+    const words = [...root.querySelectorAll<HTMLElement>(".gw")];
+    // Mark the words the section's own figure shows.
+    root.querySelectorAll<HTMLElement>(".t-sec[data-figure-terms]").forEach((sec) => {
+      const terms = new Set((sec.dataset.figureTerms ?? "").split(" "));
+      sec.querySelectorAll<HTMLElement>(".gw").forEach((w) => {
+        if (terms.has(w.dataset.g ?? "")) w.dataset.fig = "";
+      });
+    });
+    let open: HTMLElement | null = null;
+    let pinned = false;
+    let hideT = 0;
+    let lit: HTMLElement | null = null;
+    const figureOf = (w: HTMLElement) => {
+      if (!("fig" in w.dataset)) return null;
+      // An inline window inside the same paragraph run wins (the sword), else the section's own.
+      const sec = w.closest(".t-sec");
+      const inl = w.dataset.g && ["swerd", "sleen", "envye"].includes(w.dataset.g) ? sec?.querySelector<HTMLElement>(".inline-win .win") : null;
+      return inl ?? sec?.querySelector<HTMLElement>(".t-aside .win") ?? null;
+    };
+    const place = () => {
+      if (!pop || !open) return;
+      const r = open.getClientRects()[0] ?? open.getBoundingClientRect();
+      const vw = document.documentElement.clientWidth;
+      const vh = window.innerHeight;
+      const m = 10;
+      pop.style.left = "0px";
+      pop.style.top = "0px";
+      const pw = pop.offsetWidth;
+      const ph = pop.offsetHeight;
+      const cx = r.left + r.width / 2;
+      const left = Math.max(m, Math.min(vw - pw - m, cx - pw / 2));
+      const below = r.bottom + 12;
+      const above = r.top - 12 - ph;
+      // Prefer below; flip above when it would run off the bottom and there is room above.
+      const useAbove = below + ph > vh - m && above >= m;
+      const top = useAbove ? above : Math.min(below, Math.max(m, vh - ph - m));
+      pop.dataset.place = useAbove ? "above" : "below";
+      pop.style.left = `${Math.round(left)}px`;
+      pop.style.top = `${Math.round(top)}px`;
+      pop.style.setProperty("--ax", `${Math.round(Math.max(14, Math.min(pw - 14, cx - left)))}px`);
+    };
+    const close = () => {
+      window.clearTimeout(hideT);
+      if (open) open.setAttribute("aria-expanded", "false");
+      lit?.classList.remove("lit");
+      lit = null;
+      open = null;
+      pinned = false;
+      if (pop) pop.hidden = true;
+    };
+    const show = (w: HTMLElement, pin = false) => {
+      window.clearTimeout(hideT);
+      const d = GLOSS[w.dataset.g ?? ""];
+      if (!pop || !d) return;
+      if (open && open !== w) open.setAttribute("aria-expanded", "false");
+      open = w;
+      pinned = pin;
+      w.setAttribute("aria-expanded", "true");
+      const q = (c: string) => pop.querySelector<HTMLElement>(c)!;
+      q(".gp-w").textContent = w.firstChild?.textContent ?? "";
+      q(".gp-g").textContent = d.g;
+      // Glossary definitions read as definitions; Skeat's notes and introduction are labelled as such.
+      const kind = d.k ?? "def";
+      const dp = q(".gp-d");
+      dp.hidden = !d.d;
+      dp.dataset.kind = kind;
+      q(".gp-dl").textContent = kind === "note" ? "Skeat's note" : kind === "intro" ? "From Skeat's introduction" : "";
+      q(".gp-dt").textContent = d.d ?? "";
+      q(".gp-s1").textContent = d.s;
+      const lab = kind === "note" ? "Note" : kind === "intro" ? "Introduction" : "Definition";
+      q(".gp-s2").textContent = d.ds ? `${lab}: ${d.ds}` : "";
+      if (d.o) pop.dataset.ours = "";
+      else delete pop.dataset.ours;
+      const fig = figureOf(w);
+      if (fig) pop.dataset.fig = "";
+      else delete pop.dataset.fig;
+      if (lit !== fig) {
+        lit?.classList.remove("lit");
+        fig?.classList.add("lit");
+        lit = fig;
+      }
+      pop.hidden = false;
+      place();
+    };
+    const later = () => {
+      window.clearTimeout(hideT);
+      hideT = window.setTimeout(() => {
+        if (!pinned) close();
+      }, 180);
+    };
+    // Was this word's gloss already open (and pinned, or opened by touch) when the press began?
+    // Focus opens a gloss on press, so the click that follows must not read it as a second tap.
+    let pressWasOpen: boolean | null = null;
+    for (const w of words) {
+      w.addEventListener("pointerenter", (e) => {
+        if (e.pointerType === "mouse") show(w, pinned && open === w);
+      });
+      w.addEventListener("pointerleave", (e) => {
+        if (e.pointerType === "mouse" && !pinned) later();
+      });
+      w.addEventListener("pointerdown", (e) => {
+        pressWasOpen = open === w && (pinned || e.pointerType !== "mouse");
+      });
+      w.addEventListener("click", (e) => {
+        e.preventDefault();
+        // Touch / pen: a tap toggles. Mouse: a click pins the gloss open (or closes a pinned one).
+        const was = pressWasOpen ?? (open === w && pinned);
+        pressWasOpen = null;
+        if (was) close();
+        else show(w, true);
+      });
+      w.addEventListener("focus", () => {
+        if (open !== w) show(w, false);
+      });
+      w.addEventListener("blur", () => {
+        if (!pinned) later();
+      });
+      w.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          if (open === w && pinned) close();
+          else show(w, true);
+        } else if (e.key === "Escape" && open) {
+          e.preventDefault();
+          close();
+        }
+      });
+    }
+    pop?.addEventListener("pointerenter", () => window.clearTimeout(hideT));
+    pop?.addEventListener("pointerleave", (e) => {
+      if (e.pointerType === "mouse" && !pinned) later();
+    });
+    document.addEventListener("pointerdown", (e) => {
+      const t = e.target as Node;
+      if (open && !open.contains(t) && !pop?.contains(t)) close();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && open) close();
+    });
+    let raf = 0;
+    const follow = () => {
+      if (!open) return;
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        if (!open) return;
+        const r = open.getBoundingClientRect();
+        // Scrolled well away: let it go.
+        if (r.bottom < -40 || r.top > window.innerHeight + 40) close();
+        else place();
+      });
+    };
+    window.addEventListener("scroll", follow, { passive: true });
+    window.addEventListener("resize", follow);
+
+    // Show-all mode: interlinear glosses under every glossed word. Remembered per viewer.
+    const KEY = "treatise-gloss-all";
+    const allBtn = root.querySelector<HTMLButtonElement>(".gl-all");
+    const setAll = (on: boolean) => {
+      root.dataset.gloss = on ? "all" : "hover";
+      allBtn?.setAttribute("aria-pressed", String(on));
+      close();
+    };
+    try {
+      if (localStorage.getItem(KEY) === "1") setAll(true);
+    } catch {
+      /* storage unavailable */
+    }
+    allBtn?.addEventListener("click", () => {
+      const on = root.dataset.gloss !== "all";
+      setAll(on);
+      try {
+        localStorage.setItem(KEY, on ? "1" : "0");
+      } catch {
+        /* storage unavailable */
+      }
+      bodies.forEach(drawConst);
+    });
+
+    // Each section's paragraphs become a constellation strung down the left margin.
+    const SVGNS = "http://www.w3.org/2000/svg";
+    const drawConst = (body: HTMLElement) => {
+      const svg = body.querySelector<SVGSVGElement>(".t-const");
+      if (!svg) return;
+      svg.replaceChildren();
+      const box = body.getBoundingClientRect();
+      if (!box.width) return;
+      const pts: { x: number; y: number; first: boolean }[] = [];
+      const ps = [...body.querySelectorAll<HTMLElement>(".t-me > p")];
+      ps.forEach((p, i) => {
+        const r = p.getBoundingClientRect();
+        const lh = parseFloat(getComputedStyle(p).lineHeight) || 24;
+        pts.push({ x: i % 2 ? 11 : 4, y: r.top - box.top + Math.min(lh, 40) * 0.55, first: i === 0 });
+      });
+      if (!pts.length) return;
+      const path = document.createElementNS(SVGNS, "path");
+      path.setAttribute("d", pts.map((p, i) => `${i ? "L" : "M"}${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(""));
+      svg.appendChild(path);
+      for (const p of pts) {
+        const r = p.first ? 2.8 : 1.7;
+        const g = document.createElementNS(SVGNS, "circle");
+        g.setAttribute("class", "c-glow");
+        g.setAttribute("cx", p.x.toFixed(1));
+        g.setAttribute("cy", p.y.toFixed(1));
+        g.setAttribute("r", String(r * 3));
+        svg.appendChild(g);
+        const c = document.createElementNS(SVGNS, "circle");
+        c.setAttribute("class", "c-star gold");
+        c.setAttribute("cx", p.x.toFixed(1));
+        c.setAttribute("cy", p.y.toFixed(1));
+        c.setAttribute("r", String(r));
+        svg.appendChild(c);
+      }
+    };
+    const bodies = [...root.querySelectorAll<HTMLElement>(".t-body")];
+    const ro = new ResizeObserver((es) => es.forEach((e) => drawConst(e.target as HTMLElement)));
+    bodies.forEach((b) => ro.observe(b));
+    document.fonts?.ready.then(() => bodies.forEach(drawConst));
+
+    // Contents: join each part's stars with a faint line, and show the
+    // title of the star under the pointer / keyboard focus (or of the
+    // section being read) in the caption below the chart.
+    const drawBand = (band: HTMLElement) => {
+      const svg = band.querySelector<SVGSVGElement>(".toc-lines");
+      if (!svg) return;
+      const box = band.getBoundingClientRect();
+      const pts = [...band.querySelectorAll<HTMLElement>(".toc-star")].map((st) => {
+        const r = st.getBoundingClientRect();
+        return [r.left + r.width / 2 - box.left, r.top + r.height / 2 - box.top];
+      });
+      const path = document.createElementNS(SVGNS, "path");
+      // A new row starts a new stroke, so no line runs back across the band.
+      path.setAttribute(
+        "d",
+        pts.map(([x, y], i) => `${i && x > pts[i - 1][0] ? "L" : "M"}${x.toFixed(1)} ${y.toFixed(1)}`).join("")
+      );
+      svg.replaceChildren(path);
+    };
+    const bands = [...root.querySelectorAll<HTMLElement>(".toc-band")];
+    const bandRO = new ResizeObserver((es) => es.forEach((e) => drawBand(e.target as HTMLElement)));
+    bands.forEach((b) => bandRO.observe(b));
+    document.fonts?.ready.then(() => bands.forEach(drawBand));
+
+    const capK = root.querySelector<HTMLElement>(".toc-ck");
+    const capT = root.querySelector<HTMLElement>(".toc-ct");
+    let pointed: HTMLElement | null = null;
+    let reading: HTMLElement | null = null;
+    const showCaption = () => {
+      const a = pointed ?? reading;
+      if (!a || !capK || !capT) return;
+      capK.textContent = a.dataset.captionKicker ?? "";
+      capT.textContent = `${a.dataset.caption ?? ""}…`;
+    };
+    root.querySelectorAll<HTMLElement>(".toc-band a").forEach((a) => {
+      const on = () => {
+        pointed = a;
+        showCaption();
+      };
+      const off = () => {
+        if (pointed === a) {
+          pointed = null;
+          showCaption();
+        }
+      };
+      a.addEventListener("pointerenter", on);
+      a.addEventListener("focus", on);
+      a.addEventListener("pointerleave", off);
+      a.addEventListener("blur", off);
+    });
+
+    // Mark the section in view as active (window glow + contents star).
+    const links = new Map<string, HTMLElement>();
+    root.querySelectorAll<HTMLElement>(".toc-band [data-toc]").forEach((a) => links.set(a.dataset.toc!, a));
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          e.target.classList.toggle("active", e.isIntersecting);
+          const link = links.get(e.target.id);
+          link?.classList.toggle("active", e.isIntersecting);
+          if (e.isIntersecting && link) {
+            reading = link;
+            showCaption();
+          }
+        }
+      },
+      { rootMargin: "-35% 0px -45% 0px" }
+    );
+    root.querySelectorAll(".t-sec").forEach((s) => io.observe(s));
+  }
+</script>

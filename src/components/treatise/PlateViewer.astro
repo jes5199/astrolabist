@@ -1,0 +1,131 @@
+---
+// A button that opens a full-screen, zoomable view of a large static drawing (e.g. the whole back).
+// The image is an <img> (SVG as image: no scripts can run) and is only fetched when first opened.
+// Zoom: + / − / Fit buttons, ctrl/⌘ + wheel, pinch (two pointers); pan: drag or scroll.
+interface Props { src: string; button: string; title: string; caption?: string; width: number; height: number }
+const { src, button, title, caption, width, height } = Astro.props;
+const uid = `pv-${Math.random().toString(36).slice(2, 8)}`;
+---
+<div class="pv">
+  <button type="button" class="pv-open" aria-haspopup="dialog" aria-controls={uid}>{button}</button>
+  <dialog id={uid} class="pv-dlg" aria-label={title}>
+    <div class="pv-bar">
+      <p class="pv-title">{title}</p>
+      <div class="pv-tools">
+        <button type="button" data-z="out" aria-label="Zoom out">−</button>
+        <button type="button" data-z="fit">Fit</button>
+        <button type="button" data-z="in" aria-label="Zoom in">+</button>
+        <button type="button" data-z="close" class="pv-close" aria-label="Close">✕</button>
+      </div>
+    </div>
+    <div class="pv-stage" tabindex="0" aria-label="Drawing; drag or scroll to pan">
+      <img class="pv-img" data-src={src} data-w={width} data-h={height} alt={title} draggable="false" />
+    </div>
+    {caption && <p class="pv-cap">{caption}</p>}
+  </dialog>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".pv").forEach((root) => {
+    const open = root.querySelector<HTMLButtonElement>(".pv-open")!;
+    const dlg = root.querySelector<HTMLDialogElement>(".pv-dlg")!;
+    const stage = root.querySelector<HTMLElement>(".pv-stage")!;
+    const img = root.querySelector<HTMLImageElement>(".pv-img")!;
+    // An SVG without width/height has no reliable natural size as an <img>, so use the declared size.
+    const NW = Number(img.dataset.w), NH = Number(img.dataset.h);
+    let scale = 1, fit = 1;
+    const MAX = 6; // max zoom, relative to fit
+    const apply = (s: number, cx?: number, cy?: number) => {
+      const r = stage.getBoundingClientRect();
+      const ox = (cx ?? r.width / 2) + stage.scrollLeft, oy = (cy ?? r.height / 2) + stage.scrollTop;
+      const k = Math.min(MAX * fit, Math.max(fit, s)) / scale;
+      scale *= k;
+      img.style.width = `${NW * scale}px`;
+      stage.scrollLeft = ox * k - (cx ?? r.width / 2);
+      stage.scrollTop = oy * k - (cy ?? r.height / 2);
+    };
+    const doFit = () => {
+      const r = stage.getBoundingClientRect();
+      fit = Math.min(r.width / NW, r.height / NH);
+      scale = fit; img.style.width = `${NW * fit}px`;
+      stage.scrollLeft = 0; stage.scrollTop = 0;
+    };
+    open.addEventListener("click", () => {
+      dlg.showModal();
+      if (!img.src) { img.addEventListener("load", doFit, { once: true }); img.src = img.dataset.src!; }
+      else doFit();
+      stage.focus();
+    });
+    root.querySelectorAll<HTMLButtonElement>("[data-z]").forEach((b) =>
+      b.addEventListener("click", () => {
+        const z = b.dataset.z;
+        if (z === "close") dlg.close();
+        else if (z === "fit") doFit();
+        else apply(scale * (z === "in" ? 1.5 : 1 / 1.5));
+      })
+    );
+    stage.addEventListener("wheel", (e) => {
+      if (!(e.ctrlKey || e.metaKey)) return;
+      e.preventDefault();
+      const r = stage.getBoundingClientRect();
+      apply(scale * Math.exp(-e.deltaY * 0.002), e.clientX - r.left, e.clientY - r.top);
+    }, { passive: false });
+    stage.addEventListener("keydown", (e) => {
+      if (e.key === "+" || e.key === "=") apply(scale * 1.25);
+      else if (e.key === "-") apply(scale / 1.25);
+      else if (e.key === "0") doFit();
+    });
+    // drag to pan (mouse) and pinch to zoom (two touches)
+    const pts = new Map<number, { x: number; y: number }>();
+    let pinch0 = 0, scale0 = 1;
+    stage.addEventListener("pointerdown", (e) => { stage.setPointerCapture(e.pointerId); pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (pts.size === 2) { const [a, b] = [...pts.values()]; pinch0 = Math.hypot(a.x - b.x, a.y - b.y); scale0 = scale; } });
+    stage.addEventListener("pointermove", (e) => {
+      const p = pts.get(e.pointerId); if (!p) return;
+      if (pts.size === 1) { stage.scrollLeft -= e.clientX - p.x; stage.scrollTop -= e.clientY - p.y; }
+      pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (pts.size === 2 && pinch0) {
+        const [a, b] = [...pts.values()]; const r = stage.getBoundingClientRect();
+        apply(scale0 * Math.hypot(a.x - b.x, a.y - b.y) / pinch0, (a.x + b.x) / 2 - r.left, (a.y + b.y) / 2 - r.top);
+      }
+    });
+    const up = (e: PointerEvent) => { pts.delete(e.pointerId); if (pts.size < 2) pinch0 = 0; };
+    stage.addEventListener("pointerup", up); stage.addEventListener("pointercancel", up);
+    dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
+    window.addEventListener("resize", () => { if (dlg.open) doFit(); });
+  });
+</script>
+
+<style>
+  .pv { margin: 1.2rem 0 0.4rem; }
+  .pv-open {
+    font: 600 0.78rem/1 var(--me-font, serif); letter-spacing: 0.22em; text-transform: uppercase;
+    color: #f5dc9b; background: rgba(8, 12, 40, 0.92); border: 1px solid rgba(236, 201, 120, 0.55);
+    border-radius: 999px; padding: 0.7rem 1.1rem; cursor: pointer;
+  }
+  .pv-open:hover, .pv-open:focus-visible { border-color: #ecc978; outline: none; box-shadow: 0 0 0 2px rgba(236, 201, 120, 0.35); }
+  .pv-dlg {
+    width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0;
+    background: #050816; color: #e4e7f3; display: none; flex-direction: column;
+  }
+  .pv-dlg[open] { display: flex; }
+  .pv-dlg::backdrop { background: rgba(0, 0, 0, 0.7); }
+  .pv-bar { display: flex; gap: 1rem; align-items: center; justify-content: space-between; padding: 0.6rem 1rem; border-bottom: 1px solid rgba(236, 201, 120, 0.25); }
+  .pv-title { margin: 0; flex: 1 1 10rem; min-width: 0; font: 0.95rem/1.3 var(--modern-font, serif); color: #f5dc9b; }
+  @media (max-width: 600px) {
+    .pv-bar { flex-wrap: wrap; gap: 0.5rem; padding: 0.5rem 0.75rem; }
+    .pv-title { font-size: 0.82rem; flex-basis: 100%; }
+    .pv-tools { width: 100%; justify-content: space-between; }
+    .pv-cap { max-height: 16vh; font-size: 0.78rem; }
+  }
+  .pv-tools { display: flex; gap: 0.4rem; flex-shrink: 0; }
+  .pv-tools button {
+    min-width: 2.6rem; height: 2.6rem; font: 600 1rem/1 system-ui, sans-serif; color: #f5dc9b;
+    background: #0b1236; border: 1px solid rgba(236, 201, 120, 0.45); border-radius: 0.5rem; cursor: pointer;
+  }
+  .pv-tools button:focus-visible { outline: 2px solid #ecc978; outline-offset: 2px; }
+  .pv-stage { flex: 1; overflow: auto; touch-action: none; cursor: grab; display: grid; place-items: start center; }
+  .pv-stage:active { cursor: grabbing; }
+  .pv-img { display: block; max-width: none; min-width: 0; user-select: none; } /* global.css sets img { min-width: 100% } */
+  .pv-cap { margin: 0; padding: 0.6rem 1rem 0.9rem; font: 0.85rem/1.45 var(--modern-font, serif); color: #cfd5ec; border-top: 1px solid rgba(236, 201, 120, 0.2); max-height: 22vh; overflow: auto; }
+</style>

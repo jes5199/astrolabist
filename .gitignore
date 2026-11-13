@@ -24,3 +24,5 @@ pnpm-debug.log*
 .idea/
 
 node_modules
+# python bytecode (tools/)
+__pycache__/
