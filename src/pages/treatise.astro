@@ -1316,6 +1316,13 @@ const tocParts = [
     aspect-ratio: auto;
     height: 88%;
   }
+  /* Phones: large windows go taller (3:4); the scenes read their box's aspect and stack
+     their step list under the instrument (astrolabe-video's stack mode). */
+  @media (max-width: 599.98px) {
+    .t-sec .t-aside[data-size="large"] .win {
+      aspect-ratio: 3 / 4;
+    }
+  }
   .win-ring {
     position: absolute;
     inset: 0;
