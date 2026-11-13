@@ -1,0 +1,146 @@
+---
+/**
+ * Lazy scene wrapper.
+ *
+ * Renders a static poster (inline SVG). If `name` is set, a module at
+ * /scenes/<name>.js is imported when the wrapper comes within 200px of the
+ * viewport. Module contract:
+ *
+ *   export function mount(el)   // build the scene inside `el` (called once per wrapper)
+ *   export function start(el)   // begin animating that mounted instance
+ *   export function stop(el)    // pause it
+ *
+ * start() runs while the wrapper is on screen and stop() when it leaves.
+ * start() is skipped entirely under `prefers-reduced-motion: reduce`, so
+ * mount() should leave a sensible still frame. If the module is missing or
+ * throws, the poster stays.
+ */
+interface Props {
+  name?: string;
+  label?: string;
+}
+const { name, label = "Figure" } = Astro.props;
+---
+
+<figure class="scene" data-scene={name} aria-label={label}>
+  <svg
+    class="scene-poster"
+    viewBox="0 0 200 200"
+    role="img"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <g fill="none" stroke="currentColor">
+      <circle cx="100" cy="100" r="88" stroke-width="3"></circle>
+      <circle cx="100" cy="100" r="78" stroke-width="1"></circle>
+      <circle cx="100" cy="100" r="52" stroke-width="1" stroke-dasharray="2 4"
+      ></circle>
+      <circle cx="100" cy="100" r="30" stroke-width="1"></circle>
+      <circle cx="100" cy="6" r="6" stroke-width="2"></circle>
+      <line x1="100" y1="12" x2="100" y2="188" stroke-width="1"></line>
+      <line x1="22" y1="100" x2="178" y2="100" stroke-width="0.6"></line>
+      <line
+        x1="38"
+        y1="162"
+        x2="162"
+        y2="38"
+        stroke-width="2.5"
+        stroke-linecap="round"></line>
+    </g>
+    <circle cx="100" cy="100" r="3" fill="currentColor"></circle>
+  </svg>
+  <div class="scene-stage"></div>
+</figure>
+
+<style>
+  .scene {
+    position: relative;
+    margin: 0;
+    aspect-ratio: 1;
+    width: 100%;
+    color: var(--header-color);
+  }
+  .scene-poster,
+  .scene-stage {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .scene-poster {
+    opacity: 0.55;
+    transition: opacity 0.4s;
+  }
+  .scene.mounted .scene-poster {
+    opacity: 0;
+  }
+</style>
+
+<script>
+  type SceneModule = {
+    mount: (el: HTMLElement) => void;
+    start?: (el: HTMLElement) => void;
+    stop?: (el: HTMLElement) => void;
+  };
+
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  function setup(fig: HTMLElement) {
+    const name = fig.dataset.scene;
+    const stage = fig.querySelector<HTMLElement>(".scene-stage");
+    if (!name || !stage || !/^[a-z0-9-]+$/.test(name)) return;
+
+    let mod: SceneModule | null = null;
+    let loading = false;
+    let visible = false;
+    let running = false;
+
+    const sync = () => {
+      if (!mod) return;
+      const want = visible && !reduce.matches;
+      if (want && !running) {
+        mod.start?.(stage);
+        running = true;
+      } else if (!want && running) {
+        mod.stop?.(stage);
+        running = false;
+      }
+    };
+
+    const load = async () => {
+      if (loading) return;
+      loading = true;
+      try {
+        const m = (await import(
+          /* @vite-ignore */ `/scenes/${name}.js`
+        )) as SceneModule;
+        if (typeof m.mount !== "function") return;
+        m.mount(stage);
+        mod = m;
+        fig.classList.add("mounted");
+        sync();
+      } catch (err) {
+        // Missing or broken scene: keep the poster.
+        console.warn(`scene "${name}" not loaded`, err);
+      }
+    };
+
+    new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) load();
+      },
+      { rootMargin: "200px" }
+    ).observe(fig);
+
+    new IntersectionObserver((entries) => {
+      for (const e of entries) visible = e.isIntersecting;
+      sync();
+    }).observe(fig);
+
+    reduce.addEventListener?.("change", sync);
+  }
+
+  document
+    .querySelectorAll<HTMLElement>(".scene[data-scene]")
+    .forEach(setup);
+</script>

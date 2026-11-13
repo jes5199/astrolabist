@@ -27,6 +27,21 @@ const posts = defineCollection({
   }),
 });
 
+// Chaucer, A Treatise on the Astrolabe (Skeat's text). See treatise/_SOURCE.md.
+const treatise = defineCollection({
+  type: "content",
+  schema: z.object({
+    order: z.number(),
+    part: z.enum(["Prologue", "Part I", "Part II"]),
+    section: z.string(),
+    heading: z.string().optional(),
+    latin: z.string().optional(),
+    scene: z.string().optional(),
+    modern: z.string().optional(),
+  }),
+});
+
 export const collections = {
   posts,
+  treatise,
 };

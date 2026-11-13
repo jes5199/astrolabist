@@ -1,0 +1,531 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Scene from "../components/Scene.astro";
+import { SITE_TITLE } from "../consts";
+
+const entries = (await getCollection("treatise")).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+// Part-level rubrics from Skeat's text (see src/content/treatise/_SOURCE.md).
+const partRubric: Record<string, string> = {
+  "Part I": "HERE BIGINNETH THE DESCRIPCION OF THE ASTROLABIE.",
+  "Part II": "HERE BIGINNEN THE CONCLUSIONS OF THE ASTROLABIE.",
+};
+
+const partSlug: Record<string, string> = {
+  "Part I": "part-1",
+  "Part II": "part-2",
+};
+const anchor = (part: string, section: string) =>
+  part === "Prologue" ? "prologue" : `${partSlug[part]}-${section}`;
+
+const sections = await Promise.all(
+  entries.map(async (entry) => {
+    const { Content } = await entry.render();
+    const { part, section } = entry.data;
+    return { entry, Content, id: anchor(part, section) };
+  })
+);
+
+const parts = ["Prologue", "Part I", "Part II"].map((name) => ({
+  name,
+  items: sections.filter((s) => s.entry.data.part === name),
+}));
+---
+
+<BaseLayout
+  title={`A Treatise on the Astrolabe - ${SITE_TITLE}`}
+  description="Geoffrey Chaucer, A Treatise on the Astrolabe (c. 1391), in W. W. Skeat's Middle English text (1894)."
+>
+  <div class="treatise" data-view="both">
+    <header class="t-head">
+      <h1>A Treatise on the Astrolabe</h1>
+      <p class="t-intro">
+        Geoffrey Chaucer, <cite>A Treatise on the Astrolabe</cite> (c. 1391).
+        Middle English text: W. W. Skeat (1894).
+      </p>
+    </header>
+
+    <nav class="t-toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        {
+          parts.map((p) =>
+            p.name === "Prologue" ? (
+              p.items.map((s) => (
+                <li>
+                  <a href={`#${s.id}`} data-toc={s.id}>
+                    Prologue
+                  </a>
+                </li>
+              ))
+            ) : (
+              <li>
+                <span class="toc-part">{p.name}</span>
+                <ol>
+                  {p.items.map((s) => (
+                    <li>
+                      <a href={`#${s.id}`} data-toc={s.id}>
+                        <span class="toc-num">§ {s.entry.data.section}</span>
+                        {s.entry.data.heading && (
+                          <span class="toc-rubric">{s.entry.data.heading}</span>
+                        )}
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </li>
+            )
+          )
+        }
+      </ol>
+    </nav>
+
+    <fieldset class="t-view">
+      <legend>Show</legend>
+      <input type="radio" name="t-view" id="t-view-me" value="me" />
+      <label for="t-view-me">Middle English</label>
+      <input type="radio" name="t-view" id="t-view-modern" value="modern" />
+      <label for="t-view-modern">Modern</label>
+      <input type="radio" name="t-view" id="t-view-both" value="both" checked />
+      <label for="t-view-both">Both</label>
+    </fieldset>
+
+    <div class="t-cols" aria-hidden="true">
+      <span>Middle English</span>
+      <span>Modern English</span>
+      <span>Figure</span>
+    </div>
+
+    {
+      parts.map((p) => (
+        <section class="t-part" aria-label={p.name}>
+          {p.name !== "Prologue" && (
+            <header class="t-part-head">
+              <h2>{p.name}</h2>
+              <p class="t-part-rubric">{partRubric[p.name]}</p>
+            </header>
+          )}
+          {p.items.map(({ entry, Content, id }) => (
+            <article class="t-sec" id={id}>
+              <header class="t-sec-head">
+                <h3>
+                  {entry.data.part === "Prologue" ? (
+                    "Prologue"
+                  ) : (
+                    <>
+                      <span class="t-sec-num">§ {entry.data.section}.</span>{" "}
+                      {entry.data.heading}
+                    </>
+                  )}
+                </h3>
+                {entry.data.latin && (
+                  <p class="t-latin" lang="la">
+                    {entry.data.latin}
+                  </p>
+                )}
+              </header>
+              <div class="t-scene">
+                <Scene
+                  name={entry.data.scene}
+                  label={`Figure for ${entry.data.part}${entry.data.part === "Prologue" ? "" : ` § ${entry.data.section}`}`}
+                />
+              </div>
+              <div class="t-me" lang="enm">
+                <Content />
+              </div>
+              <div class="t-modern">
+                {entry.data.modern ? (
+                  <p>{entry.data.modern}</p>
+                ) : (
+                  <p class="t-pending">Modern rendering — pending</p>
+                )}
+              </div>
+            </article>
+          ))}
+        </section>
+      ))
+    }
+  </div>
+</BaseLayout>
+
+<style is:global>
+  @font-face {
+    font-family: "Junicode 2";
+    src: url("/fonts/treatise/junicode/Junicode2-Roman.woff2") format("woff2");
+    font-weight: 400 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Texturina";
+    src: url("/fonts/treatise/texturina/Texturina-VF.woff2") format("woff2");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "EB Garamond";
+    src: url("/fonts/treatise/ebgaramond/EBGaramond-VF.woff2") format("woff2");
+    font-weight: 400 800;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  /* Let this page use the full width BaseLayout gives it. */
+  main:has(> .treatise) {
+    max-width: 1240px;
+  }
+  @media (min-width: 1000px) {
+    .page-padding:has(.treatise) {
+      padding-left: 48px;
+      padding-right: 48px;
+    }
+  }
+</style>
+
+<style>
+  .treatise {
+    --rubric: var(--text-hover);
+    --gilt: var(--pull-quote-color);
+    --me-font: "Junicode 2", "Junicode", Georgia, serif;
+    --black-font: "Texturina", var(--me-font);
+    --modern-font: "EB Garamond", Georgia, serif;
+    position: relative;
+    z-index: 1;
+  }
+
+  .t-head h1 {
+    font-family: var(--black-font);
+    font-weight: 600;
+    font-variation-settings: "opsz" 72;
+    color: var(--rubric);
+    margin-bottom: 0.5rem;
+  }
+  .t-intro {
+    font-family: var(--modern-font);
+    font-size: 1.25rem;
+    margin-top: 0;
+  }
+
+  /* Contents */
+  .t-toc {
+    border-top: 1px solid var(--tag-border);
+    border-bottom: 1px solid var(--tag-border);
+    padding: 0.5rem 0 1rem;
+    margin: 1.5rem 0 2rem;
+    max-width: 44rem;
+  }
+  .t-toc h2 {
+    font-family: var(--black-font);
+    font-size: 1.25rem;
+    color: var(--rubric);
+    margin: 0.5rem 0;
+  }
+  .t-toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .t-toc ol ol {
+    padding-left: 1.25rem;
+  }
+  .t-toc li {
+    margin: 0.2rem 0;
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+  .toc-part {
+    font-family: var(--black-font);
+    font-weight: 600;
+  }
+  .t-toc a {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    gap: 0.6rem;
+    min-width: 0;
+  }
+  .t-toc a:hover,
+  .t-toc a.active {
+    color: var(--rubric);
+  }
+  .toc-num {
+    flex: none;
+    font-variant-numeric: oldstyle-nums;
+  }
+  .toc-rubric {
+    font-family: var(--me-font);
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+  }
+
+  /* Parts and sections */
+  .t-part-head h2 {
+    font-family: var(--black-font);
+    color: var(--rubric);
+    font-weight: 600;
+    margin: 3rem 0 0.25rem;
+  }
+  .t-part-rubric {
+    font-family: var(--me-font);
+    color: var(--rubric);
+    letter-spacing: 0.06em;
+    font-size: 0.95rem;
+    margin: 0 0 1.5rem;
+  }
+
+  .t-sec {
+    padding: 1.5rem 0 2rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--tag-border) 35%, transparent);
+    scroll-margin-top: 1rem;
+  }
+  .t-sec-head h3 {
+    font-family: var(--black-font);
+    font-weight: 500;
+    color: var(--rubric);
+    font-size: 1.3rem;
+    line-height: 1.35;
+    letter-spacing: 0.02em;
+    margin: 0 0 0.5rem;
+  }
+  .t-sec-num {
+    font-weight: 700;
+  }
+  .t-latin {
+    font-family: var(--me-font);
+    font-style: normal;
+    font-size: 0.85rem;
+    line-height: 1.45;
+    letter-spacing: 0.04em;
+    color: var(--header-color);
+    margin: 0 0 1rem;
+  }
+
+  .t-me {
+    font-family: var(--me-font);
+    font-weight: 400;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    hyphens: manual;
+  }
+  .t-me :global(p) {
+    margin: 0 0 1em;
+  }
+  .t-me :global(p:first-child::first-letter) {
+    font-family: var(--black-font);
+    font-weight: 700;
+    font-variation-settings: "opsz" 72;
+    color: var(--rubric);
+    float: left;
+    font-size: 3.6em;
+    line-height: 0.85;
+    padding: 0.08em 0.1em 0 0;
+    margin-right: 0.04em;
+    text-shadow: 0.03em 0.03em 0 var(--gilt);
+  }
+
+  .t-modern {
+    font-family: var(--modern-font);
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+  .t-pending {
+    margin: 0;
+    padding: 1rem 1.1rem;
+    border: 1px dashed var(--tag-border);
+    border-radius: 4px;
+    font-style: normal;
+    font-variant: small-caps;
+    letter-spacing: 0.05em;
+    opacity: 0.7;
+  }
+
+  .t-scene :global(.scene:not([data-scene])) {
+    opacity: 0.5;
+  }
+
+  /* View toggle (mobile) */
+  .t-view {
+    border: 0;
+    margin: 0 0 1rem;
+    padding: 0;
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--theme-background);
+    border-bottom: 1px solid var(--tag-border);
+  }
+  .t-view legend {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+  .t-view input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .t-view label {
+    flex: 1;
+    text-align: center;
+    padding: 0.6rem 0.25rem 0.5rem;
+    font-size: 0.95rem;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+  }
+  .t-view input:checked + label {
+    color: var(--rubric);
+    border-bottom-color: var(--rubric);
+  }
+  .t-view input:focus-visible + label {
+    outline: 2px solid var(--rubric);
+    outline-offset: -2px;
+  }
+
+  .t-cols {
+    display: none;
+  }
+
+  /* Mobile: one column, scene inline above the passage. */
+  @media (max-width: 999.98px) {
+    .t-sec {
+      display: flex;
+      flex-direction: column;
+    }
+    .t-sec-head {
+      order: 1;
+    }
+    .t-scene {
+      order: 2;
+      max-width: 16rem;
+      width: 70%;
+      margin: 0 auto 1rem;
+    }
+    .t-scene:not(:has(.scene[data-scene])) {
+      display: none;
+    }
+    .t-me {
+      order: 3;
+    }
+    .t-modern {
+      order: 4;
+    }
+    .treatise[data-view="both"] .t-modern {
+      border-top: 1px solid color-mix(in srgb, var(--tag-border) 35%, transparent);
+      padding-top: 1rem;
+    }
+    .treatise[data-view="me"] .t-modern,
+    .treatise[data-view="modern"] .t-me {
+      display: none;
+    }
+  }
+
+  /* Desktop: Middle English | modern | sticky scene. */
+  @media (min-width: 1000px) {
+    .t-view {
+      display: none;
+    }
+    .t-cols,
+    .t-sec {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) 15rem;
+      column-gap: 2.5rem;
+    }
+    .t-cols {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: var(--theme-background);
+      border-bottom: 1px solid var(--tag-border);
+      padding: 0.5rem 0;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--header-color);
+    }
+    .t-sec {
+      grid-template-areas:
+        "head head scene"
+        "me modern scene";
+      grid-template-rows: auto 1fr;
+    }
+    .t-sec-head {
+      grid-area: head;
+    }
+    .t-me {
+      grid-area: me;
+    }
+    .t-modern {
+      grid-area: modern;
+    }
+    .t-scene {
+      grid-area: scene;
+      align-self: start;
+      position: sticky;
+      top: 3.5rem;
+      opacity: 0.45;
+      transition: opacity 0.4s;
+    }
+    .t-sec.active .t-scene {
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  const root = document.querySelector<HTMLElement>(".treatise");
+  if (root) {
+    // View toggle, remembered per viewer.
+    const KEY = "treatise-view";
+    const radios = root.querySelectorAll<HTMLInputElement>(
+      'input[name="t-view"]'
+    );
+    const apply = (v: string) => {
+      if (!["me", "modern", "both"].includes(v)) return;
+      root.dataset.view = v;
+      radios.forEach((r) => (r.checked = r.value === v));
+    };
+    try {
+      const saved = localStorage.getItem(KEY);
+      if (saved) apply(saved);
+    } catch {
+      /* storage unavailable */
+    }
+    radios.forEach((r) =>
+      r.addEventListener("change", () => {
+        apply(r.value);
+        try {
+          localStorage.setItem(KEY, r.value);
+        } catch {
+          /* storage unavailable */
+        }
+      })
+    );
+
+    // Mark the section in view as active (scene panel + contents link).
+    const links = new Map<string, HTMLElement>();
+    root
+      .querySelectorAll<HTMLElement>("[data-toc]")
+      .forEach((a) => links.set(a.dataset.toc!, a));
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          e.target.classList.toggle("active", e.isIntersecting);
+          links.get(e.target.id)?.classList.toggle("active", e.isIntersecting);
+        }
+      },
+      { rootMargin: "-35% 0px -45% 0px" }
+    );
+    root.querySelectorAll(".t-sec").forEach((s) => io.observe(s));
+  }
+</script>
