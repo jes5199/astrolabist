@@ -145,6 +145,7 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | `north`, `south`, `east`, `west` (on the ground) | treatise-p2-29-four-quarters.js | Part II §29 (astrolabe-video 5dfc993). Instrument version (figure version possible later). Quarters named on the ground since the text does not settle which face lies up when "couched"; it does settle that the ring end lies south. | **decided: modern** |
 | `on the meridian`, `the sun's way`, `planet 3° north`, `planet 2° south`, scale `30°`–`45°` | treatise-p2-30-planet-latitude.js | Part II §30 (astrolabe-video 308c33b). Modern; illustrative planets (no specific planet named). | **decided: modern** |
 | `midsummer`, `equinox`, `midwinter`, `42° north of east`, `due east` (was `very east`; applied, astrolabe-video 8eec225), `42° south of east` | treatise-p2-31-sunrise-azimuth.js | Part II §31 (astrolabe-video 1ce3664). Modern per tg 17787; "very east" is Chaucer's phrase, so it becomes "due east". | **decided: modern** |
+| `3 hours after midday`, `52° west of south` | treatise-p2-32-conjunction.js | Part II §32 (astrolabe-video 793a8af). Modern. The conjunction hour is our illustrative choice (the text gives none), on Chaucer's 12 March. | **decided: modern**; hour choice provisional |
 
 ## Not on the page
 
