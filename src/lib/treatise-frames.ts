@@ -91,6 +91,9 @@ export const SCENE_KIND: Record<string, SceneKind> = {
   "treatise-p2-36-houses-ink": "I",
   "treatise-p2-37-houses-label-ink": "I",
   "treatise-p2-38-meridian-line": "F",
+  "treatise-p2-39-town-meridians": "S",
+  "treatise-p2-41-tower": "F",
+  "treatise-p2-42-two-stations": "F",
 };
 
 // Night-style modules that are not sky scenes but still want the plain round rim.

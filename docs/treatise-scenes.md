@@ -83,7 +83,7 @@ Kinds:
 | 62 | II §37 houses another way | The four angles | I | #61 | 1–2 h | ink pre-build held: astrolabe-video 7ec8c51 (treatise-p2-37-houses-label-ink.js; gates clean; not in the page tree until jes rules on ink) |
 | 63 | II §38 meridian line on the ground | A metal plate, a pin, the sun's shadow marking the meridian | F | rig, sky, #54's ground | 1 day+ | |
 | 64 | II §39 meridians and longitudes of towns | Cities on their meridians *(town names: ledger)* | S | sky | ½ day | |
-| 65 | II §40 rising of a planet | A planet's rising degree | I | plate, rete | 1–2 h | |
+| 65 | II §40 rising of a planet | A planet's rising degree | I | plate, rete | 1–2 h || ink pre-build held: astrolabe-video b4fd958 (treatise-p2-40-planet-rising-ink.js; gates clean; FLAG: Chaucer's 14° does not reproduce on a 52° plate, construction gives Pisces 9°, so the degree is ringed, not named; Venus example not drawn) |
 | 66 | II §41 height of a tower, umbra recta | Lewis (or Chaucer) sighting a tower top through the rule; the shadow square read *(the tower prop and a sighting pose)* | F | rig, tower (new), 47869 backSquare | 1 day+ | |
 | 67 | II §41a, §41b (spurious) | Same tower, other points of the square | — | #66 | — | |
 | 68 | II §42 umbra versa | Can't reach the tower's foot: two stations | F | #66 | ½ day | |
