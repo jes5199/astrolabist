@@ -136,6 +136,7 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | `62.1°`, `38.0°`, `declination 24.1° north` | treatise-p2-20-declination.js | Part II §20 (astrolabe-video 6d31e3d). Modern. 24.1° is the 47869 plate's own obliquity; Chaucer gives Ptolemy's 23°50′ in I §17. | **decided: modern** |
 | `equator`, `zenith`, `north`, `pole`, `52°` ×2, `latitude 52°` | treatise-p2-21-plate-latitude.js | Part II §21 (astrolabe-video d9c5279). Modern. | **decided: modern** |
 | `N`, `S`, `pole`, `zenith`, `equator`, `51°50′` ×2, `38°10′` ×2 | treatise-p2-22-oxford.js | Part II §22 (astrolabe-video 512e17c). Modern labels; the measures are Chaucer's own figures for Oxford. Note: the plate scenes use 52° (the 47869 drawing's round figure). | **decided: modern** |
+| `A`, `F` (Chaucer's letters), `north`, `81°50′`, `21°50′`, `pole 51°50′` | treatise-p2-23-pole-star.js | Part II §23 (astrolabe-video 4532b23). Sky version; a figure-on-a-winter-night version is a possible later upgrade. | **decided: modern** |
 
 ## Not on the page
 
