@@ -1,260 +1,127 @@
-// A Treatise on the Astrolabe, Part II, 2: "To knowe the altitude of the sonne".
+// A Treatise on the Astrolabe, Part II, 2: "Put the ring of thyn Astrolabie up-on thy right thoumbe, and turne thy lift
+// syde agayn the light of the sonne. And remeve thy rewle up and doun, til that the stremes of the sonne shyne thorgh
+// bothe holes of thy rewle. Loke thanne how many degrees thy rewle is areised fro the litel crois up-on thyn est line,
+// and tak ther the altitude of thy sonne."
 // Scene contract (astrolabist, src/components/Scene.astro): mount(el) once, then start(el) / stop(el).
 //
-// Two views of one instrument, turning in step.  Left: the back, face on, hanging from its ring; the rule
-// (alidade) is raised towards the sun and its end reads the altitude on the rim.  Right: the same instrument
-// turned on its vertical axis, so the two sights are seen standing off the rule.  There is no beam: what
-// you see when you really do this is the shadow of the upper sight falling on the lower one, with a spot of
-// light from the upper hole that you bring onto the lower hole.  The spot's place is computed from the
-// rule's angle and the sun's altitude, 25 1/2 degrees, Chaucer's own example (12 March 1391).
-//
-// Original line work: the outlines are those of our constructed drawing of Oxford inv. 47869 (shared module),
-// the scales and the projection are computed here.  COLOURED WOODCUT on vellum (jes tg 17847), replacing
-// treatise-p2-2-altitude.js: cut and washed by lib/woodcut.js; the shadow and the holes in ink, the sun ochre, the
-// reading in the printer's red.  Nothing is traced.
+// v2, A LARGE WINDOW, 3:2 (viewBox -150 -100 300 200), as II 3 v2 (jes tg 17917): Chaucer's four steps one at a time,
+// listed beside the instrument, the step being done in red.  One view only (the old scene showed two at once): the
+// back, hanging from the ring; the sun off to its east side (the little cross is at the viewer's right on this back),
+// at Chaucer's 25 1/2 degrees (12 March 1391).  The rule is moved up and down; only when it lies true does the beam
+// pass both holes; then the degrees are counted up from the cross.  COLOURED WOODCUT on vellum: shared lib/back-ink.js
+// (our constructed drawing of Oxford inv. 47869).  Nothing is traced.
 
 import A from "./lib/astrolabe-47869.js";
-import { woodcut, RED, VELLUM, WASH } from "./lib/woodcut.js";
+import { back, node, f, PIVOT, T, SILVER, NIGHT, VELLUM, WASH } from "./lib/back-ink.js";
 
-const NS = "http://www.w3.org/2000/svg";
 const instances = new WeakMap();
+const LOOP = 22000;
+const STILL = 17000; // ms: the beam through both holes, 25 1/2 counted
+const C = { x: 40, y: 22, k: 0.62 };
+const W = (px) => f(px / C.k);
 const RAD = Math.PI / 180;
+const ALT = A.morning.sunAlt; // 25.5
+const SUN = [C.x + 106 * Math.cos(ALT * RAD), C.y - 106 * Math.sin(ALT * RAD)];
+const STEPS = [
+  { t: 0.5, lines: ["the ring on your", "right thumb"] },
+  { t: 4.0, lines: ["your left side", "toward the sun"] },
+  { t: 7.4, lines: ["move the rule until the", "sun shines through", "both holes"] },
+  { t: 13.4, lines: ["count the degrees up", "from the little cross:", "25½°"] },
+];
+const END = 20.0;
 
-const SUN_ALT = 25.5; // degrees
-const SUN = [-86, -12.7]; // the sun's place in the window
-const FLAT = { x: -30, y: 14, k: 0.4 }; // face-on copy: centre, scale (limb radius 100 -> 36); the sun lies on its 25 1/2 degree line
-const TURN = { x: 50, y: 24, k: 0.55, tilt: 64 }; // turned copy
-const CT = Math.cos(TURN.tilt * RAD);
-const ST = Math.sin(TURN.tilt * RAD);
-const VANE = { at: 75.5, half: 13.9, tall: 30, hole: 17 }; // along the rule, half width, height, hole height
-const THICK = 7; // the body's thickness, limb radius 100
-const NIGHT = VELLUM; // the ground behind a part
-const DARK = "currentColor"; // shadow and holes: ink
-const SILVER = RED;
-const LIGHT = "#fffaf0"; // the sun's spot: paper left bare and bright
-let WC = null; // the woodcut tools, in instrument units at about the copies' scale (set in mount)
-const LOOP = 15000; // ms
-
-function node(tag, attrs, parent) {
-  const n = document.createElementNS(NS, tag);
-  for (const k in attrs) n.setAttribute(k, attrs[k]);
-  if (parent) parent.appendChild(n);
-  return n;
+const ease = (u) => (u < 0 ? 0 : u > 1 ? 1 : u * u * (3 - 2 * u));
+const span = (t, a, b) => ease((t - a) / (b - a));
+// the rule's altitude by time: up past it, down below it, up to it
+function ruleAt(t) {
+  if (t < 7.8) return 0;
+  if (t < 9.4) return 40 * span(t, 7.8, 9.4);
+  if (t < 10.8) return 40 - 25 * span(t, 9.4, 10.8);
+  if (t < END + 0.8) return 15 + (ALT - 15) * span(t, 10.8, 12.2);
+  return ALT * (1 - span(t, END + 0.8, END + 1.8));
 }
-const f = (n) => (Math.round(n * 100) / 100).toString();
-
-// the back's scales as line work, limb radius 100, centre (0, 0)
-function back(parent, bold) {
-  const T = A.backTiers;
-  const g = node("g", { fill: "none", stroke: "currentColor", "vector-effect": "non-scaling-stroke", filter: WC.rough }, parent);
-  const ring = (r, w, o) =>
-    node("circle", { r: f(r), "stroke-width": w * 1.5, opacity: Math.min(1, o + 0.2), "vector-effect": "non-scaling-stroke" }, g);
-  node("circle", { r: 100, fill: NIGHT, "stroke-width": bold * 1.5, "vector-effect": "non-scaling-stroke" }, g);
-  const ann = (r0, r1) => `M0 ${-r1}A${r1} ${r1} 0 1 1 0 ${r1}A${r1} ${r1} 0 1 1 0 ${-r1}ZM0 ${-r0}A${r0} ${r0} 0 1 1 0 ${r0}A${r0} ${r0} 0 1 1 0 ${-r0}Z`;
-  node("path", WC.wash({ d: ann(T.degrees, T.border), "fill-rule": "evenodd", fill: WASH.ochre, "fill-opacity": 0.6 }), g);
-  node("path", WC.wash({ d: ann(T.signs, T.zodnum), "fill-rule": "evenodd", fill: WASH.blue, "fill-opacity": 0.5 }), g);
-  ring(T.altitude, 0.5, 0.9);
-  ring(T.degrees, 0.35, 0.7);
-  ring(T.signs, 0.35, 0.55);
-  ring(T.months, 0.35, 0.45);
-  ring(T.letters, 0.35, 0.45);
-  // the altitude scale: a tick every 5 degrees, longer every 15
-  let d = "";
-  for (let a = 0; a < 360; a += 5) {
-    const r1 = a % 15 === 0 ? T.signs + 4 : T.degrees;
-    const c = Math.cos(a * RAD);
-    const s = Math.sin(a * RAD);
-    d += `M${f(r1 * c)} ${f(r1 * s)}L${f(T.border * c)} ${f(T.border * s)}`;
-  }
-  node("path", { d, "stroke-width": 0.6, opacity: 0.9, "vector-effect": "non-scaling-stroke" }, g);
-  // the two lines through the centre, and the shadow square below
-  const q = A.backSquare.outer;
-  node(
-    "path",
-    {
-      d: `M${-T.letters} 0H${T.letters}M0 ${-T.letters}V${T.letters}M${-q} 0V${q}H${q}V0`,
-      "stroke-width": 0.35,
-      opacity: 0.55,
-      "vector-effect": "non-scaling-stroke",
-    },
-    g
-  );
-  // the little cross on the east line, where the scale begins
-  node(
-    "path",
-    { d: `M${T.border - 9} -3V3M${T.border - 12} 0H${T.border - 6}`, "stroke-width": 0.5, "vector-effect": "non-scaling-stroke" },
-    g
-  );
-  return g;
-}
-
-function throne(parent, w) {
-  const g = node("g", { fill: NIGHT, stroke: "currentColor", "stroke-width": w * 1.5, "stroke-linejoin": "round", filter: WC.rough }, parent);
-  for (const k of ["base", "boss", "stem", "shackle"]) {
-    node("path", { d: A.throneBack[k], stroke: "none" }, g);
-    node("path", WC.wash({ d: A.throneBack[k], fill: WASH.red }), g);
-    node("path", { d: A.throneBack[k], fill: "none", "vector-effect": "non-scaling-stroke" }, g);
-  }
-  node("path", { d: A.throneBack.ring, fill: "none", "vector-effect": "non-scaling-stroke" }, g);
-  return g;
-}
-
-function rule(parent) {
-  const g = node("g", { filter: WC.rough }, parent);
-  node("path", WC.wash({ d: A.alidade.body, fill: WASH.ochre, "fill-opacity": 0.7 }), g);
-  node(
-    "path",
-    { d: A.alidade.body, fill: "none", stroke: "currentColor", "stroke-width": 1.1, "stroke-linejoin": "round", "vector-effect": "non-scaling-stroke" },
-    g
-  );
-  node("circle", { r: 6, fill: NIGHT, stroke: "currentColor", "stroke-width": 0.9, "vector-effect": "non-scaling-stroke" }, g);
-  return g;
-}
-
-// turned view: a point of the instrument (u right, v down, z off the face towards us) on the screen
-function tp(u, v, z) {
-  return [TURN.x + TURN.k * (u * CT + z * ST), TURN.y + TURN.k * v];
-}
-const poly = (pts) => pts.map((p) => f(p[0]) + "," + f(p[1])).join(" ");
 
 export function mount(el) {
   if (instances.has(el)) return;
-  const svg = node("svg", { viewBox: "-100 -100 200 200", width: "100%", height: "100%", "aria-hidden": "true" });
+  const svg = node("svg", { viewBox: "-150 -100 300 200", width: "100%", height: "100%", "aria-hidden": "true" });
   svg.style.fontFamily = "inherit";
-
-  // ---- the sun: a disc with short rays, and a soft glow.  One sun for the whole window.
-  const id = "sun-glow-" + Math.random().toString(36).slice(2, 8);
-  const defs = node("defs", {}, svg);
-  WC = woodcut(defs, { freq: 0.05, wobble: 2.2, seed: 31 });
-  const grad = node("radialGradient", { id }, defs);
-  node("stop", { offset: 0, "stop-color": LIGHT, "stop-opacity": 0.5 }, grad);
-  node("stop", { offset: 1, "stop-color": LIGHT, "stop-opacity": 0 }, grad);
-  const sun = node("g", { transform: `translate(${SUN[0]} ${SUN[1]})` }, svg);
-  node("circle", { r: 17, fill: `url(#${id})` }, sun);
-  const rays = node("g", { stroke: "currentColor", "stroke-width": 0.9, "stroke-linecap": "round" }, sun);
-  for (let i = 0; i < 12; i++) {
-    const c = Math.cos(i * 30 * RAD);
-    const s = Math.sin(i * 30 * RAD);
-    const r2 = i % 2 ? 9.2 : 10.8;
-    node("line", { x1: f(7.2 * c), y1: f(7.2 * s), x2: f(r2 * c), y2: f(r2 * s) }, rays);
-  }
-  node("circle", { r: 5.6, fill: WASH.ochre, stroke: "currentColor", "stroke-width": 1.2 }, sun);
-
-  // ---- the face-on copy
-  const flat = node("g", { transform: `translate(${FLAT.x} ${FLAT.y}) scale(${FLAT.k})` }, svg);
-  throne(flat, 0.7);
-  back(flat, 1.1);
-  const flatRule = rule(flat);
-  const flatVanes = node("g", { fill: "currentColor" }, flatRule);
-  for (const d of A.alidade.vanes) node("path", { d }, flatVanes);
-  // the reading: a ring where the rule's end meets the scale, and the figure
-  const mark = node("circle", { r: 4.2, fill: "none", stroke: SILVER, "stroke-width": 0.9, opacity: 0 }, svg);
-  const label = node(
-    "text",
-    { x: -50, y: 72, "text-anchor": "middle", "font-size": 15, "font-weight": 600, fill: SILVER, opacity: 0, "font-family": "inherit", stroke: NIGHT, "stroke-width": 3, "stroke-linejoin": "round", "paint-order": "stroke" },
-    svg
-  );
-  label.textContent = "25½°";
-
-  // ---- the turned copy: the same drawing squeezed by the cosine of the turn, with its edge showing
-  const tg = `translate(${TURN.x} ${TURN.y}) scale(${f(TURN.k * CT)} ${TURN.k})`;
-  node(
-    "ellipse",
-    {
-      cx: f(TURN.x - TURN.k * THICK * ST),
-      cy: TURN.y,
-      rx: f(TURN.k * 100 * CT),
-      ry: f(TURN.k * 100),
-      fill: "currentColor",
-      stroke: "currentColor",
-      "stroke-width": 1.2,
-    },
-    svg
-  );
-  const turned = node("g", { transform: tg }, svg);
-  throne(turned, 0.7);
-  back(turned, 1.1);
-  const turnRule = rule(turned);
-  const vaneStyle = { fill: WASH.ochre, "fill-opacity": 0.85, stroke: "currentColor", "stroke-width": 1.1, "stroke-linejoin": "round" };
-  const upper = node("polygon", vaneStyle, svg);
-  const upperHole = node("ellipse", { rx: 1.0, ry: 1.3, fill: DARK }, svg);
-  const lower = node("polygon", { ...vaneStyle, "fill-opacity": 0.5 }, svg);
-  const shadow = node("polygon", { fill: DARK, "fill-opacity": 0.7 }, svg);
-  const lowerHole = node("ellipse", { rx: 1.0, ry: 1.3, fill: DARK, stroke: "currentColor", "stroke-width": 0.3 }, svg);
-  const glow = node("circle", { r: 4.5, fill: `url(#${id})`, opacity: 0 }, svg);
-  const spot = node("ellipse", { rx: 1.0, ry: 1.3, fill: LIGHT }, svg);
-
+  // the sun: ochre, inked, with rays
+  const sun = node("g", { transform: `translate(${f(SUN[0])} ${f(SUN[1])})`, opacity: 0 }, svg);
+  node("circle", { r: 7, fill: WASH.ochre, stroke: "currentColor", "stroke-width": 1.3 }, sun);
+  for (let i = 0; i < 8; i++) node("line", { x1: 0, y1: -10, x2: 0, y2: -14, stroke: "currentColor", "stroke-width": 1.3, "stroke-linecap": "round", transform: `rotate(${45 * i})` }, sun);
+  // the beam, from the sun along the true line, on through both holes
+  const beam = node("line", { x1: f(SUN[0]), y1: f(SUN[1]), x2: f(C.x - 80 * Math.cos(ALT * RAD)), y2: f(C.y + 80 * Math.sin(ALT * RAD)), stroke: SILVER, "stroke-width": 1.6, "stroke-dasharray": "4 2.5", opacity: 0 }, svg);
+  const g = node("g", { transform: `translate(${C.x} ${C.y}) scale(${C.k})` }, svg);
+  const hang = node("g", {}, g);
+  const b = back(hang, { scale: C.k, ticks: true });
+  // the count, up from the little cross on the east line, on the altitude scale
+  const R = (T.altitude + T.border) / 2;
+  const count = node("path", { fill: "none", stroke: SILVER, "stroke-width": W(3), "stroke-linecap": "round", opacity: 0 }, hang);
+  const cross = node("path", { d: `M${f(T.border - 9)} -3.5V3.5M${f(T.border - 12.5)} 0H${f(T.border - 5.5)}`, stroke: SILVER, "stroke-width": W(1.6), opacity: 0 }, hang);
+  // the rule with its two sights
+  const rule = node("g", { filter: b.wc.rough }, hang);
+  node("path", { d: A.alidade.body, fill: VELLUM }, rule);
+  node("path", b.wc.wash({ d: A.alidade.body, fill: WASH.ochre, "fill-opacity": 0.85 }), rule);
+  node("path", { d: A.alidade.body, fill: "none", stroke: "currentColor", "stroke-width": W(1.3), "stroke-linejoin": "round" }, rule);
+  for (const v of A.alidade.vanes) node("path", { d: v, fill: "currentColor" }, rule);
+  node("circle", { r: 4.6, fill: VELLUM, stroke: "currentColor", "stroke-width": W(1.2) }, hang);
+  // the thumb's peg
+  node("line", { x1: -9, y1: PIVOT + 2.2, x2: 9, y2: PIVOT + 2.2, stroke: "currentColor", "stroke-width": W(2.6), "stroke-linecap": "round" }, g);
+  const reading = node("text", { "font-size": 15, "font-weight": 700, fill: SILVER, opacity: 0, "font-family": "inherit", stroke: VELLUM, "stroke-width": 3.5, "stroke-linejoin": "round", "paint-order": "stroke" }, svg);
+  reading.textContent = "25½°";
+  const rp = [C.x + C.k * (T.border + 6) * Math.cos((ALT / 2) * RAD), C.y - C.k * (T.border + 6) * Math.sin((ALT / 2) * RAD)];
+  reading.setAttribute("x", f(rp[0] + 2));
+  reading.setAttribute("y", f(rp[1] + 5));
+  // the steps
+  const list = node("g", {}, svg);
+  const X0 = -142;
+  let y = -60;
+  const rows = STEPS.map((st, i) => {
+    const els = st.lines.map((ln, j) => {
+      const t = node("text", { x: X0 + (j ? 11 : 0), y: y + j * 12, "font-size": 10.5, "font-weight": 600, fill: "currentColor", opacity: 0, "font-family": "inherit" }, list);
+      t.textContent = (j ? "" : `${i + 1}  `) + ln;
+      return t;
+    });
+    y += 12 * st.lines.length + 10;
+    return els;
+  });
   el.appendChild(svg);
-  const s = { flatRule, turnRule, upper, upperHole, lower, lowerHole, shadow, spot, glow, mark, label, raf: 0, t0: 0, at: 0 };
+  const s = { sun, beam, hang, rule, count, cross, reading, ring: b.ring, rows, R, raf: 0, t0: 0, tm: STILL };
   instances.set(el, s);
-  draw(s, SUN_ALT, 1); // the still: aligned, the reading shown
+  draw(s, STILL / 1000);
 }
 
-// h: the rule's altitude in degrees (its left end raised); show: 0..1, how far the reading is shown
-function draw(s, h, show) {
-  s.flatRule.setAttribute("transform", `rotate(${f(h)})`);
-  s.turnRule.setAttribute("transform", `rotate(${f(h)})`);
-  const e = [Math.cos(h * RAD), Math.sin(h * RAD)]; // along the rule, from the upper sight to the lower
-  const p = [-e[1], e[0]]; // across it, in the instrument's plane
-  const vane = (sign, a, b) => {
-    const cu = sign * VANE.at * e[0];
-    const cv = sign * VANE.at * e[1];
-    return [
-      tp(cu + a * p[0], cv + a * p[1], 0),
-      tp(cu + b * p[0], cv + b * p[1], 0),
-      tp(cu + b * p[0], cv + b * p[1], VANE.tall),
-      tp(cu + a * p[0], cv + a * p[1], VANE.tall),
-    ];
-  };
-  const at = (sign, a, z) => tp(sign * VANE.at * e[0] + a * p[0], sign * VANE.at * e[1] + a * p[1], z);
-  s.upper.setAttribute("points", poly(vane(-1, -VANE.half, VANE.half)));
-  s.lower.setAttribute("points", poly(vane(1, -VANE.half, VANE.half)));
-  let c = at(-1, 0, VANE.hole);
-  s.upperHole.setAttribute("cx", f(c[0]));
-  s.upperHole.setAttribute("cy", f(c[1]));
-  c = at(1, 0, VANE.hole);
-  s.lowerHole.setAttribute("cx", f(c[0]));
-  s.lowerHole.setAttribute("cy", f(c[1]));
-  // the light runs in the instrument's plane at the sun's altitude: where the upper sight's shadow and the
-  // spot from its hole fall across the lower sight
-  const q = 2 * VANE.at * Math.tan((SUN_ALT - h) * RAD);
-  const a = Math.max(-VANE.half, q - VANE.half);
-  const b = Math.min(VANE.half, q + VANE.half);
-  if (b > a) {
-    s.shadow.setAttribute("points", poly(vane(1, a, b)));
-    s.shadow.setAttribute("opacity", 1);
-  } else {
-    s.shadow.setAttribute("opacity", 0);
-  }
-  const on = Math.abs(q) < VANE.half - 1.2;
-  c = at(1, on ? q : 0, VANE.hole);
-  s.spot.setAttribute("cx", f(c[0]));
-  s.spot.setAttribute("cy", f(c[1]));
-  s.spot.setAttribute("opacity", on ? 1 : 0);
-  s.glow.setAttribute("cx", f(c[0]));
-  s.glow.setAttribute("cy", f(c[1]));
-  s.glow.setAttribute("opacity", f(show * 0.9));
-  // the reading on the face-on copy
-  const r = A.backTiers.altitude * FLAT.k + 1.2;
-  s.mark.setAttribute("cx", f(FLAT.x - r * e[0]));
-  s.mark.setAttribute("cy", f(FLAT.y - r * e[1]));
-  s.mark.setAttribute("opacity", f(show));
-  s.label.setAttribute("opacity", f(show));
-}
-
-const ease = (u) => (u < 0 ? 0 : u > 1 ? 1 : u * u * (3 - 2 * u));
-
-// the rule at time t (ms into the loop): raised from low, hunting up and down past the sun, settling on it
-function pose(t) {
-  const u = t / LOOP;
-  if (u < 0.5) {
-    const x = u / 0.5;
-    const swing = 17.5 * Math.exp(-3.4 * x) * Math.cos(x * Math.PI * 5);
-    return [SUN_ALT - swing * (1 - ease((x - 0.86) / 0.14)), 0];
-  }
-  if (u < 0.86) return [SUN_ALT, ease((u - 0.5) / 0.06)];
-  const x = (u - 0.86) / 0.14; // let it fall back to where the loop began
-  return [SUN_ALT - 17.5 * ease(x), 1 - ease(x / 0.4)];
+function draw(s, t) {
+  const out = 1 - span(t, END, END + 0.8);
+  // 1. hung on the thumb: a swing that dies away
+  const x = Math.min(1, Math.max(0, (t - 0.6) / 3.2));
+  const sw = t < 0.6 ? 0 : 10 * Math.exp(-3.2 * x) * Math.cos(x * Math.PI * 5) * (1 - span(x, 0.85, 1));
+  s.hang.setAttribute("transform", `rotate(${f(sw)} 0 ${PIVOT})`);
+  s.ring.setAttribute("opacity", f(span(t, 0.6, 1.0) * (1 - span(t, 3.6, 4.0))));
+  // 2. the sun
+  s.sun.setAttribute("opacity", f(span(t, 4.2, 4.8) * out));
+  // 3. the rule moved; the beam passes only when it lies true
+  const a = ruleAt(t);
+  s.rule.setAttribute("transform", `rotate(${f(-a)})`);
+  s.beam.setAttribute("opacity", f(Math.abs(a - ALT) < 0.6 && t > 7.4 ? 0.9 * out : 0));
+  // 4. the count from the little cross
+  const u = span(t, 13.8, 15.2);
+  const p0 = [s.R, 0];
+  const p1 = [s.R * Math.cos(ALT * u * RAD), -s.R * Math.sin(ALT * u * RAD)];
+  s.count.setAttribute("d", u > 0.01 ? `M${f(p0[0])} ${f(p0[1])}A${f(s.R)} ${f(s.R)} 0 0 0 ${f(p1[0])} ${f(p1[1])}` : "");
+  s.count.setAttribute("opacity", f(span(t, 13.6, 13.9) * out));
+  s.cross.setAttribute("opacity", f(span(t, 13.4, 13.8) * out));
+  s.reading.setAttribute("opacity", f(span(t, 15.2, 15.7) * out));
+  STEPS.forEach((st, i) => {
+    const next = STEPS[i + 1] ? STEPS[i + 1].t : END;
+    const now = t >= st.t && t < next;
+    const done = t >= next;
+    const al = (now || done ? 1 : 0.3) * span(t, 0.2, 0.5) * out;
+    for (const e of s.rows[i]) {
+      e.setAttribute("opacity", f(al));
+      e.setAttribute("fill", now ? SILVER : "currentColor");
+    }
+  });
 }
 
 export function start(el) {
@@ -262,10 +129,9 @@ export function start(el) {
   if (!s || s.raf) return;
   s.t0 = 0;
   const step = (now) => {
-    if (!s.t0) s.t0 = now - s.at;
-    s.at = (now - s.t0) % LOOP;
-    const [h, show] = pose(s.at);
-    draw(s, h, show);
+    if (!s.t0) s.t0 = now - s.tm;
+    s.tm = (now - s.t0) % LOOP;
+    draw(s, s.tm / 1000);
     s.raf = requestAnimationFrame(step);
   };
   s.raf = requestAnimationFrame(step);
@@ -282,7 +148,6 @@ export function stop(el) {
 export function seek(el, ms) {
   const s = instances.get(el);
   if (!s) return;
-  s.at = ((ms % LOOP) + LOOP) % LOOP;
-  const [h, show] = pose(s.at);
-  draw(s, h, show);
+  s.tm = ((ms % LOOP) + LOOP) % LOOP;
+  draw(s, s.tm / 1000);
 }

@@ -1311,6 +1311,11 @@ const tocParts = [
     width: 100%;
     aspect-ratio: 3 / 2;
   }
+  /* The scene box follows the 3:2 window instead of its default square. */
+  .t-sec .t-aside[data-size="large"] .win-glass :global(.scene) {
+    aspect-ratio: auto;
+    height: 88%;
+  }
   .win-ring {
     position: absolute;
     inset: 0;
