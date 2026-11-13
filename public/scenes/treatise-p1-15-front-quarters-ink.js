@@ -14,7 +14,7 @@ import { front, node, f, SILVER, NIGHT } from "./lib/front-ink.js";
 const instances = new WeakMap();
 const LOOP = 12000;
 const STILL = 8200; // ms: the cross drawn and named
-const C = { x: 0, y: 22, k: 0.68 }; // hung plumb, as I 1
+const C = { x: 0, y: 22, k: 0.64 }; // the hanging ring inside the window (astrolabist #47901) // hung plumb, as I 1
 const W = (px) => f(px / C.k);
 
 const ease = (u) => (u < 0 ? 0 : u > 1 ? 1 : u * u * (3 - 2 * u));

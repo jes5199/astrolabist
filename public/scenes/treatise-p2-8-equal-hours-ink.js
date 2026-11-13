@@ -15,7 +15,7 @@ import { front, node, f, rim, P, SILVER, NIGHT } from "./lib/front-ink.js";
 const instances = new WeakMap();
 const LOOP = 14000;
 const STILL = 9500; // ms: one unequal hour lit and reckoned
-const C = { x: 0, y: 10, k: 0.9 };
+const C = { x: 0, y: 18, k: 0.62 }; // the hanging ring inside the window (its top 183 units up, at -95; astrolabist #47901)
 const W = (px) => f(px / C.k);
 const RAD = Math.PI / 180;
 const EPS = P.obliquity * RAD;
