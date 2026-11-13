@@ -54,8 +54,10 @@ export function mount(el) {
     t.textContent = str;
     return t;
   };
-  const t1 = text(C.y + C.k * Y1 + 4.5, `${H1.toFixed(1)}°`);
-  const t0 = text(C.y + C.k * Y0 + 4.5, `${H0.toFixed(1)}°`);
+  // the equator's prick (higher on the plate: south is up) labelled above it, the sun's below (at the smaller scale
+  // they no longer fit side by side)
+  const t1 = text(C.y + C.k * Y1 + 12, `${H1.toFixed(1)}°`, 11);
+  const t0 = text(C.y + C.k * Y0 - 3, `${H0.toFixed(1)}°`, 11);
   const tr = node("text", { x: 0, y: f(C.y + 46), "text-anchor": "middle", "font-size": 14, fill: SILVER, opacity: 0, "font-family": "inherit", stroke: NIGHT, "stroke-width": 3, "stroke-linejoin": "round", "paint-order": "stroke" }, svg);
   tr.textContent = `declination ${(H1 - H0).toFixed(1)}° north`;
   el.appendChild(svg);

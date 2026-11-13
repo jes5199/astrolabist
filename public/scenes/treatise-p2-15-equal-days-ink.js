@@ -77,7 +77,7 @@ export function mount(el) {
     });
     // the comparison, in the middle
     const len = hm(dayOf(act.a));
-    words.push(text(C.x, C.y - 62, act.wb === "day" ? `same day: ${len}` : `day = night: ${len}`));
+    words.push(text(C.x, C.y + 74, act.wb === "day" ? `same day: ${len}` : `day = night: ${len}`));
     return { grp, marks, tg, words };
   });
   el.appendChild(svg);
