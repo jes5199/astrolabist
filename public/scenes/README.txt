@@ -46,3 +46,4 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-p1-15-front-quarters.js lib/front.js copied byte-for-byte from astrolabe-video c20a560.
 2026-11-13: treatise-p1-16-front-border.js copied byte-for-byte from astrolabe-video c20a560.
 2026-11-13: treatise-p1-17-three-circles.js copied byte-for-byte from astrolabe-video 2766b18.
+2026-11-13: treatise-p1-18-almucantars.js copied byte-for-byte from astrolabe-video 876ff9d.
