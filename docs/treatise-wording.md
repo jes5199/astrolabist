@@ -117,6 +117,7 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | ↳ `Coruus` | = δ Crv (Algorab), **probable** | Skeat, Oxford Chaucer vol. 3 (1894), notes on Fig. 2 (Gutenberg #45027) gives Algorab = δ Corvi on his rete. | identification as noted |
 | ↳ `Elfeca` | = Alphecca (α CrB) | Skeat, Oxford Chaucer vol. 3 (1894), notes on Fig. 2 (Gutenberg #45027) ("Alpheta, Alphecca, or α Coronae Borealis"). | identification as noted |
 | ↳ `Alauue` | = α Oph (Rasalhague), **uncertain** | Arabic al-ḥawwāʾ = Ophiuchus; Skeat names α Oph "Raz Alhagus" on his figure. | identification as noted |
+| `almury` | treatise-p1-23-almury.js | Part I §23 (astrolabe-video 9b177af). Chaucer's word; his alternatives "Denticle of Capricorne", "Calculer". | source text |
 
 ## Not on the page
 
