@@ -12,7 +12,7 @@ import json, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-from curate import G, OVERRIDES  # noqa: E402
+from curate import G, OVERRIDES, BLANK, LINE_STRICT, TRANSLATION  # noqa: E402
 from iapages import Pages  # noqa: E402
 
 SRC = os.path.abspath(sys.argv[1])
@@ -96,6 +96,14 @@ for (key, src, line, head, gloss, fs, extra) in G:
     rec = {"gloss": gloss, "source": src}
     if extra.get("short"):
         rec["short"] = extra["short"]
+    if extra.get("lineOnly"):
+        rec["lineOnly"] = True
+    # The strict modern line: Skeat's first sense (or a chosen piece of his gloss).
+    base = extra.get("short") or gloss
+    ln = LINE_STRICT.get(key) or re.split(r", |; ", base)[0]
+    if ln not in gloss and ln not in base and ln.lower() not in [f.lower() for f in fs]:
+        errors.append(f"{key}: strict line {ln!r} is not Skeat's wording (gloss {gloss!r})")
+    rec["line"] = ln
     fixes = extra.get("fix", [])
     if src == "ours":
         if extra.get("def"):
@@ -159,6 +167,18 @@ for sec, phrase, word, key in OVERRIDES:
     if key is not None and key not in entries:
         errors.append(f"override key {key} unknown")
     ov.append({"section": sec, "match": ph, "word": word.lower(), "key": key})
+KINDS = {"added-word", "reordered", "modernised-form", "paraphrase-phrase"}
+spans = []
+for sec, match, line, kind in TRANSLATION:
+    ph = " ".join(re.findall(r"[A-Za-z]+(?:-[A-Za-z]+)*", match.lower()))
+    if f" {ph} " not in f" {joined[sec]} ":
+        errors.append(f"translation span {match!r} not in {sec}")
+    if kind not in KINDS:
+        errors.append(f"translation span {match!r}: unknown departure kind {kind!r}")
+    spans.append({"section": sec, "match": ph, "line": line, "kind": kind})
+for b in BLANK:
+    if b not in alltoks:
+        errors.append(f"blank word {b!r} not in sample")
 for k, r in entries.items():
     used = k in forms.values() or any(p["key"] == k for p in phrases) or any(o["key"] == k for o in ov)
     if not used:
@@ -217,6 +237,8 @@ doc = {
     "forms": dict(sorted(forms.items())),
     "phrases": phrases,
     "overrides": ov,
+    "blank": BLANK,
+    "lineSpans": spans,
 }
 json.dump(doc, open(out, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
 n = {}

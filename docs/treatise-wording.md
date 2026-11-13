@@ -14,47 +14,47 @@ approved yet: Jes has not signed off on the framing lines.
 
 | Text | Where | Notes | Status |
 |---|---|---|---|
-| `A Treatise on the Astrolabe - Astrolab.ist` (document title) | treatise.astro:233 | Site title comes from `src/consts.ts`. | provisional; awaiting Jes |
-| `Geoffrey Chaucer, A Treatise on the Astrolabe (c. 1391), in W. W. Skeat's Middle English text (1894).` (meta description) | treatise.astro:234 | Doesn't mention the modern text. | provisional; awaiting Jes |
-| `Geoffrey Chaucer ✦ c. 1391` (hero kicker) | treatise.astro:284 |  | provisional; awaiting Jes |
-| `A Treatise on the Astrolabe` (h1) | treatise.astro:285 | Conventional modern title. | provisional; awaiting Jes |
-| `“Litell Lowis my sone…”` (hero line) | treatise.astro:286 | Skeat's opening words, quoted. We chose to excerpt them and added the ellipsis. | provisional; awaiting Jes |
-| `Middle English text: W. W. Skeat (1894).` | treatise.astro:288 | Credit line. | provisional; awaiting Jes |
-| `Glosses from Skeat's glossaries to the Treatise (1872) and to Chaucer (1894), for the Prologue and Part I §§ 1–3.` | treatise.astro:288 | Gloss variant. Credit for the glosses and the extent of the sample. | provisional; awaiting Jes |
-| `Draft preview; publication permission pending.` | treatise.astro:290 | Required notice; keep until permission is granted. Also in the closing credit. | provisional; awaiting Jes |
-| `Read on, and the heavens turn about the lode-sterre.` | treatise.astro:293 | Framing flourish. Shown only when motion is allowed. "lode-sterre" is Chaucer's word (pole star). | provisional; awaiting Jes |
-| `Contents` (nav aria-label) | treatise.astro:296 | Screen-reader only. | provisional; awaiting Jes |
-| `The Conclusiouns, as a constellacioun` (contents heading) | treatise.astro:297 | Framing flourish in mock Middle English spelling. | provisional; awaiting Jes |
-| Contents group titles: `Prologue`, `Part I`, `Part II`, `Supplementary propositions`, `Spurious sections` | treatise.astro:200, :203, :204 | New in the whole-treatise pass. "Supplementary propositions" follows Skeat's heading; "Spurious sections" follows his note. | provisional; awaiting Jes |
-| Contents group subtitles: `The descripcioun`, `The conclusiouns`, `printed by Skeat after the Explicit`, `so marked by Skeat` | treatise.astro:201, :202, :203, :204 | New in the whole-treatise pass. The first two in mock Middle English spelling. | provisional; awaiting Jes |
-| Contents star numerals: `P` (Prologue), `1`…`46`, `41a`… | treatise.astro:219 | New. "P" is ours; the rest are Skeat's section numbers. | provisional; awaiting Jes |
-| Contents star accessible names, e.g. `Part II · § 12: Special declaracioun of the houres of planetes`; the caption under the chart (same words) | treatise.astro:310, :321 | New. Kicker plus the first words (below). | provisional; awaiting Jes |
-| Contents sub-labels / full-list entries, e.g. `Thyn Astrolabie hath a ring…`, `To knowe the altitude of the…` | treatise.astro:142, :336 | First 4–6 words of Skeat's text or rubric, Part II rubrics lower-cased, ellipsis added by us. | provisional; awaiting Jes |
-| `Every section, by its first words` (disclosure for the full list) | treatise.astro:326 | New in the whole-treatise pass. | provisional; awaiting Jes |
-| `Glosses` (gloss bar group label, screen-reader only) | treatise.astro:347 | Gloss variant; replaces the Middle English / Both / Modern toggle. | provisional; awaiting Jes |
-| `Hover or tap a marked word for its gloss` (wide) / `Tap a marked word` (under 600px) | treatise.astro:348 | Gloss variant. Hint in the sticky bar; "marked word" carries the same dotted underline as the glossed words. | provisional; awaiting Jes |
-| `Show all glosses` (wide) / `All glosses` (under 600px) (switch) | treatise.astro:349 | Gloss variant. Turns on interlinear glosses under every glossed word; remembered per viewer. | provisional; awaiting Jes |
-| Gloss popover: the word as printed, Skeat's gloss and definition, then `Shown in the figure` (only for words the section's figure shows) | treatise.astro:360 | Gloss variant. "Shown in the figure" is ours. | provisional; awaiting Jes |
-| Gloss popover: second paragraph labelled `Skeat's note` (from his notes) or `From Skeat's introduction` (introduction § 28), set as an indented italic note; glossary definitions carry no label | treatise.astro:1821 | Gloss variant. Commentary is never presented as a definition. | provisional; awaiting Jes |
-| Gloss popover source line, e.g. `Skeat, EETS 1872, glossary · s.v. Turet, p. 118`; then `Definition: …` / `Note: Skeat, Oxford Chaucer 1894, vol. III, note to Prol. l. 7` / `Introduction: …`; `our gloss · provisional` | treatise-gloss.ts:48; treatise.astro:1824 | Gloss variant. Source names are written in the gloss builder (next row). | provisional; awaiting Jes |
+| `A Treatise on the Astrolabe - Astrolab.ist` (document title) | treatise.astro:266 | Site title comes from `src/consts.ts`. | provisional; awaiting Jes |
+| `Geoffrey Chaucer, A Treatise on the Astrolabe (c. 1391), in W. W. Skeat's Middle English text (1894).` (meta description) | treatise.astro:267 | Doesn't mention the modern text. | provisional; awaiting Jes |
+| `Geoffrey Chaucer ✦ c. 1391` (hero kicker) | treatise.astro:317 |  | provisional; awaiting Jes |
+| `A Treatise on the Astrolabe` (h1) | treatise.astro:318 | Conventional modern title. | provisional; awaiting Jes |
+| `“Litell Lowis my sone…”` (hero line) | treatise.astro:320 | Skeat's opening words, quoted. We chose to excerpt them and added the ellipsis. | provisional; awaiting Jes |
+| `Middle English text: W. W. Skeat (1894).` | treatise.astro:322 | Credit line. | provisional; awaiting Jes |
+| `Glosses from Skeat's glossaries to the Treatise (1872) and to Chaucer (1894), for the Prologue and Part I §§ 1–3.` | treatise.astro:322 | Gloss variant. Credit for the glosses and the extent of the sample. | provisional; awaiting Jes |
+| `Draft preview; publication permission pending.` | treatise.astro:324 | Required notice; keep until permission is granted. Also in the closing credit. | provisional; awaiting Jes |
+| `Read on, and the heavens turn about the lode-sterre.` | treatise.astro:327 | Framing flourish. Shown only when motion is allowed. "lode-sterre" is Chaucer's word (pole star). | provisional; awaiting Jes |
+| `Contents` (nav aria-label) | treatise.astro:330 | Screen-reader only. | provisional; awaiting Jes |
+| Top contents, one row of the major divisions: `Prologue`, `Part I`, `Part II`, `Supplementary propositions`, `Spurious sections` (the last two quieter); each links to that part's heading | treatise.astro:249, :252, :253 | Contents redesign: replaces the all-sections constellation chart. Titles as before. | provisional; awaiting Jes |
+| Top contents subtitles: `Litell Lowis my sone` (new, Skeat's opening words), `The descripcioun`, `The conclusiouns`, `printed by Skeat after the Explicit`, `so marked by Skeat` | treatise.astro:249, :250, :251, :252, :253 | The Prologue's subtitle is new; the others as before (first two in mock Middle English spelling). | provisional; awaiting Jes |
+| Star lines under each part heading: numerals `1`…`23`, `1`…`40`, `41`…`46`, `41a`…; nav labels `Sections of Part I`, `Sections of Part II`, `The supplementary propositions`, `The spurious sections` | treatise.astro:241, :224, :227 | Contents redesign. Skeat's section numbers; the nav labels (screen-reader only) are ours. | provisional; awaiting Jes |
+| Star accessible names and the caption under each star line, e.g. `Part II § 12: Special declaracioun of the houres of planetes`, `Part I § 1: Thyn Astrolabie hath a ring…` | treatise.astro:217, :411 | Contents redesign. Part II: Skeat's whole rubric (sentence case, end stop dropped); otherwise his first five words plus our ellipsis. The caption shows the star under the pointer or focus, else the section being read; a tap goes straight to the section. | provisional; awaiting Jes |
+| Contents sub-labels / full-list entries, e.g. `Thyn Astrolabie hath a ring…`, `To knowe the altitude of the…` | treatise.astro:158, :353 | First 4–6 words of Skeat's text or rubric, Part II rubrics lower-cased, ellipsis added by us. | provisional; awaiting Jes |
+| `Every section, by its first words` (disclosure for the full list) | treatise.astro:343 | New in the whole-treatise pass. | provisional; awaiting Jes |
+| `Under Chaucer's words, a modern line. Tap or hover a word whose modern word is gold for its definition and source.` (hint under the contents) | treatise.astro:364 | Replaces the sticky gloss bar and its hint; the modern line is always on (Jes, tg 17806). | provisional; awaiting Jes |
+| Subtitle `Bred and mylk for childeren` | treatise.astro:319 | Skeat, Oxford Chaucer vol. III (1894), introduction § 3 (Gutenberg #45027 line 2128): MS. E Museo 54 (his B) has the rubricated title 'Bred and mylk For childeren', 'boldly written at the beginning'; MS. Bodley 619 (his E, § 6, line 2149) has 'Brede and Milke for children'. B's form, `for` lowercased (the MS capital is scribal). | decided (Jes tg 17815); spelling per Skeat's MS B |
+| The subtitle's modern line `bread and milk for children` | treatise.astro:319 | Ours, a plain modernisation. | provisional; awaiting Jes |
+| Gloss popover: the word as printed, Skeat's gloss and definition, then `Shown in the figure` (only for words the section's figure shows) | treatise.astro:374 | Gloss variant. "Shown in the figure" is ours. | provisional; awaiting Jes |
+| Gloss popover: second paragraph labelled `Skeat's note` (from his notes) or `From Skeat's introduction` (introduction § 28), set as an indented italic note; glossary definitions carry no label | treatise.astro:1889 | Gloss variant. Commentary is never presented as a definition. | provisional; awaiting Jes |
+| Gloss popover source line, e.g. `Skeat, EETS 1872, glossary · s.v. Turet, p. 118`; then `Definition: …` / `Note: Skeat, Oxford Chaucer 1894, vol. III, note to Prol. l. 7` / `Introduction: …`; `our gloss · provisional` | treatise-gloss.ts:61; treatise.astro:1892 | Gloss variant. Source names are written in the gloss builder (next row). | provisional; awaiting Jes |
 | Source names: `Skeat, EETS 1872, glossary`, `Skeat, Oxford Chaucer 1894, glossary`, `Skeat, Oxford Chaucer 1894, index of names`, `Skeat, Oxford Chaucer 1894, vol. III`, `our gloss`; locators `note to Prol. l. 7`, `Introduction, § 28` | build_glosses.py:85, :78 | Gloss variant. Our short names for the editions; full titles and URLs are in `glosses.json` and `docs/treatise-glosses.md`. | provisional; awaiting Jes |
-| Screen-reader description of each glossed word: gloss, definition (or `Skeat's note: …` / `From Skeat's introduction: …`), then `Source: …` or `Our gloss.` | treatise.astro:181 | Gloss variant. Hidden text, read through aria-describedby. | provisional; awaiting Jes |
-| Interlinear (show-all) glosses: Skeat's first alternative, or a shorter piece of his gloss for long ones (e.g. `propositions`, `the eye`, `plate or rod`) | treatise-gloss.ts:127 | Gloss variant. Still Skeat's words (the builder checks every short form is a substring of his entry), but which piece to show is our choice. | provisional; awaiting Jes |
-| Which glossed words light their section's figure (e.g. `turet`, `moder` in § 2; `riet`, `wombe`, `loppe` in § 3; `swerd` in the Prologue) | treatise.astro:26 | Gloss variant. Our reading of what each scene shows. | provisional; awaiting Jes |
-| `The glossed sample ends here.` / `From § 4 on, Skeat's text is shown without glosses.` (aria-label `End of the glossed sample`) | treatise.astro:480, :481 | Gloss variant. After Part I § 3. | provisional; awaiting Jes |
-| Part `aria-label`: `Prologue`, `Part I`, `Part II` | treatise.astro:366 |  | provisional; awaiting Jes |
-| `PARS PRIMA` / `PARS SECUNDA` (above part headings) | treatise.astro:44, :377 | Our Latin, modelled on the Latin rubrics in Skeat. | provisional; awaiting Jes |
-| `Part I` / `Part II` (part headings) | treatise.astro:378 |  | provisional; awaiting Jes |
-| `HERE BIGINNETH THE DESCRIPCION…` / `HERE BIGINNEN THE CONCLUSIONS…` / `HERE ENDETH THE DESCRIPCION OF THE ASTROLABIE.` | treatise.astro:39, :195 | **Skeat's**, listed only because the page supplies them rather than the collection. The "HERE ENDETH" rubric is new on the page. | n/a (source text) |
-| Skeat's group labels: `SUPPLEMENTARY PROPOSITIONS.` and `[The following sections are spurious; …]`; the Explicit colophon after §40 | treatise.astro:385, :476 | **Skeat's**, carried in the collection's `note` / `colophon` fields and shown as printed (italic underscores removed). | n/a (source text) |
-| Section kicker suffixes `· supplementary` / `· spurious` | treatise.astro:420 | New. Quiet labels on sections outside the main sequence. | provisional; awaiting Jes |
-| Sky-window ring legends: `PROLOGUS · LITELL LOWIS MY SONE`, `PARS PRIMA · CAPITULUM I`…, `PARS SECUNDA · CONCLUSIO I`…, `… CONCLUSIO XLI a` | treatise.astro:130, :131 | Our Latin. "Conclusio" follows Skeat's Latin rubric ("conclusiones"); "Capitulum" for Part I is our choice; Skeat's letter suffix kept for the spurious sections. | provisional; awaiting Jes |
-| Inline window legend `WITH THIS SWERD SHAL I SLEEN ENVYE` and aria-label `Figure: with this swerd shal I sleen envye` | treatise.astro:139 | New. Label from `00-prologue.md` (`inlineScenes`); the legend is the label without "Figure:", upper-cased. The words are Skeat's. | provisional; awaiting Jes |
-| `Figure for Prologue` / `Figure for Part II § 1` … (figure aria-label) | treatise.astro:411 | Screen-reader label for each sky window. | provisional; awaiting Jes |
-| `The Prologue` / `Part II · § 1` … (section kicker) | treatise.astro:141 |  | provisional; awaiting Jes |
-| Section titles for sections without a rubric, e.g. `Litell Lowis my sone…`, `Thyn Astrolabie hath a ring…` | treatise.astro:158 | First 4–5 words of Skeat's text plus our ellipsis. Part II titles are Skeat's rubrics, unchanged. | provisional; awaiting Jes |
-| `Explicit` (closing word) | treatise.astro:494 | Conventional Latin end-of-text mark. | provisional; awaiting Jes |
-| `Middle English: W. W. Skeat (1894). Glosses: W. W. Skeat, Early English Text Society (1872) and Oxford Chaucer (1894), except those marked as ours. … Sky drawn for the latitude of Oxford.` (closing credit) | treatise.astro:496, :500 | Gloss credit added in the gloss variant. | provisional; awaiting Jes |
+| Screen-reader description of each glossed word: gloss, definition (or `Skeat's note: …` / `From Skeat's introduction: …`), then `Source: …` or `Our gloss.` | treatise.astro:197 | Gloss variant. Hidden text, read through aria-describedby. | provisional; awaiting Jes |
+| The modern line under every word of the glossed sections (always on): Skeat's gloss (his first sense, or a chosen piece of it), our plain respellings, the word itself where modern English uses it unchanged (quieter colour), `·` where there is no clean equivalent; in `translation` mode our minimal departures (tables below) | treatise-gloss.ts:97; treatise.astro:28 | Jes tg 17804/17806/17813. `LINE_MODE = "strict"` switches back to the word-for-word gloss line. | provisional; awaiting Jes |
+| Which glossed words light their section's figure (e.g. `turet`, `moder` in § 2; `riet`, `wombe`, `loppe` in § 3; `swerd` in the Prologue) | treatise.astro:32 | Gloss variant. Our reading of what each scene shows. | provisional; awaiting Jes |
+| `The glossed sample ends here.` / `From § 4 on, Skeat's text is shown without glosses.` (aria-label `End of the glossed sample`) | treatise.astro:536, :537 | Gloss variant. After Part I § 3. | provisional; awaiting Jes |
+| Part `aria-label`: `Prologue`, `Part I`, `Part II` | treatise.astro:380 |  | provisional; awaiting Jes |
+| `PARS PRIMA` / `PARS SECUNDA` (above part headings) | treatise.astro:50, :391 | Our Latin, modelled on the Latin rubrics in Skeat. | provisional; awaiting Jes |
+| `Part I` / `Part II` (part headings) | treatise.astro:392 |  | provisional; awaiting Jes |
+| `HERE BIGINNETH THE DESCRIPCION…` / `HERE BIGINNEN THE CONCLUSIONS…` / `HERE ENDETH THE DESCRIPCION OF THE ASTROLABIE.` | treatise.astro:45, :212 | **Skeat's**, listed only because the page supplies them rather than the collection. The "HERE ENDETH" rubric is new on the page. | n/a (source text) |
+| Skeat's group labels: `SUPPLEMENTARY PROPOSITIONS.` and `[The following sections are spurious; …]`; the Explicit colophon after §40 | treatise.astro:420, :532 | **Skeat's**, carried in the collection's `note` / `colophon` fields and shown as printed (italic underscores removed). | n/a (source text) |
+| Section kicker suffixes `· supplementary` / `· spurious` | treatise.astro:457 | New. Quiet labels on sections outside the main sequence. | provisional; awaiting Jes |
+| Sky-window ring legends: `PROLOGUS · LITELL LOWIS MY SONE`, `PARS PRIMA · CAPITULUM I`…, `PARS SECUNDA · CONCLUSIO I`…, `… CONCLUSIO XLI a` | treatise.astro:139, :140 | Our Latin. "Conclusio" follows Skeat's Latin rubric ("conclusiones"); "Capitulum" for Part I is our choice; Skeat's letter suffix kept for the spurious sections. | provisional; awaiting Jes |
+| Inline window legend `WITH THIS SWERD SHAL I SLEEN ENVYE` and aria-label `Figure: with this swerd shal I sleen envye` | treatise.astro:149 | New. Label from `00-prologue.md` (`inlineScenes`); the legend is the label without "Figure:", upper-cased. The words are Skeat's. | provisional; awaiting Jes |
+| Prologue's five part windows (small): ring legends and aria-labels `Figure: the first part (finished)`, `… the second part (nearly all survives)`, `… the third part (tables)`, `… the fourth part (probably never written)`, `… the fifth part (probably never written)` | 00-prologue.md:13, :29 | Ours, paraphrasing Skeat, Oxford Chaucer vol. III (1894), introduction (Gutenberg #45027, lines 2471–2518): Part i. "we have the whole"; ii. "nearly all, and probably all that ever was written"; iii. "probably consisted entirely of tables"; iv. "probably never written"; v. "in all probability, none … was ever written". Anchored on Skeat's `I. The firste partie` … `V. The fifte partie`; modules treatise-prologue-part-1…5 draw only the numeral. | provisional; awaiting Jes |
+| `Figure for Prologue` / `Figure for Part II § 1` … (figure aria-label) | treatise.astro:484 | Screen-reader label for each sky window. | provisional; awaiting Jes |
+| `The Prologue` / `Part II · § 1` … (section kicker) | treatise.astro:157 |  | provisional; awaiting Jes |
+| Section titles for sections without a rubric, e.g. `Litell Lowis my sone…`, `Thyn Astrolabie hath a ring…` | treatise.astro:174 | First 4–5 words of Skeat's text plus our ellipsis. Part II titles are Skeat's rubrics, unchanged. | provisional; awaiting Jes |
+| `Explicit` (closing word) | treatise.astro:550 | Conventional Latin end-of-text mark. | provisional; awaiting Jes |
+| `Middle English: W. W. Skeat (1894). Glosses: W. W. Skeat, Early English Text Society (1872) and Oxford Chaucer (1894), except those marked as ours. … Sky drawn for the latitude of Oxford.` (closing credit) | treatise.astro:552, :556 | Gloss credit added in the gloss variant. | provisional; awaiting Jes |
 
 ## Sky labels (`src/scripts/treatise-sky.ts`)
 
@@ -136,6 +136,26 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | degree counter ending `38.4°` | treatise-p2-13-noon.js | Part II §13 (astrolabe-video f18ee01). Modern. Chaucer's 12 March. | **decided: modern** |
 | `Aries 1°`, `Virgo 29°`, `March`, `September` | treatise-p2-14-sun-from-noon.js | Part II §14 (astrolabe-video 79c0abf). Signs Latin (decided); season month labels in modern English (explanatory labels, like II §1's "12 March"; not engraved names). | **decided** (Latin signs; modern labels) |
 | `Taurus 10°`, `Leo 20°`, `Scorpio 10°`; `same day: 14 h 43 m`, `day = night: 14 h 43 m` | treatise-p2-15-equal-days.js | Part II §15 (astrolabe-video da8e9df). Latin signs; modern captions. | **decided** |
+| `30° east: ascendant 1`, `30° west: ascendant 2`, `the middle, rising`, `the star's degree`, `Libra 22°` | treatise-p2-17-star-place.js | Part II §17 (astrolabe-video 3b6d423). Modern captions; Latin sign. **Interpretation:** "the middel degree by-twene bothe assendentes" shown as the middle counted on the border (in time), which is exact; the literal middle in zodiac degrees misses by ~26° at 52°. Alternative available. | provisional (interpretation) |
+| `Alabor`, `Cancer 4°` | treatise-p2-18-mediation.js | Part II §18 (astrolabe-video b0aa6d2). Engraved star name; mediation is the recorded one (by construction; checked independently in §21). | **decided** |
+| `Alabor`, `rises with Leo 14°` | treatise-p2-19-rises-with.js | Part II §19 (astrolabe-video 5a73248). Solved from the plate geometry. | **decided** |
+| `62.1°`, `38.0°`, `declination 24.1° north` | treatise-p2-20-declination.js | Part II §20 (astrolabe-video 6d31e3d). Modern. 24.1° is the 47869 plate's own obliquity; Chaucer gives Ptolemy's 23°50′ in I §17. | **decided: modern** |
+| `equator`, `zenith`, `north`, `pole`, `52°` ×2, `latitude 52°` | treatise-p2-21-plate-latitude.js | Part II §21 (astrolabe-video d9c5279). Modern. | **decided: modern** |
+| `N`, `S`, `pole`, `zenith`, `equator`, `51°50′` ×2, `38°10′` ×2 | treatise-p2-22-oxford.js | Part II §22 (astrolabe-video 512e17c). Modern labels; the measures are Chaucer's own figures for Oxford. Note: the plate scenes use 52° (the 47869 drawing's round figure). | **decided: modern** |
+| `A`, `F` (Chaucer's letters), `north`, `81°50′`, `21°50′`, `pole 51°50′` | treatise-p2-23-pole-star.js | Part II §23 (astrolabe-video 4532b23). Sky version; a figure-on-a-winter-night version is a possible later upgrade. | **decided: modern** |
+| `north`, `81°50′`, `21°50′`, `81°50′ + 21°50′ = 103°40′`, `half: pole 51°50′` | treatise-p2-24-never-sets.js | Part II §24 (astrolabe-video 1b2003c). Modern. | **decided: modern** |
+| `S`, `zenith`, `equator`, `38°10′`, `51°50′`, `90° − 38°10′ = 51°50′`, `south pole` | treatise-p2-25-latitude-noon.js | Part II §25 (astrolabe-video bea40ec). Modern (Chaucer: "pol antartik"). | **decided: modern** |
+| `latitude 52°` … `latitude 0°` (readout), `the right horizon`, `day = night` | treatise-p2-26-right-sphere.js | Part II §26 (astrolabe-video 503356d). Modern. Shown on a plate whose latitude slides to 0° (instead of a solid sphere). Note: at latitude 0 only the horizon (and meridian) is straight; Chaucer's "almikanteras … streighte" fits the horizon. | **decided: modern** |
+| `Aries: 27.8° of the equator`, `Cancer: 32.3° of the equator` | treatise-p2-27-right-ascension.js | Part II §27 (astrolabe-video 798773d). Latin signs; modern captions. | **decided** |
+| `Aries: 12.3°, 0 h 49 m`, `Cancer: 38.3°, 2 h 33 m` | treatise-p2-28-oblique-ascension.js | Part II §28 (astrolabe-video 258e8ed). Latin signs; modern captions. | **decided** |
+| `north`, `south`, `east`, `west` (on the ground) | treatise-p2-29-four-quarters.js | Part II §29 (astrolabe-video 5dfc993). Instrument version (figure version possible later). Quarters named on the ground since the text does not settle which face lies up when "couched"; it does settle that the ring end lies south. | **decided: modern** |
+| `on the meridian`, `the sun's way`, `planet 3° north`, `planet 2° south`, scale `30°`–`45°` | treatise-p2-30-planet-latitude.js | Part II §30 (astrolabe-video 308c33b). Modern; illustrative planets (no specific planet named). | **decided: modern** |
+| `midsummer`, `equinox`, `midwinter`, `42° north of east`, `due east` (was `very east`; applied, astrolabe-video 8eec225), `42° south of east` | treatise-p2-31-sunrise-azimuth.js | Part II §31 (astrolabe-video 1ce3664). Modern per tg 17787; "very east" is Chaucer's phrase, so it becomes "due east". | **decided: modern** |
+| `3 hours after midday`, `52° west of south` | treatise-p2-32-conjunction.js | Part II §32 (astrolabe-video 793a8af). Modern. The conjunction hour is our illustrative choice (the text gives none), on Chaucer's 12 March. | **decided: modern**; hour choice provisional |
+| `the sun`, `53° east of south`, `Alabor`, `50° west of south` | treatise-p2-33-quarter.js | Part II §33 (astrolabe-video 09f125d). Modern; engraved star name. Chaucer's II §3 settings. | **decided** |
+| `moon 41°`, `Alabor 12°`, `the moon: Virgo 15°` | treatise-p2-34-moon.js | Part II §34 (astrolabe-video f826d30). Modern captions; engraved star; Latin sign. Moon taken on the ecliptic (the text makes no exception for its latitude). | **decided** |
+| `east`, `star`, `night 1`, `night 4`, `lower: direct`, `higher: retrograde` | treatise-p2-35-retrograde.js | Part II §35 (astrolabe-video ddefaab). Modern captions. Altitudes are illustrative, not computed for a real planet. | **decided** |
+| clock times (H:MM), `in`, `out`, `meridian line`, `north`, `south`, `east`, `west` | treatise-p2-38-meridian-line.js | Part II §38 (astrolabe-video bfc9f42). Modern captions. Computed for 52°; declination ≈ −8° chosen so the times match "aboute 10 or 11" and "after 1"; no date shown. | **decided** |
 
 ## Glosses we wrote (`src/treatise-text/glosses.json`, source `ours`)
 
@@ -159,6 +179,46 @@ mark and the source line "our gloss · provisional". Every other gloss is Skeat'
 | `arabik` | Arabic | provisional; awaiting Jes |
 | `iewes` | Jews | provisional; awaiting Jes |
 | `grettre` | greater | provisional; awaiting Jes |
+| `a-nother` | another (modern line only, no popover) | provisional; awaiting Jes |
+| `aboute` | about (modern line only, no popover) | provisional; awaiting Jes |
+| `alle` | all (modern line only, no popover) | provisional; awaiting Jes |
+| `bereth` | bears (modern line only, no popover) | provisional; awaiting Jes |
+| `betre` | better (modern line only, no popover) | provisional; awaiting Jes |
+| `calculed` | calculated (modern line only, no popover) | provisional; awaiting Jes |
+| `considere` | consider (modern line only, no popover) | provisional; awaiting Jes |
+| `finde` | find (modern line only, no popover) | provisional; awaiting Jes |
+| `firste` | first (modern line only, no popover) | provisional; awaiting Jes |
+| `for-gete` | forget (modern line only, no popover) | provisional; awaiting Jes |
+| `hangen` | hang (modern line only, no popover) | provisional; awaiting Jes |
+| `harde` | hard (modern line only, no popover) | provisional; awaiting Jes |
+| `hath` | has (modern line only, no popover) | provisional; awaiting Jes |
+| `hereth` | hears (modern line only, no popover) | provisional; awaiting Jes |
+| `obeyeth` | obeys (modern line only, no popover) | provisional; awaiting Jes |
+| `olde` | old (modern line only, no popover) | provisional; awaiting Jes |
+| `othre` | other (modern line only, no popover) | provisional; awaiting Jes |
+| `owne` | own (modern line only, no popover) | provisional; awaiting Jes |
+| `pathes` | paths (modern line only, no popover) | provisional; awaiting Jes |
+| `redeth` | reads (modern line only, no popover) | provisional; awaiting Jes |
+| `righte` | right (modern line only, no popover) | provisional; awaiting Jes |
+| `seconde` | second (modern line only, no popover) | provisional; awaiting Jes |
+| `shal`, `shalt` | shall (modern line only, no popover) | provisional; awaiting Jes |
+| `shapen` | shaped (modern line only, no popover) | provisional; awaiting Jes |
+| `smalest` | smallest (modern line only, no popover) | provisional; awaiting Jes |
+| `tendre` | tender (modern line only, no popover) | provisional; awaiting Jes |
+| `thikkeste` | thickest (modern line only, no popover) | provisional; awaiting Jes |
+| `thinges` | things (modern line only, no popover) | provisional; awaiting Jes |
+| `townes` | towns (modern line only, no popover) | provisional; awaiting Jes |
+| `truste` | trust (modern line only, no popover) | provisional; awaiting Jes |
+| `un-to` | unto (modern line only, no popover) | provisional; awaiting Jes |
+| `up-on` | upon (modern line only, no popover) | provisional; awaiting Jes |
+| `whiche` | which (modern line only, no popover) | provisional; awaiting Jes |
+| `wordes` | words (modern line only, no popover) | provisional; awaiting Jes |
+| `wryten` | write (modern line only, no popover) | provisional; awaiting Jes |
+| `wyrking` | working (modern line only, no popover) | provisional; awaiting Jes |
+| `ther` | there (modern line only, no popover) | provisional; awaiting Jes |
+| `wrappeth` | wraps (modern line only, no popover) | provisional; awaiting Jes |
+| (sense choice) | her (modern line only, no popover) | provisional; awaiting Jes |
+| `signe` | sign (modern line only, no popover) | provisional; awaiting Jes |
 
 ## Sense choices we made (`overrides` in `glosses.json`)
 
@@ -177,8 +237,79 @@ themselves are Skeat's.
 | 00-prologue: "after his latitude" | `latitude` | the angular distance of any body from the ecliptic | provisional; awaiting Jes |
 | 00-prologue: "longitudes and latitudes of sterres" | `latitudes` | the angular distance of any body from the ecliptic | provisional; awaiting Jes |
 | 00-prologue: "than for as mechel" | `than` | then | provisional; awaiting Jes |
-| p1-03: "in hir wombe" | `hir` | (no gloss here) | provisional; awaiting Jes |
+| p1-03: "in hir wombe" | `hir` | her | provisional; awaiting Jes |
 | p1-02: "after his righte centre" | `his` | its | provisional; awaiting Jes |
+
+## The modern line: departures from the strict gloss (`lineSpans` in `glosses.json`)
+
+Our authored text, built on Skeat's glosses: where the word-for-word line would not read as English, we
+changed it minimally. Each row replaces the strict line under those words (one modern phrase under the
+whole span). The popover still shows Skeat's exact gloss. Written from the Middle English, Skeat's
+glosses and notes and plain English only; no modern translation was consulted.
+
+Counts: added-word 7, modernised-form 38, paraphrase-phrase 3, reordered 9; 57 rows.
+
+| Section | Middle English | Modern line | Kind | Status |
+|---|---|---|---|---|
+| 00-prologue | thyn | your | modernised-form | provisional; awaiting Jes |
+| 00-prologue | sciencez | sciences | modernised-form | provisional; awaiting Jes |
+| 00-prologue | noumbres | numbers | modernised-form | provisional; awaiting Jes |
+| 00-prologue | considere i | I consider | reordered | provisional; awaiting Jes |
+| 00-prologue | wrappeth him | wraps himself | modernised-form | provisional; awaiting Jes |
+| 00-prologue | condescendeth to | stoops to | modernised-form | provisional; awaiting Jes |
+| 00-prologue | preyers | prayers | modernised-form | provisional; awaiting Jes |
+| 00-prologue | have i geven | I have given | reordered | provisional; awaiting Jes |
+| 00-prologue | latitude | latitude | modernised-form | provisional; awaiting Jes |
+| 00-prologue | latitudes | latitudes | modernised-form | provisional; awaiting Jes |
+| 00-prologue | certein of | certain number of | added-word | provisional; awaiting Jes |
+| 00-prologue | to thy tendre age | for your tender age | modernised-form | provisional; awaiting Jes |
+| 00-prologue | yeer | years | modernised-form | provisional; awaiting Jes |
+| 00-prologue | ne canstow yit but smal | you know as yet but little | reordered | provisional; awaiting Jes |
+| 00-prologue | suffyse | let suffice | added-word | provisional; awaiting Jes |
+| 00-prologue | clerkes grekes | Greek scholars | reordered | provisional; awaiting Jes |
+| 00-prologue | langages | languages | modernised-form | provisional; awaiting Jes |
+| 00-prologue | god | God | modernised-form | provisional; awaiting Jes |
+| 00-prologue | and yit by | and yet by | modernised-form | provisional; awaiting Jes |
+| 00-prologue | right as | just as | modernised-form | provisional; awaiting Jes |
+| 00-prologue | to have my rewde endyting for excused | to hold my rude style of composition excused | paraphrase-phrase | provisional; awaiting Jes |
+| 00-prologue | for that curious | because ornate | modernised-form | provisional; awaiting Jes |
+| 00-prologue | un-to | to | modernised-form | provisional; awaiting Jes |
+| 00-prologue | than he | than that he | added-word | provisional; awaiting Jes |
+| 00-prologue | con me the more thank | thank me the more | reordered | provisional; awaiting Jes |
+| 00-prologue | him feyth bereth and obeyeth | bear him faith and obey him | reordered | provisional; awaiting Jes |
+| 00-prologue | ne usurpe nat | do not claim | paraphrase-phrase | provisional; awaiting Jes |
+| 00-prologue | myn | my | modernised-form | provisional; awaiting Jes |
+| 00-prologue | nam but | am but | modernised-form | provisional; awaiting Jes |
+| 00-prologue | a lewd | an unlearned | modernised-form | provisional; awaiting Jes |
+| 00-prologue | astrologiens | astronomers | modernised-form | provisional; awaiting Jes |
+| 00-prologue | werken | to work | added-word | provisional; awaiting Jes |
+| 00-prologue | instrument portatif aboute | instrument to carry about | paraphrase-phrase | provisional; awaiting Jes |
+| 00-prologue | smalest | the smallest | added-word | provisional; awaiting Jes |
+| 00-prologue | ne wol nat | will not | modernised-form | provisional; awaiting Jes |
+| 00-prologue | sterres fixe | fixed stars | reordered | provisional; awaiting Jes |
+| 00-prologue | declinacions | declinations | modernised-form | provisional; awaiting Jes |
+| 00-prologue | citeez | cities | modernised-form | provisional; awaiting Jes |
+| 00-prologue | for to finde | to find | modernised-form | provisional; awaiting Jes |
+| 00-prologue | altitude meridian | meridian altitude | reordered | provisional; awaiting Jes |
+| 00-prologue | conclusioun | proposition | modernised-form | provisional; awaiting Jes |
+| 00-prologue | kalendres | calendars | modernised-form | provisional; awaiting Jes |
+| 00-prologue | folwith | follows | modernised-form | provisional; awaiting Jes |
+| 00-prologue | maist | may | modernised-form | provisional; awaiting Jes |
+| 00-prologue | shaltow | you shall | modernised-form | provisional; awaiting Jes |
+| 00-prologue | equacions of houses | equations of houses | modernised-form | provisional; awaiting Jes |
+| 00-prologue | dignetes of planetes | dignities of planets | modernised-form | provisional; awaiting Jes |
+| p1-01 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p1-01 | rewle | rule | modernised-form | provisional; awaiting Jes |
+| p1-01 | altitude | altitude | modernised-form | provisional; awaiting Jes |
+| p1-02 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p1-02 | maner turet | kind of eye | added-word | provisional; awaiting Jes |
+| p1-02 | desturbeth nat | does not prevent | modernised-form | provisional; awaiting Jes |
+| p1-02 | to hangen | from hanging | modernised-form | provisional; awaiting Jes |
+| p1-03 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p1-03 | in manere of | in the manner of | added-word | provisional; awaiting Jes |
+| p1-03 | webbe of a loppe | spider's web | reordered | provisional; awaiting Jes |
+
+Words shown as `·` on the line (no Skeat gloss, and the modern look-alike would mislead): `bisy`, `discret`. Status: provisional; awaiting Jes.
 
 ## Not on the page
 
@@ -187,6 +318,8 @@ themselves are Skeat's.
 ## Change log
 
 - Legibility pass: no wording changed. Lines were only moved or hidden.
+- Modern line pass (Jes tg 17804, 17806, 17813, 17815): the show-all switch and the sticky gloss bar are gone; a modern line is always under the glossed sections, with 40 more plain respellings of ours (marked `lineOnly`, no popover) and the minimal-translation departures tabled above. New subtitle `Bred and mylk for childeren` (decided). Figures now sit inline at the start of their text; the Prologue's five part windows are new.
+- Contents redesign: the all-sections constellation chart at the top is gone; the top contents list only the major divisions, and each part heading carries a line of star links. Dropped `The Conclusiouns, as a constellacioun` (it named only Part II and no longer fits a list of all the parts). New: the Prologue's subtitle `Litell Lowis my sone`, the star lines' nav labels, the full-rubric star names.
 - Gloss review: Skeat's notes and introduction are no longer shown as definitions; labelled `Skeat's note` / `From Skeat's introduction` and set as notes (9 entries). Source name `Skeat's notes, Oxford Chaucer 1894` → `Skeat, Oxford Chaucer 1894, vol. III`.
 - Gloss variant (`treatise/style-gloss`): the Middle English / Both / Modern toggle and the column tags (`Chaucer`, `In modern English`) and `Modern rendering — pending` are gone. New: the gloss bar, popover labels, source names, the sample-end note, the gloss credits, the figure-term choice, our 14 glosses and the sense choices (tables above).
 - Whole-treatise pass: star names corrected: `Aldeboran` → `Aldeberan` (Chaucer's spelling), `Alhaioth` → `Alhajoth` (attested form). Star-name rows marked verified (Skeat notes / Wikipedia). New entries: contents group titles and subtitles, `P`, the full-list disclosure, the `· supplementary` / `· spurious` kicker suffixes, the inline sword window's legend and label, the "HERE ENDETH" rubric, Skeat's group labels and colophon (source text), and the in-scene labels. The "Modern rendering — pending" note now appears on 11 sections.
