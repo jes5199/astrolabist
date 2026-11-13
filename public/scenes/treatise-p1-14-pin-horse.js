@@ -64,7 +64,7 @@ export function mount(el) {
   const axis = node("path", { d: `M${f(END)} 0H96`, stroke: FAINT, "stroke-width": 0.8, "stroke-dasharray": "2 3", fill: "none", opacity: 0 }, root);
   const star = node("path", { d: "M0 -6L1.4 -1.4L6 0L1.4 1.4L0 6L-1.4 1.4L-6 0L-1.4 -1.4Z", transform: "translate(92 0)", fill: SILVER, opacity: 0 }, root);
   const word = node("text", { x: 90, y: -12, "text-anchor": "end", "font-size": 15, fill: SILVER, opacity: 0, "font-family": "inherit", stroke: NIGHT, "stroke-width": 3, "stroke-linejoin": "round", "paint-order": "stroke" }, root);
-  word.textContent = "Pol Artik";
+  word.textContent = "Pole Star";
   const P = parts().map((p) => ({ ...p, el: node("path", { d: p.d, fill: p.silver ? FAINT : "currentColor", "fill-opacity": p.fill, stroke: p.silver ? SILVER : "currentColor", "stroke-width": 0.8, "stroke-linejoin": "round" }, root) }));
   // the pin: a head at the back, a shank through the stack, a slot near its end
   const pin = node("g", {}, root);
