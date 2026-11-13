@@ -1117,6 +1117,15 @@ const tocParts = [
     text-align: center;
     padding: 7rem 0 3rem;
   }
+  /* The sky is erased behind each of these blocks (treatise-sky.ts veils), so they hug their
+     text: a full-width block left a wide dark band behind short headings (Jes tg 17910). */
+  .t-part-head > p,
+  .t-part-head > h2,
+  .t-group-head > p {
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
+  }
   .part-rose {
     display: block;
     width: 84px;
@@ -1138,7 +1147,7 @@ const tocParts = [
     font-size: clamp(2.4rem, 5vw, 3.6rem);
     color: var(--gold);
     line-height: 1.15; /* global.css h2 has a fixed 2.25rem line-height that let the rubric rule graze the letters */
-    margin: 0.2rem 0 0.6rem;
+    margin: 0.2rem auto 0.6rem;
     text-shadow: 0 0 24px rgba(236, 201, 120, 0.35);
   }
   /* Editorial inset note: our words, set into the text on a slip of vellum, apart from
