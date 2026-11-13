@@ -129,6 +129,7 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | `Saturday`; `1 Saturn` … `12 Venus` (modern planet names) | treatise-p2-12-planet-hours.js | Part II §12 (astrolabe-video 6a3c7c2). Chaucer's own example (Saturday 13 March) and order of planetary hours; no added astrological claim. | **decided: modern** |
 | degree counter ending `38.4°` | treatise-p2-13-noon.js | Part II §13 (astrolabe-video f18ee01). Modern. Chaucer's 12 March. | **decided: modern** |
 | `Aries 1°`, `Virgo 29°`, `March`, `September` | treatise-p2-14-sun-from-noon.js | Part II §14 (astrolabe-video 79c0abf). Signs Latin (decided); season month labels in modern English (explanatory labels, like II §1's "12 March"; not engraved names). | **decided** (Latin signs; modern labels) |
+| `Taurus 10°`, `Leo 20°`, `Scorpio 10°`; `same day: 14 h 43 m`, `day = night: 14 h 43 m` | treatise-p2-15-equal-days.js | Part II §15 (astrolabe-video da8e9df). Latin signs; modern captions. | **decided** |
 
 ## Not on the page
 
