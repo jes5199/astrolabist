@@ -109,8 +109,9 @@ export function mount(el) {
 
 function draw(s, t) {
   const out = 1 - span(t, 14.0, 14.8);
-  // the rete: at the east setting, turned to the west setting, back again for the next loop
-  const r = ROT_E + DAY * span(t, 2.6, 6.4) * (1 - span(t, 14.0, 14.8));
+  // the rete: at the east setting, turned to the west setting, then on round (the short way, as the sky turns) to
+  // the east setting again for the next loop
+  const r = ROT_E + DAY * span(t, 2.6, 6.4) + (360 - DAY) * span(t, 14.0, 14.8);
   s.rete.setAttribute("transform", `rotate(${f(r)})`);
   const sp = at(SUN, r);
   s.sun.setAttribute("cx", f(sp[0]));

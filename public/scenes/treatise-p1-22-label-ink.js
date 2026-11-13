@@ -59,7 +59,9 @@ function bearing(t) {
 
 function draw(s, t) {
   const back = span(t, 12.0, 12.8); // round to the cross again for the next loop
-  const b = bearing(t) * (1 - back);
+  // back to the cross the short way round (not unwinding every turn it made)
+  const b0 = ((bearing(t) % 360) + 360) % 360;
+  const b = b0 + ((b0 > 180 ? 360 : 0) - b0) * back;
   s.label.setAttribute("transform", `rotate(${f(b - (A.rule.contract.zero_deg + 180))})`);
   const at = ((b % 360) + 360) % 360;
   s.letters.forEach((l, i) => {
