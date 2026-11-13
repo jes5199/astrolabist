@@ -33,19 +33,60 @@ const privateModern = (slug: string): string[] | null => {
   return fs.readFileSync(f, "utf8").split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
 };
 
+// On this page scenes are painted as miniatures: the same scene, gilded.
+const illuminated: Record<string, string> = { "demo-rete": "illum-rete" };
+
+// Skeat sets rubrics in capitals; a scribe would write them in a book hand.
+const bookCase = (s: string) =>
+  s.toLowerCase().replace(/^([^a-z]*)([a-z])/, (_, pre, c) => pre + c.toUpperCase());
+
+// Painted drolleries in the outer margin, beside passages that name them.
+const marginalia: Record<string, string> = {
+  "part-2-1": "sun", // the degree of the sonne
+  "part-2-3": "star", // the sterres fixe
+};
+
+const roman = (n: number) =>
+  (["", "j", "ij", "iij", "iiij", "v", "vj", "vij", "viij", "ix", "x"][n] ?? String(n));
+
+const firstWords = (body: string, n: number) =>
+  body.trim().split(/\s+/).slice(0, n).join(" ").replace(/[,;:.]$/, "");
+
 const sections = await Promise.all(
   entries.map(async (entry) => {
     const { Content } = await entry.render();
     const { part, section } = entry.data;
-    return { entry, Content, id: anchor(part, section), privateModern: privateModern(entry.slug) };
+    const body = entry.body.trim();
+    return {
+      entry,
+      Content,
+      id: anchor(part, section),
+      privateModern: privateModern(entry.slug),
+      initial: body.match(/[A-Za-z]/)?.[0]?.toUpperCase() ?? "",
+      scene: entry.data.scene ? illuminated[entry.data.scene] ?? entry.data.scene : undefined,
+    };
   })
 );
 const usesPrivate = sections.some((s) => s.privateModern);
 
-const parts = ["Prologue", "Part I", "Part II"].map((name) => ({
-  name,
-  items: sections.filter((s) => s.entry.data.part === name),
-}));
+// One leaf per part; leaf j is the title and table.
+const runhead: Record<string, string> = {
+  Prologue: "Prologus",
+  "Part I": "Pars prima",
+  "Part II": "Pars secunda",
+};
+const leaves = ["Prologue", "Part I", "Part II"].map((name, i, all) => {
+  const items = sections.filter((s) => s.entry.data.part === name);
+  const next = sections.find((s) => s.entry.data.part === all[i + 1]);
+  return {
+    name,
+    items,
+    folio: roman(i + 2),
+    catch: next ? firstWords(next.entry.body, 3) : "",
+  };
+});
+const firstCatch = firstWords(sections[0].entry.body, 3);
+const folioOf = (part: string) => roman(["Prologue", "Part I", "Part II"].indexOf(part) + 2);
 ---
 
 <BaseLayout
@@ -53,118 +94,190 @@ const parts = ["Prologue", "Part I", "Part II"].map((name) => ({
   description="Geoffrey Chaucer, A Treatise on the Astrolabe (c. 1391), in W. W. Skeat's Middle English text (1894)."
 >
   <div class="treatise" data-view="both">
-    <header class="t-head">
-      <h1>A Treatise on the Astrolabe</h1>
-      <p class="t-intro">
-        Geoffrey Chaucer, <cite>A Treatise on the Astrolabe</cite> (c. 1391).
-        Middle English text: W. W. Skeat (1894).{usesPrivate && (
-          <> Modern English: {PRIVATE_MODERN.credit}. <strong class="t-private">Draft preview; publication permission pending.</strong></>
-        )}
-      </p>
-    </header>
+    <div class="codex">
+      <fieldset class="t-view">
+        <legend>Show</legend>
+        <input type="radio" name="t-view" id="t-view-both" value="both" checked />
+        <label for="t-view-both">Text &amp; glose</label>
+        <input type="radio" name="t-view" id="t-view-me" value="me" />
+        <label for="t-view-me">Text</label>
+        <input type="radio" name="t-view" id="t-view-modern" value="modern" />
+        <label for="t-view-modern">Glose</label>
+      </fieldset>
 
-    <nav class="t-toc" aria-label="Contents">
-      <h2>Contents</h2>
-      <ol>
-        {
-          parts.map((p) =>
-            p.name === "Prologue" ? (
-              p.items.map((s) => (
-                <li>
-                  <a href={`#${s.id}`} data-toc={s.id}>
-                    Prologue
-                  </a>
-                </li>
-              ))
-            ) : (
-              <li>
-                <span class="toc-part">{p.name}</span>
-                <ol>
-                  {p.items.map((s) => (
-                    <li>
-                      <a href={`#${s.id}`} data-toc={s.id}>
-                        <span class="toc-num">§ {s.entry.data.section}</span>
-                        {s.entry.data.heading && (
-                          <span class="toc-rubric">{s.entry.data.heading}</span>
-                        )}
-                      </a>
-                    </li>
-                  ))}
-                </ol>
-              </li>
-            )
-          )
-        }
-      </ol>
-    </nav>
+      <!-- fo. j: title and table -->
+      <article class="leaf leaf-title" aria-label="Title and contents">
+        <div class="bd" aria-hidden="true">
+          <span class="bd-v"></span><span class="bd-t"></span><span class="bd-b"></span>
+          <span class="boss b-tl"></span><span class="boss b-bl"></span>
+          <span class="boss b-tr"></span><span class="boss b-br"></span>
+        </div>
+        <p class="folio" aria-hidden="true">fo. j</p>
 
-    <fieldset class="t-view">
-      <legend>Show</legend>
-      <input type="radio" name="t-view" id="t-view-me" value="me" />
-      <label for="t-view-me">Middle English</label>
-      <input type="radio" name="t-view" id="t-view-modern" value="modern" />
-      <label for="t-view-modern">Modern</label>
-      <input type="radio" name="t-view" id="t-view-both" value="both" checked />
-      <label for="t-view-both">Both</label>
-    </fieldset>
+        <header class="title">
+          <p class="title-incipit">Here biginneth the Tretis of the Astrolabie</p>
+          <h1>
+            <span class="init init-xl" aria-hidden="true"><span class="init-f"><span class="init-l">A</span></span></span>
+            <span class="vh">A</span> Treatise <span class="title-on nw">on the</span> Astrolabe
+          </h1>
+          <p class="title-by">Geoffrey Chaucer, for Lowis his sone, <span class="nw">c. 1391</span></p>
+        </header>
 
-    <div class="t-cols" aria-hidden="true">
-      <span>Middle English</span>
-      <span>Modern English</span>
-      <span>Figure</span>
-    </div>
-
-    {
-      parts.map((p) => (
-        <section class="t-part" aria-label={p.name}>
-          {p.name !== "Prologue" && (
-            <header class="t-part-head">
-              <h2>{p.name}</h2>
-              <p class="t-part-rubric">{partRubric[p.name]}</p>
-            </header>
+        <div class="title-body">
+          <p class="credits">
+            Middle English text: W. W. Skeat (1894).{usesPrivate && (
+              <> Modern English: {PRIVATE_MODERN.credit}, written here in the margin as a glose.</>
+            )}
+          </p>
+          {usesPrivate && (
+            <p class="t-private">Draft preview; publication permission pending.</p>
           )}
-          {p.items.map(({ entry, Content, id, privateModern }) => (
-            <article class="t-sec" id={id}>
-              <header class="t-sec-head">
-                <h3>
-                  {entry.data.part === "Prologue" ? (
-                    "Prologue"
+
+          <nav class="t-toc" aria-label="Contents">
+            <h2>Tabula</h2>
+            <ol>
+              {
+                leaves.map((p) =>
+                  p.name === "Prologue" ? (
+                    p.items.map((s) => (
+                      <li class="toc-top">
+                        <a href={`#${s.id}`}>
+                          <span class="toc-label">Prologue</span>
+                          <span class="toc-lead" aria-hidden="true"></span>
+                          <span class="toc-fo">fo. {p.folio}</span>
+                        </a>
+                      </li>
+                    ))
                   ) : (
-                    <>
-                      <span class="t-sec-num">§ {entry.data.section}.</span>{" "}
-                      {entry.data.heading}
-                    </>
-                  )}
-                </h3>
-                {entry.data.latin && (
-                  <p class="t-latin" lang="la">
-                    {entry.data.latin}
-                  </p>
-                )}
-              </header>
-              <div class="t-scene">
-                <Scene
-                  name={entry.data.scene}
-                  label={`Figure for ${entry.data.part}${entry.data.part === "Prologue" ? "" : ` § ${entry.data.section}`}`}
-                />
-              </div>
-              <div class="t-me" lang="enm">
-                <Content />
-              </div>
-              <div class="t-modern">
-                {privateModern ? (
-                  privateModern.map((p) => <p>{p}</p>)
-                ) : entry.data.modern ? (
-                  <p>{entry.data.modern}</p>
-                ) : (
-                  <p class="t-pending">Modern rendering — pending</p>
-                )}
-              </div>
-            </article>
-          ))}
-        </section>
-      ))
-    }
+                    <li class="toc-top">
+                      <span class="toc-part">{p.name}</span>
+                      <ol>
+                        {p.items.map((s, i) => (
+                          <li>
+                            <a href={`#${s.id}`}>
+                              <span class={`toc-num ${i % 2 ? "blue" : "red"}`}>§ {s.entry.data.section}</span>
+                              <span class="toc-label">
+                                {s.entry.data.heading ? bookCase(s.entry.data.heading) : s.entry.body.trim().split(/\s+/).slice(0, 6).join(" ") + "…"}
+                              </span>
+                              <span class="toc-lead" aria-hidden="true"></span>
+                              <span class="toc-fo">fo. {folioOf(p.name)}</span>
+                            </a>
+                          </li>
+                        ))}
+                      </ol>
+                    </li>
+                  )
+                )
+              }
+            </ol>
+          </nav>
+        </div>
+        <p class="catch" aria-hidden="true"><span>{firstCatch}</span></p>
+      </article>
+
+      {
+        leaves.map((leaf) => (
+          <article class="leaf" aria-label={leaf.name}>
+            <div class="bd" aria-hidden="true">
+              <span class="bd-v" />
+              <span class="bd-t" />
+              <span class="bd-b" />
+              <span class="boss b-tl" />
+              <span class="boss b-bl" />
+              <span class="boss b-tr" />
+              <span class="boss b-br" />
+            </div>
+            <p class="runhead" aria-hidden="true">
+              {[...runhead[leaf.name]].map((c, i) => (
+                <span class={i % 2 ? "blue" : "red"}>{c}</span>
+              ))}
+            </p>
+            <p class="folio" aria-hidden="true">fo. {leaf.folio}</p>
+
+            <div class="leaf-body">
+              {leaf.name !== "Prologue" && (
+                <header class="part-head">
+                  <h2>{leaf.name}</h2>
+                  <p class="part-rubric">{bookCase(partRubric[leaf.name])}</p>
+                </header>
+              )}
+              {leaf.items.map(({ entry, Content, id, privateModern, initial, scene }, i) => (
+                <section class="t-sec" id={id}>
+                  <div class="t-main">
+                    <header class="t-sec-head">
+                      <h3>
+                        <span class="renvoi" aria-hidden="true" />
+                        {entry.data.part === "Prologue" ? (
+                          "Prologue"
+                        ) : (
+                          <>
+                            <span class="t-sec-num">§ {entry.data.section}.</span>{" "}
+                            {entry.data.heading && bookCase(entry.data.heading)}
+                          </>
+                        )}
+                      </h3>
+                      {entry.data.latin && (
+                        <p class="t-latin" lang="la">
+                          {bookCase(entry.data.latin)}
+                        </p>
+                      )}
+                    </header>
+                    {scene && (
+                      <figure class="mini">
+                        <div class="mini-frame">
+                          <div class="mini-band">
+                            <div class="mini-ground">
+                              <Scene
+                                name={scene}
+                                label={`Miniature of an astrolabe, for ${entry.data.part}${entry.data.part === "Prologue" ? "" : ` § ${entry.data.section}`}`}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </figure>
+                    )}
+                    <div
+                      class:list={["t-me", { big: i === 0 }]}
+                      lang="enm"
+                    >
+                      <span class="init" aria-hidden="true">
+                        <span class="init-f">
+                          <span class="init-l">{initial}</span>
+                        </span>
+                      </span>
+                      <Content />
+                    </div>
+                  </div>
+                  <aside class="t-gloss" aria-label="Modern English">
+                    <p class="gl-lemma">
+                      <span class="renvoi" aria-hidden="true" />
+                      Glose
+                    </p>
+                    {privateModern ? (
+                      privateModern.map((p) => <p>{p}</p>)
+                    ) : entry.data.modern ? (
+                      <p>{entry.data.modern}</p>
+                    ) : (
+                      <p class="t-pending">Modern rendering — pending</p>
+                    )}
+                    {marginalia[id] && (
+                      <span class={`marg marg-${marginalia[id]}`} aria-hidden="true" />
+                    )}
+                  </aside>
+                </section>
+              ))}
+            </div>
+            {leaf.catch ? (
+              <p class="catch" aria-hidden="true">
+                <span>{leaf.catch}</span>
+              </p>
+            ) : (
+              <p class="explicit">Explicit.</p>
+            )}
+          </article>
+        ))
+      }
+    </div>
   </div>
 </BaseLayout>
 
@@ -184,10 +297,10 @@ const parts = ["Prologue", "Part I", "Part II"].map((name) => ({
     font-display: swap;
   }
   @font-face {
-    font-family: "EB Garamond";
-    src: url("/fonts/treatise/ebgaramond/EBGaramond-VF.woff2") format("woff2");
-    font-weight: 400 800;
-    font-style: normal;
+    font-family: "IM Fell English";
+    src: url("/fonts/treatise/imfell/IMFellEnglish-Italic.woff2") format("woff2");
+    font-weight: 400;
+    font-style: italic;
     font-display: swap;
   }
 
@@ -197,192 +310,85 @@ const parts = ["Prologue", "Part I", "Part II"].map((name) => ({
   }
   @media (min-width: 1000px) {
     .page-padding:has(.treatise) {
-      padding-left: 48px;
-      padding-right: 48px;
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+  }
+  /* The site sets p sizes globally; the leaves set their own. */
+  .treatise p {
+    font-size: inherit;
+    line-height: inherit;
+  }
+  .page-wrapper:has(.treatise) {
+    overflow-x: clip;
+  }
+  @media (max-width: 759.98px) {
+    /* Let the lectern run edge to edge on phones. */
+    main > .treatise {
+      max-width: none;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
     }
   }
 </style>
 
 <style>
   .treatise {
-    --rubric: var(--text-hover);
-    --gilt: var(--pull-quote-color);
+    --ink: #2a1a0e;
+    --sepia: #57391a;
+    --red: #b3301c;
+    --blue: #2b4c9b;
+    --rose: #c0516b;
+    --rule: rgba(160, 82, 60, 0.2);
+    --gold: linear-gradient(
+      135deg,
+      #8a5a12 0%,
+      #e6bf55 20%,
+      #fff1b8 36%,
+      #d6a43a 52%,
+      #9b6a18 74%,
+      #ecc65e 100%
+    );
     --me-font: "Junicode 2", "Junicode", Georgia, serif;
     --black-font: "Texturina", var(--me-font);
-    --modern-font: "EB Garamond", Georgia, serif;
+    --gloss-font: "IM Fell English", "Junicode 2", Georgia, serif;
+    --lh: 2.05rem;
+    --gloss-w: 17.5rem;
+    --gap: 2.75rem;
     position: relative;
     z-index: 1;
+    margin-bottom: 3rem;
   }
 
-  .t-head h1 {
-    font-family: var(--black-font);
-    font-weight: 600;
-    font-variation-settings: "opsz" 72;
-    color: var(--rubric);
-    margin-bottom: 0.5rem;
-  }
-  .t-intro {
-    font-family: var(--modern-font);
-    font-size: 1.25rem;
-    margin-top: 0;
-  }
-
-  /* Contents */
-  .t-toc {
-    border-top: 1px solid var(--tag-border);
-    border-bottom: 1px solid var(--tag-border);
-    padding: 0.5rem 0 1rem;
-    margin: 1.5rem 0 2rem;
-    max-width: 44rem;
-  }
-  .t-toc h2 {
-    font-family: var(--black-font);
-    font-size: 1.25rem;
-    color: var(--rubric);
-    margin: 0.5rem 0;
-  }
-  .t-toc ol {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .t-toc ol ol {
-    padding-left: 1.25rem;
-  }
-  .t-toc li {
-    margin: 0.2rem 0;
-    font-size: 1rem;
-    line-height: 1.4;
-  }
-  .toc-part {
-    font-family: var(--black-font);
-    font-weight: 600;
-  }
-  .t-toc a {
-    color: inherit;
-    text-decoration: none;
-    display: flex;
-    gap: 0.6rem;
-    min-width: 0;
-  }
-  .t-toc a:hover,
-  .t-toc a.active {
-    color: var(--rubric);
-  }
-  .toc-num {
-    flex: none;
-    font-variant-numeric: oldstyle-nums;
-  }
-  .toc-rubric {
-    font-family: var(--me-font);
-    font-size: 0.8rem;
-    letter-spacing: 0.03em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    min-width: 0;
+  /* ---- The lectern: tooled leather behind the leaves ---- */
+  .codex {
+    position: relative;
+    padding: 1.25rem 2.75rem 3rem;
+    border-radius: 10px;
+    background:
+      url("/treatise-art/leather.svg") 0 0 / 96px 96px,
+      radial-gradient(ellipse at 50% 0%, #6b3a20 0%, #45210f 55%, #2a130a 100%);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 220, 160, 0.08),
+      inset 0 0 0 7px #2a130a,
+      inset 0 0 0 8px rgba(225, 180, 90, 0.35),
+      inset 0 0 60px rgba(0, 0, 0, 0.6),
+      0 10px 30px rgba(40, 20, 5, 0.35);
   }
 
-  /* Parts and sections */
-  .t-part-head h2 {
-    font-family: var(--black-font);
-    color: var(--rubric);
-    font-weight: 600;
-    margin: 3rem 0 0.25rem;
-  }
-  .t-part-rubric {
-    font-family: var(--me-font);
-    color: var(--rubric);
-    letter-spacing: 0.06em;
-    font-size: 0.95rem;
-    margin: 0 0 1.5rem;
-  }
-
-  .t-sec {
-    padding: 1.5rem 0 2rem;
-    border-bottom: 1px solid color-mix(in srgb, var(--tag-border) 35%, transparent);
-    scroll-margin-top: 1rem;
-  }
-  .t-sec-head h3 {
-    font-family: var(--black-font);
-    font-weight: 500;
-    color: var(--rubric);
-    font-size: 1.3rem;
-    line-height: 1.35;
-    letter-spacing: 0.02em;
-    margin: 0 0 0.5rem;
-  }
-  .t-sec-num {
-    font-weight: 700;
-  }
-  .t-latin {
-    font-family: var(--me-font);
-    font-style: normal;
-    font-size: 0.85rem;
-    line-height: 1.45;
-    letter-spacing: 0.04em;
-    color: var(--header-color);
-    margin: 0 0 1rem;
-  }
-
-  .t-me {
-    font-family: var(--me-font);
-    font-weight: 400;
-    font-size: 1.2rem;
-    line-height: 1.6;
-    hyphens: manual;
-  }
-  .t-me :global(p) {
-    margin: 0 0 1em;
-  }
-  .t-me :global(p:first-child::first-letter) {
-    font-family: var(--black-font);
-    font-weight: 700;
-    font-variation-settings: "opsz" 72;
-    color: var(--rubric);
-    float: left;
-    font-size: 3.6em;
-    line-height: 0.85;
-    padding: 0.08em 0.1em 0 0;
-    margin-right: 0.04em;
-    text-shadow: 0.03em 0.03em 0 var(--gilt);
-  }
-
-  .t-modern {
-    font-family: var(--modern-font);
-    font-size: 1.2rem;
-    line-height: 1.6;
-  }
-  .t-private {
-    color: #b3261e;
-    font-weight: 600;
-  }
-  .t-pending {
-    margin: 0;
-    padding: 1rem 1.1rem;
-    border: 1px dashed var(--tag-border);
-    border-radius: 4px;
-    font-style: normal;
-    font-variant: small-caps;
-    letter-spacing: 0.05em;
-    opacity: 0.7;
-  }
-
-  .t-scene :global(.scene:not([data-scene])) {
-    opacity: 0.5;
-  }
-
-  /* View toggle (mobile) */
+  /* View toggle: three gilt-tooled tabs, kept in reach. */
   .t-view {
-    border: 0;
-    margin: 0 0 1rem;
-    padding: 0;
-    display: flex;
     position: sticky;
-    top: 0;
-    z-index: 2;
-    background: var(--theme-background);
-    border-bottom: 1px solid var(--tag-border);
+    top: 0.5rem;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+    border: 0;
+    padding: 0;
+    margin: 0 auto 1.25rem;
+    width: max-content;
+    max-width: 100%;
   }
   .t-view legend {
     position: absolute;
@@ -397,108 +403,766 @@ const parts = ["Prologue", "Part I", "Part II"].map((name) => ({
     pointer-events: none;
   }
   .t-view label {
-    flex: 1;
-    text-align: center;
-    padding: 0.6rem 0.25rem 0.5rem;
+    font-family: var(--black-font);
+    font-weight: 600;
     font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    padding: 0.4rem 1rem 0.45rem;
     cursor: pointer;
-    border-bottom: 3px solid transparent;
+    color: #ecd29a;
+    background: linear-gradient(#5a2c15, #3a1a0b);
+    border: 1px solid #1d0c04;
+    box-shadow:
+      inset 0 0 0 2px rgba(236, 198, 94, 0.25),
+      0 2px 4px rgba(0, 0, 0, 0.4);
+    border-radius: 3px;
+    white-space: nowrap;
   }
   .t-view input:checked + label {
-    color: var(--rubric);
-    border-bottom-color: var(--rubric);
+    color: #2a1a0e;
+    background: var(--gold);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 250, 220, 0.6),
+      0 2px 6px rgba(0, 0, 0, 0.5);
   }
   .t-view input:focus-visible + label {
-    outline: 2px solid var(--rubric);
-    outline-offset: -2px;
+    outline: 2px solid #ecd29a;
+    outline-offset: 2px;
   }
 
-  .t-cols {
+  /* ---- A leaf of vellum ---- */
+  .leaf {
+    --pt: 8.25rem;
+    --pr: 3.5rem;
+    --pb: 8rem;
+    --pl: 8.5rem;
+    position: relative;
+    max-width: 1080px;
+    margin: 0 auto 2.75rem;
+    padding: var(--pt) var(--pr) var(--pb) var(--pl);
+    box-sizing: border-box;
+    color: var(--ink);
+    background:
+      url("/treatise-art/vellum.svg") 0 0 / 420px 420px,
+      radial-gradient(ellipse 80% 70% at 45% 40%, #f7ecd2 0%, #f0dfb9 60%, #e3c995 100%);
+    border-radius: 4px 7px 5px 6px / 6px 4px 7px 5px;
+    box-shadow:
+      inset 0 0 80px rgba(135, 85, 25, 0.3),
+      inset 0 0 6px rgba(120, 75, 20, 0.35),
+      0 1px 0 #e9d4a5,
+      3px 4px 0 -1px #d8be8a,
+      6px 8px 0 -2px #c9ab73,
+      0 22px 45px rgba(0, 0, 0, 0.55);
+  }
+  .leaf::selection,
+  .leaf ::selection {
+    background: rgba(43, 76, 155, 0.22);
+  }
+
+  /* Border: a bar of blue and rose with ivy, down the gutter and across head and foot. */
+  .bd {
+    --bar: 72px;
+    --tile: 220px;
+    --bx: 30px; /* left edge of the vertical tile */
+    --by: 2.9rem; /* centre line of the top and bottom bars */
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .bd > span {
+    position: absolute;
+  }
+  .bd-v {
+    left: var(--bx);
+    top: var(--by);
+    bottom: var(--by);
+    width: var(--bar);
+    background: url("/treatise-art/vine-v.svg") 0 0 / var(--bar) var(--tile);
+    background-repeat: no-repeat round;
+  }
+  .bd-t,
+  .bd-b {
+    left: calc(var(--bx) + var(--bar) / 2);
+    right: calc(var(--pr) + 4.5rem);
+    height: var(--bar);
+    background: url("/treatise-art/vine-h.svg") 0 0 / var(--tile) var(--bar);
+    background-repeat: round no-repeat;
+  }
+  .bd-t {
+    top: calc(var(--by) - var(--bar) / 2);
+  }
+  .bd-b {
+    bottom: calc(var(--by) - var(--bar) / 2);
+    transform: scaleY(-1);
+  }
+  .boss {
+    width: 36px;
+    height: 36px;
+    background: url("/treatise-art/boss.svg") 0 0 / 100% 100%;
+    filter: drop-shadow(1px 1.5px 1px rgba(60, 30, 5, 0.45));
+  }
+  .b-tl,
+  .b-bl {
+    left: calc(var(--bx) + var(--bar) / 2 - 18px);
+  }
+  .b-tr,
+  .b-br {
+    right: calc(var(--pr) + 4.5rem - 18px);
+  }
+  .b-tl,
+  .b-tr {
+    top: calc(var(--by) - 18px);
+  }
+  .b-bl,
+  .b-br {
+    bottom: calc(var(--by) - 18px);
+  }
+
+  .folio {
+    position: absolute;
+    top: 2rem;
+    right: var(--pr);
+    margin: 0;
+    font-family: var(--gloss-font);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--sepia);
+    opacity: 0.85;
+  }
+  .runhead {
+    position: absolute;
+    top: 5.6rem;
+    left: var(--pl);
+    right: calc(var(--pr) + var(--gloss-w) + var(--gap));
+    margin: 0;
+    text-align: center;
+    font-family: var(--black-font);
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.22em;
+  }
+  .red {
+    color: var(--red);
+  }
+  .blue {
+    color: var(--blue);
+  }
+
+  .catch {
+    position: absolute;
+    bottom: 5rem;
+    right: calc(var(--pr) + var(--gloss-w) + var(--gap));
+    margin: 0;
+    font-family: var(--me-font);
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+  .catch span {
+    display: inline-block;
+    padding: 0.05rem 0.7rem 0.1rem;
+    border: 1px solid var(--red);
+    border-radius: 0 0 40% 40% / 0 0 70% 70%;
+    box-shadow: 2px 2px 0 -1px rgba(43, 76, 155, 0.6);
+  }
+  .explicit {
+    position: absolute;
+    bottom: 5rem;
+    left: var(--pl);
+    right: calc(var(--pr) + var(--gloss-w) + var(--gap));
+    margin: 0;
+    text-align: center;
+    font-family: var(--black-font);
+    font-weight: 600;
+    color: var(--red);
+    font-size: 1.2rem;
+  }
+
+  /* ---- Text block, with its frame ruling ---- */
+  .leaf-body {
+    --rl: rgba(160, 82, 60, 0.3);
+    position: relative;
+  }
+  .leaf-body::before {
+    /* Vertical bounding rules: either side of the text block and of the gloss column. */
+    content: "";
+    position: absolute;
+    top: -1.25rem;
+    bottom: -1.5rem;
+    left: -0.9rem;
+    right: -0.9rem;
+    pointer-events: none;
+    background:
+      linear-gradient(var(--rl), var(--rl)) 0 0 / 1px 100% no-repeat,
+      linear-gradient(var(--rl), var(--rl)) 5px 0 / 1px 100% no-repeat,
+      linear-gradient(var(--rl), var(--rl))
+        calc(100% - var(--gloss-w) - var(--gap) / 2 - 0.9rem) 0 / 1px 100% no-repeat,
+      linear-gradient(var(--rl), var(--rl)) 100% 0 / 1px 100% no-repeat;
+  }
+
+  .part-head {
+    position: relative;
+    text-align: center;
+    margin: 0 calc(var(--gloss-w) + var(--gap)) 1.6rem 0;
+  }
+  .part-head h2 {
+    font-family: var(--black-font);
+    font-weight: 700;
+    font-variation-settings: "opsz" 72;
+    font-size: 2.6rem;
+    line-height: 1.1;
+    color: var(--blue);
+    margin: 0;
+    text-shadow: 1px 1px 0 rgba(255, 250, 230, 0.6);
+  }
+  .part-head h2::before,
+  .part-head h2::after {
+    /* Penwork line-fillers either side of the heading. */
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 3.5rem;
+    height: 0.6rem;
+    margin: 0 0.8rem;
+    background:
+      radial-gradient(circle, var(--red) 0 2px, transparent 2.5px) 0 50% / 0.6rem 0.6rem repeat-x,
+      linear-gradient(var(--blue), var(--blue)) 0 50% / 100% 1px no-repeat;
+  }
+  .part-rubric {
+    font-family: var(--black-font);
+    font-weight: 500;
+    color: var(--red);
+    font-size: 1.3rem;
+    margin: 0.3rem 0 0;
+  }
+
+  .t-sec {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--gloss-w);
+    column-gap: var(--gap);
+    scroll-margin-top: 4rem;
+  }
+  .t-sec + .t-sec {
+    margin-top: calc(var(--lh) * 1.25);
+  }
+
+  .t-sec-head h3 {
+    font-family: var(--black-font);
+    font-weight: 600;
+    color: var(--red);
+    font-size: 1.28rem;
+    line-height: 1.4;
+    margin: 0 0 0.5rem;
+  }
+  .t-sec-num {
+    color: var(--blue);
+    font-weight: 700;
+  }
+  .t-latin {
+    font-family: var(--me-font);
+    font-style: normal;
+    font-size: 0.92rem;
+    line-height: 1.45;
+    letter-spacing: 0.02em;
+    color: var(--red);
+    margin: 0 0 0.9rem;
+    opacity: 0.9;
+  }
+  .renvoi {
+    /* Signe de renvoi: ties a passage to its glose. */
+    display: inline-block;
+    width: 0.7em;
+    height: 0.7em;
+    margin-right: 0.4em;
+    vertical-align: 0.05em;
+    border-radius: 50%;
+    border: 1.5px solid var(--red);
+    background:
+      linear-gradient(var(--red), var(--red)) 50% 50% / 1.5px 100% no-repeat,
+      linear-gradient(var(--red), var(--red)) 50% 50% / 100% 1.5px no-repeat;
+    box-sizing: border-box;
+  }
+
+  /* Middle English: iron-gall ink on ruled lines. */
+  .t-me {
+    font-family: var(--me-font);
+    font-weight: 400;
+    font-size: 1.24rem;
+    line-height: var(--lh);
+    hyphens: manual;
+    color: var(--ink);
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(var(--lh) * 0.74),
+      var(--rule) calc(var(--lh) * 0.74),
+      var(--rule) calc(var(--lh) * 0.74 + 1px),
+      transparent calc(var(--lh) * 0.74 + 1px),
+      transparent var(--lh)
+    );
+  }
+  .t-me::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+  .t-me :global(p) {
+    margin: 0;
+  }
+  .t-me :global(p:first-of-type::first-letter) {
+    /* The painted initial stands in for this letter. */
+    font-size: 0;
+    line-height: 0;
+  }
+  .t-me :global(p + p::before) {
+    content: "¶ ";
+    font-weight: 700;
+    color: var(--blue);
+  }
+  .t-me :global(p:nth-of-type(odd):not(:first-of-type)::before) {
+    color: var(--red);
+  }
+
+  /* Painted initial: gold letter on a ground of blue and rose with white penwork. */
+  .init {
+    --n: 3;
+    float: left;
+    box-sizing: border-box;
+    width: calc(var(--n) * var(--lh) - 0.55rem);
+    height: calc(var(--n) * var(--lh) - 0.55rem);
+    margin: 0.3rem 0.75rem 0.25rem 0;
+    padding: 3px;
+    background: var(--gold);
+    border: 1px solid #3a230c;
+    box-shadow:
+      1px 2px 3px rgba(60, 30, 5, 0.35),
+      inset 0 0 0 1px rgba(255, 248, 210, 0.5);
+  }
+  .t-me.big .init {
+    --n: 4;
+  }
+  .init-f {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #3a230c;
+    box-sizing: border-box;
+    background:
+      url("/treatise-art/penwork.svg") 0 0 / 22px 22px,
+      linear-gradient(135deg, var(--blue) 0 50%, var(--rose) 50% 100%);
+  }
+  .init-l {
+    font-family: var(--black-font);
+    font-weight: 800;
+    font-variation-settings: "opsz" 72;
+    font-size: calc(var(--n) * var(--lh) * 0.72);
+    line-height: 1;
+    padding-bottom: 0.08em;
+    background: var(--gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-stroke: 0.7px #3a230c;
+    filter: drop-shadow(1px 1px 0 rgba(20, 10, 0, 0.55));
+  }
+
+  /* Miniature: gold frame, blue band with penwork, diapered ground. */
+  .mini {
+    width: min(21rem, 100%);
+    margin: 0.4rem auto 1.4rem;
+  }
+  .mini-frame {
+    padding: 5px;
+    background: var(--gold);
+    border: 1px solid #3a230c;
+    box-shadow:
+      2px 3px 6px rgba(60, 30, 5, 0.35),
+      inset 0 0 0 1px rgba(255, 248, 210, 0.5);
+  }
+  .mini-band {
+    padding: 7px;
+    border: 1px solid #3a230c;
+    background:
+      url("/treatise-art/penwork.svg") 0 0 / 22px 22px,
+      var(--rose);
+  }
+  .mini-ground {
+    padding: 7%;
+    border: 1px solid #3a230c;
+    outline: 2px solid #e2b748;
+    background: url("/treatise-art/diaper.svg") 0 0 / 22px 22px;
+    box-shadow: inset 0 0 18px rgba(10, 10, 40, 0.55);
+  }
+  .mini-ground :global(.scene) {
+    color: #f3dc94;
+  }
+  .mini-ground :global(.scene-poster) {
+    opacity: 0.8;
+  }
+
+  /* Glose: a smaller, browner hand in the outer margin. */
+  .t-gloss {
+    font-family: var(--gloss-font);
+    font-style: italic;
+    font-size: 1.08rem;
+    line-height: 1.42;
+    color: var(--sepia);
+    padding-top: 0.15rem;
+  }
+  .t-gloss p {
+    margin: 0;
+    text-indent: 1em;
+  }
+  .t-gloss p.gl-lemma {
+    text-indent: 0;
+    font-family: var(--black-font);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+    color: var(--red);
+    margin-bottom: 0.25rem;
+  }
+  .t-gloss p.gl-lemma + p {
+    text-indent: 0;
+  }
+  .t-pending {
+    opacity: 0.7;
+  }
+  .marg {
+    display: block;
+    width: 6.5rem;
+    height: 6.5rem;
+    margin: 1.5rem auto 0;
+    background: 0 0 / 100% 100% no-repeat;
+    filter: drop-shadow(1px 2px 1.5px rgba(60, 30, 5, 0.35));
+  }
+  .marg-sun {
+    background-image: url("/treatise-art/marg-sun.svg");
+  }
+  .marg-star {
+    width: 4.5rem;
+    height: 4.5rem;
+    background-image: url("/treatise-art/marg-star.svg");
+  }
+
+  /* ---- Title leaf ---- */
+  .title {
+    text-align: center;
+    margin-right: calc(var(--gloss-w) * 0.5);
+  }
+  .title-incipit {
+    font-family: var(--black-font);
+    font-weight: 500;
+    color: var(--red);
+    font-size: 1.25rem;
+    margin: 0 0 1rem;
+  }
+  .title h1 {
+    font-family: var(--black-font);
+    font-weight: 700;
+    font-variation-settings: "opsz" 72;
+    font-size: 3.6rem;
+    line-height: 1.12;
+    color: var(--blue);
+    margin: 0;
+    text-shadow: 1px 1px 0 rgba(255, 250, 230, 0.7);
+  }
+  .title h1 .init {
+    float: none;
+    display: inline-block;
+    vertical-align: -0.28em;
+    --n: 2.2;
+    margin: 0 0.15em 0 0;
+  }
+  .title-on {
+    color: var(--red);
+    font-size: 0.6em;
+    font-weight: 600;
+  }
+  .vh {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+  .title-by {
+    font-family: var(--me-font);
+    font-size: 1.25rem;
+    margin: 0.9rem 0 0;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+  .nw {
+    white-space: nowrap;
+  }
+  .title-body {
+    max-width: 40rem;
+    margin: 2.2rem auto 0;
+    transform: translateX(calc(var(--gloss-w) * -0.25));
+  }
+  .credits {
+    font-family: var(--gloss-font);
+    font-style: italic;
+    font-size: 1.12rem;
+    line-height: 1.45;
+    color: var(--sepia);
+    text-align: center;
+    margin: 0;
+  }
+  .t-private {
+    text-align: center;
+    font-family: var(--black-font);
+    font-weight: 600;
+    color: var(--red);
+    margin: 0.5rem 0 0;
+  }
+  .t-toc {
+    margin-top: 2rem;
+  }
+  .t-toc h2 {
+    font-family: var(--black-font);
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: var(--red);
+    text-align: center;
+    margin: 0 0 0.75rem;
+  }
+  .t-toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .t-toc ol ol {
+    padding-left: 1.25rem;
+  }
+  .t-toc li {
+    margin: 0.15rem 0;
+    line-height: 1.45;
+  }
+  .toc-top {
+    margin-top: 0.6rem !important;
+  }
+  .toc-part,
+  .toc-top > a .toc-label {
+    font-family: var(--black-font);
+    font-weight: 700;
+    color: var(--blue);
+    font-size: 1.15rem;
+  }
+  .t-toc a {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    color: var(--ink);
+    text-decoration: none;
+    font-family: var(--me-font);
+    font-size: 1.02rem;
+    min-width: 0;
+  }
+  .t-toc a:hover .toc-label {
+    color: var(--red);
+  }
+  .toc-num {
+    flex: none;
+    font-weight: 700;
+  }
+  .toc-label {
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .toc-lead {
+    flex: 1 0 1.5rem;
+    border-bottom: 2px dotted rgba(87, 57, 26, 0.45);
+    transform: translateY(-0.25em);
+  }
+  .toc-fo {
+    flex: none;
+    font-family: var(--gloss-font);
+    font-style: italic;
+    color: var(--sepia);
+  }
+
+  /* ---- View modes ---- */
+  .treatise[data-view="me"] .t-gloss {
+    display: none;
+  }
+  .treatise[data-view="modern"] .t-me,
+  .treatise[data-view="modern"] .t-latin {
+    display: none;
+  }
+  .treatise[data-view="modern"] .t-gloss {
+    /* Glose alone: it takes the text block, the margin stays empty. */
+    grid-column: 1;
+    grid-row: 2;
+    font-size: 1.3rem;
+    line-height: 1.5;
+  }
+  .treatise[data-view="modern"] .t-main {
+    grid-row: 1;
+  }
+  .treatise[data-view="modern"] .gl-lemma {
     display: none;
   }
 
-  /* Mobile: one column, scene inline above the passage. */
-  @media (max-width: 999.98px) {
-    .t-sec {
-      display: flex;
-      flex-direction: column;
+  /* ---- Medium: narrower glose column ---- */
+  @media (max-width: 1099.98px) {
+    .treatise {
+      --gloss-w: 14.5rem;
+      --gap: 2.25rem;
     }
-    .t-sec-head {
-      order: 1;
-    }
-    .t-scene {
-      order: 2;
-      max-width: 16rem;
-      width: 70%;
-      margin: 0 auto 1rem;
-    }
-    .t-scene:not(:has(.scene[data-scene])) {
-      display: none;
-    }
-    .t-me {
-      order: 3;
-    }
-    .t-modern {
-      order: 4;
-    }
-    .treatise[data-view="both"] .t-modern {
-      border-top: 1px solid color-mix(in srgb, var(--tag-border) 35%, transparent);
-      padding-top: 1rem;
-    }
-    .treatise[data-view="me"] .t-modern,
-    .treatise[data-view="modern"] .t-me {
-      display: none;
+    .codex {
+      padding: 1rem 1.25rem 2.5rem;
     }
   }
 
-  /* Desktop: Middle English | modern | sticky scene. */
-  @media (min-width: 1000px) {
+  /* ---- Small screens: glose follows each passage, like an interlinear note ---- */
+  @media (max-width: 759.98px) {
+    .treatise {
+      --lh: 1.85rem;
+      --gloss-w: 0px;
+      --gap: 0px;
+    }
+    .codex {
+      padding: 0.6rem 0.5rem 1.5rem;
+      border-radius: 0;
+    }
     .t-view {
-      display: none;
+      top: 0.25rem;
+      gap: 0.25rem;
     }
-    .t-cols,
+    .t-view label {
+      font-size: 0.85rem;
+      padding: 0.35rem 0.6rem 0.4rem;
+    }
+    .leaf {
+      --pt: 5.5rem;
+      --pr: 1rem;
+      --pb: 5.25rem;
+      --pl: 3.1rem;
+      margin-bottom: 1.5rem;
+    }
+    .bd {
+      --bar: 36px;
+      --tile: 110px;
+      --bx: 4px;
+      --by: 1.6rem;
+    }
+    .bd-t,
+    .bd-b {
+      right: 4.5rem;
+    }
+    .boss {
+      width: 22px;
+      height: 22px;
+    }
+    .b-tl,
+    .b-bl {
+      left: calc(var(--bx) + var(--bar) / 2 - 11px);
+    }
+    .b-tr,
+    .b-br {
+      right: calc(4.5rem - 11px);
+    }
+    .b-tl,
+    .b-tr {
+      top: calc(var(--by) - 11px);
+    }
+    .b-bl,
+    .b-br {
+      bottom: calc(var(--by) - 11px);
+    }
+    .folio {
+      top: 1.05rem;
+      font-size: 0.9rem;
+    }
+    .runhead {
+      top: 3.4rem;
+      font-size: 0.85rem;
+    }
+    .catch,
+    .explicit {
+      bottom: 3.3rem;
+      right: var(--pr);
+    }
+    .leaf-body::before {
+      left: -0.55rem;
+      right: -0.4rem;
+      background:
+        linear-gradient(var(--rl), var(--rl)) 0 0 / 1px 100% no-repeat,
+        linear-gradient(var(--rl), var(--rl)) 100% 0 / 1px 100% no-repeat;
+    }
+    .part-head {
+      margin-right: 0;
+    }
+    .part-head h2 {
+      font-size: 2rem;
+    }
+    .part-head h2::before,
+    .part-head h2::after {
+      width: 1.5rem;
+      margin: 0 0.4rem;
+    }
+    .part-rubric {
+      font-size: 1.1rem;
+    }
     .t-sec {
-      display: grid;
-      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) 15rem;
-      column-gap: 2.5rem;
+      display: block;
     }
-    .t-cols {
-      position: sticky;
-      top: 0;
-      z-index: 2;
-      background: var(--theme-background);
-      border-bottom: 1px solid var(--tag-border);
-      padding: 0.5rem 0;
-      font-size: 0.8rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--header-color);
-    }
-    .t-sec {
-      grid-template-areas:
-        "head head scene"
-        "me modern scene";
-      grid-template-rows: auto 1fr;
-    }
-    .t-sec-head {
-      grid-area: head;
+    .t-sec-head h3 {
+      font-size: 1.15rem;
     }
     .t-me {
-      grid-area: me;
+      font-size: 1.12rem;
     }
-    .t-modern {
-      grid-area: modern;
+    .t-me.big .init {
+      --n: 3;
     }
-    .t-scene {
-      grid-area: scene;
-      align-self: start;
-      position: sticky;
-      top: 3.5rem;
-      opacity: 0.45;
-      transition: opacity 0.4s;
+    .t-gloss {
+      margin-top: 1rem;
+      padding: 0.7rem 0.8rem 0.8rem 0.9rem;
+      font-size: 1.06rem;
+      border-left: 3px double var(--red);
+      background: rgba(150, 100, 40, 0.07);
     }
-    .t-sec.active .t-scene {
-      opacity: 1;
+    .marg {
+      display: none;
+    }
+    .treatise[data-view="modern"] .t-gloss {
+      margin-top: 0;
+      border-left: 0;
+      background: none;
+      padding: 0;
+    }
+    .title {
+      margin-right: 0;
+    }
+    .title-incipit {
+      font-size: 1.05rem;
+    }
+    .title h1 {
+      font-size: 2.3rem;
+    }
+    .title-by {
+      font-size: 1.05rem;
+    }
+    .title-body {
+      transform: none;
+      margin-top: 1.5rem;
+    }
+    .t-toc ol ol {
+      padding-left: 0.5rem;
+    }
+    .t-toc a {
+      font-size: 0.95rem;
+      gap: 0.35rem;
+    }
+    .toc-lead {
+      flex-basis: 0.75rem;
     }
   }
 </style>
@@ -508,9 +1172,7 @@ const parts = ["Prologue", "Part I", "Part II"].map((name) => ({
   if (root) {
     // View toggle, remembered per viewer.
     const KEY = "treatise-view";
-    const radios = root.querySelectorAll<HTMLInputElement>(
-      'input[name="t-view"]'
-    );
+    const radios = root.querySelectorAll<HTMLInputElement>('input[name="t-view"]');
     const apply = (v: string) => {
       if (!["me", "modern", "both"].includes(v)) return;
       root.dataset.view = v;
@@ -532,21 +1194,5 @@ const parts = ["Prologue", "Part I", "Part II"].map((name) => ({
         }
       })
     );
-
-    // Mark the section in view as active (scene panel + contents link).
-    const links = new Map<string, HTMLElement>();
-    root
-      .querySelectorAll<HTMLElement>("[data-toc]")
-      .forEach((a) => links.set(a.dataset.toc!, a));
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          e.target.classList.toggle("active", e.isIntersecting);
-          links.get(e.target.id)?.classList.toggle("active", e.isIntersecting);
-        }
-      },
-      { rootMargin: "-35% 0px -45% 0px" }
-    );
-    root.querySelectorAll(".t-sec").forEach((s) => io.observe(s));
   }
 </script>

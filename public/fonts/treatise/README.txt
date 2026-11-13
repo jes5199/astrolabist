@@ -15,3 +15,11 @@ U+0000-024F, U+02B0-036F, U+1E00-1EFF, U+2000-206F, U+20AC, U+2122,
 U+A720-A7FF, U+FB00-FB06 (features: kern liga clig calt ccmp locl mark mkmk
 onum lnum smcp c2sc) and saved as WOFF2. Texturina has no yogh (U+021C/D);
 Junicode and EB Garamond do.
+
+imfell/IMFellEnglish-Italic.woff2
+  IM FELL English Italic v3.00 (Igino Marini), from google/fonts
+  ofl/imfellenglish/IMFeENit28P.ttf. No Reserved Font Name. Used for the
+  marginal glose (modern English) in the manuscript treatment. Subset with
+  pyftsubset to U+0020-007E, U+00A0-00FF, U+2010-2027, U+2032-2033
+  (features: kern liga clig calt ccmp onum) and saved as WOFF2.
+  (The manuscript treatment does not load EB Garamond.)
