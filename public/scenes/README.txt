@@ -72,3 +72,4 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-p2-21-plate-latitude.js copied byte-for-byte from astrolabe-video d9c5279.
 2026-11-13: treatise-p2-22-oxford.js copied byte-for-byte from astrolabe-video 512e17c.
 2026-11-13: treatise-p2-23-pole-star.js copied byte-for-byte from astrolabe-video 4532b23.
+2026-11-13: treatise-p2-24-never-sets.js copied byte-for-byte from astrolabe-video 1b2003c.
