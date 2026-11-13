@@ -21,7 +21,10 @@ const R = A.frontRadii;
 const RB = (R.hollow + R.ladder) / 2;
 // the midsummer day's arc, as in II 7: the sun (the head of Cancer) from the east horizon to the west
 const LAT = P.latitude * RAD;
-const DEC = Math.asin(Math.sin(EPS)); // the sun's declination at the head of Cancer
+// THE DAY (shared by II 7, II 8 and II 10: change all three together): the sun's longitude, 90 = the head of Cancer
+// (midsummer); 1 = Chaucer's 12 March
+const DAY_SUN_LONGITUDE = 90;
+const DEC = Math.asin(Math.sin(EPS) * Math.sin(DAY_SUN_LONGITUDE * RAD));
 const DAY = (2 * Math.acos(-Math.tan(LAT) * Math.tan(DEC))) / RAD; // degrees of the equator (and of the border)
 // where it begins on the border: the label's bearing at sunrise (east): symmetric about the top (noon)
 const B_E = 360 - DAY / 2;

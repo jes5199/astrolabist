@@ -22,7 +22,10 @@ const C = { x: 0, y: 10, k: 0.9 };
 const W = (px) => f(px / C.k);
 const RAD = Math.PI / 180;
 const EPS = P.obliquity * RAD;
-const SUN = 90; // the head of Cancer
+// THE DAY (shared by II 7, II 8 and II 10: change all three together): the sun's longitude, 90 = the head of Cancer
+// (midsummer); 1 = Chaucer's 12 March
+const DAY_SUN_LONGITUDE = 90;
+const SUN = DAY_SUN_LONGITUDE;
 const [HC, HR] = almucantar(0);
 const RB = (A.frontRadii.hollow + A.frontRadii.ladder) / 2; // where the pricks go, on the border's ladder
 
