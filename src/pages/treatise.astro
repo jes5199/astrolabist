@@ -233,6 +233,7 @@ const sections = await Promise.all(
         const at = paras.findIndex((t) => t.includes(sc.after.replace(/\s+/g, " ")));
         if (at < 0)
           throw new Error(`treatise: inline scene "${sc.name}" in ${entry.id}: phrase "${sc.after}" not found in the Middle English`);
+        // Successive windows alternate left, right, left… in text order (Jes tg 17889).
         return { ...sc, at, legend: sc.label.replace(/^Figure:\s*/, "").toUpperCase(), frame: frameFor(sc.name) };
       })
       // A window whose module has not arrived yet is left out (and said so), not broken.
@@ -240,7 +241,12 @@ const sections = await Promise.all(
         const ok = fs.existsSync(path.join(process.cwd(), "public", "scenes", `${sc.name}.js`));
         if (!ok) console.warn(`[treatise] inline scene ${sc.name} skipped: public/scenes/${sc.name}.js not found`);
         return ok;
-      });
+      })
+      // Text order: by paragraph, then where in it the window sits (a small window before its
+      // paragraph, a phrase window at its phrase, a full window after the paragraph).
+      .map((sc) => ({ ...sc, pos: sc.place === "phrase" ? paras[sc.at].indexOf(sc.after.replace(/\s+/g, " ")) : sc.size === "small" ? -1 : 1e9 }))
+      .sort((a, b) => a.at - b.at || a.pos - b.pos)
+      .map((sc, j) => ({ ...sc, side: j % 2 === 0 ? "left" : "right" }));
     // Editorial inset notes (our words), placed like the inline windows.
     const insets = (entry.data.insets ?? []).map((n, j) => {
       const at = paras.findIndex((t) => t.includes(n.after.replace(/\s+/g, " ")));
@@ -577,7 +583,7 @@ const tocParts = [
                       </div>
                         {glossed ? glossed.map((h) => <p set:html={h} />) : <Content />}
                         {inline.map((sc, j) => (
-                          <div class="inline-win" data-after={sc.at} data-size={sc.size} data-frame={sc.frame} data-phrase={sc.place === "phrase" ? sc.after : undefined}>
+                          <div class="inline-win" data-after={sc.at} data-size={sc.size} data-frame={sc.frame} data-side={sc.side} data-phrase={sc.place === "phrase" ? sc.after : undefined}>
                             <div class="win" data-frame={sc.frame}>
                               {sc.frame === "ring" && (
                               <svg class="win-ring" viewBox="-120 -120 240 240" aria-hidden="true">
@@ -1640,14 +1646,6 @@ const tocParts = [
   .inline-win .win {
     width: 100%;
   }
-  /* Windows anchored at a phrase inside a paragraph float in where the phrase begins: small ones
-     on the left like the five parts (rule below), full-size ones on the right. */
-  .inline-win[data-phrase]:not([data-size]) {
-    float: right;
-    clear: right;
-    width: 10rem;
-    margin: 0.4rem 0 0.6rem 1.4rem;
-  }
   /* The Prologue's five parts: small windows beside their short paragraphs. */
   .inline-win[data-size="small"] {
     float: left;
@@ -1658,6 +1656,20 @@ const tocParts = [
   .inline-win[data-size="small"] .ring-text {
     font-size: 13px;
     letter-spacing: 1px;
+  }
+  /* Inline windows alternate sides down the column, and are larger (Jes tg 17889). */
+  .inline-win[data-size="small"] {
+    width: 14rem;
+  }
+  .inline-win[data-side="left"] {
+    float: left;
+    clear: left;
+    margin: 0.35rem 1.6rem 0.8rem 0;
+  }
+  .inline-win[data-side="right"] {
+    float: right;
+    clear: right;
+    margin: 0.35rem 0 0.8rem 1.6rem;
   }
   .t-me {
     font-family: var(--me-font);
@@ -2043,6 +2055,14 @@ const tocParts = [
       float: none;
       width: min(9rem, 42vw);
       margin: 0.4rem auto 1rem;
+    }
+    /* Phone: each inline window on its own line, wide. */
+    .inline-win[data-side],
+    .inline-win[data-side][data-size="small"] {
+      float: none;
+      clear: both;
+      width: min(19rem, 82vw);
+      margin: 0.6rem auto 1.2rem;
     }
     .t-me {
       font-size: 1.16rem;

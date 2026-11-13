@@ -148,3 +148,4 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-prologue-cause-2b.js copied byte-for-byte from astrolabe-video 9e92aee.
 2026-11-13: treatise-prologue-oxford-globe-ink.js copied byte-for-byte from astrolabe-video 5909f79.
 2026-11-13: treatise-p1-3-mother-rete-ink.js copied byte-for-byte from astrolabe-video e3a3ac8.
+2026-11-13: treatise-prologue-oxford-globe-ink.js copied byte-for-byte from astrolabe-video 563e342.
