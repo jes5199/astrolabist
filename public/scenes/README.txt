@@ -158,3 +158,11 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-p2-7-day-arc-ink.js copied byte-for-byte from astrolabe-video 6d1ef55.
 2026-11-13: treatise-p2-2-altitude-ink.js copied byte-for-byte from astrolabe-video 2db245c.
 2026-11-13: lib/stage.js treatise-p2-2-altitude-ink.js treatise-p2-3-time-ink.js treatise-p2-7-day-arc-ink.js copied byte-for-byte from astrolabe-video 997da26.
+2026-11-13: treatise-p2-12-planet-hours-ink.js copied byte-for-byte from astrolabe-video e83b33c.
+2026-11-13: treatise-p2-17-star-place-ink.js copied byte-for-byte from astrolabe-video 4c0e308.
+2026-11-13: lib/ascension-steps.js treatise-p2-27-right-ascension-ink.js treatise-p2-28-oblique-ascension-ink.js copied byte-for-byte from astrolabe-video 804e957.
+2026-11-13: treatise-p2-26-right-sphere-ink.js copied byte-for-byte from astrolabe-video 9df944e.
+2026-11-13: treatise-p2-34-moon-ink.js copied byte-for-byte from astrolabe-video d7a1ece.
+2026-11-13: treatise-p2-40-planet-rising-ink.js copied byte-for-byte from astrolabe-video eaa369a.
+2026-11-13: treatise-p2-6-twilight-ink.js copied byte-for-byte from astrolabe-video f0e30ce.
+2026-11-13: treatise-p2-5-between-ink.js copied byte-for-byte from astrolabe-video b9379a0.
