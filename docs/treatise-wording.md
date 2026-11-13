@@ -86,7 +86,7 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | counting numeral `1`…`365` | treatise-p1-9-days.js | Part I §9 (astrolabe-video b994c88). Modern figures. | **decided: modern** (Jes, tg 17771 "modern both") |
 | month names `Ianuarius` … `December` (I for J, as engraved: Ianuarius, Iunius, Iulius) | treatise-p1-10-months.js | Part I §10 (astrolabe-video cc23619). Latin, as on the instrument (consistent with II §1). Alternative: Chaucer's own spellings (Ianuare, Februare, Marcius, Aprile, Mayus, Iuin, Iulius…). | provisional; awaiting Jes (likely follows "Latin" for signs) |
 | day counts `31`, `28`, `30`… | treatise-p1-10-months.js | Part I §10. Modern figures. | **decided: modern** (Jes, tg 17771 "modern both") |
-| 36 saints' abbreviations `circ` `epi` `vicen` … `concep` `thom` `nati` | treatise-p1-11-holy-days.js | Part I §11 (astrolabe-video 932aae7). As ENGRAVED on Oxford HSM 47869's calendar ring, read from the museum photograph (astrolabe-video docs/video2/drawings/back47869.md). Alternative: expanded names (e.g. "Gregorius"). | provisional; awaiting Jes |
+| 36 saints' abbreviations `circ` `epi` `vicen` … `concep` `thom` `nati` | treatise-p1-11-holy-days.js | Part I §11 (astrolabe-video 932aae7). As ENGRAVED on Oxford HSM 47869's calendar ring, read from the museum photograph (astrolabe-video docs/video2/drawings/back47869.md). Alternative: expanded names (e.g. "Gregorius"). | **decided: keep engraved abbreviations** (Jes, 2026-11-13, tg 17778), plus a larger view and a table of full names and dates |
 | dominical letters `A`–`G`; day figures | treatise-p1-11-holy-days.js | Part I §11. Letters computed (1 Jan = A), matching the instrument; days in modern figures. | **decided: modern** for figures (Jes, tg 17771) |
 | `umbra versa`, `umbra recta` | treatise-p1-12-shadow-square.js | Part I §12 (astrolabe-video f66b73e). Chaucer's own Latin terms. | source text |
 | numerals `3` `6` `9` `12` | treatise-p1-12-shadow-square.js | Part I §12. Modern figures. | **decided: modern** (Jes, tg 17771) |
@@ -104,3 +104,4 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 
 - 2026-11-13 (tg 17769): zodiac sign names on the instrument are in **Latin** (Aries, Taurus, Gemini…) in all scenes, including Part I §8.
 - 2026-11-13 (tg 17771 "modern both"): scene line labels stay modern (`south`/`north`/`east`/`west`, not Chaucer's "lyne meridional" etc.), and degree numerals stay modern figures every 10 (not medieval forms).
+- 2026-11-13 (tg 17778): keep the saints' engraved abbreviations in the §11 scene; add a larger readable view of the back and a table (abbreviation, full name, Julian date, Gregorian equivalent for c. 1391) with a source per row.
