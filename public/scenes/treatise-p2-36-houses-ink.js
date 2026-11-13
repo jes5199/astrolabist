@@ -9,7 +9,7 @@
 // the 6."
 // Scene contract (astrolabist, src/components/Scene.astro): mount(el) once, then start(el) / stop(el).
 //
-// INK ON VELLUM (pre-built in the style of the samples for jes, tg 17811; astrolabist: instrument scenes may be
+// COLOURED WOODCUT on vellum (jes tg 17847; lib/woodcut.js): cut, washed, lettered in the printer's red.
 // pre-built in ink).  The front, cut down to what the conclusion uses: the limb, the three circles, the horizon, the
 // unequal hour lines under it (numbered), the midnight line; the rete's zodiac ring, hatched.  The ascendant is
 // Chaucer's own (Gemini 20, II 3).  The ring is turned as the text says, step by step, and each time the degree on the
@@ -17,14 +17,13 @@
 // trisecting the ascendant's semi-arcs in time).  Houses 7 to 12 are the nadirs of 1 to 6: lines through the pin.
 // The plate is for 52 degrees (lib/front.js's geometry); our own line work, nothing traced or copied.
 
+import { woodcut, RED, VELLUM, WASH } from "./lib/woodcut.js";
 import { node, f, rim, P, LAT, almucantar, nightFrom, hourLine } from "./lib/front.js";
 
 const instances = new WeakMap();
 const LOOP = 26000;
 const STILL = 22000; // ms: all twelve houses marked
-const INK2 = "#5a4636"; // the hatching ink
-const RED = "#8a4b2a"; // the rubricator's red
-const VELLUM = "#efe3c6";
+const INK2 = "currentColor"; // the hatching ink
 const C = { x: 0, y: -8, k: 0.72 };
 const W = (px) => f(px / C.k);
 const RAD = Math.PI / 180;
@@ -93,27 +92,31 @@ export function mount(el) {
   svg.style.fontFamily = "inherit";
   svg.style.overflow = "visible";
   const defs = node("defs", {}, svg);
+  const wc = woodcut(defs, { freq: 0.11 * C.k, wobble: 1.0 / C.k, seed: 41 });
   const pat = node("pattern", { id: "h" + uid, width: 2.6, height: 2.6, patternUnits: "userSpaceOnUse", patternTransform: "rotate(45)" }, defs);
-  node("line", { x1: 0, y1: 0, x2: 0, y2: 2.6, stroke: INK2, "stroke-width": 0.8 }, pat);
+  node("line", { x1: 0, y1: 0, x2: 0, y2: 2.6, stroke: INK2, "stroke-width": 1.1 }, pat);
   const g = node("g", { transform: `translate(${C.x} ${C.y}) scale(${C.k})` }, svg);
   const ink = { fill: "none", stroke: "currentColor", "stroke-linejoin": "round" };
+  const circW = (r, cy = 0) => `M0 ${f(cy - r)}A${f(r)} ${f(r)} 0 1 1 0 ${f(cy + r)}A${f(r)} ${f(r)} 0 1 1 0 ${f(cy - r)}Z`;
+  node("path", wc.wash({ d: circW(100) + circW(86), "fill-rule": "evenodd", fill: WASH.ochre, "fill-opacity": 0.6 }), g);
   // the limb: two circles, a tick every 5 degrees, a longer one every 15
-  node("circle", { ...ink, r: 100, "stroke-width": W(1.1) }, g);
-  node("circle", { ...ink, r: 86, "stroke-width": W(0.7) }, g);
+  node("circle", { ...ink, r: 100, "stroke-width": W(1.65) }, g);
+  node("circle", { ...ink, r: 86, "stroke-width": W(1.05) }, g);
   let dt = "";
   for (let i = 0; i < 360; i += 5) {
     const a = rim(i, 86);
     const b = rim(i, i % 15 ? 91 : 95);
     dt += `M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}`;
   }
-  node("path", { ...ink, d: dt, "stroke-width": W(0.4), stroke: INK2 }, g);
+  node("path", { ...ink, d: dt, "stroke-width": W(0.6), stroke: INK2 }, g);
   // the plate: the three circles, the horizon (clipped to the plate), the hour lines and the midnight line
   for (const r of [P.cancer, P.equator, P.capricorn]) node("circle", { ...ink, r: f(r), "stroke-width": W(r === P.capricorn ? 0.8 : 0.5), stroke: r === P.capricorn ? "currentColor" : INK2 }, g);
   const cp = node("clipPath", { id: "p" + uid }, g);
   node("circle", { r: f(P.capricorn) }, cp);
   const [hc, hr] = almucantar(0);
   const clip = node("g", { "clip-path": `url(#p${uid})` }, g);
-  node("circle", { ...ink, cy: f(-hc), r: f(hr), "stroke-width": W(0.9) }, clip);
+  node("path", wc.wash({ d: circW(P.capricorn) + circW(hr, -hc), "fill-rule": "evenodd", fill: WASH.blue, "fill-opacity": 0.45 }), clip);
+  node("circle", { ...ink, cy: f(-hc), r: f(hr), "stroke-width": W(1.35) }, clip);
   const hours = [];
   for (let k = 1; k < 12; k++) hours.push(node("path", { ...ink, d: hourLine(k), "stroke-width": W(k === 6 ? 0.9 : 0.45), stroke: k === 6 ? "currentColor" : INK2 }, g));
   // the hour numbers, at each line's end on the Capricorn circle
@@ -126,16 +129,17 @@ export function mount(el) {
   }
   // the lines a step uses, drawn again in red: an hour line or the horizon, and the midnight line
   const redHour = {};
-  for (const k of [2, 4, 8, 10]) redHour[k] = node("path", { ...ink, d: hourLine(k), "stroke-width": W(1.4), stroke: RED, opacity: 0 }, g);
-  redHour[12] = node("circle", { ...ink, cy: f(-hc), r: f(hr), "stroke-width": W(1.4), stroke: RED, opacity: 0, "clip-path": `url(#p${uid})` }, g);
-  const midnight = node("path", { ...ink, d: `M0 0V100`, "stroke-width": W(1.6), stroke: RED, opacity: 0 }, g);
+  for (const k of [2, 4, 8, 10]) redHour[k] = node("path", { ...ink, d: hourLine(k), "stroke-width": W(2.1), stroke: RED, opacity: 0 }, g);
+  redHour[12] = node("circle", { ...ink, cy: f(-hc), r: f(hr), "stroke-width": W(2.1), stroke: RED, opacity: 0, "clip-path": `url(#p${uid})` }, g);
+  const midnight = node("path", { ...ink, d: `M0 0V100`, "stroke-width": W(2.4), stroke: RED, opacity: 0 }, g);
   // the rete's zodiac ring, hatched as a cut part; sign divisions, a tick every 10 degrees
   const rete = node("g", {}, g);
   const cx = 0;
   const cy = -OFF;
   const ring = `M${f(cx)} ${f(cy - RE)}A${f(RE)} ${f(RE)} 0 1 0 ${f(cx)} ${f(cy + RE)}A${f(RE)} ${f(RE)} 0 1 0 ${f(cx)} ${f(cy - RE)}Z` +
     `M${f(cx)} ${f(cy - RE + BAND)}A${f(RE - BAND)} ${f(RE - BAND)} 0 1 0 ${f(cx)} ${f(cy + RE - BAND)}A${f(RE - BAND)} ${f(RE - BAND)} 0 1 0 ${f(cx)} ${f(cy - RE + BAND)}Z`;
-  node("path", { d: ring, fill: `url(#h${uid})`, "fill-rule": "evenodd", stroke: "currentColor", "stroke-width": W(0.8) }, rete);
+  node("path", wc.wash({ d: ring, "fill-rule": "evenodd", fill: WASH.red, "fill-opacity": 0.75 }), rete);
+  node("path", { d: ring, fill: `url(#h${uid})`, "fill-rule": "evenodd", stroke: "currentColor", "stroke-width": W(1.2) }, rete);
   let dd = "";
   for (let lam = 0; lam < 360; lam += 10) {
     const p = eclAt(lam, 0);
@@ -143,28 +147,28 @@ export function mount(el) {
     const len = lam % 30 ? BAND * 0.45 : BAND;
     dd += `M${f(p[0])} ${f(p[1])}L${f(p[0] - u[0] * len)} ${f(p[1] - u[1] * len)}`;
   }
-  node("path", { ...ink, d: dd, "stroke-width": W(0.6) }, rete);
+  node("path", { ...ink, d: dd, "stroke-width": W(0.9) }, rete);
   // the houses' beginnings: a red stroke across the band; 7 to 12 joined to their opposites through the pin
   const cuspMark = CUSPS.map((lam) => {
     const p = eclAt(lam, 0);
     const u = [(p[0] - cx) / RE, (p[1] - cy) / RE];
-    return node("path", { ...ink, d: `M${f(p[0] + u[0] * 2)} ${f(p[1] + u[1] * 2)}L${f(p[0] - u[0] * (BAND + 1))} ${f(p[1] - u[1] * (BAND + 1))}`, stroke: RED, "stroke-width": W(1.6), opacity: 0 }, rete);
+    return node("path", { ...ink, d: `M${f(p[0] + u[0] * 2)} ${f(p[1] + u[1] * 2)}L${f(p[0] - u[0] * (BAND + 1))} ${f(p[1] - u[1] * (BAND + 1))}`, stroke: RED, "stroke-width": W(2.4), opacity: 0 }, rete);
   });
   const nadirLine = [];
   for (let i = 0; i < 6; i++) {
     const a = eclAt(CUSPS[i], 0);
     const b = eclAt(CUSPS[i + 6], 0);
-    nadirLine.push(node("path", { ...ink, d: `M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}`, stroke: RED, "stroke-width": W(0.6), "stroke-dasharray": `${W(3)} ${W(2)}`, opacity: 0 }, rete));
+    nadirLine.push(node("path", { ...ink, d: `M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}`, stroke: RED, "stroke-width": W(0.9), "stroke-dasharray": `${W(4.5)} ${W(3.0)}`, opacity: 0 }, rete));
   }
   // the degree being set: a red point on the ecliptic (the ascendant, then its nadir)
   const dot = [ASC, ASC + 180].map((lam) => {
     const p = eclAt(lam, 0);
-    return node("circle", { cx: f(p[0]), cy: f(p[1]), r: 2.4, fill: RED, stroke: VELLUM, "stroke-width": W(0.8), opacity: 0 }, rete);
+    return node("circle", { cx: f(p[0]), cy: f(p[1]), r: 2.4, fill: RED, stroke: VELLUM, "stroke-width": W(1.2), opacity: 0 }, rete);
   });
-  node("circle", { r: 4, fill: VELLUM, stroke: "currentColor", "stroke-width": W(0.9) }, g); // the pin
+  node("circle", { r: 4, fill: VELLUM, stroke: "currentColor", "stroke-width": W(1.35) }, g); // the pin
   // words, in the window's units
   const text = (str, size, fill, italic = true, anchor = "middle") => {
-    const t = node("text", { "text-anchor": anchor, "font-size": size, fill, opacity: 0, "font-family": "inherit", "font-style": italic ? "italic" : "normal", stroke: VELLUM, "stroke-width": 3, "stroke-linejoin": "round", "paint-order": "stroke" }, svg);
+    const t = node("text", { "text-anchor": anchor, "font-size": size, fill, opacity: 0, "font-family": "inherit", "font-weight": 600, stroke: VELLUM, "stroke-width": 3, "stroke-linejoin": "round", "paint-order": "stroke" }, svg);
     t.textContent = str;
     return t;
   };
@@ -179,6 +183,11 @@ export function mount(el) {
   const cap = text("", 14, "currentColor", false);
   cap.setAttribute("x", 0);
   cap.setAttribute("y", f(C.y + C.k * 100 + 29));
+  // the cut: the still drawing wobbles as one; the rete has its own wobble, so it turns with it
+  const base = node("g", { filter: wc.rough });
+  while (g.firstChild && g.firstChild !== rete) base.appendChild(g.firstChild);
+  g.insertBefore(base, rete);
+  rete.setAttribute("filter", wc.rough);
   el.appendChild(svg);
   const s = { rete, redHour, midnight, cuspMark, nadirLine, dot, num, lead, tAsc, tNad, tMid, cap, raf: 0, t0: 0, tm: STILL };
   instances.set(el, s);

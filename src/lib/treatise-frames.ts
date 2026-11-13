@@ -16,7 +16,7 @@ export type SceneKind = "I" | "F" | "S" | "—";
 export type Frame = "parchment" | "rim" | "gilt" | "ring";
 
 export const SCENE_KIND: Record<string, SceneKind> = {
-  "night-window": "—",
+  "night-window": "S", // the plain night-sky window (sections with no scene of their own): a view of the sky, so the plain rim
   // Prologue
   "treatise-prologue-gift": "F",
   "treatise-prologue": "F", // "with this swerd"

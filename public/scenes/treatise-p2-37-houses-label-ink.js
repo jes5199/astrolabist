@@ -7,21 +7,20 @@
 // folwen."
 // Scene contract (astrolabist, src/components/Scene.astro): mount(el) once, then start(el) / stop(el).
 //
-// INK ON VELLUM (pre-built, as II 36).  The rete stands with Chaucer's ascendant (Gemini 20, II 3) on the eastern
+// COLOURED WOODCUT on vellum (jes tg 17847; lib/woodcut.js): cut, washed, lettered in the printer's red.
 // horizon.  The four angles are marked: 1 on the east horizon, 7 on the west, 10 on the south (meridian) line, 4 on
 // the midnight line.  The label is laid over the ascendant; the border's degrees from it to the meridian are counted
 // and parted in three, and the label laid on each part reads houses 12 and 11; the same downwards to the midnight line
 // gives 2 and 3; the nadirs give the rest.  Computed for 52 degrees: the cusps are the same as II 36's (both trisect
 // the ascendant's semi-arcs in time).  Our own line work, nothing traced or copied.
 
+import { woodcut, RED, VELLUM, WASH } from "./lib/woodcut.js";
 import { node, f, rim, P, almucantar, nightFrom, hourLine } from "./lib/front.js";
 
 const instances = new WeakMap();
 const LOOP = 30000;
 const STILL = 26000; // ms: all twelve houses marked
-const INK2 = "#5a4636"; // the hatching ink
-const RED = "#8a4b2a"; // the rubricator's red
-const VELLUM = "#efe3c6";
+const INK2 = "currentColor"; // the hatching ink
 const C = { x: 0, y: -8, k: 0.72 };
 const W = (px) => f(px / C.k);
 const RAD = Math.PI / 180;
@@ -100,36 +99,41 @@ export function mount(el) {
   svg.style.fontFamily = "inherit";
   svg.style.overflow = "visible";
   const defs = node("defs", {}, svg);
+  const wc = woodcut(defs, { freq: 0.11 * C.k, wobble: 1.0 / C.k, seed: 41 });
   const pat = node("pattern", { id: "h" + uid, width: 2.6, height: 2.6, patternUnits: "userSpaceOnUse", patternTransform: "rotate(45)" }, defs);
-  node("line", { x1: 0, y1: 0, x2: 0, y2: 2.6, stroke: INK2, "stroke-width": 0.8 }, pat);
+  node("line", { x1: 0, y1: 0, x2: 0, y2: 2.6, stroke: INK2, "stroke-width": 1.1 }, pat);
   const pat2 = node("pattern", { id: "l" + uid, width: 2.2, height: 2.2, patternUnits: "userSpaceOnUse", patternTransform: "rotate(-45)" }, defs);
-  node("line", { x1: 0, y1: 0, x2: 0, y2: 2.2, stroke: INK2, "stroke-width": 0.6 }, pat2);
+  node("line", { x1: 0, y1: 0, x2: 0, y2: 2.2, stroke: INK2, "stroke-width": 0.9 }, pat2);
   const g = node("g", { transform: `translate(${C.x} ${C.y}) scale(${C.k})` }, svg);
   const ink = { fill: "none", stroke: "currentColor", "stroke-linejoin": "round" };
+  const circW = (r, cy = 0) => `M0 ${f(cy - r)}A${f(r)} ${f(r)} 0 1 1 0 ${f(cy + r)}A${f(r)} ${f(r)} 0 1 1 0 ${f(cy - r)}Z`;
+  node("path", wc.wash({ d: circW(100) + circW(86), "fill-rule": "evenodd", fill: WASH.ochre, "fill-opacity": 0.6 }), g);
   // the limb (the border): two circles, a tick every 5 degrees, a longer one every 15
-  node("circle", { ...ink, r: 100, "stroke-width": W(1.1) }, g);
-  node("circle", { ...ink, r: 86, "stroke-width": W(0.7) }, g);
+  node("circle", { ...ink, r: 100, "stroke-width": W(1.65) }, g);
+  node("circle", { ...ink, r: 86, "stroke-width": W(1.05) }, g);
   let dt = "";
   for (let i = 0; i < 360; i += 5) {
     const a = rim(i, 86);
     const b = rim(i, i % 15 ? 91 : 95);
     dt += `M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}`;
   }
-  node("path", { ...ink, d: dt, "stroke-width": W(0.4), stroke: INK2 }, g);
+  node("path", { ...ink, d: dt, "stroke-width": W(0.6), stroke: INK2 }, g);
   // the plate: the three circles, the horizon, the hour lines (quiet), the south and midnight lines
   for (const r of [P.cancer, P.equator, P.capricorn]) node("circle", { ...ink, r: f(r), "stroke-width": W(r === P.capricorn ? 0.8 : 0.5), stroke: r === P.capricorn ? "currentColor" : INK2 }, g);
   const cp = node("clipPath", { id: "p" + uid }, g);
   node("circle", { r: f(P.capricorn) }, cp);
   const [hc, hr] = almucantar(0);
   const clip = node("g", { "clip-path": `url(#p${uid})` }, g);
-  node("circle", { ...ink, cy: f(-hc), r: f(hr), "stroke-width": W(0.9) }, clip);
-  for (let k = 1; k < 12; k++) if (k !== 6) node("path", { ...ink, d: hourLine(k), "stroke-width": W(0.4), stroke: INK2, opacity: 0.6 }, g);
-  node("path", { ...ink, d: `M0 ${f(-P.capricorn)}V${f(P.capricorn)}`, "stroke-width": W(0.9) }, g);
+  node("path", wc.wash({ d: circW(P.capricorn) + circW(hr, -hc), "fill-rule": "evenodd", fill: WASH.blue, "fill-opacity": 0.45 }), clip);
+  node("circle", { ...ink, cy: f(-hc), r: f(hr), "stroke-width": W(1.35) }, clip);
+  for (let k = 1; k < 12; k++) if (k !== 6) node("path", { ...ink, d: hourLine(k), "stroke-width": W(0.6), stroke: INK2, opacity: 0.6 }, g);
+  node("path", { ...ink, d: `M0 ${f(-P.capricorn)}V${f(P.capricorn)}`, "stroke-width": W(1.35) }, g);
   // the rete's zodiac ring, standing at the ascendant's setting
   const rete = node("g", { transform: `rotate(${f(ROT)})` }, g);
   const cy = -OFF;
   const ringD = (r) => `M0 ${f(cy - r)}A${f(r)} ${f(r)} 0 1 0 0 ${f(cy + r)}A${f(r)} ${f(r)} 0 1 0 0 ${f(cy - r)}Z`;
-  node("path", { d: ringD(RE) + ringD(RE - BAND), fill: `url(#h${uid})`, "fill-rule": "evenodd", stroke: "currentColor", "stroke-width": W(0.8) }, rete);
+  node("path", wc.wash({ d: ringD(RE) + ringD(RE - BAND), "fill-rule": "evenodd", fill: WASH.red, "fill-opacity": 0.75 }), rete);
+  node("path", { d: ringD(RE) + ringD(RE - BAND), fill: `url(#h${uid})`, "fill-rule": "evenodd", stroke: "currentColor", "stroke-width": W(1.2) }, rete);
   let dd = "";
   for (let lam = 0; lam < 360; lam += 10) {
     const p = rim(270 - raOf(lam), rAt(decOf(lam)));
@@ -137,15 +141,15 @@ export function mount(el) {
     const len = lam % 30 ? BAND * 0.45 : BAND;
     dd += `M${f(p[0])} ${f(p[1])}L${f(p[0] - u[0] * len)} ${f(p[1] - u[1] * len)}`;
   }
-  node("path", { ...ink, d: dd, "stroke-width": W(0.6) }, rete);
+  node("path", { ...ink, d: dd, "stroke-width": W(0.9) }, rete);
   // the counts on the border: the arc, and its thirds
   const tick = (b) => {
     const a = rim(b, 84);
     const c = rim(b, 100);
     return `M${f(a[0])} ${f(a[1])}L${f(c[0])} ${f(c[1])}`;
   };
-  const upArc = node("path", { ...ink, d: arc(BA, 360, 93) + tick(LB[1]) + tick(LB[2]) + tick(BA) + tick(360), stroke: RED, "stroke-width": W(1.8), opacity: 0 }, g);
-  const downArc = node("path", { ...ink, d: arc(BA, 180, 93) + tick(LB[5]) + tick(LB[6]) + tick(BA) + tick(180), stroke: RED, "stroke-width": W(1.8), opacity: 0 }, g);
+  const upArc = node("path", { ...ink, d: arc(BA, 360, 93) + tick(LB[1]) + tick(LB[2]) + tick(BA) + tick(360), stroke: RED, "stroke-width": W(2.7), opacity: 0 }, g);
+  const downArc = node("path", { ...ink, d: arc(BA, 180, 93) + tick(LB[5]) + tick(LB[6]) + tick(BA) + tick(180), stroke: RED, "stroke-width": W(2.7), opacity: 0 }, g);
   // the houses' beginnings: a red stroke across the band; the nadirs joined through the pin
   const centre = rim(ROT, OFF);
   const marks = [];
@@ -153,23 +157,23 @@ export function mount(el) {
   for (let k = 1; k <= 12; k++) {
     const p = eclAt(H[k]);
     const u = [(p[0] - centre[0]) / RE, (p[1] - centre[1]) / RE];
-    marks[k] = node("path", { ...ink, d: `M${f(p[0] + u[0] * 2)} ${f(p[1] + u[1] * 2)}L${f(p[0] - u[0] * (BAND + 1))} ${f(p[1] - u[1] * (BAND + 1))}`, stroke: RED, "stroke-width": W(1.6), opacity: 0 }, g);
+    marks[k] = node("path", { ...ink, d: `M${f(p[0] + u[0] * 2)} ${f(p[1] + u[1] * 2)}L${f(p[0] - u[0] * (BAND + 1))} ${f(p[1] - u[1] * (BAND + 1))}`, stroke: RED, "stroke-width": W(2.4), opacity: 0 }, g);
   }
   const nadir = {};
   for (const k of [5, 6, 8, 9]) {
     const a = eclAt(H[k]);
     const b = eclAt(H[((k + 5) % 12) + 1]);
-    nadir[k] = node("path", { ...ink, d: `M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}`, stroke: RED, "stroke-width": W(0.6), "stroke-dasharray": `${W(3)} ${W(2)}`, opacity: 0 }, lines);
+    nadir[k] = node("path", { ...ink, d: `M${f(a[0])} ${f(a[1])}L${f(b[0])} ${f(b[1])}`, stroke: RED, "stroke-width": W(0.9), "stroke-dasharray": `${W(4.5)} ${W(3.0)}`, opacity: 0 }, lines);
   }
   // the label: a slender rule through the pin, pointed at both ends, its edge on the line through the centre
   const label = node("g", {}, g);
-  node("path", { d: "M0 -99L2.6 -88V88L0 99L-2.6 88V-88Z", fill: `url(#l${uid})`, "fill-opacity": 0.9, stroke: "currentColor", "stroke-width": W(0.8), "stroke-linejoin": "round" }, label);
-  node("path", { d: "M0 -99V99", stroke: "currentColor", "stroke-width": W(0.5), fill: "none" }, label);
-  node("circle", { r: 4, fill: VELLUM, stroke: "currentColor", "stroke-width": W(0.9) }, g); // the pin
-  const dot = node("circle", { r: 2.4, fill: RED, stroke: VELLUM, "stroke-width": W(0.8), cx: f(eclAt(ASC)[0]), cy: f(eclAt(ASC)[1]), opacity: 0 }, g);
+  node("path", { d: "M0 -99L2.6 -88V88L0 99L-2.6 88V-88Z", fill: `url(#l${uid})`, "fill-opacity": 0.9, stroke: "currentColor", "stroke-width": W(1.2), "stroke-linejoin": "round" }, label);
+  node("path", { d: "M0 -99V99", stroke: "currentColor", "stroke-width": W(0.75), fill: "none" }, label);
+  node("circle", { r: 4, fill: VELLUM, stroke: "currentColor", "stroke-width": W(1.35) }, g); // the pin
+  const dot = node("circle", { r: 2.4, fill: RED, stroke: VELLUM, "stroke-width": W(1.2), cx: f(eclAt(ASC)[0]), cy: f(eclAt(ASC)[1]), opacity: 0 }, g);
   // words, in the window's units
   const text = (str, size, fill, italic = true, anchor = "middle") => {
-    const t = node("text", { "text-anchor": anchor, "font-size": size, fill, opacity: 0, "font-family": "inherit", "font-style": italic ? "italic" : "normal", stroke: VELLUM, "stroke-width": 3, "stroke-linejoin": "round", "paint-order": "stroke" }, svg);
+    const t = node("text", { "text-anchor": anchor, "font-size": size, fill, opacity: 0, "font-family": "inherit", "font-weight": 600, stroke: VELLUM, "stroke-width": 3, "stroke-linejoin": "round", "paint-order": "stroke" }, svg);
     t.textContent = str;
     return t;
   };
@@ -194,6 +198,11 @@ export function mount(el) {
   const cap = text("", 14, "currentColor", false);
   cap.setAttribute("x", 0);
   cap.setAttribute("y", f(C.y + C.k * 100 + 22));
+  // the cut: everything that stands still wobbles as one; the label, which turns, has its own wobble
+  const base = node("g", { filter: wc.rough });
+  while (g.firstChild && g.firstChild !== label) base.appendChild(g.firstChild);
+  g.insertBefore(base, label);
+  label.setAttribute("filter", wc.rough);
   el.appendChild(svg);
   const s = { label, upArc, downArc, marks, nadir, num, lead, dot, cap, raf: 0, t0: 0, tm: STILL };
   instances.set(el, s);
