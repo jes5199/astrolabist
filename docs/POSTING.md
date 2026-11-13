@@ -16,7 +16,7 @@ posting on Jes's behalf, and it works the same way for a human.
 | CMS | Tina CMS. Schema in `tina/config.ts`, admin UI at `/admin/index.html` |
 | Hosting | Netlify site `astrolabist.netlify.app`, with custom domain `astrolab.ist` |
 | Build command | `npm run build`, which runs `tinacms build && astro build` and needs the Tina env vars below |
-| Deploy trigger | Netlify builds `main` (see "What we know about deploys") |
+| Deploy trigger | A push to `main` triggers a Netlify build; it's live in about 75s (measured 2026-11-13) |
 | CI | `.github/workflows/image-actions.yml` only, an image optimizer (see Images) |
 
 ### What we know about deploys
@@ -26,8 +26,8 @@ posting on Jes's behalf, and it works the same way for a human.
   (`content-v2.tinajs.io/github/repository-changed`). Netlify doesn't post
   commit statuses or checks here, so it's probably linked through the Netlify
   GitHub App with continuous deployment from `main`.
-- The live site matches the latest `main` content, including the meta
-  description from `c21a9a2`, which supports that.
+- Confirmed by effect on 2026-11-13: after the push of 916acfa at 15:29:54Z,
+  the new post was serving at 15:31:08Z.
 - **Not verified from the repo:** whether Netlify also builds branch deploys or
   PR deploy previews. Only someone with Netlify dashboard access can confirm.
   Until then, assume a PR *may* produce a public `deploy-preview-N--astrolabist.netlify.app`
@@ -171,11 +171,13 @@ git merge --ff-only post/<slug>                   # or merge a PR on GitHub
 git push origin main                              # this is the publish
 ```
 
-Then verify. Allow a minute or two for the Netlify build.
+Then verify. Allow a minute or two for the Netlify build. The homepage lists
+only `featured: true` posts. Every published post shows up on `/archive/` and in the RSS feed.
 
 ```bash
 curl -s -o /dev/null -w '%{http_code}\n' https://astrolab.ist/posts/<slug>/   # expect 200
 curl -s https://astrolab.ist/rss.xml | grep -c '<slug>'                      # expect ≥1
+curl -s https://astrolab.ist/archive/ | grep -c '/posts/<slug>/'             # expect ≥1
 ```
 
 If it returns 404 after ~5 minutes, the Netlify build probably failed. The
@@ -200,15 +202,11 @@ and the repo is public.
 
 ## Known oddities (as of 2026-11-13)
 
-- **Deploys appear broken since f568863 (Tina 1.x → 3.x, 2026-10-09).** The test
-  post pushed to `main` at 07:29Z on 2026-11-13 hadn't appeared 10+ minutes
-  later. The live `/admin` bundle uses Tina 1.x-style asset names
-  (`index-1570df54.js`), but a current build produces `index-D-0v68C4.js`. That
-  means the live site predates the upgrade. The cause is unknown until someone
-  reads the Netlify deploy log: it could be the npm lockfile mismatch, the
-  Node version, the Tina Cloud schema, or deploys being disabled. Locally,
-  `tinacms build --local --skip-cloud-checks` and `astro build` both succeed.
-
+- **Deploys were broken from 2026-10-09 to 2026-11-13.** The Tina 1→3 upgrade
+  (f568863) didn't regenerate `tina/tina-lock.json`, so Netlify failed with
+  "local GraphQL schema doesn't match the remote GraphQL schema". It was fixed
+  in 916acfa. **Any future Tina upgrade must commit a regenerated
+  `tina-lock.json`** (run `npm run dev` once, then commit the lock).
 - `BASE_URL` in `src/consts.ts` is `https://astrolabist.netlify.app`, so the
   RSS feed, sitemap and canonical links point at the Netlify subdomain rather
   than `astrolab.ist`.
