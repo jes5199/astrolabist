@@ -90,3 +90,7 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-p2-39-town-meridians.js copied byte-for-byte from astrolabe-video 8bea500.
 2026-11-13: treatise-p2-41-tower.js copied byte-for-byte from astrolabe-video ffe3d92.
 2026-11-13: treatise-p2-42-two-stations.js copied byte-for-byte from astrolabe-video 1580477.
+2026-11-13: lib/woodcut.js lib/front-ink.js lib/back-ink.js treatise-p1-1-ring-ink.js copied byte-for-byte from astrolabe-video 7bfb7b7.
+2026-11-13: treatise-p1-2-shackle-ink.js copied byte-for-byte from astrolabe-video 7bfb7b7.
+2026-11-13: treatise-p1-3-mother-rete-ink.js copied byte-for-byte from astrolabe-video 7bfb7b7.
+2026-11-13: treatise-p1-4-meridional-ink.js copied byte-for-byte from astrolabe-video 7bfb7b7.
