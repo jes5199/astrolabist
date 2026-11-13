@@ -134,6 +134,10 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | `dawn to dusk`, `12 h 4 m`, `2 h 1 m`, `16 h 6 m`, `7 h 54 m` | treatise-p2-9-vulgar-day.js | Part II §9 (astrolabe-video 984f843). Modern (Chaucer: "day vulgar"). Chaucer's day, 12 March 1391 (midsummer has no full night at 52°). | **decided: modern** |
 | `20.8° + 9.2°`, `= 30°` | treatise-p2-10-unequal-sum.js | Part II §10 (astrolabe-video b1fc953). Modern. Uses the §7 midsummer day. | **decided: modern** |
 | `2 h 57 m` | treatise-p2-11-from-sunrise.js | Part II §11 (astrolabe-video 993769c). Modern. Chaucer's 12 March morning. | **decided: modern** |
+| `Saturday`; `1 Saturn` … `12 Venus` (modern planet names) | treatise-p2-12-planet-hours.js | Part II §12 (astrolabe-video 6a3c7c2). Chaucer's own example (Saturday 13 March) and order of planetary hours; no added astrological claim. | **decided: modern** |
+| degree counter ending `38.4°` | treatise-p2-13-noon.js | Part II §13 (astrolabe-video f18ee01). Modern. Chaucer's 12 March. | **decided: modern** |
+| `Aries 1°`, `Virgo 29°`, `March`, `September` | treatise-p2-14-sun-from-noon.js | Part II §14 (astrolabe-video 79c0abf). Signs Latin (decided); season month labels in modern English (explanatory labels, like II §1's "12 March"; not engraved names). | **decided** (Latin signs; modern labels) |
+| `Taurus 10°`, `Leo 20°`, `Scorpio 10°`; `same day: 14 h 43 m`, `day = night: 14 h 43 m` | treatise-p2-15-equal-days.js | Part II §15 (astrolabe-video da8e9df). Latin signs; modern captions. | **decided** |
 
 ## Glosses we wrote (`src/treatise-text/glosses.json`, source `ours`)
 
