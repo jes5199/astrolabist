@@ -14,47 +14,46 @@ approved yet: Jes has not signed off on the framing lines.
 
 | Text | Where | Notes | Status |
 |---|---|---|---|
-| `A Treatise on the Astrolabe - Astrolab.ist` (document title) | treatise.astro:400 | Site title comes from `src/consts.ts`. | provisional; awaiting Jes |
-| `Geoffrey Chaucer, A Treatise on the Astrolabe (c. 1391), in W. W. Skeat's Middle English text (1894).` (meta description) | treatise.astro:401 | Doesn't mention the modern text. | provisional; awaiting Jes |
-| `Geoffrey Chaucer ✦ c. 1391` (hero kicker) | treatise.astro:451 |  | provisional; awaiting Jes |
-| `A Treatise on the Astrolabe` (h1) | treatise.astro:452 | Conventional modern title. | provisional; awaiting Jes |
-| Introduction under the subtitle: three paragraphs in Jes's first person (the last two joined, Jes tg 17879) ("For more than a thousand years…" … "I can only hope to follow in his footsteps.") | treatise.astro:455 | Jes's own words (boss-clod's edit of Jes's text, tg 17825), OK'd "for now" (Jes tg 17854). Not ours. Unsigned: the site has no bylines. Chaucer's dates c. 1343–1400 are the modern standard (Skeat: birth 1330–40, death 25 Oct 1400). | decided (Jes tg 17854) |
-| Inset note in the Prologue after part V (`00-prologue.md` frontmatter `insets`): head `☞ What became of the five parts`; `Chaucer planned five parts. Only the first two have come down to us.`; one line per part I–V; citation `Quotations from W. W. Skeat, The Complete Works of Geoffrey Chaucer, vol. III (Oxford, 1894), introduction to the Treatise, § 24.` | treatise.astro:610 | OURS (Jes tg 17863 asked for it). Facts and quoted phrases from Skeat vol. III intro § 24 (Gutenberg #45027 ll. 2467–2516). The inset component is reusable (`insets` in any section's frontmatter). Published under Jes's standing go for /treatise/ (tg 17869; boss-clod reads it as covering this draft, tg 17867); wording still open to Jes's edits. | provisional; published (tg 17869) |
-| `Middle English text: W. W. Skeat (1894).` | treatise.astro:462 | Credit line (fine print, Jes tg 17848). | provisional; awaiting Jes |
-| `Glosses from Skeat's glossaries to the Treatise (1872) and to Chaucer (1894), for the Prologue and Part I.` | treatise.astro:462 | Gloss variant. Credit for the glosses and the extent of the sample (fine print, Jes tg 17848). | provisional; awaiting Jes |
-| `Modern rendering, folded under each section: James E. Morrison.` | treatise.astro:464 | Required credit; keep. Gloss variant wording (was `Modern English: …`). Removed with the rest of Morrison by `SHOW_MORRISON = false`. | provisional; awaiting Jes |
-| `Draft preview; publication permission pending.` | treatise.astro:464 | Required notice; keep until permission is granted. Also in the closing credit. | provisional; awaiting Jes |
-| `Read on, and the heavens turn about the lode-sterre.` | treatise.astro:460 | Framing flourish, directly under Jes's intro, replacing the `“Litell Lowis my sone…”` quote line (Jes tg 17866). Shown only when motion is allowed. "lode-sterre" is Chaucer's word (pole star). | decided (Jes tg 17866) |
-| `Contents` (nav aria-label) | treatise.astro:469 | Screen-reader only. | provisional; awaiting Jes |
-| Top contents, one row of the major divisions: `Prologue`, `Part I`, `Part II`, `Supplementary propositions`, `Spurious sections` (the last two quieter); each links to that part's heading | treatise.astro:391, :394, :395 | Contents redesign: replaces the all-sections constellation chart. Titles as before. | provisional; awaiting Jes |
-| Top contents subtitles: `Litell Lowis my sone` (new, Skeat's opening words), `The descripcioun`, `The conclusiouns`, `printed by Skeat after the Explicit`, `so marked by Skeat` | treatise.astro:391, :392, :393, :394, :395 | The Prologue's subtitle is new; the others as before (first two in mock Middle English spelling). | provisional; awaiting Jes |
-| `Under Chaucer's words, a modern line. Tap or hover a dotted word for its definition and source.` (hint under the contents) | treatise.astro:483 | Replaces the sticky gloss bar and its hint; the modern line is always on (Jes, tg 17806). Cue changed from `gold` to `dotted` (Jes, tg 17830). | provisional; awaiting Jes |
-| Subtitle `“Bred and mylk for childeren”` (in quotes, larger: Jes tg 17881) | treatise.astro:453 | Skeat, Oxford Chaucer vol. III (1894), introduction § 3 (Gutenberg #45027 line 2128): MS. E Museo 54 (his B) has the rubricated title 'Bred and mylk For childeren', 'boldly written at the beginning'; MS. Bodley 619 (his E, § 6, line 2149) has 'Brede and Milke for children'. B's form, `for` lowercased (the MS capital is scribal). | decided (Jes tg 17815); spelling per Skeat's MS B |
-| The subtitle's modern line `bread and milk for children` | treatise.astro:453 | Ours, a plain modernisation. | provisional; awaiting Jes |
-| Gloss popover: the word as printed, Skeat's gloss and definition, then `Shown in the figure` (only for words the section's figure shows) | treatise.astro:493 | Gloss variant. "Shown in the figure" is ours. | provisional; awaiting Jes |
-| Gloss popover: second paragraph labelled `Skeat's note` (from his notes) or `From Skeat's introduction` (introduction § 28), set as an indented italic note; glossary definitions carry no label | treatise.astro:2093 | Gloss variant. Commentary is never presented as a definition. | provisional; awaiting Jes |
-| Gloss popover source line, e.g. `Skeat, EETS 1872, glossary · s.v. Turet, p. 118`; then `Definition: …` / `Note: Skeat, Oxford Chaucer 1894, vol. III, note to Prol. l. 7` / `Introduction: …`; `our gloss · provisional` | treatise-gloss.ts:59; treatise.astro:2096 | Gloss variant. Source names are written in the gloss builder (next row). | provisional; awaiting Jes |
-| Source names: `Skeat, EETS 1872, glossary`, `Skeat, Oxford Chaucer 1894, glossary`, `Skeat, Oxford Chaucer 1894, index of names`, `Skeat, Oxford Chaucer 1894, vol. III`, `our gloss`; locators `note to Prol. l. 7`, `Introduction, § 28` | build_glosses.py:85, :78 | Gloss variant. Our short names for the editions; full titles and URLs are in `glosses.json` and `docs/treatise-glosses.md`. | provisional; awaiting Jes |
-| Screen-reader description of each glossed word: gloss, definition (or `Skeat's note: …` / `From Skeat's introduction: …`), then `Source: …` or `Our gloss.` | treatise.astro:370 | Gloss variant. Hidden text, read through aria-describedby. | provisional; awaiting Jes |
+| `A Treatise on the Astrolabe - Astrolab.ist` (document title) | treatise.astro:399 | Site title comes from `src/consts.ts`. | provisional; awaiting Jes |
+| `Geoffrey Chaucer, A Treatise on the Astrolabe (c. 1391), in W. W. Skeat's Middle English text (1894).` (meta description) | treatise.astro:400 | Doesn't mention the modern text. | provisional; awaiting Jes |
+| `Geoffrey Chaucer ✦ c. 1391` (hero kicker) | treatise.astro:450 |  | provisional; awaiting Jes |
+| `A Treatise on the Astrolabe` (h1) | treatise.astro:451 | Conventional modern title. | provisional; awaiting Jes |
+| Introduction under the subtitle: three paragraphs in Jes's first person (the last two joined, Jes tg 17879) ("For more than a thousand years…" … "I can only hope to follow in his footsteps.") | treatise.astro:454 | Jes's own words (boss-clod's edit of Jes's text, tg 17825), OK'd "for now" (Jes tg 17854). Not ours. Unsigned: the site has no bylines. Chaucer's dates c. 1343–1400 are the modern standard (Skeat: birth 1330–40, death 25 Oct 1400). | decided (Jes tg 17854) |
+| Inset note in the Prologue after part V (`00-prologue.md` frontmatter `insets`): head `☞ What became of the five parts`; `Chaucer planned five parts. Only the first two have come down to us.`; one line per part I–V; citation `Quotations from W. W. Skeat, The Complete Works of Geoffrey Chaucer, vol. III (Oxford, 1894), introduction to the Treatise, § 24.` | treatise.astro:609 | OURS (Jes tg 17863 asked for it). Facts and quoted phrases from Skeat vol. III intro § 24 (Gutenberg #45027 ll. 2467–2516). The inset component is reusable (`insets` in any section's frontmatter). Published under Jes's standing go for /treatise/ (tg 17869; boss-clod reads it as covering this draft, tg 17867); wording still open to Jes's edits. | provisional; published (tg 17869) |
+| `Middle English text: W. W. Skeat (1894).` | treatise.astro:461 | Credit line (fine print, Jes tg 17848). | provisional; awaiting Jes |
+| `Glosses from Skeat's glossaries to the Treatise (1872) and to Chaucer (1894), for the whole Treatise.` | treatise.astro:461 | Gloss variant. Credit for the glosses and their extent (fine print, Jes tg 17848); since the Part II pass (Jes tg 17907) the glosses cover the whole Treatise. | provisional; awaiting Jes |
+| `Modern rendering, folded under each section: James E. Morrison.` | treatise.astro:463 | Required credit; keep. Gloss variant wording (was `Modern English: …`). Removed with the rest of Morrison by `SHOW_MORRISON = false`. | provisional; awaiting Jes |
+| `Draft preview; publication permission pending.` | treatise.astro:463 | Required notice; keep until permission is granted. Also in the closing credit. | provisional; awaiting Jes |
+| `Read on, and the heavens turn about the lode-sterre.` | treatise.astro:459 | Framing flourish, directly under Jes's intro, replacing the `“Litell Lowis my sone…”` quote line (Jes tg 17866). Shown only when motion is allowed. "lode-sterre" is Chaucer's word (pole star). | decided (Jes tg 17866) |
+| `Contents` (nav aria-label) | treatise.astro:468 | Screen-reader only. | provisional; awaiting Jes |
+| Top contents, one row of the major divisions: `Prologue`, `Part I`, `Part II`, `Supplementary propositions`, `Spurious sections` (the last two quieter); each links to that part's heading | treatise.astro:390, :393, :394 | Contents redesign: replaces the all-sections constellation chart. Titles as before. | provisional; awaiting Jes |
+| Top contents subtitles: `Litell Lowis my sone` (new, Skeat's opening words), `The descripcioun`, `The conclusiouns`, `printed by Skeat after the Explicit`, `so marked by Skeat` | treatise.astro:390, :391, :392, :393, :394 | The Prologue's subtitle is new; the others as before (first two in mock Middle English spelling). | provisional; awaiting Jes |
+| `Under Chaucer's words, a modern line. Tap or hover a dotted word for its definition and source.` (hint under the contents) | treatise.astro:482 | Replaces the sticky gloss bar and its hint; the modern line is always on (Jes, tg 17806). Cue changed from `gold` to `dotted` (Jes, tg 17830). | provisional; awaiting Jes |
+| Subtitle `“Bred and mylk for childeren”` (in quotes, larger: Jes tg 17881) | treatise.astro:452 | Skeat, Oxford Chaucer vol. III (1894), introduction § 3 (Gutenberg #45027 line 2128): MS. E Museo 54 (his B) has the rubricated title 'Bred and mylk For childeren', 'boldly written at the beginning'; MS. Bodley 619 (his E, § 6, line 2149) has 'Brede and Milke for children'. B's form, `for` lowercased (the MS capital is scribal). | decided (Jes tg 17815); spelling per Skeat's MS B |
+| The subtitle's modern line `bread and milk for children` | treatise.astro:452 | Ours, a plain modernisation. | provisional; awaiting Jes |
+| Gloss popover: the word as printed, Skeat's gloss and definition, then `Shown in the figure` (only for words the section's figure shows) | treatise.astro:492 | Gloss variant. "Shown in the figure" is ours. | provisional; awaiting Jes |
+| Gloss popover: second paragraph labelled `Skeat's note` (from his notes) or `From Skeat's introduction` (introduction § 28), set as an indented italic note; glossary definitions carry no label | treatise.astro:2075 | Gloss variant. Commentary is never presented as a definition. | provisional; awaiting Jes |
+| Gloss popover source line, e.g. `Skeat, EETS 1872, glossary · s.v. Turet, p. 118`; then `Definition: …` / `Note: Skeat, Oxford Chaucer 1894, vol. III, note to Prol. l. 7` / `Introduction: …`; `our gloss · provisional` | treatise-gloss.ts:59; treatise.astro:2078 | Gloss variant. Source names are written in the gloss builder (next row). | provisional; awaiting Jes |
+| Source names: `Skeat, EETS 1872, glossary`, `Skeat, Oxford Chaucer 1894, glossary`, `Skeat, Oxford Chaucer 1894, index of names`, `Skeat, Oxford Chaucer 1894, vol. III`, `our gloss`; locators `note to Prol. l. 7`, `Introduction, § 28` | build_glosses.py:86, :79 | Gloss variant. Our short names for the editions; full titles and URLs are in `glosses.json` and `docs/treatise-glosses.md`. | provisional; awaiting Jes |
+| Screen-reader description of each glossed word: gloss, definition (or `Skeat's note: …` / `From Skeat's introduction: …`), then `Source: …` or `Our gloss.` | treatise.astro:369 | Gloss variant. Hidden text, read through aria-describedby. | provisional; awaiting Jes |
 | The modern line under every word of the glossed sections (always on): Skeat's gloss (his first sense, or a chosen piece of it), our plain respellings, the word itself where modern English uses it unchanged (quieter colour), `·` where there is no clean equivalent; in `translation` mode our minimal departures (tables below) | treatise-gloss.ts:95; treatise.astro:29 | Jes tg 17804/17806/17813. `LINE_MODE = "strict"` switches back to the word-for-word gloss line. | provisional; awaiting Jes |
 | Which glossed words light their section's figure (e.g. `turet`, `moder` in § 2; `riet`, `wombe`, `loppe` in § 3; `swerd` in the Prologue) | treatise.astro:33 | Gloss variant. Our reading of what each scene shows. | provisional; awaiting Jes |
-| `Modern rendering (Morrison)` (disclosure under each section) and its credit `James E. Morrison. Draft preview; publication permission pending.` | treatise.astro:633, :635 | Gloss variant. Collapsed by default. Required credit and notice kept. `SHOW_MORRISON = false` removes all of it. | provisional; awaiting Jes |
-| `The glosses run through Part I.` / `Part II is shown in Skeat's text without glosses, for now.` (aria-label `End of the glosses`) | treatise.astro:651, :652 | Gloss variant. After Part I § 23 (was after § 3 while only the sample was glossed). | provisional; awaiting Jes |
-| Part `aria-label`: `Prologue`, `Part I`, `Part II` | treatise.astro:499 |  | provisional; awaiting Jes |
-| `PARS PRIMA` / `PARS SECUNDA` (above part headings) | treatise.astro:56, :510 | Our Latin, modelled on the Latin rubrics in Skeat. | provisional; awaiting Jes |
-| `Part I` / `Part II` (part headings) | treatise.astro:511 |  | provisional; awaiting Jes |
-| `HERE BIGINNETH THE DESCRIPCION…` / `HERE BIGINNEN THE CONCLUSIONS…` / `HERE ENDETH THE DESCRIPCION OF THE ASTROLABIE.` | treatise.astro:46, :385 | **Skeat's**, listed only because the page supplies them rather than the collection. The "HERE ENDETH" rubric is new on the page. | n/a (source text) |
-| Skeat's group labels: `SUPPLEMENTARY PROPOSITIONS.` and `[The following sections are spurious; …]`; the Explicit colophon after §40 | treatise.astro:528, :647 | **Skeat's**, carried in the collection's `note` / `colophon` fields and shown as printed (italic underscores removed). | n/a (source text) |
-| Section kicker suffixes `· supplementary` / `· spurious` | treatise.astro:544 | New. Quiet labels on sections outside the main sequence. | provisional; awaiting Jes |
+| `Modern rendering (Morrison)` (disclosure under each section) and its credit `James E. Morrison. Draft preview; publication permission pending.` | treatise.astro:632, :634 | Gloss variant. Collapsed by default. Required credit and notice kept. `SHOW_MORRISON = false` removes all of it. | provisional; awaiting Jes |
+| Part `aria-label`: `Prologue`, `Part I`, `Part II` | treatise.astro:498 |  | provisional; awaiting Jes |
+| `PARS PRIMA` / `PARS SECUNDA` (above part headings) | treatise.astro:56, :509 | Our Latin, modelled on the Latin rubrics in Skeat. | provisional; awaiting Jes |
+| `Part I` / `Part II` (part headings) | treatise.astro:510 |  | provisional; awaiting Jes |
+| `HERE BIGINNETH THE DESCRIPCION…` / `HERE BIGINNEN THE CONCLUSIONS…` / `HERE ENDETH THE DESCRIPCION OF THE ASTROLABIE.` | treatise.astro:46, :384 | **Skeat's**, listed only because the page supplies them rather than the collection. The "HERE ENDETH" rubric is new on the page. | n/a (source text) |
+| Skeat's group labels: `SUPPLEMENTARY PROPOSITIONS.` and `[The following sections are spurious; …]`; the Explicit colophon after §40 | treatise.astro:527, :646 | **Skeat's**, carried in the collection's `note` / `colophon` fields and shown as printed (italic underscores removed). | n/a (source text) |
+| Section kicker suffixes `· supplementary` / `· spurious` | treatise.astro:543 | New. Quiet labels on sections outside the main sequence. | provisional; awaiting Jes |
 | Sky-window ring legends: `PROLOGUS · LITELL LOWIS MY SONE`, `PARS PRIMA · CAPITULUM I`…, `PARS SECUNDA · CONCLUSIO I`…, `… CONCLUSIO XLI a` | treatise.astro:298, :299 | Our Latin. "Conclusio" follows Skeat's Latin rubric ("conclusiones"); "Capitulum" for Part I is our choice; Skeat's letter suffix kept for the spurious sections. | provisional; awaiting Jes |
 | Inline window legend `WITH THIS SWERD SHAL I SLEEN ENVYE` and aria-label `Figure: with this swerd shal I sleen envye` | treatise.astro:309 | New. Label from `00-prologue.md` (`inlineScenes`); the legend is the label without "Figure:", upper-cased. The words are Skeat's. | provisional; awaiting Jes |
-| `☞` (printer's red) before the phrase a figure belongs to, in the Prologue's text | treatise.astro:173, :1589 | New element (Jes tg 17901). Set by the placement script before each phrase-anchored window's phrase, so readers can see which line a figure belongs to. Decorative: aria-hidden, not selectable, clicks pass through to the word. | provisional; awaiting Jes |
+| `☞` (printer's red) before the phrase a figure belongs to, in the Prologue's text | treatise.astro:173, :1587 | New element (Jes tg 17901). Set by the placement script before each phrase-anchored window's phrase, so readers can see which line a figure belongs to. Decorative: aria-hidden, not selectable, clicks pass through to the word. | provisional; awaiting Jes |
 | Prologue's five part windows (small): ring legends and aria-labels `Figure: the first part (finished)`, `… the second part (nearly all survives)`, `… the third part (tables)`, `… the fourth part (probably never written)`, `… the fifth part (probably never written)` | 00-prologue.md:44, :60 | Ours, paraphrasing Skeat, Oxford Chaucer vol. III (1894), introduction (Gutenberg #45027, lines 2471–2518): Part i. "we have the whole"; ii. "nearly all, and probably all that ever was written"; iii. "probably consisted entirely of tables"; iv. "probably never written"; v. "in all probability, none … was ever written". Anchored on Skeat's `I. The firste partie` … `V. The fifte partie`; modules treatise-prologue-part-1…5 draw only the numeral. | provisional; awaiting Jes |
-| `Figure for Prologue` / `Figure for Part II § 1` … (figure aria-label) | treatise.astro:578 | Screen-reader label for each sky window. | provisional; awaiting Jes |
+| `Figure for Prologue` / `Figure for Part II § 1` … (figure aria-label) | treatise.astro:577 | Screen-reader label for each sky window. | provisional; awaiting Jes |
 | `The Prologue` / `Part II · § 1` … (section kicker) | treatise.astro:328 |  | provisional; awaiting Jes |
 | Section titles for sections without a rubric, e.g. `Litell Lowis my sone…`, `Thyn Astrolabie hath a ring…` | treatise.astro:342 | First 4–5 words of Skeat's text plus our ellipsis. Part II titles are Skeat's rubrics, unchanged. Since Jes tg 17856 the first-words titles (Prologue, Part I §1–23: Skeat prints no rubric there) are screen-reader only; the visible label is the kicker, e.g. `Part I · § 21`. | provisional; awaiting Jes |
-| `Explicit` (closing word) | treatise.astro:665 | Conventional Latin end-of-text mark. | provisional; awaiting Jes |
-| `Middle English: W. W. Skeat (1894). Glosses: W. W. Skeat, Early English Text Society (1872) and Oxford Chaucer (1894), except those marked as ours. … Sky drawn for the latitude of Oxford.` (closing credit) | treatise.astro:667, :671 | Gloss credit added in the gloss variant; Morrison credit there reads `Modern rendering: …`. | provisional; awaiting Jes |
+| `Explicit` (closing word) | treatise.astro:658 | Conventional Latin end-of-text mark. | provisional; awaiting Jes |
+| `Middle English: W. W. Skeat (1894). Glosses: W. W. Skeat, Early English Text Society (1872) and Oxford Chaucer (1894), except those marked as ours. … Sky drawn for the latitude of Oxford.` (closing credit) | treatise.astro:660, :664 | Gloss credit added in the gloss variant; Morrison credit there reads `Modern rendering: …`. | provisional; awaiting Jes |
 
 ## Sky labels (`src/scripts/treatise-sky.ts`)
 
@@ -361,6 +360,188 @@ mark and the source line "our gloss · provisional". Every other gloss is Skeat'
 | (sense choice) | rule (modern line only, no popover) | provisional; awaiting Jes |
 | (sense choice) | written (modern line only, no popover) | provisional; awaiting Jes |
 | (sense choice) | seems (modern line only, no popover) | provisional; awaiting Jes |
+| (sense choice) | it (modern line only, no popover) | provisional; awaiting Jes |
+| (sense choice) | marks (modern line only, no popover) | provisional; awaiting Jes |
+| `monthe` | month (modern line only, no popover) | provisional; awaiting Jes |
+| `soughte` | sought (modern line only, no popover) | provisional; awaiting Jes |
+| `brighte` | bright (modern line only, no popover) | provisional; awaiting Jes |
+| `loke` | look (modern line only, no popover) | provisional; awaiting Jes |
+| `nedith` | needs (modern line only, no popover) | provisional; awaiting Jes |
+| `turne` | turn (modern line only, no popover) | provisional; awaiting Jes |
+| `assending` | ascending (modern line only, no popover) | provisional; awaiting Jes |
+| `clok` | clock (modern line only, no popover) | provisional; awaiting Jes |
+| `erre` | err (modern line only, no popover) | provisional; awaiting Jes |
+| `evere` | ever (modern line only, no popover) | provisional; awaiting Jes |
+| `feire` | fair (modern line only, no popover) | provisional; awaiting Jes |
+| `folwing` | following (modern line only, no popover) | provisional; awaiting Jes |
+| `founden` | found (modern line only, no popover) | provisional; awaiting Jes |
+| `hast` | have (modern line only, no popover) | provisional; awaiting Jes |
+| `lettre` | letter (modern line only, no popover) | provisional; awaiting Jes |
+| `mak` | make (modern line only, no popover) | provisional; awaiting Jes |
+| `more-over` | moreover (modern line only, no popover) | provisional; awaiting Jes |
+| `poynte` | point (modern line only, no popover) | provisional; awaiting Jes |
+| `sette` | set (modern line only, no popover) | provisional; awaiting Jes |
+| `sholde`, `shuld` | should (modern line only, no popover) | provisional; awaiting Jes |
+| `sterris` | stars (modern line only, no popover) | provisional; awaiting Jes |
+| `tok` | took (modern line only, no popover) | provisional; awaiting Jes |
+| `turnede` | turned (modern line only, no popover) | provisional; awaiting Jes |
+| `weste` | west (modern line only, no popover) | provisional; awaiting Jes |
+| `aryse` | arise (modern line only, no popover) | provisional; awaiting Jes |
+| `assendeth`, `assendith` | ascends (modern line only, no popover) | provisional; awaiting Jes |
+| `eke` | also (modern line only, no popover) | provisional; awaiting Jes |
+| `feith` | faith (modern line only, no popover) | provisional; awaiting Jes |
+| `frendly` | friendly (modern line only, no popover) | provisional; awaiting Jes |
+| `gretly` | greatly (modern line only, no popover) | provisional; awaiting Jes |
+| `largeste` | largest (modern line only, no popover) | provisional; awaiting Jes |
+| `nativite` | nativity (modern line only, no popover) | provisional; awaiting Jes |
+| `observen` | observe (modern line only, no popover) | provisional; awaiting Jes |
+| `porcion`, `porcioun` | portion (modern line only, no popover) | provisional; awaiting Jes |
+| `questiouns` | questions (modern line only, no popover) | provisional; awaiting Jes |
+| `rekned` | reckoned (modern line only, no popover) | provisional; awaiting Jes |
+| `seen` | see (modern line only, no popover) | provisional; awaiting Jes |
+| `there-for` | therefore (modern line only, no popover) | provisional; awaiting Jes |
+| `wher-for`, `wher-fore` | wherefore (modern line only, no popover) | provisional; awaiting Jes |
+| `tymes` | times (modern line only, no popover) | provisional; awaiting Jes |
+| `falleth` | falls (modern line only, no popover) | provisional; awaiting Jes |
+| `wher` | where (modern line only, no popover) | provisional; awaiting Jes |
+| `worke` | work (modern line only, no popover) | provisional; awaiting Jes |
+| `a-mong` | among (modern line only, no popover) | provisional; awaiting Jes |
+| `opposit` | opposite (modern line only, no popover) | provisional; awaiting Jes |
+| `schewe` | show (modern line only, no popover) | provisional; awaiting Jes |
+| `passeth` | passes (modern line only, no popover) | provisional; awaiting Jes |
+| `ryseth` | rises (modern line only, no popover) | provisional; awaiting Jes |
+| `prikkes` | dots (modern line only, no popover) | provisional; awaiting Jes |
+| `adde` | add (modern line only, no popover) | provisional; awaiting Jes |
+| `daye` | day (modern line only, no popover) | provisional; awaiting Jes |
+| `al-redy` | already (modern line only, no popover) | provisional; awaiting Jes |
+| `ioyntly` | jointly (modern line only, no popover) | provisional; awaiting Jes |
+| `manye` | many (modern line only, no popover) | provisional; awaiting Jes |
+| `a-gayn` | again (modern line only, no popover) | provisional; awaiting Jes |
+| `climbeth` | climbs (modern line only, no popover) | provisional; awaiting Jes |
+| `dessending` | descending (modern line only, no popover) | provisional; awaiting Jes |
+| `endeth` | ends (modern line only, no popover) | provisional; awaiting Jes |
+| `gon` | gone (modern line only, no popover) | provisional; awaiting Jes |
+| `iupiter` | Jupiter (modern line only, no popover) | provisional; awaiting Jes |
+| `doth` | does (modern line only, no popover) | provisional; awaiting Jes |
+| `a-boute` | about (modern line only, no popover) | provisional; awaiting Jes |
+| `fynde` | find (modern line only, no popover) | provisional; awaiting Jes |
+| `marke` | mark (modern line only, no popover) | provisional; awaiting Jes |
+| `midde` | mid (modern line only, no popover) | provisional; awaiting Jes |
+| `lok` | look (modern line only, no popover) | provisional; awaiting Jes |
+| `pointe` | point (modern line only, no popover) | provisional; awaiting Jes |
+| `varieth` | varies (modern line only, no popover) | provisional; awaiting Jes |
+| `yer` | year (modern line only, no popover) | provisional; awaiting Jes |
+| `assendentes` | ascendants (modern line only, no popover) | provisional; awaiting Jes |
+| `for-get` | forget (modern line only, no popover) | provisional; awaiting Jes |
+| `rikned` | reckoned (modern line only, no popover) | provisional; awaiting Jes |
+| `stondeth` | stands (modern line only, no popover) | provisional; awaiting Jes |
+| `to-warde` | toward (modern line only, no popover) | provisional; awaiting Jes |
+| `standeth` | stands (modern line only, no popover) | provisional; awaiting Jes |
+| `neyther` | neither (modern line only, no popover) | provisional; awaiting Jes |
+| `shorte` | short (modern line only, no popover) | provisional; awaiting Jes |
+| `exceded` | exceeded (modern line only, no popover) | provisional; awaiting Jes |
+| `winters` | winter's (modern line only, no popover) | provisional; awaiting Jes |
+| `dissendeth` | descends (modern line only, no popover) | provisional; awaiting Jes |
+| `by-nethe` | beneath (modern line only, no popover) | provisional; awaiting Jes |
+| `cerkle` | circle (modern line only, no popover) | provisional; awaiting Jes |
+| `degre` | degree (modern line only, no popover) | provisional; awaiting Jes |
+| `distans` | distance (modern line only, no popover) | provisional; awaiting Jes |
+| `dwellen` | dwell (modern line only, no popover) | provisional; awaiting Jes |
+| `odde` | odd (modern line only, no popover) | provisional; awaiting Jes |
+| `ascendeth` | ascends (modern line only, no popover) | provisional; awaiting Jes |
+| `assenciouns` | ascensions (modern line only, no popover) | provisional; awaiting Jes |
+| `cuntrey` | country (modern line only, no popover) | provisional; awaiting Jes |
+| `divydeth` | divides (modern line only, no popover) | provisional; awaiting Jes |
+| `folke` | folk (modern line only, no popover) | provisional; awaiting Jes |
+| `instrumentz` | instruments (modern line only, no popover) | provisional; awaiting Jes |
+| `knowen` | know (modern line only, no popover) | provisional; awaiting Jes |
+| `manifeste` | manifestly (modern line only, no popover) | provisional; awaiting Jes |
+| `passinge` | passing (modern line only, no popover) | provisional; awaiting Jes |
+| `poeple` | people (modern line only, no popover) | provisional; awaiting Jes |
+| `someres` | summers (modern line only, no popover) | provisional; awaiting Jes |
+| `winteres` | winters (modern line only, no popover) | provisional; awaiting Jes |
+| `worlde` | world (modern line only, no popover) | provisional; awaiting Jes |
+| `werke`, `wyrke` | work (modern line only, no popover) | provisional; awaiting Jes |
+| `arisen` | rise (modern line only, no popover) | provisional; awaiting Jes |
+| `obeyen` | obey (modern line only, no popover) | provisional; awaiting Jes |
+| `handes` | hands (modern line only, no popover) | provisional; awaiting Jes |
+| `shyninge` | shining (modern line only, no popover) | provisional; awaiting Jes |
+| `takest` | take (modern line only, no popover) | provisional; awaiting Jes |
+| `heyere` | higher (modern line only, no popover) | provisional; awaiting Jes |
+| `wente` | went (modern line only, no popover) | provisional; awaiting Jes |
+| `significacion` | signification (modern line only, no popover) | provisional; awaiting Jes |
+| `mones` | moon's (modern line only, no popover) | provisional; awaiting Jes |
+| `stonden` | stand (modern line only, no popover) | provisional; awaiting Jes |
+| `trowthe` | truth (modern line only, no popover) | provisional; awaiting Jes |
+| `condicion` | condition (modern line only, no popover) | provisional; awaiting Jes |
+| (sense choice) | directly (modern line only, no popover) | provisional; awaiting Jes |
+| `be-ginning`, `by-ginning`, `byginning` | beginning (modern line only, no popover) | provisional; awaiting Jes |
+| `schadwe`, `shadwe` | shadow (modern line only, no popover) | provisional; awaiting Jes |
+| `shyneth` | shines (modern line only, no popover) | provisional; awaiting Jes |
+| `smallere` | smaller (modern line only, no popover) | provisional; awaiting Jes |
+| `ston` | stone (modern line only, no popover) | provisional; awaiting Jes |
+| `stryke` | stroke (modern line only, no popover) | provisional; awaiting Jes |
+| `ther-upon` | thereupon (modern line only, no popover) | provisional; awaiting Jes |
+| `aprocheth` | approaches (modern line only, no popover) | provisional; awaiting Jes |
+| `citees` | cities (modern line only, no popover) | provisional; awaiting Jes |
+| `conteyned`, `contiened` | contained (modern line only, no popover) | provisional; awaiting Jes |
+| `descripcion` | description (modern line only, no popover) | provisional; awaiting Jes |
+| `distaunce` | distance (modern line only, no popover) | provisional; awaiting Jes |
+| `thay` | they (modern line only, no popover) | provisional; awaiting Jes |
+| `tounes` | towns (modern line only, no popover) | provisional; awaiting Jes |
+| `lokede` | looked (modern line only, no popover) | provisional; awaiting Jes |
+| `north-ward` | northward (modern line only, no popover) | provisional; awaiting Jes |
+| `resceyve` | receive (modern line only, no popover) | provisional; awaiting Jes |
+| `be-hold`, `be-holde`, `beholde` | behold (modern line only, no popover) | provisional; awaiting Jes |
+| `be-tween`, `be-twen`, `betwixe` | between (modern line only, no popover) | provisional; awaiting Jes |
+| `falle` | fall (modern line only, no popover) | provisional; awaiting Jes |
+| `schal`, `schalt` | shall (modern line only, no popover) | provisional; awaiting Jes |
+| `wilt` | will (modern line only, no popover) | provisional; awaiting Jes |
+| `an-other` | another (modern line only, no popover) | provisional; awaiting Jes |
+| `seest` | see (modern line only, no popover) | provisional; awaiting Jes |
+| `werking`, `werkinge` | working (modern line only, no popover) | provisional; awaiting Jes |
+| `differens`, `differense` | difference (modern line only, no popover) | provisional; awaiting Jes |
+| `ferste` | first (modern line only, no popover) | provisional; awaiting Jes |
+| `fill` | fell (modern line only, no popover) | provisional; awaiting Jes |
+| `findest` | find (modern line only, no popover) | provisional; awaiting Jes |
+| `nombere`, `numbre` | number (modern line only, no popover) | provisional; awaiting Jes |
+| `poyntis` | points (modern line only, no popover) | provisional; awaiting Jes |
+| `prikkys` | marks (modern line only, no popover) | provisional; awaiting Jes |
+| `secunde` | second (modern line only, no popover) | provisional; awaiting Jes |
+| `settest` | set (modern line only, no popover) | provisional; awaiting Jes |
+| `mesures` | measures (modern line only, no popover) | provisional; awaiting Jes |
+| `eche` | each (modern line only, no popover) | provisional; awaiting Jes |
+| `goost` | go (modern line only, no popover) | provisional; awaiting Jes |
+| `makest` | make (modern line only, no popover) | provisional; awaiting Jes |
+| `muste` | must (modern line only, no popover) | provisional; awaiting Jes |
+| `markes` | marks (modern line only, no popover) | provisional; awaiting Jes |
+| (sense choice) | afterwards (modern line only, no popover) | provisional; awaiting Jes |
+| `be-fore` | before (modern line only, no popover) | provisional; awaiting Jes |
+| `conteyneth` | contains (modern line only, no popover) | provisional; awaiting Jes |
+| `decembere` | December (modern line only, no popover) | provisional; awaiting Jes |
+| `entringe` | entering (modern line only, no popover) | provisional; awaiting Jes |
+| `fraccioun` | fraction (modern line only, no popover) | provisional; awaiting Jes |
+| `hede` | head (modern line only, no popover) | provisional; awaiting Jes |
+| `monethes`, `monethis` | months (modern line only, no popover) | provisional; awaiting Jes |
+| `mony` | many (modern line only, no popover) | provisional; awaiting Jes |
+| `passid` | passed (modern line only, no popover) | provisional; awaiting Jes |
+| `sayen` | say (modern line only, no popover) | provisional; awaiting Jes |
+| `worchest` | work (modern line only, no popover) | provisional; awaiting Jes |
+| `yeres`, `yeris` | years (modern line only, no popover) | provisional; awaiting Jes |
+| `yf` | if (modern line only, no popover) | provisional; awaiting Jes |
+| `after-ward` | afterward (modern line only, no popover) | provisional; awaiting Jes |
+| `amonge` | among (modern line only, no popover) | provisional; awaiting Jes |
+| `kepte` | kept (modern line only, no popover) | provisional; awaiting Jes |
+| `ony` | any (modern line only, no popover) | provisional; awaiting Jes |
+| `precise` | precisely (modern line only, no popover) | provisional; awaiting Jes |
+| `tabelis` | tables (modern line only, no popover) | provisional; awaiting Jes |
+| `woldest` | would (modern line only, no popover) | provisional; awaiting Jes |
+| `wroot` | wrote (modern line only, no popover) | provisional; awaiting Jes |
+| `bringe` | bring (modern line only, no popover) | provisional; awaiting Jes |
+| `labelle` | label (modern line only, no popover) | provisional; awaiting Jes |
+| `esely` | easily (modern line only, no popover) | provisional; awaiting Jes |
+| `seyd` | said (modern line only, no popover) | provisional; awaiting Jes |
+| `dide` | did (modern line only, no popover) | provisional; awaiting Jes |
 
 ## Sense choices we made (`overrides` in `glosses.json`)
 
@@ -439,6 +620,305 @@ themselves are Skeat's.
 | p1-14: "the tables of" | `tables` | plates | provisional; awaiting Jes |
 | p1-22: "no plates" | `plates` | the "sight" on the "rewle," | provisional; awaiting Jes |
 | p1-21: "hir longitudes" | `longitudes` | longitudes | provisional; awaiting Jes |
+| p2-01: "than" | `than` | then | provisional; awaiting Jes |
+| p2-04: "than" | `than` | then | provisional; awaiting Jes |
+| p2-01: "tho" | `tho` | then | provisional; awaiting Jes |
+| p2-03: "tho" | `tho` | then | provisional; awaiting Jes |
+| p2-04: "seyn" | `seyn` | say | provisional; awaiting Jes |
+| p2-04: "yit sein" | `sein` | say | provisional; awaiting Jes |
+| p2-04: "thilke" | `thilke` | that | provisional; awaiting Jes |
+| p2-06: "thilke" | `thilke` | that | provisional; awaiting Jes |
+| p2-04: "yit" | `yit` | yet | provisional; awaiting Jes |
+| p2-04: "ne" | `ne` | nor | provisional; awaiting Jes |
+| p2-04: "spirit ne hath" | `ne` | not | provisional; awaiting Jes |
+| p2-02: "no more declaracion" | `more` | (no gloss here) | provisional; awaiting Jes |
+| p2-04: "more brood" | `more` | (no gloss here) | provisional; awaiting Jes |
+| p2-03: "general rewle" | `rewle` | rule | provisional; awaiting Jes |
+| p2-03: "minutes" | `minutes` | a sixtieth part of a degree | provisional; awaiting Jes |
+| p2-03: "wot" | `wot` | know | provisional; awaiting Jes |
+| p2-01: "writen" | `writen` | written | provisional; awaiting Jes |
+| p2-05: "sitte" | `sitte` | be situate | provisional; awaiting Jes |
+| p2-05: "evene" | `evene` | exactly | provisional; awaiting Jes |
+| p2-05: "compas" | `compas` | pair of compasses | provisional; awaiting Jes |
+| p2-01: "maner" | `maner` | manner, way | provisional; awaiting Jes |
+| p2-03: "maner" | `maner` | manner, way | provisional; awaiting Jes |
+| p2-04: "special declaracioun" | `special` | (no gloss here) | provisional; awaiting Jes |
+| p2-03: "fond hir sitting" | `hir` | her (applied to a star) | provisional; awaiting Jes |
+| p2-03: "after the middel" | `after` | (no gloss here) | provisional; awaiting Jes |
+| p2-04: "latitude" | `latitude` | the angular distance of any body from the ecliptic | provisional; awaiting Jes |
+| p2-03: "centre" | `centre` | the "centre" or small point at the very end of which is the position of a fixed star in the Rete of the Astrolabe | provisional; awaiting Jes |
+| p2-03: "sey i by the centre" | `by` | with reference to | provisional; awaiting Jes |
+| p2-01: "rewle up that" | `up` | upon | provisional; awaiting Jes |
+| p2-05: "by on and on" | `on` | one | provisional; awaiting Jes |
+| p2-03: "to hard" | `to` | too | provisional; awaiting Jes |
+| p2-03: "consentrik" | `consentrik` | at an unchanging altitude | provisional; awaiting Jes |
+| p2-03: "renneth" | `renneth` | runs, continues | provisional; awaiting Jes |
+| p2-04: "angle" | `angle` | angular distance (from the meridian) | provisional; awaiting Jes |
+| p2-05: "where-as" | `where-as` | whereas | provisional; awaiting Jes |
+| p2-01: "ful experience" | `ful` | full | provisional; awaiting Jes |
+| p2-07: "of whether that" | `whether` | which (of two) | provisional; awaiting Jes |
+| p2-06: "declare him" | `him` | it | provisional; awaiting Jes |
+| p2-05: "his right place" | `his` | its | provisional; awaiting Jes |
+| p2-06: "his nadir" | `his` | its | provisional; awaiting Jes |
+| p2-07: "his propre" | `his` | its | provisional; awaiting Jes |
+| p2-05: "and on or" | `on` | one | provisional; awaiting Jes |
+| p2-04: "his" | `his` | its | provisional; awaiting Jes |
+| p2-10: "than" | `than` | then | provisional; awaiting Jes |
+| p2-12: "than" | `than` | then | provisional; awaiting Jes |
+| p2-13: "than" | `than` | then | provisional; awaiting Jes |
+| p2-14: "than" | `than` | then | provisional; awaiting Jes |
+| p2-15: "than" | `than` | then | provisional; awaiting Jes |
+| p2-17: "than" | `than` | then | provisional; awaiting Jes |
+| p2-20: "than" | `than` | then | provisional; awaiting Jes |
+| p2-22: "than" | `than` | then | provisional; awaiting Jes |
+| p2-23: "than" | `than` | then | provisional; awaiting Jes |
+| p2-25: "than" | `than` | then | provisional; awaiting Jes |
+| p2-10: "day than" | `than` | (no gloss here) | provisional; awaiting Jes |
+| p2-23: "lasse than" | `than` | (no gloss here) | provisional; awaiting Jes |
+| p2-23: "heyer than" | `than` | (no gloss here) | provisional; awaiting Jes |
+| p2-13: "seyn" | `seyn` | say | provisional; awaiting Jes |
+| p2-14: "seyn" | `seyn` | say | provisional; awaiting Jes |
+| p2-15: "seyn" | `seyn` | say | provisional; awaiting Jes |
+| p2-23: "seyn" | `seyn` | say | provisional; awaiting Jes |
+| p2-25: "thee semeth" | `semeth` | seems | provisional; awaiting Jes |
+| p2-17: "thilke" | `thilke` | that | provisional; awaiting Jes |
+| p2-20: "thilke" | `thilke` | that | provisional; awaiting Jes |
+| p2-23: "thilke" | `thilke` | that | provisional; awaiting Jes |
+| p2-24: "thilke" | `thilke` | that | provisional; awaiting Jes |
+| p2-25: "thilke" | `thilke` | that | provisional; awaiting Jes |
+| p2-20: "thilke altitudes" | `thilke` | those | provisional; awaiting Jes |
+| p2-25: "thilke degrees" | `thilke` | those | provisional; awaiting Jes |
+| p2-14: "and yit" | `yit` | yet | provisional; awaiting Jes |
+| p2-17: "ne" | `ne` | nor | provisional; awaiting Jes |
+| p2-19: "ne" | `ne` | nor | provisional; awaiting Jes |
+| p2-25: "ne" | `ne` | nor | provisional; awaiting Jes |
+| p2-11: "nedeth more" | `more` | (no gloss here) | provisional; awaiting Jes |
+| p2-25: "neither more ne" | `more` | (no gloss here) | provisional; awaiting Jes |
+| p2-22: "shorte rewle" | `rewle` | rule | provisional; awaiting Jes |
+| p2-22: "minutes" | `minutes` | a sixtieth part of a degree | provisional; awaiting Jes |
+| p2-25: "minutes" | `minutes` | a sixtieth part of a degree | provisional; awaiting Jes |
+| p2-25: "wot" | `wot` | know | provisional; awaiting Jes |
+| p2-23: "sitte" | `sitte` | be situate | provisional; awaiting Jes |
+| p2-12: "they sitten" | `sitten` | are situate | provisional; awaiting Jes |
+| p2-17: "evene" | `evene` | exactly | provisional; awaiting Jes |
+| p2-12: "maner" | `maner` | manner, way | provisional; awaiting Jes |
+| p2-25: "maner" | `maner` | manner, way | provisional; awaiting Jes |
+| p2-12: "after" | `after` | (no gloss here) | provisional; awaiting Jes |
+| p2-17: "latitude" | `latitude` | the angular distance of any body from the ecliptic | provisional; awaiting Jes |
+| p2-19: "latitude" | `latitude` | the angular distance of any body from the ecliptic | provisional; awaiting Jes |
+| p2-18: "centre of the sterre" | `centre` | the "centre" or small point at the very end of which is the position of a fixed star in the Rete of the Astrolabe | provisional; awaiting Jes |
+| p2-19: "centre of the sterre" | `centre` | the "centre" or small point at the very end of which is the position of a fixed star in the Rete of the Astrolabe | provisional; awaiting Jes |
+| p2-15: "that on day" | `on` | one | provisional; awaiting Jes |
+| p2-25: "to long" | `to` | too | provisional; awaiting Jes |
+| p2-21: "table compouned" | `compouned` | composed, constructed, drawn | provisional; awaiting Jes |
+| p2-19: "non of hem" | `non` | none | provisional; awaiting Jes |
+| p2-25: "degree of his declinacion" | `his` | its | provisional; awaiting Jes |
+| p2-25: "nombre of his declinacion" | `his` | its | provisional; awaiting Jes |
+| p2-25: "noon and his declinacion" | `his` | its | provisional; awaiting Jes |
+| p2-12: "his" | `his` | its | provisional; awaiting Jes |
+| p2-17: "his" | `his` | its | provisional; awaiting Jes |
+| p2-19: "his" | `his` | its | provisional; awaiting Jes |
+| p2-20: "his" | `his` | its | provisional; awaiting Jes |
+| p2-16: "goth in somer" | `somer` | summer | provisional; awaiting Jes |
+| p2-23: "thin heved" | `heved` | head | provisional; awaiting Jes |
+| p2-25: "as sheweth in" | `sheweth` | appears as, is shewn | provisional; awaiting Jes |
+| p2-19: "declineth" | `declineth` | possesses declination | provisional; awaiting Jes |
+| p2-17: "the quantite of his declinacion" | `quantite` | quantity | provisional; awaiting Jes |
+| p2-25: "same quantite of space" | `quantite` | quantity | provisional; awaiting Jes |
+| p2-16: "y-lyke declinacioun" | `y-lyke` | equal | provisional; awaiting Jes |
+| p2-13: "this is to seyn" | `seyn` | say | provisional; awaiting Jes |
+| p2-14: "this is to seyn" | `seyn` | say | provisional; awaiting Jes |
+| p2-15: "this is to seyn" | `seyn` | say | provisional; awaiting Jes |
+| p2-23: "this is to seyn" | `seyn` | say | provisional; awaiting Jes |
+| p2-25: "thee semeth" | `semeth` | seems | provisional; awaiting Jes |
+| p2-22: "shorte rewle" | `rewle` | rule | provisional; awaiting Jes |
+| p2-17: "his latitude" | `latitude` | the angular distance of any body from the ecliptic | provisional; awaiting Jes |
+| p2-17: "the latitude or the declinacion" | `latitude` | the angular distance of any body from the ecliptic | provisional; awaiting Jes |
+| p2-17: "declinacion or the latitude" | `latitude` | the angular distance of any body from the ecliptic | provisional; awaiting Jes |
+| p2-19: "latitude of the sterre" | `latitude` | the angular distance of any body from the ecliptic | provisional; awaiting Jes |
+| p2-19: "no latitude" | `latitude` | the angular distance of any body from the ecliptic | provisional; awaiting Jes |
+| p2-13: "the heyest of the sonne" | `heyest` | highest place | provisional; awaiting Jes |
+| p2-14: "the heyest of the sonne" | `heyest` | highest place | provisional; awaiting Jes |
+| p2-19: "latitudes of planetes" | `latitudes` | the angular distance of any body from the ecliptic | provisional; awaiting Jes |
+| p2-23: "to prove this conclusioun" | `prove` | to test | provisional; awaiting Jes |
+| p2-23: "agayns the dawening" | `agayns` | near to | provisional; awaiting Jes |
+| p2-17: "evene fro" | `evene` | exactly | provisional; awaiting Jes |
+| p2-23: "evene" | `evene` | exactly | provisional; awaiting Jes |
+| p2-23: "at even" | `even` | evening | provisional; awaiting Jes |
+| p2-23: "at evene" | `evene` | evening | provisional; awaiting Jes |
+| p2-09: "the hole day" | `hole` | whole | provisional; awaiting Jes |
+| 00-prologue: "table" | `table` | (no gloss here) | provisional; awaiting Jes |
+| p2-17: "save only" | `save` | save, except | provisional; awaiting Jes |
+| p2-19: "save in o cas" | `save` | save, except | provisional; awaiting Jes |
+| p2-23: "his" | `his` | its | provisional; awaiting Jes |
+| p2-24: "his" | `his` | its | provisional; awaiting Jes |
+| p2-25: "his nethere" | `his` | its | provisional; awaiting Jes |
+| p2-23: "or the dawing" | `or` | ere, before | provisional; awaiting Jes |
+| p2-23: "or day" | `or` | ere, before | provisional; awaiting Jes |
+| p2-16: "shadwes y-lyke" | `y-lyke` | alike, equally | provisional; awaiting Jes |
+| p2-16: "altitudes y-lyke" | `y-lyke` | alike, equally | provisional; awaiting Jes |
+| p2-30: "than" | `than` | then | provisional; awaiting Jes |
+| p2-31: "than" | `than` | then | provisional; awaiting Jes |
+| p2-34: "than" | `than` | then | provisional; awaiting Jes |
+| p2-35: "than" | `than` | then | provisional; awaiting Jes |
+| p2-36: "than" | `than` | then | provisional; awaiting Jes |
+| p2-37: "than" | `than` | then | provisional; awaiting Jes |
+| p2-38: "than" | `than` | then | provisional; awaiting Jes |
+| p2-39: "than" | `than` | then | provisional; awaiting Jes |
+| p2-40: "than" | `than` | then | provisional; awaiting Jes |
+| p2-30: "heyere than" | `than` | (no gloss here) | provisional; awaiting Jes |
+| p2-30: "lasse than" | `than` | (no gloss here) | provisional; awaiting Jes |
+| p2-35: "lasse than" | `than` | (no gloss here) | provisional; awaiting Jes |
+| p2-35: "more than" | `than` | (no gloss here) | provisional; awaiting Jes |
+| p2-38: "lengere than" | `than` | (no gloss here) | provisional; awaiting Jes |
+| p2-39: "est than" | `than` | (no gloss here) | provisional; awaiting Jes |
+| p2-40: "tho" | `tho` | then | provisional; awaiting Jes |
+| p2-26: "seyn" | `seyn` | say | provisional; awaiting Jes |
+| p2-30: "seyn" | `seyn` | say | provisional; awaiting Jes |
+| p2-33: "seyn" | `seyn` | say | provisional; awaiting Jes |
+| p2-39: "seyn" | `seyn` | say | provisional; awaiting Jes |
+| p2-40: "seyn" | `seyn` | say | provisional; awaiting Jes |
+| p2-26: "thilke" | `thilke` | that | provisional; awaiting Jes |
+| p2-29: "thilke" | `thilke` | that | provisional; awaiting Jes |
+| p2-30: "thilke" | `thilke` | that | provisional; awaiting Jes |
+| p2-32: "thilke" | `thilke` | that | provisional; awaiting Jes |
+| p2-26: "thilke folke" | `thilke` | those | provisional; awaiting Jes |
+| p2-26: "thilke assenciouns" | `thilke` | those | provisional; awaiting Jes |
+| p2-39: "thilke man" | `thilke` | that | provisional; awaiting Jes |
+| p2-34: "or non ne on" | `ne` | nor | provisional; awaiting Jes |
+| p2-28: "more upright" | `more` | (no gloss here) | provisional; awaiting Jes |
+| p2-31: "no more but" | `more` | (no gloss here) | provisional; awaiting Jes |
+| p2-33: "no more to" | `more` | (no gloss here) | provisional; awaiting Jes |
+| p2-35: "more than" | `more` | (no gloss here) | provisional; awaiting Jes |
+| p2-39: "more toward" | `more` | (no gloss here) | provisional; awaiting Jes |
+| p2-27: "sitte" | `sitte` | be situate | provisional; awaiting Jes |
+| p2-28: "sitte" | `sitte` | be situate | provisional; awaiting Jes |
+| p2-32: "sitte" | `sitte` | be situate | provisional; awaiting Jes |
+| p2-33: "sitte" | `sitte` | be situate | provisional; awaiting Jes |
+| p2-36: "sitte" | `sitte` | be situate | provisional; awaiting Jes |
+| p2-29: "evene" | `evene` | exactly | provisional; awaiting Jes |
+| p2-38: "evene" | `evene` | exactly | provisional; awaiting Jes |
+| p2-39: "evene" | `evene` | exactly | provisional; awaiting Jes |
+| p2-40: "evene" | `evene` | exactly | provisional; awaiting Jes |
+| p2-38: "evene grond" | `evene` | even | provisional; awaiting Jes |
+| p2-38: "evene ston" | `evene` | even | provisional; awaiting Jes |
+| p2-38: "evene stok" | `evene` | even | provisional; awaiting Jes |
+| p2-38: "evene pin" | `evene` | even | provisional; awaiting Jes |
+| p2-38: "take than a compas" | `compas` | pair of compasses | provisional; awaiting Jes |
+| p2-40: "compas" | `compas` | pair of compasses | provisional; awaiting Jes |
+| p2-40: "maner" | `maner` | manner, way | provisional; awaiting Jes |
+| p2-35: "hir" | `hir` | her | provisional; awaiting Jes |
+| p2-40: "hir" | `hir` | her | provisional; awaiting Jes |
+| p2-38: "after of the clokke" | `after` | (no gloss here) | provisional; awaiting Jes |
+| p2-40: "houre after houre" | `after` | (no gloss here) | provisional; awaiting Jes |
+| p2-30: "latitude" | `latitude` | the angular distance of any body from the ecliptic | provisional; awaiting Jes |
+| p2-34: "latitude" | `latitude` | the angular distance of any body from the ecliptic | provisional; awaiting Jes |
+| p2-40: "latitude" | `latitude` | the angular distance of any body from the ecliptic | provisional; awaiting Jes |
+| p2-39: "latitude of a clymat" | `latitude` | the breadth of a climate, or a line along which such breadth is measured | provisional; awaiting Jes |
+| p2-39: "longitude of the toun" | `longitude` | the distance between two given meridians | provisional; awaiting Jes |
+| p2-39: "longitude of a clymat" | `longitude` | the length or extent of a ' climate,' in a direction parallel to the equator | provisional; awaiting Jes |
+| p2-34: "set his centre" | `centre` | the "centre" or small point at the very end of which is the position of a fixed star in the Rete of the Astrolabe | provisional; awaiting Jes |
+| p2-34: "or non" | `non` | none | provisional; awaiting Jes |
+| p2-34: "on whether syde" | `whether` | which (of two) | provisional; awaiting Jes |
+| p2-28: "hem til other" | `til` | to | provisional; awaiting Jes |
+| p2-27: "his" | `his` | its | provisional; awaiting Jes |
+| p2-28: "his" | `his` | its | provisional; awaiting Jes |
+| p2-29: "his" | `his` | its | provisional; awaiting Jes |
+| p2-31: "his" | `his` | its | provisional; awaiting Jes |
+| p2-37: "his" | `his` | its | provisional; awaiting Jes |
+| p2-39: "his" | `his` | its | provisional; awaiting Jes |
+| p2-26: "her heved" | `heved` | head | provisional; awaiting Jes |
+| p2-39: "oure heved" | `heved` | head | provisional; awaiting Jes |
+| p2-26: "as sheweth" | `sheweth` | appears as, is shewn | provisional; awaiting Jes |
+| p2-30: "as sheweth by" | `sheweth` | appears as, is shewn | provisional; awaiting Jes |
+| p2-32: "as sheweth by" | `sheweth` | appears as, is shewn | provisional; awaiting Jes |
+| p2-30: "a quantite of latitude" | `quantite` | quantity | provisional; awaiting Jes |
+| p2-39: "meridian" | `meridian` | meridian | provisional; awaiting Jes |
+| p2-39: "verrey meridian place" | `meridian` | southern, on the meridian | provisional; awaiting Jes |
+| p2-39: "y-lyke meridian" | `y-lyke` | the same | provisional; awaiting Jes |
+| p2-27: "eft-sones waite" | `eft-sones` | again | provisional; awaiting Jes |
+| p2-28: "waite eft-sones" | `eft-sones` | again | provisional; awaiting Jes |
+| p2-40: "save in capricorne" | `save` | save, except | provisional; awaiting Jes |
+| p2-26: "mediacioun of thilke" | `mediacioun` | means, assistance | provisional; awaiting Jes |
+| p2-28: "gemini obeyeth" | `obeyeth` | obeys | provisional; awaiting Jes |
+| p2-29: "quarters of the firmament" | `quarters` | quarters of the heavens | provisional; awaiting Jes |
+| p2-29: "wombe-syde" | `wombe-syde` | the front of the astrolabe | provisional; awaiting Jes |
+| p2-30: "wey of the sonne" | `wey` | the sun's apparent way or path during a given day | provisional; awaiting Jes |
+| p2-30: "wey wher-as the sonne wente" | `wey` | the sun's apparent way or path during a given day | provisional; awaiting Jes |
+| p2-31: "partiez" | `partiez` | parts | provisional; awaiting Jes |
+| p2-32: "sitteth" | `sitteth` | is situate | provisional; awaiting Jes |
+| p2-33: "maystou" | `maystou` | mayest thou | provisional; awaiting Jes |
+| p2-39: "pole artyk" | `artyk` | arctic, northern | provisional; awaiting Jes |
+| p2-40: "bycause" | `bycause` | because | provisional; awaiting Jes |
+| p2-40: "a subtil compas" | `subtil` | subtle | provisional; awaiting Jes |
+| p2-40: "peyre tables" | `tables` | tablets | provisional; awaiting Jes |
+| p2-38: "for warping" | `for` | against, to prevent | provisional; awaiting Jes |
+| 00-prologue: "tables" | `tables` | (no gloss here) | provisional; awaiting Jes |
+| p2-39: "evene directe agayns" | `directe` | directly | provisional; awaiting Jes |
+| p2-28: "more space" | `more` | (no gloss here) | provisional; awaiting Jes |
+| p2-34: "his" | `his` | its | provisional; awaiting Jes |
+| p2-35: "his" | `his` | its | provisional; awaiting Jes |
+| p2-40: "his" | `his` | its | provisional; awaiting Jes |
+| p2-36: "him" | `him` | it | provisional; awaiting Jes |
+| p2-40: "of him" | `him` | it | provisional; awaiting Jes |
+| p2-34: "tretis" | `tretis` | treatises | provisional; awaiting Jes |
+| p2-39: "men clepen" | `clepen` | name, mention | provisional; awaiting Jes |
+| p2-38: "any-thing" | `any-thing` | in any degree, at all, to any appreciable extent | provisional; awaiting Jes |
+| p2-41: "than" | `than` | then | provisional; awaiting Jes |
+| p2-41a: "than" | `than` | then | provisional; awaiting Jes |
+| p2-41b: "than" | `than` | then | provisional; awaiting Jes |
+| p2-42: "than" | `than` | then | provisional; awaiting Jes |
+| p2-42a: "than" | `than` | then | provisional; awaiting Jes |
+| p2-42b: "than" | `than` | then | provisional; awaiting Jes |
+| p2-43: "than" | `than` | then | provisional; awaiting Jes |
+| p2-43a: "than" | `than` | then | provisional; awaiting Jes |
+| p2-44: "than" | `than` | then | provisional; awaiting Jes |
+| p2-45: "than" | `than` | then | provisional; awaiting Jes |
+| p2-46: "than" | `than` | then | provisional; awaiting Jes |
+| p2-44: "lasse than" | `than` | (no gloss here) | provisional; awaiting Jes |
+| p2-45: "lasse than" | `than` | (no gloss here) | provisional; awaiting Jes |
+| p2-41: "maner" | `maner` | manner, way | provisional; awaiting Jes |
+| p2-41b: "maner" | `maner` | manner, way | provisional; awaiting Jes |
+| p2-42: "maner" | `maner` | manner, way | provisional; awaiting Jes |
+| p2-43: "maner" | `maner` | manner, way | provisional; awaiting Jes |
+| p2-44: "maner" | `maner` | manner, way | provisional; awaiting Jes |
+| p2-42: "prikke" | `prikke` | a small mark, such as a little stick stuck in the ground | provisional; awaiting Jes |
+| p2-42a: "prikke" | `prikke` | a small mark, such as a little stick stuck in the ground | provisional; awaiting Jes |
+| p2-43: "prikke" | `prikke` | a small mark, such as a little stick stuck in the ground | provisional; awaiting Jes |
+| p2-42: "prikkes" | `prikkes` | marks | provisional; awaiting Jes |
+| p2-42a: "prikkes" | `prikkes` | marks | provisional; awaiting Jes |
+| p2-42b: "prikkes" | `prikkes` | marks | provisional; awaiting Jes |
+| p2-43: "prikkes" | `prikkes` | marks | provisional; awaiting Jes |
+| p2-44: "minutes" | `minutes` | a sixtieth part of a degree | provisional; awaiting Jes |
+| p2-45: "minutes" | `minutes` | a sixtieth part of a degree | provisional; awaiting Jes |
+| p2-45: "thilke" | `thilke` | that | provisional; awaiting Jes |
+| p2-44: "more" | `more` | (no gloss here) | provisional; awaiting Jes |
+| p2-44: "table" | `table` | (no gloss here) | provisional; awaiting Jes |
+| p2-45: "table" | `table` | (no gloss here) | provisional; awaiting Jes |
+| p2-44: "ful passed" | `ful` | fully | provisional; awaiting Jes |
+| p2-45: "fond directe under" | `directe` | directly | provisional; awaiting Jes |
+| p2-41: "this rewle is so general" | `rewle` | rule | provisional; awaiting Jes |
+| p2-41a: "multiplye that be" | `be` | by | provisional; awaiting Jes |
+| p2-41a: "divyde it be the same" | `be` | by | provisional; awaiting Jes |
+| p2-42a: "be the distaunce" | `be` | by | provisional; awaiting Jes |
+| p2-42b: "devyde be" | `be` | by | provisional; awaiting Jes |
+| p2-43: "wyrking be umbra recta" | `be` | by | provisional; awaiting Jes |
+| p2-43a: "be the difference" | `be` | by | provisional; awaiting Jes |
+| p2-42: "hath him to" | `hath` | is in proportion | provisional; awaiting Jes |
+| p2-42b: "hath him to" | `hath` | is in proportion | provisional; awaiting Jes |
+| p2-43a: "hath him to" | `hath` | is in proportion | provisional; awaiting Jes |
+| p2-41: "see him" | `him` | it | provisional; awaiting Jes |
+| p2-42: "see him" | `him` | it | provisional; awaiting Jes |
+| p2-42: "seest him" | `him` | it | provisional; awaiting Jes |
+| p2-44: "directe of him" | `him` | it | provisional; awaiting Jes |
+| p2-43: "it were the" | `were` | should be; also, would be | provisional; awaiting Jes |
+| p2-44: "and after entere" | `after` | afterwards | provisional; awaiting Jes |
+| p2-44: "and after with-drawe" | `after` | afterwards | provisional; awaiting Jes |
+| p2-43a: "after at the poynt" | `after` | afterwards | provisional; awaiting Jes |
+| p2-44: "writen" | `writen` | written | provisional; awaiting Jes |
+| p2-45: "writen" | `writen` | written | provisional; awaiting Jes |
+| p2-44: "entere hit in-to thy slate" | `entere` | set down in writing | provisional; awaiting Jes |
+| p2-44: "laste meridian" | `meridian` | midday | provisional; awaiting Jes |
 
 ## The modern line: departures from the strict gloss (`lineSpans` in `glosses.json`)
 
@@ -447,7 +927,7 @@ changed it minimally. Each row replaces the strict line under those words (one m
 whole span). The popover still shows Skeat's exact gloss. Written from the Middle English, Skeat's
 glosses and notes and plain English only; no modern translation was consulted.
 
-Counts: added-word 15, modernised-form 101, paraphrase-phrase 18, reordered 32; 166 rows.
+Counts: added-word 43, modernised-form 429, paraphrase-phrase 58, reordered 168; 698 rows.
 
 | Section | Middle English | Modern line | Kind | Status |
 |---|---|---|---|---|
@@ -617,6 +1097,538 @@ Counts: added-word 15, modernised-form 101, paraphrase-phrase 18, reordered 32; 
 | p1-23 | sit fix | is fixed | paraphrase-phrase | provisional; awaiting Jes |
 | p1-23 | conclusioun | proposition | modernised-form | provisional; awaiting Jes |
 | p1-23 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-01 | ensample as thus | for example, thus | paraphrase-phrase | provisional; awaiting Jes |
+| p2-01 | tho leide i | then I laid | reordered | provisional; awaiting Jes |
+| p2-01 | in maner as | in the way | paraphrase-phrase | provisional; awaiting Jes |
+| p2-01 | the which | which | modernised-form | provisional; awaiting Jes |
+| p2-01 | knowe i | I know | reordered | provisional; awaiting Jes |
+| p2-01 | hadde i | I had | reordered | provisional; awaiting Jes |
+| p2-01 | rewle | rule | modernised-form | provisional; awaiting Jes |
+| p2-01 | myn | my | modernised-form | provisional; awaiting Jes |
+| p2-01 | conclusioun | proposition | modernised-form | provisional; awaiting Jes |
+| p2-02 | so general ever in oon | so general and always alike | added-word | provisional; awaiting Jes |
+| p2-02 | agayn the light | towards the light | modernised-form | provisional; awaiting Jes |
+| p2-02 | til that | until | modernised-form | provisional; awaiting Jes |
+| p2-02 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-02 | rewle | rule | modernised-form | provisional; awaiting Jes |
+| p2-02 | maistow | you may | modernised-form | provisional; awaiting Jes |
+| p2-03 | it lyked me for to take | it pleased me to take | modernised-form | provisional; awaiting Jes |
+| p2-03 | by which that thow wenest governe | by which you expect to regulate | paraphrase-phrase | provisional; awaiting Jes |
+| p2-03 | ne mak thee nevere bold | never make yourself bold | paraphrase-phrase | provisional; awaiting Jes |
+| p2-03 | tho wolde i wite | then I wished to know | paraphrase-phrase | provisional; awaiting Jes |
+| p2-03 | by-cause that she was | because it was | modernised-form | provisional; awaiting Jes |
+| p2-03 | wolde i warne thee | I would warn you | reordered | provisional; awaiting Jes |
+| p2-03 | set iustly a clokke | set a clock exactly | reordered | provisional; awaiting Jes |
+| p2-03 | whan thee list | when you please | paraphrase-phrase | provisional; awaiting Jes |
+| p2-03 | tho turnede i | then I turned | reordered | provisional; awaiting Jes |
+| p2-03 | tho leide i | then I laid | reordered | provisional; awaiting Jes |
+| p2-03 | tho rekened i | then I reckoned | reordered | provisional; awaiting Jes |
+| p2-03 | tho loked i | then I looked | reordered | provisional; awaiting Jes |
+| p2-03 | tho sette i | then I set | reordered | provisional; awaiting Jes |
+| p2-03 | of the clokke | o'clock | modernised-form | provisional; awaiting Jes |
+| p2-03 | of the clok | o'clock | modernised-form | provisional; awaiting Jes |
+| p2-03 | fond hir sitting | found it sitting | modernised-form | provisional; awaiting Jes |
+| p2-03 | by-cause that it | because it | modernised-form | provisional; awaiting Jes |
+| p2-03 | conclusioun sey i | proposition I say | reordered | provisional; awaiting Jes |
+| p2-03 | of minutes | minutes | modernised-form | provisional; awaiting Jes |
+| p2-03 | which that | which | modernised-form | provisional; awaiting Jes |
+| p2-03 | hadde i | I had | reordered | provisional; awaiting Jes |
+| p2-03 | an heep | a great number | modernised-form | provisional; awaiting Jes |
+| p2-03 | sterris fixe | fixed stars | reordered | provisional; awaiting Jes |
+| p2-03 | lettres capitals | capital letters | reordered | provisional; awaiting Jes |
+| p2-03 | lerned i | I learnt | reordered | provisional; awaiting Jes |
+| p2-03 | have take | have taken | modernised-form | provisional; awaiting Jes |
+| p2-03 | a iust | an exact | modernised-form | provisional; awaiting Jes |
+| p2-03 | ben ney | is near | modernised-form | provisional; awaiting Jes |
+| p2-03 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-03 | myn | my | modernised-form | provisional; awaiting Jes |
+| p2-03 | rewle | rule | modernised-form | provisional; awaiting Jes |
+| p2-03 | verrey | true | modernised-form | provisional; awaiting Jes |
+| p2-03 | un-to | to | modernised-form | provisional; awaiting Jes |
+| p2-03 | passed | past | modernised-form | provisional; awaiting Jes |
+| p2-03 | assendent | ascendant | modernised-form | provisional; awaiting Jes |
+| p2-03 | ascendent | ascendant | modernised-form | provisional; awaiting Jes |
+| p2-03 | ney | near | modernised-form | provisional; awaiting Jes |
+| p2-04 | ne that no wikked planete have non aspecte | nor that any wicked planet have any aspect | paraphrase-phrase | provisional; awaiting Jes |
+| p2-04 | ne have up-on him non aspecte infortunat | nor have upon it any unlucky aspect | reordered | provisional; awaiting Jes |
+| p2-04 | what celestial body that is | whatever celestial body is | paraphrase-phrase | provisional; awaiting Jes |
+| p2-04 | lyk to him that is | like one that is | paraphrase-phrase | provisional; awaiting Jes |
+| p2-04 | a fortunat assendent clepen they | they call a fortunate ascendant | reordered | provisional; awaiting Jes |
+| p2-04 | the tail of the dragoun | the Dragon's Tail | modernised-form | provisional; awaiting Jes |
+| p2-04 | ne that he be nat | nor that it be | paraphrase-phrase | provisional; awaiting Jes |
+| p2-04 | what planete that is | whatever planet is | paraphrase-phrase | provisional; awaiting Jes |
+| p2-04 | ne hath no feith | has no faith | paraphrase-phrase | provisional; awaiting Jes |
+| p2-04 | yit is the planete | yet the planet is | reordered | provisional; awaiting Jes |
+| p2-04 | sein thise astrologiens | these astronomers say | reordered | provisional; awaiting Jes |
+| p2-04 | for to be | to be | modernised-form | provisional; awaiting Jes |
+| p2-04 | in good place | in a good place | added-word | provisional; awaiting Jes |
+| p2-04 | with no shrewe | with any evil planet | paraphrase-phrase | provisional; awaiting Jes |
+| p2-04 | with no planete | with any planet | paraphrase-phrase | provisional; awaiting Jes |
+| p2-04 | ne no knowing | nor any knowledge | paraphrase-phrase | provisional; awaiting Jes |
+| p2-04 | sey some folk | some folk say | reordered | provisional; awaiting Jes |
+| p2-04 | which that | which | modernised-form | provisional; awaiting Jes |
+| p2-04 | sin that | since | modernised-form | provisional; awaiting Jes |
+| p2-04 | special declaracioun | a special explanation | added-word | provisional; awaiting Jes |
+| p2-04 | yif that | if | modernised-form | provisional; awaiting Jes |
+| p2-04 | in horoscopo | in horoscopo | modernised-form | provisional; awaiting Jes |
+| p2-04 | in angle | in an angle | added-word | provisional; awaiting Jes |
+| p2-04 | rikne they | they reckon | reordered | provisional; awaiting Jes |
+| p2-04 | seyn they | they say | reordered | provisional; awaiting Jes |
+| p2-04 | whan that | when | modernised-form | provisional; awaiting Jes |
+| p2-04 | sey they | they say | reordered | provisional; awaiting Jes |
+| p2-04 | al-thogh that | although | modernised-form | provisional; awaiting Jes |
+| p2-04 | assendent | ascendant | modernised-form | provisional; awaiting Jes |
+| p2-04 | astrologiens | astronomers | modernised-form | provisional; awaiting Jes |
+| p2-04 | angle | angle | modernised-form | provisional; awaiting Jes |
+| p2-04 | planetes | planets | modernised-form | provisional; awaiting Jes |
+| p2-04 | retrograd | retrograde | modernised-form | provisional; awaiting Jes |
+| p2-04 | he | it | modernised-form | provisional; awaiting Jes |
+| p2-04 | rytes | rites | modernised-form | provisional; awaiting Jes |
+| p2-04 | latitude | latitude | modernised-form | provisional; awaiting Jes |
+| p2-05 | whan that | when | modernised-form | provisional; awaiting Jes |
+| p2-05 | over gret | too great | paraphrase-phrase | provisional; awaiting Jes |
+| p2-05 | a compas | a pair of compasses | added-word | provisional; awaiting Jes |
+| p2-05 | wher as | where | modernised-form | provisional; awaiting Jes |
+| p2-05 | shaltow finde | you shall find | modernised-form | provisional; awaiting Jes |
+| p2-05 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-05 | verrey | true | modernised-form | provisional; awaiting Jes |
+| p2-05 | assendent | ascendant | modernised-form | provisional; awaiting Jes |
+| p2-06 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-06 | spring | dawn | modernised-form | provisional; awaiting Jes |
+| p2-06 | verrey | true | modernised-form | provisional; awaiting Jes |
+| p2-07 | of whether that thee lyketh | of whichever you please | paraphrase-phrase | provisional; awaiting Jes |
+| p2-07 | of his propre moevinge | by its own motion | paraphrase-phrase | provisional; awaiting Jes |
+| p2-07 | in the mene whyle | in the meantime | modernised-form | provisional; awaiting Jes |
+| p2-07 | how longe that | how long | modernised-form | provisional; awaiting Jes |
+| p2-07 | fro tyme that | from the time that | added-word | provisional; awaiting Jes |
+| p2-07 | sterre fix | fixed star | reordered | provisional; awaiting Jes |
+| p2-07 | day natural | natural day | reordered | provisional; awaiting Jes |
+| p2-07 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-07 | maistow | you may | modernised-form | provisional; awaiting Jes |
+| p2-07 | he | it | modernised-form | provisional; awaiting Jes |
+| p2-08 | houres in-equales | unequal hours | reordered | provisional; awaiting Jes |
+| p2-08 | houres equales | equal hours | reordered | provisional; awaiting Jes |
+| p2-08 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-09 | hole day vulgar | whole vulgar day | reordered | provisional; awaiting Jes |
+| p2-09 | day artificial | artificial day | reordered | provisional; awaiting Jes |
+| p2-09 | un-to | to | modernised-form | provisional; awaiting Jes |
+| p2-09 | maystow | you may | modernised-form | provisional; awaiting Jes |
+| p2-09 | verrey | true | modernised-form | provisional; awaiting Jes |
+| p2-10 | som-tyme ben they lengere | sometimes they are longer | reordered | provisional; awaiting Jes |
+| p2-10 | day artificial | artificial day | reordered | provisional; awaiting Jes |
+| p2-10 | houres in-equales | unequal hours | reordered | provisional; awaiting Jes |
+| p2-10 | hour in-equal | unequal hour | reordered | provisional; awaiting Jes |
+| p2-10 | houre in-equal | unequal hour | reordered | provisional; awaiting Jes |
+| p2-10 | houre inequal | unequal hour | reordered | provisional; awaiting Jes |
+| p2-10 | planetes | planets | modernised-form | provisional; awaiting Jes |
+| p2-11 | fro the sonne aryse | from the sun's rising | paraphrase-phrase | provisional; awaiting Jes |
+| p2-11 | conclusioun wol i declare | proposition I will declare | reordered | provisional; awaiting Jes |
+| p2-11 | ther thou desirest | where you desire | modernised-form | provisional; awaiting Jes |
+| p2-11 | thee list | it pleases you | reordered | provisional; awaiting Jes |
+| p2-11 | houres equales | equal hours | reordered | provisional; awaiting Jes |
+| p2-11 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-11 | un-to | to | modernised-form | provisional; awaiting Jes |
+| p2-12 | now is my sonne gon | now my sun is gone | reordered | provisional; awaiting Jes |
+| p2-12 | it go to reste | it goes to rest | modernised-form | provisional; awaiting Jes |
+| p2-12 | knowe i this conclusioun | I know this proposition | reordered | provisional; awaiting Jes |
+| p2-12 | the sonne aryse | the sun rises | modernised-form | provisional; awaiting Jes |
+| p2-12 | uppere and uppere | higher and higher | paraphrase-phrase | provisional; awaiting Jes |
+| p2-12 | dounere and dounere | lower and lower | paraphrase-phrase | provisional; awaiting Jes |
+| p2-12 | by the morwe | in the morning | modernised-form | provisional; awaiting Jes |
+| p2-12 | fond i | I found | reordered | provisional; awaiting Jes |
+| p2-12 | next him | next after it | added-word | provisional; awaiting Jes |
+| p2-12 | houre inequal | unequal hour | reordered | provisional; awaiting Jes |
+| p2-12 | un-to | to | modernised-form | provisional; awaiting Jes |
+| p2-12 | planetes | planets | modernised-form | provisional; awaiting Jes |
+| p2-12 | verrey | true | modernised-form | provisional; awaiting Jes |
+| p2-12 | myn | my | modernised-form | provisional; awaiting Jes |
+| p2-13 | is passed | has passed | modernised-form | provisional; awaiting Jes |
+| p2-13 | by-ginneth it | it begins | reordered | provisional; awaiting Jes |
+| p2-13 | lyne meridional | southern line | reordered | provisional; awaiting Jes |
+| p2-13 | sterre fix | fixed star | reordered | provisional; awaiting Jes |
+| p2-13 | altitude meridian | meridian altitude | reordered | provisional; awaiting Jes |
+| p2-13 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-13 | maystow | you may | modernised-form | provisional; awaiting Jes |
+| p2-14 | in whiche that is the sonne | in which the sun is | reordered | provisional; awaiting Jes |
+| p2-14 | in midde of | in the middle of | added-word | provisional; awaiting Jes |
+| p2-14 | thou shalt | you shall | modernised-form | provisional; awaiting Jes |
+| p2-14 | lyne meridional | southern line | reordered | provisional; awaiting Jes |
+| p2-14 | rewle | rule | modernised-form | provisional; awaiting Jes |
+| p2-14 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-14 | altitude | altitude | modernised-form | provisional; awaiting Jes |
+| p2-14 | maistow | you may | modernised-form | provisional; awaiting Jes |
+| p2-15 | that on day | the one day | paraphrase-phrase | provisional; awaiting Jes |
+| p2-15 | y-lyke of lengthe | equal in length | modernised-form | provisional; awaiting Jes |
+| p2-15 | dayes naturaly | natural days | reordered | provisional; awaiting Jes |
+| p2-15 | that othere | the other | modernised-form | provisional; awaiting Jes |
+| p2-15 | day artificial | artificial day | reordered | provisional; awaiting Jes |
+| p2-16 | y-lyke of lengthe | equal in length | modernised-form | provisional; awaiting Jes |
+| p2-16 | wher-as | where | modernised-form | provisional; awaiting Jes |
+| p2-16 | un-to | to | modernised-form | provisional; awaiting Jes |
+| p2-16 | declinacioun | declination | modernised-form | provisional; awaiting Jes |
+| p2-17 | as ney as thou mayst | as near as you may | modernised-form | provisional; awaiting Jes |
+| p2-17 | whan that this is don | when this is done | modernised-form | provisional; awaiting Jes |
+| p2-17 | passeth any-thing the south westward | passes the south westward in any degree | reordered | provisional; awaiting Jes |
+| p2-17 | hath him a-non right in | is immediately in | paraphrase-phrase | provisional; awaiting Jes |
+| p2-17 | som maner sterre fixe | some kind of fixed star | added-word | provisional; awaiting Jes |
+| p2-17 | som maner sterre fix | some kind of fixed star | added-word | provisional; awaiting Jes |
+| p2-17 | which that thou knowest | which you know | modernised-form | provisional; awaiting Jes |
+| p2-17 | al-be-it so that | although | paraphrase-phrase | provisional; awaiting Jes |
+| p2-17 | for-get nat | do not forget | modernised-form | provisional; awaiting Jes |
+| p2-17 | lyne meridional | southern line | reordered | provisional; awaiting Jes |
+| p2-17 | body celestial | celestial body | reordered | provisional; awaiting Jes |
+| p2-17 | he | it | modernised-form | provisional; awaiting Jes |
+| p2-17 | assendentes | ascendants | modernised-form | provisional; awaiting Jes |
+| p2-17 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-17 | un-to | to | modernised-form | provisional; awaiting Jes |
+| p2-17 | altitude | altitude | modernised-form | provisional; awaiting Jes |
+| p2-17 | declinacion | declination | modernised-form | provisional; awaiting Jes |
+| p2-17 | declinacioun | declination | modernised-form | provisional; awaiting Jes |
+| p2-17 | latitude | latitude | modernised-form | provisional; awaiting Jes |
+| p2-17 | planetes | planets | modernised-form | provisional; awaiting Jes |
+| p2-17 | assendent | ascendant | modernised-form | provisional; awaiting Jes |
+| p2-17 | verrey | true | modernised-form | provisional; awaiting Jes |
+| p2-18 | lyne meridional | southern line | reordered | provisional; awaiting Jes |
+| p2-18 | un-to | to | modernised-form | provisional; awaiting Jes |
+| p2-19 | a strange degree | a degree not its own | reordered | provisional; awaiting Jes |
+| p2-19 | sterre fix | fixed star | reordered | provisional; awaiting Jes |
+| p2-19 | latitude | latitude | modernised-form | provisional; awaiting Jes |
+| p2-19 | latitudes | latitudes | modernised-form | provisional; awaiting Jes |
+| p2-19 | planetes | planets | modernised-form | provisional; awaiting Jes |
+| p2-20 | whan that this is don | when this is done | modernised-form | provisional; awaiting Jes |
+| p2-20 | lyne meridional | southern line | reordered | provisional; awaiting Jes |
+| p2-20 | altitude | altitude | modernised-form | provisional; awaiting Jes |
+| p2-20 | declinacion | declination | modernised-form | provisional; awaiting Jes |
+| p2-21 | cercle equinoxial | equinoctial circle | reordered | provisional; awaiting Jes |
+| p2-21 | pool artik | arctic pole | reordered | provisional; awaiting Jes |
+| p2-21 | un-to | to | modernised-form | provisional; awaiting Jes |
+| p2-21 | latitude | latitude | modernised-form | provisional; awaiting Jes |
+| p2-22 | pol artik | arctic pole | reordered | provisional; awaiting Jes |
+| p2-22 | pool artik | arctic pole | reordered | provisional; awaiting Jes |
+| p2-22 | pole artik | arctic pole | reordered | provisional; awaiting Jes |
+| p2-22 | latitude | latitude | modernised-form | provisional; awaiting Jes |
+| p2-22 | minutes | minutes | modernised-form | provisional; awaiting Jes |
+| p2-23 | whan that this is don | when this is done | modernised-form | provisional; awaiting Jes |
+| p2-23 | waite a tyme | wait a time | modernised-form | provisional; awaiting Jes |
+| p2-23 | forget it nat | do not forget it | reordered | provisional; awaiting Jes |
+| p2-23 | a gret whyle | a great while | modernised-form | provisional; awaiting Jes |
+| p2-23 | thou most | you must | modernised-form | provisional; awaiting Jes |
+| p2-23 | shaltow seen | you shall see | modernised-form | provisional; awaiting Jes |
+| p2-23 | pol artik | arctic pole | reordered | provisional; awaiting Jes |
+| p2-23 | sterre fix | fixed star | reordered | provisional; awaiting Jes |
+| p2-23 | wayte | watch for | added-word | provisional; awaiting Jes |
+| p2-23 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-23 | altitude | altitude | modernised-form | provisional; awaiting Jes |
+| p2-23 | latitude | latitude | modernised-form | provisional; awaiting Jes |
+| p2-23 | hastow | you have | modernised-form | provisional; awaiting Jes |
+| p2-23 | conclusioun | proposition | modernised-form | provisional; awaiting Jes |
+| p2-24 | pol artik | arctic pole | reordered | provisional; awaiting Jes |
+| p2-24 | sterre fixe | fixed star | reordered | provisional; awaiting Jes |
+| p2-24 | altitude | altitude | modernised-form | provisional; awaiting Jes |
+| p2-25 | i sey nat this | I do not say this | modernised-form | provisional; awaiting Jes |
+| p2-25 | thee semeth | it seems to you | reordered | provisional; awaiting Jes |
+| p2-25 | leveth thee | remain to you | modernised-form | provisional; awaiting Jes |
+| p2-25 | thee lest | it pleases you | reordered | provisional; awaiting Jes |
+| p2-25 | maner forseid | aforesaid manner | reordered | provisional; awaiting Jes |
+| p2-25 | thou knowest | you know | modernised-form | provisional; awaiting Jes |
+| p2-25 | lyne equinoxial | equinoctial line | reordered | provisional; awaiting Jes |
+| p2-25 | pool artik | arctic pole | reordered | provisional; awaiting Jes |
+| p2-25 | pol antartik | southern pole | reordered | provisional; awaiting Jes |
+| p2-25 | sterre fix | fixed star | reordered | provisional; awaiting Jes |
+| p2-25 | sheweth | is shown | modernised-form | provisional; awaiting Jes |
+| p2-25 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-25 | altitude | altitude | modernised-form | provisional; awaiting Jes |
+| p2-25 | declinacion | declination | modernised-form | provisional; awaiting Jes |
+| p2-25 | declinacioun | declination | modernised-form | provisional; awaiting Jes |
+| p2-25 | latitude | latitude | modernised-form | provisional; awaiting Jes |
+| p2-25 | minutes | minutes | modernised-form | provisional; awaiting Jes |
+| p2-25 | hastow | you have | modernised-form | provisional; awaiting Jes |
+| p2-27 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-28 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-29 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-30 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-31 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-32 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-34 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-37 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-40 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-29 | altitude | altitude | modernised-form | provisional; awaiting Jes |
+| p2-30 | altitude | altitude | modernised-form | provisional; awaiting Jes |
+| p2-33 | altitude | altitude | modernised-form | provisional; awaiting Jes |
+| p2-34 | altitude | altitude | modernised-form | provisional; awaiting Jes |
+| p2-35 | altitude | altitude | modernised-form | provisional; awaiting Jes |
+| p2-30 | latitude | latitude | modernised-form | provisional; awaiting Jes |
+| p2-34 | latitude | latitude | modernised-form | provisional; awaiting Jes |
+| p2-39 | latitude | latitude | modernised-form | provisional; awaiting Jes |
+| p2-27 | lyne meridional | southern line | reordered | provisional; awaiting Jes |
+| p2-29 | lyne meridional | southern line | reordered | provisional; awaiting Jes |
+| p2-30 | lyne meridional | southern line | reordered | provisional; awaiting Jes |
+| p2-37 | lyne meridional | southern line | reordered | provisional; awaiting Jes |
+| p2-38 | lyne meridional | southern line | reordered | provisional; awaiting Jes |
+| p2-39 | lyne meridional | southern line | reordered | provisional; awaiting Jes |
+| p2-28 | un-to | to | modernised-form | provisional; awaiting Jes |
+| p2-31 | un-to | to | modernised-form | provisional; awaiting Jes |
+| p2-38 | un-to | to | modernised-form | provisional; awaiting Jes |
+| p2-29 | hastow | you have | modernised-form | provisional; awaiting Jes |
+| p2-37 | hastow | you have | modernised-form | provisional; awaiting Jes |
+| p2-38 | hastow | you have | modernised-form | provisional; awaiting Jes |
+| p2-27 | maystow | you may | modernised-form | provisional; awaiting Jes |
+| p2-34 | maystow | you may | modernised-form | provisional; awaiting Jes |
+| p2-40 | maystow | you may | modernised-form | provisional; awaiting Jes |
+| p2-31 | maistow | you may | modernised-form | provisional; awaiting Jes |
+| p2-37 | maistow | you may | modernised-form | provisional; awaiting Jes |
+| p2-40 | maistow | you may | modernised-form | provisional; awaiting Jes |
+| p2-26 | nota | note | modernised-form | provisional; awaiting Jes |
+| p2-34 | nota | note | modernised-form | provisional; awaiting Jes |
+| p2-39 | nota | note | modernised-form | provisional; awaiting Jes |
+| p2-40 | nota | note | modernised-form | provisional; awaiting Jes |
+| p2-27 | til that | until | modernised-form | provisional; awaiting Jes |
+| p2-28 | til that | until | modernised-form | provisional; awaiting Jes |
+| p2-31 | til that | until | modernised-form | provisional; awaiting Jes |
+| p2-38 | til that | until | modernised-form | provisional; awaiting Jes |
+| p2-40 | til that | until | modernised-form | provisional; awaiting Jes |
+| p2-26 | as sheweth | as is shown | modernised-form | provisional; awaiting Jes |
+| p2-30 | as sheweth | as is shown | modernised-form | provisional; awaiting Jes |
+| p2-32 | as sheweth | as is shown | modernised-form | provisional; awaiting Jes |
+| p2-29 | rewle | rule | modernised-form | provisional; awaiting Jes |
+| p2-38 | rewle | rule | modernised-form | provisional; awaiting Jes |
+| p2-31 | declaracion | explanation | modernised-form | provisional; awaiting Jes |
+| p2-36 | declaracion | explanation | modernised-form | provisional; awaiting Jes |
+| p2-36 | assendent | ascendant | modernised-form | provisional; awaiting Jes |
+| p2-37 | assendent | ascendant | modernised-form | provisional; awaiting Jes |
+| p2-34 | sterre fix | fixed star | reordered | provisional; awaiting Jes |
+| p2-35 | sterre fix | fixed star | reordered | provisional; awaiting Jes |
+| p2-34 | thou knowest | you know | modernised-form | provisional; awaiting Jes |
+| p2-35 | thou knowest | you know | modernised-form | provisional; awaiting Jes |
+| p2-30 | hir | its | modernised-form | provisional; awaiting Jes |
+| p2-35 | hir | its | modernised-form | provisional; awaiting Jes |
+| p2-40 | hir | its | modernised-form | provisional; awaiting Jes |
+| p2-26 | more part | the greater part | added-word | provisional; awaiting Jes |
+| p2-26 | lasse part | the lesser part | added-word | provisional; awaiting Jes |
+| p2-26 | assendeth embelif | ascends obliquely | modernised-form | provisional; awaiting Jes |
+| p2-26 | where as | where | modernised-form | provisional; awaiting Jes |
+| p2-26 | two someres and two winteres in a yeer | two summers and two winters in a year | modernised-form | provisional; awaiting Jes |
+| p2-26 | han this forseide poeple | have these aforesaid people | modernised-form | provisional; awaiting Jes |
+| p2-26 | astrologiens | astronomers | modernised-form | provisional; awaiting Jes |
+| p2-26 | orison rectum | orison rectum | modernised-form | provisional; awaiting Jes |
+| p2-26 | wher-as | where | modernised-form | provisional; awaiting Jes |
+| p2-26 | enhaused up-on | elevated above | modernised-form | provisional; awaiting Jes |
+| p2-27 | thee liste | it may please you | reordered | provisional; awaiting Jes |
+| p2-28 | which as thee list | which it pleases you | reordered | provisional; awaiting Jes |
+| p2-28 | wher as | where | modernised-form | provisional; awaiting Jes |
+| p2-28 | houres equales | equal hours | reordered | provisional; awaiting Jes |
+| p2-28 | arisen embelif | rise obliquely | modernised-form | provisional; awaiting Jes |
+| p2-28 | ever ch | each | modernised-form | provisional; awaiting Jes |
+| p2-28 | til other | to the other | added-word | provisional; awaiting Jes |
+| p2-29 | thee list | it pleases you | reordered | provisional; awaiting Jes |
+| p2-29 | ther thou takest | where you take | modernised-form | provisional; awaiting Jes |
+| p2-29 | so that thou werke | provided that you work | modernised-form | provisional; awaiting Jes |
+| p2-30 | that is the degree | as is the degree | modernised-form | provisional; awaiting Jes |
+| p2-30 | wher-as | where | modernised-form | provisional; awaiting Jes |
+| p2-31 | by north the est | north of the east | reordered | provisional; awaiting Jes |
+| p2-31 | by southe the est | south of the east | reordered | provisional; awaiting Jes |
+| p2-31 | but he be | unless it be | modernised-form | provisional; awaiting Jes |
+| p2-31 | departed in | divided into | modernised-form | provisional; awaiting Jes |
+| p2-31 | al-be-it so that | although | paraphrase-phrase | provisional; awaiting Jes |
+| p2-31 | is ther | there is | reordered | provisional; awaiting Jes |
+| p2-31 | is it devided in | it is divided into | reordered | provisional; awaiting Jes |
+| p2-31 | plages principalx | cardinal quarters | reordered | provisional; awaiting Jes |
+| p2-32 | day precedent | preceding day | reordered | provisional; awaiting Jes |
+| p2-32 | thou art | you are | modernised-form | provisional; awaiting Jes |
+| p2-32 | in knowing of the houres | in knowing the hours | modernised-form | provisional; awaiting Jes |
+| p2-33 | no more to seyn but | no more to say than | modernised-form | provisional; awaiting Jes |
+| p2-33 | any tyme | at any time | added-word | provisional; awaiting Jes |
+| p2-33 | maystou seen | you may see | modernised-form | provisional; awaiting Jes |
+| p2-34 | conclusioun | proposition | modernised-form | provisional; awaiting Jes |
+| p2-34 | ther the sterre | where the star | modernised-form | provisional; awaiting Jes |
+| p2-34 | tretis of astrolabie | treatises of the Astrolabe | added-word | provisional; awaiting Jes |
+| p2-34 | ne make non excepcioun | make no exception | paraphrase-phrase | provisional; awaiting Jes |
+| p2-34 | himself | itself | modernised-form | provisional; awaiting Jes |
+| p2-34 | fix sterre | fixed star | reordered | provisional; awaiting Jes |
+| p2-35 | agayn the thridde | again on the third | added-word | provisional; awaiting Jes |
+| p2-35 | shaltow | you shall | modernised-form | provisional; awaiting Jes |
+| p2-35 | that she was | that it was | modernised-form | provisional; awaiting Jes |
+| p2-35 | thou toke | you took | modernised-form | provisional; awaiting Jes |
+| p2-35 | retrograd | retrograde | modernised-form | provisional; awaiting Jes |
+| p2-35 | is of the cours of the mone | holds for the course of the moon | paraphrase-phrase | provisional; awaiting Jes |
+| p2-35 | moeveth the contrarie from othere planetes | moves contrary to other planets | modernised-form | provisional; awaiting Jes |
+| p2-36 | houre inequal | unequal hour | reordered | provisional; awaiting Jes |
+| p2-36 | hour inequal | unequal hour | reordered | provisional; awaiting Jes |
+| p2-37 | wel thou wost | you know well | reordered | provisional; awaiting Jes |
+| p2-37 | thilke degrees in | those degrees into | modernised-form | provisional; awaiting Jes |
+| p2-37 | the same wyse wirke thou | In the same way work | added-word | provisional; awaiting Jes |
+| p2-37 | houses | houses | modernised-form | provisional; awaiting Jes |
+| p2-38 | a iust | an exact | modernised-form | provisional; awaiting Jes |
+| p2-38 | in centre | in the centre | added-word | provisional; awaiting Jes |
+| p2-39 | a maner descripcion | a kind of description | added-word | provisional; awaiting Jes |
+| p2-39 | of lyne imagined | of an imagined line | reordered | provisional; awaiting Jes |
+| p2-39 | in what place that any maner man | in whatever place any man | paraphrase-phrase | provisional; awaiting Jes |
+| p2-39 | than is hit | then it is | reordered | provisional; awaiting Jes |
+| p2-39 | for evermo | for evermore | modernised-form | provisional; awaiting Jes |
+| p2-39 | of whiche that o | of which the one | modernised-form | provisional; awaiting Jes |
+| p2-39 | that other toun | the other town | modernised-form | provisional; awaiting Jes |
+| p2-39 | chaunge nat | do not change | modernised-form | provisional; awaiting Jes |
+| p2-39 | a lyne imagined | an imagined line | reordered | provisional; awaiting Jes |
+| p2-39 | pole artik | arctic pole | reordered | provisional; awaiting Jes |
+| p2-39 | pole artyk | arctic pole | reordered | provisional; awaiting Jes |
+| p2-39 | arch meridian | meridian arc | reordered | provisional; awaiting Jes |
+| p2-39 | longitude | longitude | modernised-form | provisional; awaiting Jes |
+| p2-40 | for to be | to be | modernised-form | provisional; awaiting Jes |
+| p2-40 | samples folwinge | following examples | reordered | provisional; awaiting Jes |
+| p2-40 | a subtil compas | a subtle pair of compasses | added-word | provisional; awaiting Jes |
+| p2-40 | that oon poynt | the one point | modernised-form | provisional; awaiting Jes |
+| p2-40 | that other poynt | the other point | modernised-form | provisional; awaiting Jes |
+| p2-40 | tok i | I took | reordered | provisional; awaiting Jes |
+| p2-40 | sette i | I set | reordered | provisional; awaiting Jes |
+| p2-40 | leide i | I laid | reordered | provisional; awaiting Jes |
+| p2-40 | turned i | I turned | reordered | provisional; awaiting Jes |
+| p2-40 | saw i | I saw | reordered | provisional; awaiting Jes |
+| p2-40 | have i | I have | reordered | provisional; awaiting Jes |
+| p2-40 | in maner of a peyre tables | in the manner of a pair of tablets | added-word | provisional; awaiting Jes |
+| p2-40 | latitude septentrional | northern latitude | reordered | provisional; awaiting Jes |
+| p2-40 | latitude meridional | southern latitude | reordered | provisional; awaiting Jes |
+| p2-40 | be take | be taken | modernised-form | provisional; awaiting Jes |
+| p2-40 | in horoscopo | in horoscopo | modernised-form | provisional; awaiting Jes |
+| p2-40 | thou wolt | you will | modernised-form | provisional; awaiting Jes |
+| p2-40 | loke thou rekne | look that you reckon | added-word | provisional; awaiting Jes |
+| p2-40 | she ne dwelleth nat | it does not dwell | modernised-form | provisional; awaiting Jes |
+| p2-40 | thou wel knowest | you well know | modernised-form | provisional; awaiting Jes |
+| p2-40 | latitude | latitude | modernised-form | provisional; awaiting Jes |
+| p2-29 | fro his meridional | from its southern line | added-word | provisional; awaiting Jes |
+| p2-28 | verrey est | due east | paraphrase-phrase | provisional; awaiting Jes |
+| p2-28 | verrey north | due north | paraphrase-phrase | provisional; awaiting Jes |
+| p2-28 | verrey south | due south | paraphrase-phrase | provisional; awaiting Jes |
+| p2-31 | verrey est | due east | paraphrase-phrase | provisional; awaiting Jes |
+| p2-35 | whether so he moeve | whether it move | modernised-form | provisional; awaiting Jes |
+| p2-37 | the evene equacion | the equal partition | modernised-form | provisional; awaiting Jes |
+| p2-38 | an heer-mele | a hair's breadth | modernised-form | provisional; awaiting Jes |
+| p2-38 | a compas | a pair of compasses | added-word | provisional; awaiting Jes |
+| p2-38 | the cercle of the compas | the edge of the circle | paraphrase-phrase | provisional; awaiting Jes |
+| p2-31 | he | it | modernised-form | provisional; awaiting Jes |
+| p2-33 | he | it | modernised-form | provisional; awaiting Jes |
+| p2-35 | he | it | modernised-form | provisional; awaiting Jes |
+| p2-41 | mete i | I measure | reordered | provisional; awaiting Jes |
+| p2-41 | be-holde i | I behold | reordered | provisional; awaiting Jes |
+| p2-41 | with adding of | with the addition of | added-word | provisional; awaiting Jes |
+| p2-41 | is partyes of the heyght | are 5 12ths of the height | modernised-form | provisional; awaiting Jes |
+| p2-41a | adde therto up to thyn eye to the residue | add to the remainder the height up to your eye | paraphrase-phrase | provisional; awaiting Jes |
+| p2-41a | on the same wyse | in the same way | modernised-form | provisional; awaiting Jes |
+| p2-41b | is two-thrid partyes | 8 is two thirds | reordered | provisional; awaiting Jes |
+| p2-41b | the two-thrid partyes of the tour | two thirds of the height of the tower | paraphrase-phrase | provisional; awaiting Jes |
+| p2-42 | vmbra versa | umbra versa | modernised-form | provisional; awaiting Jes |
+| p2-42 | go i | I go | reordered | provisional; awaiting Jes |
+| p2-42 | ther finde i that it hath him twelfe sythes | there I find that it is contained twelve times | paraphrase-phrase | provisional; awaiting Jes |
+| p2-42 | beholde i | I behold | reordered | provisional; awaiting Jes |
+| p2-42 | the party | the 6th part | modernised-form | provisional; awaiting Jes |
+| p2-42 | schalt thou | you shall | reordered | provisional; awaiting Jes |
+| p2-42 | passeth | 6 exceeds 4 | reordered | provisional; awaiting Jes |
+| p2-42 | et sic de ceteris | and so for the rest | paraphrase-phrase | provisional; awaiting Jes |
+| p2-42a | foot ben | feet are | modernised-form | provisional; awaiting Jes |
+| p2-42a | ther-to | to it | modernised-form | provisional; awaiting Jes |
+| p2-42a | passeth | 4 exceeds | reordered | provisional; awaiting Jes |
+| p2-42b | makest thou | you make | reordered | provisional; awaiting Jes |
+| p2-42b | muste thou | you must | reordered | provisional; awaiting Jes |
+| p2-42b | shalt thou | you shall | reordered | provisional; awaiting Jes |
+| p2-43 | the partie | the 12th part | modernised-form | provisional; awaiting Jes |
+| p2-43 | yif ther were it were the partye | if there were 2, it would be the 6th part | modernised-form | provisional; awaiting Jes |
+| p2-43 | yif ther were the partye | if there were 3, the 4th part | modernised-form | provisional; awaiting Jes |
+| p2-43 | et sic deinceps | and so on | paraphrase-phrase | provisional; awaiting Jes |
+| p2-43 | yif it were it were the party | if it were 5, it would be the 5th part | modernised-form | provisional; awaiting Jes |
+| p2-43 | and party | and 7, the 7th part | added-word | provisional; awaiting Jes |
+| p2-43 | conclusioun | proposition | modernised-form | provisional; awaiting Jes |
+| p2-43 | the stature of thyn heyghte | your own height | paraphrase-phrase | provisional; awaiting Jes |
+| p2-43a | passeth the nombre of | the number of 4 exceeds | reordered | provisional; awaiting Jes |
+| p2-43a | thy-self | yourself | modernised-form | provisional; awaiting Jes |
+| p2-44 | shall thou worche | you shall work | reordered | provisional; awaiting Jes |
+| p2-44 | entere hit in-to thy slate | set it down in writing on your slate | paraphrase-phrase | provisional; awaiting Jes |
+| p2-44 | anni collecti et expansi | anni collecti et expansi | modernised-form | provisional; awaiting Jes |
+| p2-44 | anni expansi | anni expansi | modernised-form | provisional; awaiting Jes |
+| p2-44 | anni collecti | anni collecti | modernised-form | provisional; awaiting Jes |
+| p2-44 | and that thou findest in directe wryte | And what you find in a line with it, write | added-word | provisional; awaiting Jes |
+| p2-44 | take that thou findest in directe of | take what you find in a line with | modernised-form | provisional; awaiting Jes |
+| p2-44 | loke what thou findest in directe of | look what you find in a line with | modernised-form | provisional; awaiting Jes |
+| p2-44 | take that thou findest in directe there-of | take what you find in a line with it | modernised-form | provisional; awaiting Jes |
+| p2-44 | wryte that thou findest in directe of | write what you find in a line with | modernised-form | provisional; awaiting Jes |
+| p2-44 | shalt thou | you shall | reordered | provisional; awaiting Jes |
+| p2-45 | annis collectis et expansis | annis collectis et expansis | modernised-form | provisional; awaiting Jes |
+| p2-45 | residue was yere | remainder was 3 years | modernised-form | provisional; awaiting Jes |
+| p2-45 | that yere was passed | that 3 years had passed | modernised-form | provisional; awaiting Jes |
+| p2-45 | wroot i | I wrote | reordered | provisional; awaiting Jes |
+| p2-45 | withdraw i | I subtracted | reordered | provisional; awaiting Jes |
+| p2-45 | than fond i | then I found | reordered | provisional; awaiting Jes |
+| p2-45 | soghte i | I sought | reordered | provisional; awaiting Jes |
+| p2-45 | myn | my | modernised-form | provisional; awaiting Jes |
+| p2-45 | fond i yeer | I found 3 years | reordered | provisional; awaiting Jes |
+| p2-45 | tok i | I took | reordered | provisional; awaiting Jes |
+| p2-45 | added i | I added | reordered | provisional; awaiting Jes |
+| p2-45 | had i | I had | reordered | provisional; awaiting Jes |
+| p2-45 | other in any | or in any | modernised-form | provisional; awaiting Jes |
+| p2-45 | table ther | table where | modernised-form | provisional; awaiting Jes |
+| p2-45 | findest y-write in directe of | find written in a line with | modernised-form | provisional; awaiting Jes |
+| p2-45 | findest in directe of | find in a line with | modernised-form | provisional; awaiting Jes |
+| p2-46 | wite thou | know | modernised-form | provisional; awaiting Jes |
+| p2-46 | thou list | it pleases you | reordered | provisional; awaiting Jes |
+| p2-46 | awayte thou | watch | modernised-form | provisional; awaiting Jes |
+| p2-46 | set thou | set | modernised-form | provisional; awaiting Jes |
+| p2-46 | remeve thou | move | modernised-form | provisional; awaiting Jes |
+| p2-46 | maist | may | modernised-form | provisional; awaiting Jes |
+| p2-46 | flode or ebbe or half flode | flood or ebb, or half flood | modernised-form | provisional; awaiting Jes |
+| p2-46 | or quarter flode or ebbe | or quarter flood, or ebb | modernised-form | provisional; awaiting Jes |
+| p2-46 | or half or quarter ebbe | or half or quarter ebb | modernised-form | provisional; awaiting Jes |
+| p2-46 | than shalt esely knowe | shall then easily know | reordered | provisional; awaiting Jes |
+| p2-46 | worke thou than | then work | reordered | provisional; awaiting Jes |
+| p2-46 | knowe thou | know | modernised-form | provisional; awaiting Jes |
+| p2-46 | thou art inne | you are in | modernised-form | provisional; awaiting Jes |
+| p2-46 | bringe thou | bring | modernised-form | provisional; awaiting Jes |
+| p2-41 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-42 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-42a | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-43 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-43a | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-44 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-46 | thyn | your | modernised-form | provisional; awaiting Jes |
+| p2-41 | rewle | rule | modernised-form | provisional; awaiting Jes |
+| p2-41a | rewle | rule | modernised-form | provisional; awaiting Jes |
+| p2-41b | rewle | rule | modernised-form | provisional; awaiting Jes |
+| p2-42a | rewle | rule | modernised-form | provisional; awaiting Jes |
+| p2-43 | rewle | rule | modernised-form | provisional; awaiting Jes |
+| p2-43a | rewle | rule | modernised-form | provisional; awaiting Jes |
+| p2-41 | altitude | altitude | modernised-form | provisional; awaiting Jes |
+| p2-42 | altitude | altitude | modernised-form | provisional; awaiting Jes |
+| p2-42b | altitude | altitude | modernised-form | provisional; awaiting Jes |
+| p2-43 | altitude | altitude | modernised-form | provisional; awaiting Jes |
+| p2-41a | mayst | may | modernised-form | provisional; awaiting Jes |
+| p2-42 | mayst | may | modernised-form | provisional; awaiting Jes |
+| p2-42a | mayst | may | modernised-form | provisional; awaiting Jes |
+| p2-43 | mayst | may | modernised-form | provisional; awaiting Jes |
+| p2-43a | mayst | may | modernised-form | provisional; awaiting Jes |
+| p2-41 | umbra recta | umbra recta | modernised-form | provisional; awaiting Jes |
+| p2-42b | umbra recta | umbra recta | modernised-form | provisional; awaiting Jes |
+| p2-43 | umbra recta | umbra recta | modernised-form | provisional; awaiting Jes |
+| p2-42 | umbra versa | umbra versa | modernised-form | provisional; awaiting Jes |
+| p2-42a | umbra versa | umbra versa | modernised-form | provisional; awaiting Jes |
+| p2-42b | umbra versa | umbra versa | modernised-form | provisional; awaiting Jes |
+| p2-41 | falle | falls | modernised-form | provisional; awaiting Jes |
+| p2-41a | falle | falls | modernised-form | provisional; awaiting Jes |
+| p2-41b | falle | falls | modernised-form | provisional; awaiting Jes |
+| p2-42a | falle | falls | modernised-form | provisional; awaiting Jes |
+| p2-41b | right as | just as | modernised-form | provisional; awaiting Jes |
+| p2-42b | right as | just as | modernised-form | provisional; awaiting Jes |
+| p2-43a | right as | just as | modernised-form | provisional; awaiting Jes |
+| p2-41 | right so | just so | modernised-form | provisional; awaiting Jes |
+| p2-41b | right so | just so | modernised-form | provisional; awaiting Jes |
+| p2-42 | right so | just so | modernised-form | provisional; awaiting Jes |
+| p2-42b | right so | just so | modernised-form | provisional; awaiting Jes |
+| p2-43a | right so | just so | modernised-form | provisional; awaiting Jes |
+| p2-42 | hath him to | is in proportion to | modernised-form | provisional; awaiting Jes |
+| p2-42b | hath him to | is in proportion to | modernised-form | provisional; awaiting Jes |
+| p2-43a | hath him to | is in proportion to | modernised-form | provisional; awaiting Jes |
+| p2-44 | minutes | minutes | modernised-form | provisional; awaiting Jes |
+| p2-45 | minutes | minutes | modernised-form | provisional; awaiting Jes |
+| p2-44 | wolt | will | modernised-form | provisional; awaiting Jes |
+| p2-45 | wolt | will | modernised-form | provisional; awaiting Jes |
+| p2-02 | altitude | altitude | modernised-form | provisional; awaiting Jes |
+| p2-03 | altitude | altitude | modernised-form | provisional; awaiting Jes |
 
 Words shown as `·` on the line (no Skeat gloss, and the modern look-alike would mislead): `bisy`, `discret`. Status: provisional; awaiting Jes.
 
@@ -635,6 +1647,7 @@ Words shown as `·` on the line (no Skeat gloss, and the modern look-alike would
 - Contents: the collapsible full list (`Every section, by its first words`, and its first-words entries such as `Thyn Astrolabie hath a ring…`) removed (Jes tg 17849). Navigation is the major-divisions row and the star lines under each part.
 - Star lines removed (Jes tg 17894, 17896): the star-link lines under each part heading and under the supplementary and spurious heads are gone, with their nav labels and star names; navigation is the major-divisions row at the top. Prologue (Jes tg 17901): every figure now sits at its own line, with a red `☞` before its phrase; the sword window moved from after the paragraph to `with this swerd`. New window: the languages map (tg 17891).
 - Gloss pass over the rest of Part I (§§ 4–23; Jes tg 17907): the glosses and the modern line now run from the Prologue through Part I § 23; new `ours` respellings, sense choices and line departures are in the tables above (all provisional). The sample-end note moved after § 23 and now reads `The glosses run through Part I.` / `Part II is shown in Skeat's text without glosses, for now.`; the credit line says `for the Prologue and Part I`. Skeat's _italic_ Latin now renders in italics on both lines. Bare numerals (90, 31, 23) now sit in the line too, the numeral repeated beneath (no new wording). Written from the Middle English, Skeat's glossaries and notes and plain English only; no modern translation was consulted.
+- Gloss pass over Part II (all of §§ 1–40, the supplementary §§ 41–46 and the spurious §§ 41a, 41b, 42a, 42b, 43a; Jes tg 17907): the glosses and the modern line now cover the whole Treatise; new `ours` respellings, sense choices and line departures are in the tables above (all provisional). The sample-end note (`The glosses run through Part I.` / `Part II is shown in Skeat's text without glosses, for now.`) is removed; the credit line now says `for the whole Treatise`. Part II's English rubrics (frontmatter `heading`) and Latin lines stay as Skeat prints them, with no modern line. Written from the Middle English, Skeat's glossaries and notes and plain English only; no modern translation was consulted.
 
 ## Decisions
 
