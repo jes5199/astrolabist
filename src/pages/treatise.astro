@@ -137,6 +137,27 @@ const PLACE_INLINE = `(function (s) {
   me.querySelectorAll(":scope > .inline-win, :scope > .t-inset").forEach(function (w) {
     var p = ps[+w.dataset.after];
     if (!p) return;
+    if (w.dataset.phrase) {
+      // Float the window in at the phrase itself: find it in the paragraph's own words
+      // (not the modern line under them), and insert before the word where it starts.
+      var norm = function (t) { return t.replace(/\s+/g, " ").toLowerCase(); };
+      var want = norm(w.dataset.phrase), text = "", marks = [];
+      var walk = document.createTreeWalker(p, NodeFilter.SHOW_TEXT, { acceptNode: function (n) {
+        return n.parentElement && n.parentElement.closest("rt") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT; } });
+      for (var n = walk.nextNode(); n; n = walk.nextNode()) { marks.push([text.length, n]); text += n.nodeValue; }
+      var at = norm(text).indexOf(want);
+      if (at < 0) { p.before(w); return; }
+      // norm() keeps length except where it collapses whitespace runs; map back by re-normalising prefixes.
+      var raw = 0; while (raw < text.length && norm(text.slice(0, raw)).length < at) raw++;
+      var hit = marks[0];
+      for (var k = 0; k < marks.length; k++) if (marks[k][0] <= raw) hit = marks[k];
+      var node = hit[1], off = raw - hit[0];
+      var host = node.parentElement && node.parentElement.closest("ruby");
+      if (host && p.contains(host)) host.before(w);
+      else if (off > 0 && off < node.nodeValue.length) node.parentNode.insertBefore(w, node.splitText(off));
+      else node.parentNode.insertBefore(w, node);
+      return;
+    }
     if (w.dataset.size === "small") p.before(w);
     else p.after(w);
   });
@@ -339,13 +360,12 @@ const tocParts = [
       <header class="t-hero">
         <p class="t-kicker">Geoffrey Chaucer <span>✦</span> c. 1391</p>
         <h1><span class="h1-a">A Treatise</span> <span class="h1-b">on the Astrolabe</span></h1>
-        <p class="t-subtitle"><ruby lang="enm">Bred and mylk for childeren<rt>bread and milk for children</rt></ruby></p>
+        <p class="t-subtitle"><ruby lang="enm">“Bred and mylk for childeren”<rt>bread and milk for children</rt></ruby></p>
         {/* Jes's introduction (text tg 17825; OK'd "for now", Jes tg 17854). */}
         <div class="t-preface">
           <p>For more than a thousand years, the astrolabe was the ultimate representation of scientific knowledge of space and time, packed into a sort of portable computer.</p>
           <p>Geoffrey Chaucer (c. 1343–1400), the poet known for <cite>The Canterbury Tales</cite>, also wrote what is often called the oldest technical treatise in English: an instruction manual for the astrolabe, written as a letter to a ten-year-old boy, Lewis, possibly his own son or the son of a friend.</p>
-          <p>I present it here with new animated illustrations and a readable modern gloss.</p>
-          <p>Chaucer called himself a “<span lang="enm">lewd compilatour</span>” (an unlearned compiler), merely repackaging the brilliant work of the old astronomers. I can only hope to follow in his footsteps.</p>
+          <p>I present it here with new animated illustrations and a readable modern gloss. Chaucer called himself a “<span lang="enm">lewd compilatour</span>” (an unlearned compiler), merely repackaging the brilliant work of the old astronomers. I can only hope to follow in his footsteps.</p>
         </div>
         <p class="t-hint">Read on, and the heavens turn about the lode-sterre.</p>
         <p class="t-intro">
@@ -512,7 +532,7 @@ const tocParts = [
                       </div>
                         {glossed ? glossed.map((h) => <p set:html={h} />) : <Content />}
                         {inline.map((sc, j) => (
-                          <div class="inline-win" data-after={sc.at} data-size={sc.size} data-frame={sc.frame}>
+                          <div class="inline-win" data-after={sc.at} data-size={sc.size} data-frame={sc.frame} data-phrase={sc.place === "phrase" ? sc.after : undefined}>
                             <div class="win" data-frame={sc.frame}>
                               {sc.frame === "ring" && (
                               <svg class="win-ring" viewBox="-120 -120 240 240" aria-hidden="true">
@@ -1140,8 +1160,8 @@ const tocParts = [
     margin: -0.6rem 0 1.4rem;
     font-family: var(--me-font);
     font-style: italic;
-    font-size: 1.35rem;
-    letter-spacing: 0.04em;
+    font-size: clamp(1.6rem, 3.4vw, 2.2rem); /* larger, in quotes (Jes tg 17881) */
+    letter-spacing: 0.03em;
     color: #ead9b0;
   }
   .t-subtitle ruby {
@@ -1189,7 +1209,7 @@ const tocParts = [
      Chaucer (night page, silver) and the modern line (gray). Marked with a red manicule. */
   .t-inset {
     clear: both;
-    margin: 1.4rem 0 1.8rem;
+    margin: 1.4rem auto 1.8rem; /* centred in the text column (Jes tg 17873) */
     padding: 0.9rem 1.1rem 0.8rem 1.2rem;
     background: linear-gradient(180deg, #f8f2e1, #efe4c6);
     color: #2b2118;
@@ -1561,6 +1581,14 @@ const tocParts = [
   }
   .inline-win .win {
     width: 100%;
+  }
+  /* Windows anchored at a phrase inside a paragraph float in where the phrase begins: small ones
+     on the left like the five parts (rule below), full-size ones on the right. */
+  .inline-win[data-phrase]:not([data-size]) {
+    float: right;
+    clear: right;
+    width: 10rem;
+    margin: 0.4rem 0 0.6rem 1.4rem;
   }
   /* The Prologue's five parts: small windows beside their short paragraphs. */
   .inline-win[data-size="small"] {

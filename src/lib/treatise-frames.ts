@@ -20,6 +20,7 @@ export const SCENE_KIND: Record<string, SceneKind> = {
   // Prologue
   "treatise-prologue-gift": "F",
   "treatise-prologue": "F", // "with this swerd"
+  "treatise-prologue-cause-2b": "F", // the "too hard at ten" miniature
   // The five small "partie" windows draw the instrument in gold and silver on the night glass
   // (night style, not ink): a parchment square would make them illegible. See RIM_ANYWAY.
   "treatise-prologue-part-1": "I",

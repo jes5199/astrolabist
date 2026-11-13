@@ -43,12 +43,13 @@ const treatise = defineCollection({
     note: z.string().optional(),
     // Skeat's closing Latin colophon, carried by the last section it follows.
     colophon: z.string().optional(),
+    // `place: "phrase"`: the window floats in at the phrase itself (mid-paragraph, right side).
     // Extra sky windows set into the text: each after the paragraph of the
     // Middle English that contains `after` (the build fails if it is missing).
     // `size: "small"`: a smaller window set at the START of that paragraph,
     // beside its first lines (the Prologue's five parts).
     inlineScenes: z
-      .array(z.object({ name: z.string(), after: z.string(), label: z.string(), size: z.enum(["small"]).optional() }))
+      .array(z.object({ name: z.string(), after: z.string(), label: z.string(), size: z.enum(["small"]).optional(), place: z.enum(["phrase"]).optional() }))
       .optional(),
     // Editorial inset notes (OUR words, set apart from Chaucer and the gloss line): each goes
     // after the paragraph of the Middle English that contains `after`. Text may use *italic*.
