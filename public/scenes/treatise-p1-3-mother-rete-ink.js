@@ -163,12 +163,12 @@ function draw(s, t) {
     l.setAttribute("y", f(y));
     l.setAttribute("opacity", f(1 - u));
   });
-  // the spider: down on its thread onto the rete (a little bounce), rides it while the parts close and open, and
-  // climbs away before the round begins again
-  const rx = APART[2][0] + (TOGETHER[0] - APART[2][0]) * u;
-  const ry = APART[2][1] + (TOGETHER[1] - APART[2][1]) * u;
-  const down = span(t, 0.1, 1.0) * (1 - span(t, 11.2, 11.9));
-  const bob = 2.2 * Math.sin(Math.PI * span(t, 0.95, 1.35)) * (1 - span(t, 11.2, 11.9));
+  // the spider (jes tg 17871, 17885): only while the parts lie fully apart (before 2.6 s): down on its thread onto the
+  // rete, a little bounce, and up and away again before anything moves
+  const rx = APART[2][0];
+  const ry = APART[2][1];
+  const down = span(t, 0.1, 0.9) * (1 - span(t, 1.8, 2.5));
+  const bob = 2.2 * Math.sin(Math.PI * span(t, 0.85, 1.25)) * (1 - span(t, 1.8, 2.5));
   s.spider.setAttribute("transform", `translate(${f(rx + 4)} ${f(ry - 16 - 150 * (1 - down) + bob)})`);
 }
 

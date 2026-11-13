@@ -3,7 +3,8 @@
 // Scene contract (astrolabist, src/components/Scene.astro): mount(el) once, then start(el) / stop(el).
 //
 // The earth as a globe (jes tg 17885), COLOURED WOODCUT on vellum: a graticule cut in ink, the sea washed slate blue
-// (no coasts are drawn: nothing invented).  The globe turns until Oxford comes round; Oxford is pricked in red; its
+// (no coasts are drawn: nothing invented).  The globe stands drawn from the first frame, Oxford turned toward us
+// (jes tg 17890); Oxford is pricked in red; its
 // latitude is measured up its meridian from the equator: 51 degrees 50 minutes, Chaucer's own figure for Oxford
 // (II 22; the instrument's plates are drawn for 52); then its zenith, straight up, and its horizon, the plane the
 // plate is made for.  Orthographic projection; lib/woodcut.js; our own drawing.
@@ -13,13 +14,12 @@ import { woodcut, RED, VELLUM, WASH } from "./lib/woodcut.js";
 const NS = "http://www.w3.org/2000/svg";
 const instances = new WeakMap();
 const LOOP = 14000;
-const STILL = 10000; // ms: the latitude, the zenith and the horizon shown
+const STILL = 8000; // ms: the latitude, the zenith and the horizon shown
 const RAD = Math.PI / 180;
 const G = { x: 6, y: 10, r: 62 };
 const TILT = 10 * RAD; // the north pole toward us
 const LAT = 51 + 50 / 60; // Chaucer's latitude of Oxford
 const AT = -52; // where Oxford's meridian comes to rest, degrees from the globe's middle (west on the left)
-const TURN0 = -120;
 
 function node(tag, attrs, parent) {
   const n = document.createElementNS(NS, tag);
@@ -104,16 +104,16 @@ export function mount(el) {
 }
 
 function draw(s, t) {
-  const vis = span(t, 0, 0.5) * (1 - span(t, 13.2, 13.9));
-  s.globe.setAttribute("opacity", f(vis));
-  const lon = TURN0 + (AT - TURN0) * span(t, 0.3, 3.0); // Oxford's meridian, coming round
+  // the sphere is always there; what is drawn on it comes and goes
+  const vis = 1 - span(t, 13.2, 13.9);
+  const lon = AT; // Oxford's meridian
   let d = "";
   for (let m = -180; m < 180; m += 30) d += meridian(m + lon);
   for (const la of [-60, -30, 30, 60]) d += parallel(la);
   s.grid.setAttribute("d", d);
   s.eq.setAttribute("d", parallel(0));
   const P = proj(LAT, lon);
-  const on = span(t, 3.1, 3.5) * vis;
+  const on = span(t, 0.6, 1.0) * vis;
   s.town.setAttribute("cx", f(P[0]));
   s.town.setAttribute("cy", f(P[1]));
   s.town.setAttribute("opacity", f(on));
@@ -121,17 +121,17 @@ function draw(s, t) {
   s.tTown.setAttribute("y", f(P[1] + 9));
   s.tTown.setAttribute("opacity", f(on));
   // the latitude: up the meridian from the equator
-  const up = LAT * span(t, 4.0, 5.6);
+  const up = LAT * span(t, 1.5, 3.1);
   s.arc.setAttribute("d", up > 0.5 ? meridian(lon, 0, up) : "");
-  s.arc.setAttribute("opacity", f(span(t, 3.9, 4.1) * vis));
+  s.arc.setAttribute("opacity", f(span(t, 1.4, 1.6) * vis));
   const E = proj(0, lon);
   s.tEq.setAttribute("x", f(E[0]));
   s.tEq.setAttribute("y", f(E[1] + 15));
-  s.tEq.setAttribute("opacity", f(span(t, 4.0, 4.4) * vis));
+  s.tEq.setAttribute("opacity", f(span(t, 1.5, 1.9) * vis));
   const M = proj(LAT / 2, lon);
   s.tLat.setAttribute("x", f(M[0] - 6));
   s.tLat.setAttribute("y", f(M[1] + 4));
-  s.tLat.setAttribute("opacity", f(span(t, 5.4, 5.9) * vis));
+  s.tLat.setAttribute("opacity", f(span(t, 2.9, 3.4) * vis));
   // the zenith, straight up from the town; the horizon, the plane that touches the globe there
   const n = tilt(vec(LAT, lon));
   const Z = scr(n, G.r + 30);
@@ -139,7 +139,7 @@ function draw(s, t) {
   s.zen.setAttribute("y1", f(P[1]));
   s.zen.setAttribute("x2", f(Z[0]));
   s.zen.setAttribute("y2", f(Z[1]));
-  const zo = span(t, 6.6, 7.2) * vis;
+  const zo = span(t, 4.1, 4.7) * vis;
   s.zen.setAttribute("opacity", f(zo));
   s.tZen.setAttribute("x", f(Z[0] - 2));
   s.tZen.setAttribute("y", f(Z[1] - 5));
@@ -155,7 +155,7 @@ function draw(s, t) {
     hd += `${a ? "L" : "M"}${f(q[0])} ${f(q[1])}`;
   }
   s.hor.setAttribute("d", hd + "Z");
-  const ho = span(t, 7.6, 8.2) * vis;
+  const ho = span(t, 5.1, 5.7) * vis;
   s.hor.setAttribute("opacity", f(ho));
   s.tHor.setAttribute("x", f(P[0] + 14));
   s.tHor.setAttribute("y", f(P[1] - 13));
