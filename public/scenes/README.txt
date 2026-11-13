@@ -57,3 +57,4 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-p2-6-twilight.js lib/sky.js copied byte-for-byte from astrolabe-video fcc1e69.
 2026-11-13: treatise-p2-7-day-arc.js copied byte-for-byte from astrolabe-video 2c96bc1.
 2026-11-13: treatise-p1-17-three-circles.js treatise-p1-14-pin-horse.js copied byte-for-byte from astrolabe-video 2c96bc1.
+2026-11-13: treatise-p2-8-equal-hours.js copied byte-for-byte from astrolabe-video 6bbf7cd.
