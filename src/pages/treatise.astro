@@ -103,13 +103,16 @@ const ringTicks = Array.from({ length: 72 }, (_, i) => {
 
 // Skeat sets some sections apart; `note` carries his own label for them.
 // Run in place, right after the Middle English, so the move happens before first paint:
-// each inline window goes after the paragraph it belongs to.
+// each inline window goes after the paragraph it belongs to; a small one goes
+// before it, so it sits beside that paragraph's first lines.
 const PLACE_INLINE = `(function (s) {
   var me = s.parentElement;
   var ps = me.querySelectorAll(":scope > p");
   me.querySelectorAll(":scope > .inline-win").forEach(function (w) {
     var p = ps[+w.dataset.after];
-    if (p) p.after(w);
+    if (!p) return;
+    if (w.dataset.size === "small") p.before(w);
+    else p.after(w);
   });
 })(document.currentScript);`;
 
@@ -132,12 +135,19 @@ const sections = await Promise.all(
     const kind = kindOf(entry.data.note);
     // Inline sky windows: find the paragraph of the Middle English holding the phrase.
     const paras = entry.body.split(/\n\s*\n/).map((t) => t.replace(/\s+/g, " ").trim()).filter(Boolean);
-    const inline = (entry.data.inlineScenes ?? []).map((sc) => {
-      const at = paras.findIndex((t) => t.includes(sc.after.replace(/\s+/g, " ")));
-      if (at < 0)
-        throw new Error(`treatise: inline scene "${sc.name}" in ${entry.id}: phrase "${sc.after}" not found in the Middle English`);
-      return { ...sc, at, legend: sc.label.replace(/^Figure:\s*/, "").toUpperCase() };
-    });
+    const inline = (entry.data.inlineScenes ?? [])
+      .map((sc) => {
+        const at = paras.findIndex((t) => t.includes(sc.after.replace(/\s+/g, " ")));
+        if (at < 0)
+          throw new Error(`treatise: inline scene "${sc.name}" in ${entry.id}: phrase "${sc.after}" not found in the Middle English`);
+        return { ...sc, at, legend: sc.label.replace(/^Figure:\s*/, "").toUpperCase() };
+      })
+      // A window whose module has not arrived yet is left out (and said so), not broken.
+      .filter((sc) => {
+        const ok = fs.existsSync(path.join(process.cwd(), "public", "scenes", `${sc.name}.js`));
+        if (!ok) console.warn(`[treatise] inline scene ${sc.name} skipped: public/scenes/${sc.name}.js not found`);
+        return ok;
+      });
     const kicker = part === "Prologue" ? "The Prologue" : `${part} · § ${section}`;
     const label = heading
       ? sentence(plain(incipit(heading, 6)))
@@ -435,25 +445,6 @@ const listGroups = [
                   data-glossed={glossed ? "" : undefined}
                   data-figure-terms={figureTerms.length ? figureTerms.join(" ") : undefined}
                 >
-                  <div class="t-aside">
-                    <div class="win">
-                      <svg class="win-ring" viewBox="-120 -120 240 240" aria-hidden="true">
-                        <use href="#win-ring" x="-120" y="-120" width="240" height="240"></use>
-                        <text class="ring-text">
-                          <textPath href="#win-arc" startOffset="25%" text-anchor="middle">{ring}</textPath>
-                        </text>
-                      </svg>
-                      <div class="win-glass">
-                        <svg class="win-stars" viewBox="-100 -100 200 200" aria-hidden="true">
-                          <use href={`#win-field-${field}`} x="-100" y="-100" width="200" height="200" transform={`rotate(${spin})`}></use>
-                        </svg>
-                        <Scene
-                          name={entry.data.scene ?? "night-window"}
-                          label={`Figure for ${entry.data.part}${entry.data.part === "Prologue" ? "" : ` § ${entry.data.section}`}`}
-                        />
-                      </div>
-                    </div>
-                  </div>
                   <div class="t-main">
                     <header class="t-sec-label">
                       <p class="t-sec-kicker">
@@ -471,9 +462,28 @@ const listGroups = [
                     </header>
                     <div class="t-body">
                       <div class="t-me" lang="enm">
+                      <div class="t-aside">
+                        <div class="win">
+                          <svg class="win-ring" viewBox="-120 -120 240 240" aria-hidden="true">
+                            <use href="#win-ring" x="-120" y="-120" width="240" height="240"></use>
+                            <text class="ring-text">
+                              <textPath href="#win-arc" startOffset="25%" text-anchor="middle">{ring}</textPath>
+                            </text>
+                          </svg>
+                          <div class="win-glass">
+                            <svg class="win-stars" viewBox="-100 -100 200 200" aria-hidden="true">
+                              <use href={`#win-field-${field}`} x="-100" y="-100" width="200" height="200" transform={`rotate(${spin})`}></use>
+                            </svg>
+                            <Scene
+                              name={entry.data.scene ?? "night-window"}
+                              label={`Figure for ${entry.data.part}${entry.data.part === "Prologue" ? "" : ` § ${entry.data.section}`}`}
+                            />
+                          </div>
+                        </div>
+                      </div>
                         {glossed ? glossed.map((h) => <p set:html={h} />) : <Content />}
                         {inline.map((sc, j) => (
-                          <div class="inline-win" data-after={sc.at}>
+                          <div class="inline-win" data-after={sc.at} data-size={sc.size}>
                             <div class="win">
                               <svg class="win-ring" viewBox="-120 -120 240 240" aria-hidden="true">
                                 <use href="#win-ring" x="-120" y="-120" width="240" height="240"></use>
@@ -1281,24 +1291,23 @@ const listGroups = [
 
   /* --- sections ----------------------------------------------------- */
   .t-sec {
+    max-width: 50rem;
+    margin: 0 auto;
     padding: 3.5rem 0 4.5rem;
     scroll-margin-top: 3.5rem;
-    display: grid;
-    grid-template-columns: 21rem minmax(0, 41rem);
-    justify-content: center;
-    column-gap: 4.25rem;
-    align-items: start;
   }
-  .t-sec[data-side="r"] {
-    grid-template-columns: minmax(0, 41rem) 21rem;
+  /* The section's figure: inline at the start of its text, floated beside
+     the opening lines, which wrap round its circle. It scrolls with them. */
+  .t-aside {
+    float: left;
+    width: 17rem;
+    margin: 0.2rem 2rem 1rem 0;
+    shape-outside: circle(50%);
+    shape-margin: 0.7rem;
   }
   .t-sec[data-side="r"] .t-aside {
-    order: 2;
-  }
-  /* The figure stays in view beside its passage while it is read. */
-  .t-aside {
-    position: sticky;
-    top: max(5rem, calc(50vh - 11rem));
+    float: right;
+    margin: 0.2rem 0 1rem 2rem;
   }
   .t-sec-label {
     margin-bottom: 2.25rem;
@@ -1424,6 +1433,17 @@ const listGroups = [
   }
   .inline-win .win {
     width: 100%;
+  }
+  /* The Prologue's five parts: small windows beside their short paragraphs. */
+  .inline-win[data-size="small"] {
+    float: left;
+    clear: left;
+    width: 10rem;
+    margin: 0.1rem 1.4rem 0.6rem 0;
+  }
+  .inline-win[data-size="small"] .ring-text {
+    font-size: 13px;
+    letter-spacing: 1px;
   }
   .t-me {
     font-family: var(--me-font);
@@ -1778,13 +1798,12 @@ const listGroups = [
     .t-sec {
       padding: 2.5rem 0 3rem;
     }
-    .t-sec,
-    .t-sec[data-side="r"] {
-      display: block;
-    }
-    .t-aside {
-      position: static;
-      margin-bottom: 1.5rem;
+    .t-aside,
+    .t-sec[data-side="r"] .t-aside {
+      float: none;
+      width: auto;
+      margin: 0 0 1.5rem;
+      shape-outside: none;
     }
     .t-sec-label,
     .t-sec[data-side="r"] .t-sec-label {
@@ -1815,6 +1834,10 @@ const listGroups = [
       width: min(15rem, 68vw);
       margin: 0.4rem auto 1.6rem;
       shape-outside: none;
+    }
+    .inline-win[data-size="small"] {
+      width: min(9rem, 42vw);
+      margin: 0.4rem auto 1rem;
     }
     .t-me {
       font-size: 1.16rem;

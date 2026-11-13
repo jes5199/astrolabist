@@ -45,8 +45,10 @@ const treatise = defineCollection({
     colophon: z.string().optional(),
     // Extra sky windows set into the text: each after the paragraph of the
     // Middle English that contains `after` (the build fails if it is missing).
+    // `size: "small"`: a smaller window set at the START of that paragraph,
+    // beside its first lines (the Prologue's five parts).
     inlineScenes: z
-      .array(z.object({ name: z.string(), after: z.string(), label: z.string() }))
+      .array(z.object({ name: z.string(), after: z.string(), label: z.string(), size: z.enum(["small"]).optional() }))
       .optional(),
     saintsTable: z.boolean().optional(),
     plates: z
