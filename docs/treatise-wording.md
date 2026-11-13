@@ -140,6 +140,7 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | `north`, `81°50′`, `21°50′`, `81°50′ + 21°50′ = 103°40′`, `half: pole 51°50′` | treatise-p2-24-never-sets.js | Part II §24 (astrolabe-video 1b2003c). Modern. | **decided: modern** |
 | `S`, `zenith`, `equator`, `38°10′`, `51°50′`, `90° − 38°10′ = 51°50′`, `south pole` | treatise-p2-25-latitude-noon.js | Part II §25 (astrolabe-video bea40ec). Modern (Chaucer: "pol antartik"). | **decided: modern** |
 | `latitude 52°` … `latitude 0°` (readout), `the right horizon`, `day = night` | treatise-p2-26-right-sphere.js | Part II §26 (astrolabe-video 503356d). Modern. Shown on a plate whose latitude slides to 0° (instead of a solid sphere). Note: at latitude 0 only the horizon (and meridian) is straight; Chaucer's "almikanteras … streighte" fits the horizon. | **decided: modern** |
+| `Aries: 27.8° of the equator`, `Cancer: 32.3° of the equator` | treatise-p2-27-right-ascension.js | Part II §27 (astrolabe-video 798773d). Latin signs; modern captions. | **decided** |
 
 ## Not on the page
 
