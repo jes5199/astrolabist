@@ -50,6 +50,16 @@ export function sourceLine(e: GlossEntry): string {
   const where = r ? ` · s.v. ${r.head}${r.page ? `, p.\u00a0${r.page}` : ""}` : "";
   return `${cite}${where}`;
 }
+/**
+ * What the second paragraph is: a glossary definition ("def"), or commentary from
+ * Skeat's notes ("note") or his introduction ("intro") in vol. III, which must not
+ * be presented as a definition.
+ */
+export function defKind(e: GlossEntry): "def" | "note" | "intro" | null {
+  if (!e.def) return null;
+  if (e.defSource !== "oxf3") return "def";
+  return e.defRef?.where?.startsWith("Introduction") ? "intro" : "note";
+}
 /** Where the definition comes from, when that differs from the gloss's source or Skeat is quoting someone. */
 export function defLine(e: GlossEntry): string | null {
   if (!e.def || !e.defSource) return null;

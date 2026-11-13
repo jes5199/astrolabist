@@ -41,7 +41,9 @@ Wedgwood (*con … thank*), Bailey (*dignetes*), Tyrwhitt (*Somer*), Brae (*Lenn
   *latitude* terrestrial at "the latitude of Oxenford", astronomical at "after his latitude").
   These are the `overrides`, listed in the wording ledger.
 - EETS first when it has an entry for the word in this sense; then the Oxford glossary; definitions
-  for technical words from either glossary or from Skeat's own introduction and notes (vol. III).
+  for technical words from either glossary. Passages from Skeat's notes or introduction (vol. III) are
+  commentary, not definitions: the popover labels them "Skeat's note" / "From Skeat's introduction"
+  and sets them as an indented italic note.
 - `ours`: only a plain modern equivalent of a spelling, where no Skeat entry was found
   (14 entries, 16 forms; see the ledger). No `ours` entry may carry a definition (the gate checks).
 - Not glossed: words spelled and used as in modern English; transparent respellings with no
@@ -59,7 +61,7 @@ Wedgwood (*con … thank*), Bailey (*dignetes*), Tyrwhitt (*Somer*), Brae (*Lenn
 | Distinct glossed forms | 239 (including 8 phrases such as *tak keep*, *con me the more thank*) |
 | Entries | 227: EETS 120, Oxford glossary 87, Oxford names 6, ours 14 |
 | Token occurrences by gloss source | EETS 214, Oxford glossary 142, Oxford names 8, ours 31 |
-| Definitions | 27: from the EETS glossary 17, Oxford vol. III introduction and notes 9, Oxford glossary 1 |
+| Second paragraphs | 27: 18 glossary definitions (EETS 17, Oxford 1); 9 pieces of commentary, labelled as such: 6 "Skeat's note" (*Lowis, philosofre, suffisaunt, certein, Somer, Lenne*) and 3 "From Skeat's introduction" (*Astrolabie, rewle, clymatz*) |
 
 ## Provenance in the data
 

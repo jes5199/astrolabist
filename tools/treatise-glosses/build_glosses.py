@@ -85,7 +85,7 @@ SRC_CITE = {
     "eets": "Skeat, EETS 1872, glossary",
     "oxf6": "Skeat, Oxford Chaucer 1894, glossary",
     "oxf6n": "Skeat, Oxford Chaucer 1894, index of names",
-    "oxf3": "Skeat's notes, Oxford Chaucer 1894",
+    "oxf3": "Skeat, Oxford Chaucer 1894, vol. III",
     "ours": "our gloss",
 }
 

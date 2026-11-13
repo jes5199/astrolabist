@@ -11,6 +11,7 @@ import {
   glossEntries,
   sourceLine,
   defLine,
+  defKind,
   type GlossStats,
 } from "../lib/treatise-gloss";
 
@@ -169,12 +170,13 @@ const usedKeys = [...glossStats.keys].sort();
 const glossData = Object.fromEntries(
   usedKeys.map((k) => {
     const e = glossEntries[k];
-    return [k, { g: e.gloss, d: e.def ?? null, s: sourceLine(e), ds: defLine(e), o: e.source === "ours" ? 1 : 0 }];
+    return [k, { g: e.gloss, d: e.def ?? null, s: sourceLine(e), ds: defLine(e), k: defKind(e), o: e.source === "ours" ? 1 : 0 }];
   })
 );
 const glossDesc = usedKeys.map((k) => {
   const e = glossEntries[k];
-  const parts = [e.gloss, e.def, e.source === "ours" ? "Our gloss." : `Source: ${sourceLine(e)}.`].filter(Boolean);
+  const label = { def: "", note: "Skeat's note: ", intro: "From Skeat's introduction: " }[defKind(e) ?? "def"];
+  const parts = [e.gloss, e.def ? label + e.def : null, e.source === "ours" ? "Our gloss." : `Source: ${sourceLine(e)}.`].filter(Boolean);
   return { id: `gd-${k}`, text: parts.join(". ").replace(/\.\./g, ".") };
 });
 console.log(
@@ -352,7 +354,7 @@ const counts = {
       <div class="gl-pop" id="gl-pop" role="tooltip" hidden>
         <p class="gp-w" lang="enm"></p>
         <p class="gp-g"></p>
-        <p class="gp-d"></p>
+        <p class="gp-d"><span class="gp-dl"></span><span class="gp-dt"></span></p>
         <p class="gp-fig">Shown in the figure</p>
         <p class="gp-s"><span class="gp-s1"></span><span class="gp-s2"></span></p>
       </div>
@@ -1487,7 +1489,29 @@ const counts = {
     font-size: 0.96rem;
     color: #e0e4f3;
   }
-  .gp-d:empty,
+  /* Commentary (Skeat's notes, his introduction), set apart from a definition. */
+  .gp-d[data-kind="note"],
+  .gp-d[data-kind="intro"] {
+    margin-top: 0.55rem !important;
+    padding-left: 0.7rem;
+    border-left: 2px solid rgba(236, 201, 120, 0.5);
+    font-style: italic;
+    font-size: 0.93rem;
+  }
+  .gp-dl {
+    display: block;
+    font-family: var(--me-font);
+    font-style: normal;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #f3dfa8;
+    margin-bottom: 0.15rem;
+  }
+  .gp-dl:empty {
+    display: none;
+  }
+  .gp-d[hidden],
   .gl-pop:not([data-fig]) .gp-fig {
     display: none;
   }
@@ -1719,7 +1743,7 @@ const counts = {
     // aria-describedby (a hidden description, for screen readers). One shared
     // popover shows the gloss: on hover (mouse), on tap (touch: tap again or tap
     // elsewhere to close), and on keyboard focus (Enter toggles, Escape closes).
-    type GD = { g: string; d: string | null; s: string; ds: string | null; o: 0 | 1 };
+    type GD = { g: string; d: string | null; s: string; ds: string | null; k: "def" | "note" | "intro" | null; o: 0 | 1 };
     const GLOSS: Record<string, GD> = JSON.parse(document.getElementById("gl-data")?.textContent || "{}");
     const pop = document.getElementById("gl-pop") as HTMLElement | null;
     const words = [...root.querySelectorAll<HTMLElement>(".gw")];
@@ -1783,9 +1807,16 @@ const counts = {
       const q = (c: string) => pop.querySelector<HTMLElement>(c)!;
       q(".gp-w").textContent = w.firstChild?.textContent ?? "";
       q(".gp-g").textContent = d.g;
-      q(".gp-d").textContent = d.d ?? "";
+      // Glossary definitions read as definitions; Skeat's notes and introduction are labelled as such.
+      const kind = d.k ?? "def";
+      const dp = q(".gp-d");
+      dp.hidden = !d.d;
+      dp.dataset.kind = kind;
+      q(".gp-dl").textContent = kind === "note" ? "Skeat's note" : kind === "intro" ? "From Skeat's introduction" : "";
+      q(".gp-dt").textContent = d.d ?? "";
       q(".gp-s1").textContent = d.s;
-      q(".gp-s2").textContent = d.ds ? `Definition: ${d.ds}` : "";
+      const lab = kind === "note" ? "Note" : kind === "intro" ? "Introduction" : "Definition";
+      q(".gp-s2").textContent = d.ds ? `${lab}: ${d.ds}` : "";
       if (d.o) pop.dataset.ours = "";
       else delete pop.dataset.ours;
       const fig = figureOf(w);
