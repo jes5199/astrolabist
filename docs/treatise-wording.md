@@ -133,6 +133,7 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | `30° east: ascendant 1`, `30° west: ascendant 2`, `the middle, rising`, `the star's degree`, `Libra 22°` | treatise-p2-17-star-place.js | Part II §17 (astrolabe-video 3b6d423). Modern captions; Latin sign. **Interpretation:** "the middel degree by-twene bothe assendentes" shown as the middle counted on the border (in time), which is exact; the literal middle in zodiac degrees misses by ~26° at 52°. Alternative available. | provisional (interpretation) |
 | `Alabor`, `Cancer 4°` | treatise-p2-18-mediation.js | Part II §18 (astrolabe-video b0aa6d2). Engraved star name; mediation is the recorded one (by construction; checked independently in §21). | **decided** |
 | `Alabor`, `rises with Leo 14°` | treatise-p2-19-rises-with.js | Part II §19 (astrolabe-video 5a73248). Solved from the plate geometry. | **decided** |
+| `62.1°`, `38.0°`, `declination 24.1° north` | treatise-p2-20-declination.js | Part II §20 (astrolabe-video 6d31e3d). Modern. 24.1° is the 47869 plate's own obliquity; Chaucer gives Ptolemy's 23°50′ in I §17. | **decided: modern** |
 
 ## Not on the page
 
