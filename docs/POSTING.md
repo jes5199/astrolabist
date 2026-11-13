@@ -137,7 +137,7 @@ Local (no Tina credentials needed):
 
 ```bash
 # once. `npm ci` currently FAILS: package-lock.json is out of sync with
-# package.json since f568863 ("update tina"). Netlify runs `npm install`, so prod still builds.
+# package.json since f568863 ("update tina").
 npm install && git checkout package-lock.json   # don't commit lockfile churn with a post
 npx astro dev               # http://localhost:4321/posts/<slug>/
 # (if node_modules is missing, npx downloads the *latest* astro and fails, so install first)
@@ -199,6 +199,15 @@ and the repo is public.
   push. Content-only posts don't touch the schema.
 
 ## Known oddities (as of 2026-11-13)
+
+- **Deploys appear broken since f568863 (Tina 1.x → 3.x, 2026-10-09).** The test
+  post pushed to `main` at 07:29Z on 2026-11-13 hadn't appeared 10+ minutes
+  later. The live `/admin` bundle uses Tina 1.x-style asset names
+  (`index-1570df54.js`), but a current build produces `index-D-0v68C4.js`. That
+  means the live site predates the upgrade. The cause is unknown until someone
+  reads the Netlify deploy log: it could be the npm lockfile mismatch, the
+  Node version, the Tina Cloud schema, or deploys being disabled. Locally,
+  `tinacms build --local --skip-cloud-checks` and `astro build` both succeed.
 
 - `BASE_URL` in `src/consts.ts` is `https://astrolabist.netlify.app`, so the
   RSS feed, sitemap and canonical links point at the Netlify subdomain rather
