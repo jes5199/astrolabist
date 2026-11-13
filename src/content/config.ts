@@ -48,6 +48,10 @@ const treatise = defineCollection({
     inlineScenes: z
       .array(z.object({ name: z.string(), after: z.string(), label: z.string() }))
       .optional(),
+    saintsTable: z.boolean().optional(),
+    plates: z
+      .array(z.object({ src: z.string(), button: z.string(), title: z.string(), caption: z.string().optional(), width: z.number(), height: z.number() }))
+      .optional(),
   }),
 });
 

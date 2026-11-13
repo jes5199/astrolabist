@@ -1,0 +1,51 @@
+---
+// The 36 holy days engraved on the calendar ring of Oxford HSM inv. 47869, resolved against the Sarum kalendar
+// (Dickinson, Missale Sarum, 1861–83). Data: src/treatise-text/saints.json; one source link per row.
+import saints from "../../treatise-text/saints.json";
+---
+<details class="st">
+  <summary>The holy days on the calendar ring</summary>
+  <p class="st-note">
+    Chaucer's England kept the Julian calendar. In 1391 its dates ran eight days behind the Gregorian calendar we use today,
+    so St Gregory's day, 12 March, fell on what we would call 20 March.
+  </p>
+  <div class="st-scroll" tabindex="0" role="region" aria-label="Holy days table (scrolls sideways)">
+    <table>
+      <thead>
+        <tr><th scope="col">Engraved</th><th scope="col">Feast</th><th scope="col">Day (Julian)</th><th scope="col">Today's calendar</th><th scope="col">Letter</th><th scope="col">Source</th></tr>
+      </thead>
+      <tbody>
+        {saints.map((s) => (
+          <tr>
+            <td class="st-abbr">{s.abbr}</td>
+            <td>{s.nameEn}<span class="st-lat"> · <i>{s.nameLatin}</i></span></td>
+            <td>{s.julian}</td>
+            <td>{s.gregorian1391}{s.abbr === "nati" ? " 1392" : ""}</td>
+            <td class="st-letter">{s.letter}</td>
+            <td><a href={s.source.url} rel="noopener">p. {s.source.page}</a></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="st-src">
+    Feasts identified from the Sarum kalendar in F. H. Dickinson (ed.), <i>Missale ad usum insignis et praeclarae ecclesiae Sarum</i>
+    (Burntisland, 1861–83), pp. 17**–28**, printed from the Sarum Missal of 1497. Abbreviations, days and letters as engraved on the instrument.
+  </p>
+</details>
+<style>
+  .st { margin: 1rem 0 0.4rem; color: #e4e7f3; }
+  .st summary { cursor: pointer; font: 600 0.78rem/1.4 var(--me-font, serif); letter-spacing: 0.22em; text-transform: uppercase; color: #f5dc9b; }
+  .st summary:focus-visible { outline: 2px solid #ecc978; outline-offset: 3px; }
+  .st-note, .st-src { font: 0.9rem/1.5 var(--modern-font, serif); color: #cfd5ec; margin: 0.8rem 0; }
+  .st-src { font-size: 0.8rem; }
+  .st-scroll { overflow-x: auto; background: rgba(5, 8, 22, 0.92); border: 1px solid rgba(236, 201, 120, 0.25); border-radius: 0.4rem; }
+  .st table { border-collapse: collapse; width: 100%; font: 0.86rem/1.35 var(--modern-font, serif); }
+  .st th { text-align: left; font-weight: 600; color: #f5dc9b; padding: 0.5rem 0.6rem; border-bottom: 1px solid rgba(236, 201, 120, 0.35); white-space: nowrap; }
+  .st td { padding: 0.4rem 0.6rem; border-bottom: 1px solid rgba(167, 176, 212, 0.15); vertical-align: top; }
+  .st-abbr { font-family: var(--me-font, serif); color: #f5dc9b; white-space: nowrap; }
+  .st-letter { text-align: center; }
+  .st-lat { color: #a9b2d6; }
+  .st a { color: #cfdcff; }
+  @media (max-width: 600px) { .st-lat { display: none; } }
+</style>

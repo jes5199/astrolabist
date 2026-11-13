@@ -2,6 +2,8 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Scene from "../components/Scene.astro";
+import PlateViewer from "../components/treatise/PlateViewer.astro";
+import SaintsTable from "../components/treatise/SaintsTable.astro";
 import { SITE_TITLE } from "../consts";
 import fs from "node:fs";
 import path from "node:path";
@@ -385,6 +387,10 @@ const counts = {
                       {inline.length > 0 && (
                         <script is:inline set:html={PLACE_INLINE}></script>
                       )}
+                      {(entry.data.plates ?? []).map((pl) => (
+                        <PlateViewer src={pl.src} button={pl.button} title={pl.title} caption={pl.caption} width={pl.width} height={pl.height} />
+                      ))}
+                      {entry.data.saintsTable && <SaintsTable />}
                     </div>
                     <div class="t-meridian" aria-hidden="true"></div>
                     <div class="t-modern">
