@@ -42,3 +42,6 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-p1-12-shadow-square.js treatise-p1-10-months.js treatise-p2-1-sun-degree.js copied byte-for-byte from astrolabe-video 5369e56.
 2026-11-13: treatise-p1-13-rule.js copied byte-for-byte from astrolabe-video e8f2c18.
 2026-11-13: back-large.svg copied byte-for-byte from astrolabe-video 2bbde39 (static, no script; shown via <img> in PlateViewer).
+2026-11-13: treatise-p1-14-pin-horse.js copied byte-for-byte from astrolabe-video d2c0b6d.
+2026-11-13: treatise-p1-15-front-quarters.js lib/front.js copied byte-for-byte from astrolabe-video c20a560.
+2026-11-13: treatise-p1-16-front-border.js copied byte-for-byte from astrolabe-video c20a560.

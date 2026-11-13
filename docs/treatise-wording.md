@@ -93,6 +93,9 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | Button "View the whole back"; viewer title and caption (from astrolabe-video's drawing notes, lightly edited) | p1-11.md `plates` | Part I §11 large view. Caption credits History of Science Museum, Oxford, inv. 47869. | provisional; awaiting Jes |
 | `umbra versa`, `umbra recta` | treatise-p1-12-shadow-square.js | Part I §12 (astrolabe-video f66b73e). Chaucer's own Latin terms. | source text |
 | numerals `3` `6` `9` `12` | treatise-p1-12-shadow-square.js | Part I §12. Modern figures. | **decided: modern** (Jes, tg 17771) |
+| `Pol Artik` | treatise-p1-14-pin-horse.js | Part I §14 (astrolabe-video d2c0b6d). Chaucer's own words. Honesty notes: the horse-head wedge is the general type (47869's wedge is not recorded); thicknesses drawn 3.5× deeper. | source text |
+| `south`, `north`, `east`, `west` | treatise-p1-15-front-quarters.js | Part I §15 (astrolabe-video 169e6da). | **decided: modern** (Jes, tg 17771) |
+| (none: the instrument's own hour letters and cross, as engraved) | treatise-p1-16-front-border.js | Part I §16 (astrolabe-video c20a560). | n/a |
 
 ## Not on the page
 
