@@ -9,6 +9,9 @@
 // Scene contract (astrolabist, src/components/Scene.astro): mount(el) once, then start(el) / stop(el).
 //
 // COLOURED WOODCUT on vellum (jes tg 17847; lib/woodcut.js): cut, washed, lettered in the printer's red.
+// v2, A LARGE WINDOW (3:2; 3:4 stacked on a phone: lib/stage.js), after II 4 v2 (jes tg 17908, 17914, 17917): the same
+// drawing and loupe, slower, with Chaucer's six steps listed beside the instrument in place of the captions (the step
+// being done in red).  OPEN (for jes): the numbers below.
 // zodiac's scale from Pisces 1 (points A and F); Pisces 1 is set on the eastern horizon; the label is laid over it and
 // the span set on the label, A over the ecliptic, F outward (south); rete and label are turned together till F is on
 // the horizon; the degree of the zodiac then on the horizon rises with Jupiter.  On our plate (52 degrees) that degree
@@ -17,12 +20,19 @@
 
 import { woodcut, RED, VELLUM, WASH } from "./lib/woodcut.js";
 import { node, f, rim, P, almucantar, nightFrom, hourLine } from "./lib/front.js";
+import { VIEWBOX, layoutOf, watch, stepList } from "./lib/stage.js";
 
 const instances = new WeakMap();
-const LOOP = 24000;
-const STILL = 17000; // ms: F on the horizon, the rising degree ringed
+const PACE = 0.6; // the v1 timeline (below, in its own seconds) played at this speed
+const LOOP = 24000 / PACE;
+const STILL = 17000 / PACE; // ms: F on the horizon, the rising degree ringed
 const INK2 = "currentColor";
-const C = { x: 0, y: -8, k: 0.72 };
+const LAYOUT = {
+  wide: { C: { x: -66, y: -4, k: 0.84 }, loupe: { x: -12, y: 64, r: 31, m: 6 }, list: { x: 30, y: -84, size: 9.4, lh: 10.5, gap: 6, indent: 10, width: 118 } },
+  stack: { C: { x: 0, y: -86, k: 1.0 }, loupe: { x: 96, y: -156, r: 34, m: 6 }, list: { x: -136, y: 42, size: 12.5, lh: 14, gap: 6, indent: 15, width: 272 } },
+};
+let C = LAYOUT.wide.C;
+let LOUPE = LAYOUT.wide.loupe;
 const W = (px) => f(px / C.k);
 const RAD = Math.PI / 180;
 const EPS = P.obliquity * RAD;
@@ -82,15 +92,16 @@ const RE = (P.capricorn + P.cancer) / 2;
 const OFF = (P.capricorn - P.cancer) / 2;
 const BAND = 11;
 const REST = 200;
-const LOUPE = { x: 58, y: -60, r: 33, m: 6 }; // the magnifying glass: where, how big, how much // the label's bearing (on the plate) before it is laid
-const CAPS = [
-  [0.5, 3.6, "Jupiter: Pisces 1°, 3° south"],
-  [4.0, 5.8, "Pisces 1° on the horizon"],
-  [6.0, 7.4, "the label laid over it"],
-  [7.6, 9.4, "A on the ecliptic, F 3° south"],
-  [9.6, 12.2, "turned till F is on the horizon"],
-  [12.6, 20.6, "the degree rising with Jupiter"],
+// the steps, with when each begins (in the v1 timeline's seconds)
+const STEPS = [
+  { t: 0.5, lines: ["Jupiter at Pisces 1°, 3° south: A at Pisces 1°, F 3° on"] },
+  { t: 4.0, lines: ["set Pisces 1° on the east horizon"] },
+  { t: 6.0, lines: ["lay the label on that degree"] },
+  { t: 7.6, lines: ["on the label: A over the ecliptic, F 3° south, toward the border"] },
+  { t: 9.6, lines: ["turn the rete until F sits on the horizon"] },
+  { t: 12.6, lines: ["the degree rising now rises with Jupiter"] },
 ];
+const END = 20.8;
 
 const ease = (u) => (u < 0 ? 0 : u > 1 ? 1 : u * u * (3 - 2 * u));
 const span = (t, a, b) => ease((t - a) / (b - a));
@@ -98,10 +109,24 @@ const win = (p) => [C.x + C.k * p[0], C.y + C.k * p[1]];
 
 export function mount(el) {
   if (instances.has(el)) return;
+  const s = { raf: 0, t0: 0, tm: STILL };
+  instances.set(el, s);
+  build(el, s);
+  watch(el, s, () => {
+    s.svg.remove();
+    build(el, s);
+  });
+}
+
+function build(el, s) {
+  s.mode = layoutOf(el);
+  const Lo = LAYOUT[s.mode];
+  C = Lo.C;
+  LOUPE = Lo.loupe;
   const uid = Math.random().toString(36).slice(2, 8);
-  const svg = node("svg", { viewBox: "-100 -100 200 200", width: "100%", height: "100%", "aria-hidden": "true" });
+  const svg = node("svg", { viewBox: VIEWBOX[s.mode], width: "100%", height: "100%", "aria-hidden": "true" });
   svg.style.fontFamily = "inherit";
-  svg.style.overflow = "visible";
+  el.appendChild(svg);
   const defs = node("defs", {}, svg);
   const wc = woodcut(defs, { freq: 0.11 * C.k, wobble: 1.0 / C.k, seed: 41 });
   const pat = node("pattern", { id: "h" + uid, width: 2.6, height: 2.6, patternUnits: "userSpaceOnUse", patternTransform: "rotate(45)" }, defs);
@@ -200,21 +225,18 @@ export function mount(el) {
   const hp = win([-HR * 0.62, -HC - HR * 0.79]);
   tHor.setAttribute("x", f(hp[0] - 2));
   tHor.setAttribute("y", f(hp[1]));
-  const cap = text("", 14, "currentColor", false);
-  cap.setAttribute("x", 0);
-  cap.setAttribute("y", f(C.y + C.k * 100 + 22));
   // the cut: the still drawing wobbles as one; rete and label, which turn, have their own wobble
   const base = node("g", { filter: wc.rough });
   while (g.firstChild && g.firstChild !== turned) base.appendChild(g.firstChild);
   g.insertBefore(base, turned);
   turned.setAttribute("filter", wc.rough);
-  el.appendChild(svg);
-  const s = { turned, labelRot, compass, wax, ring, tA, tF, tDeg, tHor, cap, L, lead, spot, raf: 0, t0: 0, tm: STILL };
-  instances.set(el, s);
-  draw(s, STILL / 1000);
+  const { rows } = stepList(node("g", {}, svg), STEPS, Lo.list);
+  Object.assign(s, { svg, turned, labelRot, compass, wax, ring, tA, tF, tDeg, tHor, L, lead, spot, rows });
+  draw(s, s.tm / 1000);
 }
 
-function draw(s, t) {
+function draw(s, T) {
+  const t = T * PACE; // the v1 timeline
   const fade = 1 - span(t, 21.0, 21.8);
   let rot = ROT_0 + (ROT_L - ROT_0) * span(t, 4.0, 5.4);
   rot += (ROT_F - ROT_L) * span(t, 9.8, 12.2);
@@ -307,14 +329,16 @@ function draw(s, t) {
   s.tDeg.setAttribute("y", f(pd[1] - 6));
   s.tDeg.setAttribute("opacity", f(span(t, 4.4, 4.9) * (1 - span(t, 7.4, 7.8)) + span(t, 13.0, 13.4) * fade));
   s.tHor.setAttribute("opacity", f(span(t, 4.4, 4.9) * (1 - span(t, 6.0, 6.4)) + span(t, 12.2, 12.6) * fade));
-  let str = "";
-  let a = 0;
-  for (const [t0, t1, txt] of CAPS) if (t >= t0 - 0.01 && t < t1 + 0.3) {
-    str = txt;
-    a = span(t, t0, t0 + 0.3) * (1 - span(t, t1, t1 + 0.3));
-  }
-  if (s.cap.textContent !== str) s.cap.textContent = str;
-  s.cap.setAttribute("opacity", f(a));
+  STEPS.forEach((st, i) => {
+    const next = STEPS[i + 1] ? STEPS[i + 1].t : END;
+    const now = t >= st.t && t < next;
+    const done = t >= next;
+    const al = (now || done ? 1 : 0.3) * span(t, 0.2, 0.4) * (1 - span(t, END, END + 0.6));
+    for (const e of s.rows[i]) {
+      e.setAttribute("opacity", f(al));
+      e.setAttribute("fill", now ? RED : "currentColor");
+    }
+  });
 }
 
 export function start(el) {
