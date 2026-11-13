@@ -135,3 +135,4 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-p2-36-houses-ink.js copied byte-for-byte from astrolabe-video 6006a4c.
 2026-11-13: treatise-p2-37-houses-label-ink.js copied byte-for-byte from astrolabe-video 6006a4c.
 2026-11-13: treatise-p2-40-planet-rising-ink.js copied byte-for-byte from astrolabe-video 6006a4c.
+2026-11-13: treatise-p1-1-ring-back-ink.js copied byte-for-byte from astrolabe-video 30bad16.
