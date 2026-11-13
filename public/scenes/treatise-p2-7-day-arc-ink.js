@@ -6,17 +6,23 @@
 // Scene contract (astrolabist, src/components/Scene.astro): mount(el) once, then start(el) / stop(el).
 //
 // v2, A LARGE WINDOW, 3:2 (viewBox -150 -100 300 200), as II 3 v2 (jes tg 17917): Chaucer's six steps one at a time,
-// listed beside the instrument, the step being done in red.  The sun at the head of Cancer (midsummer: the text gives
+// listed beside the instrument, the step being done in red.  On a phone (a container taller than wide, or
+// data-layout="stack") the window is 3:4, the steps under the instrument (lib/stage.js, astrolabist #47871).  The sun at the head of Cancer (midsummer: the text gives
 // no day; the shared DAY_SUN_LONGITUDE of II 7, 8, 10).  Solved from the plate's geometry; COLOURED WOODCUT on vellum,
 // shared lib/front-ink.js; the rete and label are our constructed drawing of inv. 47869's.  Nothing is traced.
 
 import A from "./lib/astrolabe-47869.js";
 import { front, node, f, rim, P, almucantar, SILVER, NIGHT, VELLUM, WASH } from "./lib/front-ink.js";
+import { VIEWBOX, layoutOf, watch, stepList } from "./lib/stage.js";
 
 const instances = new WeakMap();
 const LOOP = 31000;
 const STILL = 27000; // ms: both pricks, the day and the night measured
-const C = { x: -64, y: 12, k: 0.84 };
+const LAYOUT = {
+  wide: { C: { x: -66, y: 14, k: 0.8 }, list: { x: 32, y: -74, size: 9.6, lh: 11, gap: 6, indent: 11 } },
+  stack: { C: { x: 0, y: -52, k: 1.08 }, list: { x: -136, y: 82, size: 12.5, lh: 14, gap: 8, indent: 15, width: 272 } },
+};
+let C = LAYOUT.wide.C; // the layout being built (set by build)
 const W = (px) => f(px / C.k);
 const RAD = Math.PI / 180;
 const EPS = P.obliquity * RAD;
@@ -80,9 +86,22 @@ const END = 29.0;
 
 export function mount(el) {
   if (instances.has(el)) return;
+  const s = { raf: 0, t0: 0, tm: STILL };
+  instances.set(el, s);
+  build(el, s);
+  watch(el, s, () => {
+    s.svg.remove();
+    build(el, s);
+  });
+}
+
+function build(el, s) {
+  s.mode = layoutOf(el);
+  C = LAYOUT[s.mode].C;
   const uid = Math.random().toString(36).slice(2, 8);
-  const svg = node("svg", { viewBox: "-150 -100 300 200", width: "100%", height: "100%", "aria-hidden": "true" });
+  const svg = node("svg", { viewBox: VIEWBOX[s.mode], width: "100%", height: "100%", "aria-hidden": "true" });
   svg.style.fontFamily = "inherit";
+  el.appendChild(svg);
   const g = node("g", { transform: `translate(${C.x} ${C.y}) scale(${C.k})` }, svg);
   const fr = front(g, { scale: C.k, faint: 0.4 });
   fr.plate.clip.setAttribute("opacity", 0.3);
@@ -119,22 +138,9 @@ export function mount(el) {
   };
   const pricks = [prick(B_E), prick(B_W)];
   // the steps beside the instrument
-  const list = node("g", {}, svg);
-  const X0 = 34;
-  let y = -74;
-  const rows = STEPS.map((st, i) => {
-    const els = st.lines.map((ln, j) => {
-      const t = node("text", { x: X0 + (j ? 11 : 0), y: y + j * 11, "font-size": 9.6, "font-weight": 600, fill: "currentColor", opacity: 0, "font-family": "inherit" }, list);
-      t.textContent = (j ? "" : `${i + 1}  `) + ln;
-      return t;
-    });
-    y += 11 * st.lines.length + 6;
-    return els;
-  });
-  el.appendChild(svg);
-  const s = { rete: fr.rete.g, eastH, westH, sun, dayArc, nightArc, label, pricks, rows, raf: 0, t0: 0, tm: STILL };
-  instances.set(el, s);
-  draw(s, STILL / 1000);
+  const { rows } = stepList(node("g", {}, svg), STEPS, LAYOUT[s.mode].list);
+  Object.assign(s, { svg, rete: fr.rete.g, eastH, westH, sun, dayArc, nightArc, label, pricks, rows });
+  draw(s, s.tm / 1000);
 }
 
 function draw(s, t) {

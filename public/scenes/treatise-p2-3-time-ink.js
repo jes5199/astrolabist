@@ -6,7 +6,9 @@
 // Scene contract (astrolabist, src/components/Scene.astro): mount(el) once, then start(el) / stop(el).
 //
 // v2, A LARGE WINDOW, 3:2 (viewBox -150 -100 300 200), after II 4 v2 (jes tg 17908, 17914, 17917): Chaucer's steps one
-// at a time, each held, listed beside the instrument (the step being done in red).  By day, then by night.
+// at a time, each held, listed beside the instrument (the step being done in red).  By day, then by night.  On a phone
+// (a container taller than wide, or data-layout="stack") the window is 3:4, the steps under the instrument
+// (lib/stage.js, astrolabist #47871).
 // The night star's altitude is the text's 18 degrees (the earlier scene used 12, from the film's song: wrong).  On our
 // constructed rete the night reading comes out past 8 o'clock as Chaucer says, but some forty minutes past rather than
 // his "2 degrees", and the rising degree near Libra 28 against his 23: so the night ascendant is ringed, not named.
@@ -15,11 +17,16 @@
 
 import A from "./lib/astrolabe-47869.js";
 import { front, node, f, rim, P, LAT, almucantar, SILVER, NIGHT, VELLUM, WASH } from "./lib/front-ink.js";
+import { VIEWBOX, layoutOf, watch, stepList } from "./lib/stage.js";
 
 const instances = new WeakMap();
 const LOOP = 48000;
 const STILL = 19500; // ms: by day, everything found
-const C = { x: -64, y: 12, k: 0.84 };
+const LAYOUT = {
+  wide: { C: { x: -66, y: 14, k: 0.8 }, list: { x: 34, y: -78, size: 10, lh: 12, gap: 9, indent: 11, headSize: 13, headGap: 20, restart: true, number: (i) => (i % 5) + 1 } },
+  stack: { C: { x: 0, y: -52, k: 1.08 }, list: { x: -136, y: 80, size: 12.5, lh: 14, gap: 8, indent: 15, width: 272, headSize: 15, headGap: 20, restart: true, number: (i) => (i % 5) + 1 } },
+};
+let C = LAYOUT.wide.C; // the layout being built (set by build)
 const W = (px) => f(px / C.k);
 const RAD = Math.PI / 180;
 const EPS = P.obliquity * RAD;
@@ -92,9 +99,22 @@ const END = [24.0, 47.0]; // each half's end
 
 export function mount(el) {
   if (instances.has(el)) return;
+  const s = { raf: 0, t0: 0, tm: STILL };
+  instances.set(el, s);
+  build(el, s);
+  watch(el, s, () => {
+    s.svg.remove();
+    build(el, s);
+  });
+}
+
+function build(el, s) {
+  s.mode = layoutOf(el);
+  C = LAYOUT[s.mode].C;
   const uid = Math.random().toString(36).slice(2, 8);
-  const svg = node("svg", { viewBox: "-150 -100 300 200", width: "100%", height: "100%", "aria-hidden": "true" });
+  const svg = node("svg", { viewBox: VIEWBOX[s.mode], width: "100%", height: "100%", "aria-hidden": "true" });
   svg.style.fontFamily = "inherit";
+  el.appendChild(svg);
   const g = node("g", { transform: `translate(${C.x} ${C.y}) scale(${C.k})` }, svg);
   const fr = front(g, { scale: C.k, faint: 0.4 });
   fr.plate.clip.setAttribute("opacity", 0.35);
@@ -127,30 +147,10 @@ export function mount(el) {
   // the rising degree on the eastern horizon
   const ascDay = node("circle", { r: 4, fill: SILVER, stroke: NIGHT, "stroke-width": W(1), opacity: 0 }, g);
   const ascNight = node("circle", { r: 5, fill: "none", stroke: SILVER, "stroke-width": W(2), opacity: 0 }, g);
-  // the list of steps, beside the instrument
-  const list = node("g", {}, svg);
-  const X0 = 34;
-  let y = -78;
-  const rows = STEPS.map((st, i) => {
-    if (st.head) {
-      if (i) y = -78;
-      const h = node("text", { x: X0, y, "font-size": 13, "font-weight": 700, fill: SILVER, opacity: 0, "font-family": "inherit" }, list);
-      h.textContent = st.head;
-      y += 20;
-      st.headEl = h;
-    }
-    const els = st.lines.map((ln, j) => {
-      const t = node("text", { x: X0 + (j ? 11 : 0), y: y + j * 12, "font-size": 10, "font-weight": 600, fill: "currentColor", opacity: 0, "font-family": "inherit" }, list);
-      t.textContent = (j ? "" : `${(i % 5) + 1}  `) + ln;
-      return t;
-    });
-    y += 12 * st.lines.length + 9;
-    return els;
-  });
-  el.appendChild(svg);
-  const s = { rete: fr.rete.g, letters, dayCircle, nightCircle, sun, star, label, count, ascDay, ascNight, rows, raf: 0, t0: 0, tm: STILL };
-  instances.set(el, s);
-  draw(s, STILL / 1000);
+  // the list of steps, beside the instrument (or under it)
+  const { rows, heads } = stepList(node("g", {}, svg), STEPS, LAYOUT[s.mode].list);
+  Object.assign(s, { svg, rete: fr.rete.g, letters, dayCircle, nightCircle, sun, star, label, count, ascDay, ascNight, rows, heads });
+  draw(s, s.tm / 1000);
 }
 
 // the rim's arc between two bearings (clockwise), as path data in the plate's units
@@ -222,7 +222,7 @@ function draw(s, t) {
       e.setAttribute("opacity", f(a));
       e.setAttribute("fill", now ? SILVER : "currentColor");
     }
-    if (st.headEl) st.headEl.setAttribute("opacity", f(inHalf));
+    if (s.heads[i]) s.heads[i].setAttribute("opacity", f(inHalf));
   });
 }
 
