@@ -5,6 +5,27 @@ import Scene from "../components/Scene.astro";
 import { SITE_TITLE } from "../consts";
 import fs from "node:fs";
 import path from "node:path";
+import {
+  GLOSS_SAMPLE,
+  glossSection,
+  glossEntries,
+  sourceLine,
+  defLine,
+  type GlossStats,
+} from "../lib/treatise-gloss";
+
+// Gloss variant: Middle English only. Morrison's modern rendering is offered as a
+// collapsed per-section disclosure; set this to false to remove it (and its credits).
+const SHOW_MORRISON = true;
+
+// Scene terms: glossed words that the section's own figure shows. Opening one of
+// these glosses lights that figure's window.
+const FIGURE_TERMS: Record<string, string[]> = {
+  "00-prologue": ["swerd", "sleen", "envye"],
+  "p1-01": ["thoumbe", "heighte"],
+  "p1-02": ["turet", "renneth", "moder"],
+  "p1-03": ["moder", "riet", "wombe", "thinne", "clymatz", "webbe", "loppe"],
+};
 
 const entries = (await getCollection("treatise")).sort(
   (a, b) => a.data.order - b.data.order
@@ -82,7 +103,7 @@ const ringTicks = Array.from({ length: 72 }, (_, i) => {
 // each inline window goes after the paragraph it belongs to.
 const PLACE_INLINE = `(function (s) {
   var me = s.parentElement;
-  var ps = me.querySelectorAll(":scope > p:not(.t-tag)");
+  var ps = me.querySelectorAll(":scope > p");
   me.querySelectorAll(":scope > .inline-win").forEach(function (w) {
     var p = ps[+w.dataset.after];
     if (p) p.after(w);
@@ -91,6 +112,8 @@ const PLACE_INLINE = `(function (s) {
 
 const kindOf = (note?: string) =>
   !note ? "main" : /spurious/i.test(note) ? "spurious" : "supplementary";
+
+const glossStats: GlossStats = { tokens: 0, glossed: 0, forms: new Set(), keys: new Set() };
 
 const sections = await Promise.all(
   entries.map(async (entry, i) => {
@@ -116,14 +139,18 @@ const sections = await Promise.all(
     const label = heading
       ? sentence(plain(incipit(heading, 6)))
       : plain(incipit(entry.body, part === "Prologue" ? 4 : 5));
+    // The glossed sample: Skeat's paragraphs with each glossed word made focusable.
+    const glossed = GLOSS_SAMPLE.has(entry.slug) ? glossSection(entry.slug, entry.body, glossStats) : null;
     return {
       entry,
       Content,
+      glossed,
+      figureTerms: FIGURE_TERMS[entry.slug] ?? [],
       i,
       kind,
       kicker,
       id: anchor(part, section),
-      privateModern: privateModern(entry.slug),
+      privateModern: SHOW_MORRISON ? privateModern(entry.slug) : null,
       ring,
       title: heading || `${incipit(entry.body, part === "Prologue" ? 4 : 5)}…`,
       label,
@@ -134,6 +161,27 @@ const sections = await Promise.all(
   })
 );
 const usesPrivate = sections.some((s) => s.privateModern);
+const lastSample = sections.filter((s) => s.glossed).at(-1)?.entry.slug;
+
+// Gloss data for the page script, and one hidden description per entry for
+// assistive technology (each glossed word points at its entry by aria-describedby).
+const usedKeys = [...glossStats.keys].sort();
+const glossData = Object.fromEntries(
+  usedKeys.map((k) => {
+    const e = glossEntries[k];
+    return [k, { g: e.gloss, d: e.def ?? null, s: sourceLine(e), ds: defLine(e), o: e.source === "ours" ? 1 : 0 }];
+  })
+);
+const glossDesc = usedKeys.map((k) => {
+  const e = glossEntries[k];
+  const parts = [e.gloss, e.def, e.source === "ours" ? "Our gloss." : `Source: ${sourceLine(e)}.`].filter(Boolean);
+  return { id: `gd-${k}`, text: parts.join(". ").replace(/\.\./g, ".") };
+});
+console.log(
+  `[treatise glosses] sample: ${glossStats.tokens} word tokens, ${glossStats.glossed} glossed (${(
+    (100 * glossStats.glossed) / Math.max(1, glossStats.tokens)
+  ).toFixed(1)}%); ${glossStats.forms.size} distinct forms; ${usedKeys.length} entries`
+);
 
 const parts = ["Prologue", "Part I", "Part II"].map((name) => ({
   name,
@@ -181,7 +229,7 @@ const counts = {
   title={`A Treatise on the Astrolabe - ${SITE_TITLE}`}
   description="Geoffrey Chaucer, A Treatise on the Astrolabe (c. 1391), in W. W. Skeat's Middle English text (1894)."
 >
-  <div class="treatise" data-view="both">
+  <div class="treatise" data-gloss="hover">
     <div class="sky" aria-hidden="true">
       <canvas class="sky-rete"></canvas>
     </div>
@@ -233,8 +281,9 @@ const counts = {
         <h1><span class="h1-a">A Treatise</span> <span class="h1-b">on the Astrolabe</span></h1>
         <p class="t-dedication" lang="enm">“Litell Lowis my sone…”</p>
         <p class="t-intro">
-          Middle English text: W. W. Skeat (1894).{usesPrivate && (
-            <> Modern English: {PRIVATE_MODERN.credit}. <strong class="t-private">Draft preview; publication permission pending.</strong></>
+          Middle English text: W. W. Skeat (1894). Glosses from Skeat's glossaries to the Treatise
+          (1872) and to Chaucer (1894), for the Prologue and Part I §§ 1–3.{usesPrivate && (
+            <> Modern rendering, folded under each section: {PRIVATE_MODERN.credit}. <strong class="t-private">Draft preview; publication permission pending.</strong></>
           )}
         </p>
         <p class="t-hint">Read on, and the heavens turn about the lode-sterre.</p>
@@ -291,15 +340,22 @@ const counts = {
         </details>
       </nav>
 
-      <fieldset class="t-view">
-        <legend>Show</legend>
-        <input type="radio" name="t-view" id="t-view-me" value="me" />
-        <label for="t-view-me">Middle English</label>
-        <input type="radio" name="t-view" id="t-view-both" value="both" checked />
-        <label for="t-view-both">Both</label>
-        <input type="radio" name="t-view" id="t-view-modern" value="modern" />
-        <label for="t-view-modern">Modern</label>
-      </fieldset>
+      <div class="gl-bar" role="group" aria-label="Glosses">
+        <span class="gl-hint"><span class="gl-hint-wide">Hover or tap a</span><span class="gl-hint-narrow">Tap a</span> <span class="gl-cue">marked word</span><span class="gl-hint-wide"> for its gloss</span></span>
+        <button type="button" class="gl-all" aria-pressed="false"><span class="gl-hint-wide">Show&nbsp;</span>all glosses</button>
+      </div>
+
+      <div class="gl-descs" hidden>
+        {glossDesc.map((d) => <span id={d.id}>{d.text}</span>)}
+      </div>
+      <script type="application/json" id="gl-data" set:html={JSON.stringify(glossData).replace(/</g, "\\u003c")}></script>
+      <div class="gl-pop" id="gl-pop" role="tooltip" hidden>
+        <p class="gp-w" lang="enm"></p>
+        <p class="gp-g"></p>
+        <p class="gp-d"></p>
+        <p class="gp-fig">Shown in the figure</p>
+        <p class="gp-s"><span class="gp-s1"></span><span class="gp-s2"></span></p>
+      </div>
 
       {
         parts.map((p) => (
@@ -319,15 +375,22 @@ const counts = {
                 <p class="t-part-rubric" lang="enm">{partRubric[p.name]}</p>
               </header>
             )}
-            {p.items.map(({ entry, Content, id, privateModern, ring, title, field, spin, i, kind, kicker, inline }, k) => (
+            {p.items.map(({ entry, Content, glossed, figureTerms, id, privateModern, ring, title, field, spin, i, kind, kicker, inline }, k) => (
               <>
                 {kind !== "main" && p.items[k - 1]?.kind !== kind && (
                   <header class={`t-group-head t-group-${kind}`}>
                     <p lang="enm">{plain(entry.data.note ?? "")}</p>
                   </header>
                 )}
-                <article class="t-sec" id={id} data-side={i % 2 ? "r" : "l"} data-kind={kind}>
-                  <header class="t-sec-head">
+                <article
+                  class="t-sec"
+                  id={id}
+                  data-side={i % 2 ? "r" : "l"}
+                  data-kind={kind}
+                  data-glossed={glossed ? "" : undefined}
+                  data-figure-terms={figureTerms.length ? figureTerms.join(" ") : undefined}
+                >
+                  <div class="t-aside">
                     <div class="win">
                       <svg class="win-ring" viewBox="-120 -120 240 240" aria-hidden="true">
                         <use href="#win-ring" x="-120" y="-120" width="240" height="240"></use>
@@ -345,7 +408,9 @@ const counts = {
                         />
                       </div>
                     </div>
-                    <div class="t-sec-label">
+                  </div>
+                  <div class="t-main">
+                    <header class="t-sec-label">
                       <p class="t-sec-kicker">
                         {entry.data.part === "Prologue" ? kicker : <>{entry.data.part} · § <span class="t-num">{entry.data.section}</span></>}
                         {kind !== "main" && <span class="t-sec-kind"> · {kind}</span>}
@@ -358,50 +423,55 @@ const counts = {
                           {entry.data.latin}
                         </p>
                       )}
-                    </div>
-                  </header>
-                  <div class="t-body">
-                    <div class="t-me" lang="enm">
-                      <p class="t-tag" aria-hidden="true">Chaucer</p>
-                      <Content />
-                      {inline.map((sc, j) => (
-                        <div class="inline-win" data-after={sc.at}>
-                          <div class="win">
-                            <svg class="win-ring" viewBox="-120 -120 240 240" aria-hidden="true">
-                              <use href="#win-ring" x="-120" y="-120" width="240" height="240"></use>
-                              <text class="ring-text">
-                                <textPath href="#win-arc" startOffset="25%" text-anchor="middle">{sc.legend}</textPath>
-                              </text>
-                            </svg>
-                            <div class="win-glass win-glass-full">
-                              <svg class="win-stars" viewBox="-100 -100 200 200" aria-hidden="true">
-                                <use href={`#win-field-${(field + j + 1) % 6}`} x="-100" y="-100" width="200" height="200"></use>
+                    </header>
+                    <div class="t-body">
+                      <div class="t-me" lang="enm">
+                        {glossed ? glossed.map((h) => <p set:html={h} />) : <Content />}
+                        {inline.map((sc, j) => (
+                          <div class="inline-win" data-after={sc.at}>
+                            <div class="win">
+                              <svg class="win-ring" viewBox="-120 -120 240 240" aria-hidden="true">
+                                <use href="#win-ring" x="-120" y="-120" width="240" height="240"></use>
+                                <text class="ring-text">
+                                  <textPath href="#win-arc" startOffset="25%" text-anchor="middle">{sc.legend}</textPath>
+                                </text>
                               </svg>
-                              <Scene name={sc.name} label={sc.label} />
+                              <div class="win-glass win-glass-full">
+                                <svg class="win-stars" viewBox="-100 -100 200 200" aria-hidden="true">
+                                  <use href={`#win-field-${(field + j + 1) % 6}`} x="-100" y="-100" width="200" height="200"></use>
+                                </svg>
+                                <Scene name={sc.name} label={sc.label} />
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      ))}
-                      {inline.length > 0 && (
-                        <script is:inline set:html={PLACE_INLINE}></script>
+                        ))}
+                        {inline.length > 0 && (
+                          <script is:inline set:html={PLACE_INLINE}></script>
+                        )}
+                      </div>
+                      {privateModern && (
+                        <details class="t-morrison">
+                          <summary>Modern rendering (Morrison)</summary>
+                          <div class="tm-body">
+                            <p class="tm-credit">
+                              {PRIVATE_MODERN.credit}. <strong class="t-private">Draft preview; publication permission pending.</strong>
+                            </p>
+                            {privateModern.map((p) => <p>{p}</p>)}
+                          </div>
+                        </details>
                       )}
+                      <svg class="t-const" aria-hidden="true"></svg>
                     </div>
-                    <div class="t-meridian" aria-hidden="true"></div>
-                    <div class="t-modern">
-                      <p class="t-tag" aria-hidden="true">In modern English</p>
-                      {privateModern ? (
-                        privateModern.map((p) => <p>{p}</p>)
-                      ) : entry.data.modern ? (
-                        <p>{entry.data.modern}</p>
-                      ) : (
-                        <p class="t-pending">Modern rendering — pending</p>
-                      )}
-                    </div>
-                    <svg class="t-const" aria-hidden="true"></svg>
                   </div>
                 </article>
                 {entry.data.colophon && (
                   <p class="t-colophon" lang="la">{entry.data.colophon}</p>
+                )}
+                {entry.slug === lastSample && (
+                  <aside class="t-sample-end" aria-label="End of the glossed sample">
+                    <p>The glossed sample ends here.</p>
+                    <p>From § 4 on, Skeat's text is shown without glosses.</p>
+                  </aside>
                 )}
               </>
             ))}
@@ -410,15 +480,14 @@ const counts = {
             )}
           </section>
         ))
-      }          </section>
-        ))
       }
 
       <footer class="t-end">
         <p class="t-explicit">Explicit</p>
         <p class="t-credit">
-          Middle English: W. W. Skeat (1894).{usesPrivate && (
-            <> Modern English: {PRIVATE_MODERN.credit}. <strong class="t-private">Draft preview; publication permission pending.</strong></>
+          Middle English: W. W. Skeat (1894). Glosses: W. W. Skeat, Early English Text Society (1872) and
+          Oxford Chaucer (1894), except those marked as ours.{usesPrivate && (
+            <> Modern rendering: {PRIVATE_MODERN.credit}. <strong class="t-private">Draft preview; publication permission pending.</strong></>
           )}
           Sky drawn for the latitude of Oxford.
         </p>
@@ -938,18 +1007,19 @@ const counts = {
     }
   }
 
-  /* --- view toggle -------------------------------------------------- */
-  .t-view {
-    border: 0;
-    margin: 0 auto 1rem;
-    padding: 3px;
-    display: flex;
-    width: max-content;
-    max-width: 100%;
-    box-sizing: border-box;
+  /* --- gloss bar: hint and the show-all switch --------------------- */
+  .gl-bar {
     position: sticky;
     top: 0.75rem;
     z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    width: max-content;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto 1rem;
+    padding: 4px 4px 4px 1.1rem;
     border-radius: 999px;
     background: rgba(9, 12, 32, 0.95);
     box-shadow: 0 6px 22px rgba(2, 3, 12, 0.55);
@@ -957,36 +1027,58 @@ const counts = {
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
   }
-  .t-view legend {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
+  .gl-hint {
+    font-family: var(--modern-font);
+    font-size: 0.95rem;
+    color: #cfd5ec;
+    white-space: nowrap;
   }
-  .t-view input {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
+  .gl-hint-narrow {
+    display: none;
   }
-  .t-view label {
-    padding: 0.4rem 1rem 0.35rem;
+  @media (max-width: 599.98px) {
+    .gl-hint-wide {
+      display: none;
+    }
+    .gl-hint-narrow {
+      display: inline;
+    }
+  }
+  .gl-cue {
+    font-family: var(--me-font);
+    color: var(--silver);
+    text-decoration: underline dotted rgba(236, 201, 120, 0.7);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+  }
+  .gl-all {
+    appearance: none;
+    border: 0;
+    margin: 0;
+    cursor: pointer;
+    padding: 0.45rem 1rem 0.4rem;
+    border-radius: 999px;
+    font: inherit;
     font-family: var(--me-font);
     font-size: 0.78rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--faint);
-    cursor: pointer;
-    border-radius: 999px;
     white-space: nowrap;
+    color: #d9def2;
+    background: rgba(236, 201, 120, 0.1);
+    box-shadow: inset 0 0 0 1px var(--hair);
   }
-  .t-view input:checked + label {
+  .gl-all:hover {
+    color: #fff;
+  }
+  .gl-all[aria-pressed="true"] {
     color: #10142e;
     background: linear-gradient(#f7e2a8, #dcb35c);
+    box-shadow: none;
   }
-  .t-view input:focus-visible + label {
+  .gl-all:focus-visible {
     outline: 2px solid var(--gold);
-    outline-offset: 1px;
+    outline-offset: 2px;
   }
 
   /* --- parts -------------------------------------------------------- */
@@ -1075,22 +1167,25 @@ const counts = {
   .t-sec {
     padding: 3.5rem 0 4.5rem;
     scroll-margin-top: 3.5rem;
-  }
-  .t-sec-head {
     display: grid;
-    grid-template-columns: 15rem minmax(0, 1fr);
-    gap: 2.75rem;
-    align-items: center;
-    margin-bottom: 2.75rem;
+    grid-template-columns: 21rem minmax(0, 41rem);
+    justify-content: center;
+    column-gap: 4.25rem;
+    align-items: start;
   }
-  .t-sec[data-side="r"] .t-sec-head {
-    grid-template-columns: minmax(0, 1fr) 15rem;
+  .t-sec[data-side="r"] {
+    grid-template-columns: minmax(0, 41rem) 21rem;
   }
-  .t-sec[data-side="r"] .win {
+  .t-sec[data-side="r"] .t-aside {
     order: 2;
   }
-  .t-sec[data-side="r"] .t-sec-label {
-    text-align: right;
+  /* The figure stays in view beside its passage while it is read. */
+  .t-aside {
+    position: sticky;
+    top: max(5rem, calc(50vh - 11rem));
+  }
+  .t-sec-label {
+    margin-bottom: 2.25rem;
   }
 
   .win {
@@ -1195,13 +1290,11 @@ const counts = {
     margin: 0;
   }
 
-  /* Both texts, joined by a meridian with a constellation strung across it. */
+  /* Middle English only; the constellation runs down the left margin. */
   .t-body {
     position: relative;
     isolation: isolate;
-    display: grid;
-    grid-template-columns: minmax(0, 1.1fr) 5.5rem minmax(0, 1fr);
-    grid-template-areas: "me meridian modern";
+    padding-left: 1.9rem;
   }
   /* A sky window set into the Middle English, after the words it shows.
      Wide: floated beside the following lines, which wrap round its circle.
@@ -1217,7 +1310,6 @@ const counts = {
     width: 100%;
   }
   .t-me {
-    grid-area: me;
     font-family: var(--me-font);
     font-size: 1.24rem;
     line-height: 1.72;
@@ -1227,7 +1319,7 @@ const counts = {
   .t-me :global(p) {
     margin: 0 0 1.1em;
   }
-  .t-me :global(p:nth-of-type(2)::first-letter) {
+  .t-me :global(p:nth-of-type(1)::first-letter) {
     font-family: var(--black-font);
     font-weight: 700;
     font-variation-settings: "opsz" 72;
@@ -1239,44 +1331,6 @@ const counts = {
     text-shadow:
       0 0 18px rgba(236, 201, 120, 0.55),
       0 0 2px rgba(255, 240, 200, 0.8);
-  }
-  .t-tag {
-    font-family: var(--me-font);
-    font-size: 0.72rem !important;
-    line-height: 1 !important;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--faint);
-    margin: 0 0 1.2rem !important;
-  }
-  .t-meridian {
-    grid-area: meridian;
-    justify-self: center;
-    width: 9px;
-    background:
-      linear-gradient(var(--hair), var(--hair)) center / 1px 100% no-repeat,
-      repeating-linear-gradient(transparent 0 23px, rgba(236, 201, 120, 0.4) 23px 24px) center / 9px 100% no-repeat;
-    mask-image: linear-gradient(transparent, #000 3rem, #000 calc(100% - 3rem), transparent);
-    -webkit-mask-image: linear-gradient(transparent, #000 3rem, #000 calc(100% - 3rem), transparent);
-  }
-  .t-modern {
-    grid-area: modern;
-    font-family: var(--modern-font);
-    font-size: 1.16rem;
-    line-height: 1.66;
-    color: var(--gold-soft);
-  }
-  .t-modern p {
-    margin: 0 0 1em;
-  }
-  .t-pending {
-    padding: 1rem 1.1rem;
-    border: 1px dashed var(--hair);
-    border-radius: 999px;
-    text-align: center;
-    font-variant: small-caps;
-    letter-spacing: 0.05em;
-    color: var(--faint);
   }
   /* The sky itself recedes behind text: see the veils in treatise-sky.ts. */
   .t-const {
@@ -1303,19 +1357,238 @@ const counts = {
     fill: #ffe7b0;
   }
 
-  .treatise[data-view="me"] .t-body,
-  .treatise[data-view="modern"] .t-body {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: "me" "modern";
-    max-width: 44rem;
-    margin: 0 auto;
-    padding-left: 2.5rem;
+  /* --- glossed words ------------------------------------------------ */
+  :global(.gw) {
+    position: relative;
+    cursor: help;
+    border-radius: 2px;
+    text-decoration: underline dotted rgba(236, 201, 120, 0.6);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.32em;
+    text-decoration-skip-ink: none;
+    transition: color 0.15s, text-shadow 0.15s, background-color 0.15s;
+    -webkit-tap-highlight-color: transparent;
   }
-  .treatise[data-view="me"] .t-modern,
-  .treatise[data-view="modern"] .t-me,
-  .treatise[data-view="me"] .t-meridian,
-  .treatise[data-view="modern"] .t-meridian {
+  :global(.gw-minor) {
+    text-decoration-color: rgba(236, 201, 120, 0.3);
+  }
+  :global(.gw-ours) {
+    text-decoration-color: rgba(190, 200, 235, 0.3);
+  }
+  :global(.gw:hover),
+  :global(.gw[aria-expanded="true"]) {
+    color: #fff6dc;
+    text-decoration-color: var(--gold);
+    text-shadow: 0 0 12px rgba(255, 220, 150, 0.55);
+  }
+  :global(.gw:focus) {
+    outline: none;
+  }
+  :global(.gw:focus-visible) {
+    outline: 1.5px solid var(--gold);
+    outline-offset: 2px;
+  }
+  :global(.gw[data-fig]) {
+    text-decoration-style: solid;
+    text-decoration-thickness: 1px;
+    text-decoration-color: rgba(236, 201, 120, 0.62);
+  }
+  /* Interlinear glosses (show-all mode): small, centred under the word. */
+  :global(.gw-i) {
     display: none;
+  }
+  .treatise[data-gloss="all"] .t-sec[data-glossed] .t-me :global(p) {
+    line-height: 2.4;
+  }
+  .treatise[data-gloss="all"] :global(.gw-i) {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 1.3em;
+    transform: translateX(-50%);
+    max-width: max(calc(100% + 0.6em), 5.4em);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: var(--modern-font);
+    font-style: italic;
+    font-size: 0.64em;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+    color: #ead9b0;
+    text-shadow: 0 0 6px rgba(6, 9, 24, 0.9);
+    pointer-events: none;
+  }
+  .treatise[data-gloss="all"] :global(.gw) {
+    text-decoration-color: transparent;
+  }
+
+  /* The popover: one shared element, placed by script. */
+  .gl-pop {
+    position: fixed;
+    z-index: 50;
+    left: 0;
+    top: 0;
+    width: min(21rem, calc(100vw - 24px));
+    box-sizing: border-box;
+    padding: 0.85rem 1rem 0.75rem;
+    border-radius: 10px;
+    background: #0b1030;
+    border: 1px solid rgba(236, 201, 120, 0.45);
+    box-shadow:
+      0 14px 40px rgba(0, 0, 0, 0.6),
+      0 0 0 4px rgba(11, 16, 48, 0.55),
+      0 0 30px rgba(120, 140, 255, 0.16);
+    color: #eef0fa;
+    font-family: var(--modern-font);
+    font-size: 1.04rem;
+    line-height: 1.42;
+    pointer-events: auto;
+  }
+  .gl-pop[hidden] {
+    display: none;
+  }
+  .gl-pop::before {
+    content: "";
+    position: absolute;
+    left: var(--ax, 50%);
+    width: 10px;
+    height: 10px;
+    background: #0b1030;
+    border: solid rgba(236, 201, 120, 0.45);
+    transform: translateX(-50%) rotate(45deg);
+  }
+  .gl-pop[data-place="below"]::before {
+    top: -6px;
+    border-width: 1px 0 0 1px;
+  }
+  .gl-pop[data-place="above"]::before {
+    bottom: -6px;
+    border-width: 0 1px 1px 0;
+  }
+  .gl-pop p {
+    margin: 0;
+    line-height: inherit;
+  }
+  .gp-w {
+    font-family: var(--me-font);
+    font-size: 0.86rem;
+    letter-spacing: 0.08em;
+    color: #f3dfa8;
+    margin-bottom: 0.2rem !important;
+  }
+  .gp-g {
+    font-size: 1.14rem;
+    font-weight: 500;
+    color: #ffffff;
+  }
+  .gp-d {
+    margin-top: 0.4rem !important;
+    font-size: 0.96rem;
+    color: #e0e4f3;
+  }
+  .gp-d:empty,
+  .gl-pop:not([data-fig]) .gp-fig {
+    display: none;
+  }
+  .gp-fig {
+    margin-top: 0.45rem !important;
+    font-family: var(--me-font);
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #f3dfa8;
+  }
+  .gp-fig::before {
+    content: "✦ ";
+  }
+  .gp-s {
+    margin-top: 0.55rem !important;
+    padding-top: 0.45rem;
+    border-top: 1px solid rgba(236, 201, 120, 0.22);
+    font-size: 0.8rem;
+    line-height: 1.35;
+    color: #c9cfe6;
+  }
+  .gp-s1,
+  .gp-s2 {
+    display: block;
+  }
+  .gp-s2:empty {
+    display: none;
+  }
+  .gl-pop[data-ours] .gp-s {
+    font-style: italic;
+  }
+
+  /* A figure lights up while one of the words it shows is glossed. */
+  .t-sec .win.lit,
+  .inline-win .win.lit {
+    filter: none;
+  }
+  .win.lit .win-glass {
+    box-shadow:
+      0 0 0 2px rgba(255, 226, 160, 0.95),
+      0 0 60px 16px rgba(255, 214, 130, 0.38),
+      inset 0 0 30px rgba(0, 0, 0, 0.7);
+  }
+  .win.lit .win-ring {
+    filter: drop-shadow(0 0 6px rgba(255, 220, 150, 0.8));
+  }
+
+  /* Morrison's rendering, folded under the Middle English. */
+  .t-morrison {
+    margin: 1.6rem 0 0;
+    border-top: 1px solid var(--hair);
+    padding-top: 0.9rem;
+    font-family: var(--modern-font);
+  }
+  .t-morrison summary {
+    cursor: pointer;
+    width: max-content;
+    max-width: 100%;
+    font-family: var(--me-font);
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--faint);
+    padding: 0.25rem 0;
+  }
+  .t-morrison summary:hover {
+    color: var(--gold);
+  }
+  .t-morrison summary:focus-visible {
+    outline: 1px solid var(--gold);
+    outline-offset: 2px;
+  }
+  .tm-body {
+    margin-top: 0.9rem;
+    font-size: 1.12rem;
+    line-height: 1.62;
+    color: var(--gold-soft);
+  }
+  .tm-body p {
+    margin: 0 0 0.9em;
+  }
+  .tm-credit {
+    font-size: 0.92rem;
+    color: #cfd5ec;
+  }
+
+  .t-sample-end {
+    max-width: 34rem;
+    margin: 0.5rem auto 3rem;
+    padding: 1rem 1.4rem;
+    text-align: center;
+    font-family: var(--modern-font);
+    font-size: 1.02rem;
+    line-height: 1.5;
+    color: #d6dbef;
+    border: 1px dashed var(--hair);
+    border-radius: 999px;
+  }
+  .t-sample-end p {
+    margin: 0;
   }
 
   /* --- the end ------------------------------------------------------ */
@@ -1367,18 +1640,18 @@ const counts = {
     .t-sec {
       padding: 2.5rem 0 3rem;
     }
-    .t-sec-head,
-    .t-sec[data-side="r"] .t-sec-head {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 1.5rem;
-      text-align: center;
-      margin-bottom: 2rem;
+    .t-sec,
+    .t-sec[data-side="r"] {
+      display: block;
     }
-    .t-sec[data-side="r"] .win {
-      order: 0;
+    .t-aside {
+      position: static;
+      margin-bottom: 1.5rem;
     }
+    .t-sec-label,
     .t-sec[data-side="r"] .t-sec-label {
       text-align: center;
+      margin-bottom: 2rem;
     }
     .win {
       width: min(15rem, 68vw);
@@ -1396,15 +1669,8 @@ const counts = {
       margin: 0.9rem auto 0;
       background: linear-gradient(90deg, rgba(236, 201, 120, 0), var(--gold), rgba(236, 201, 120, 0));
     }
-    .t-body,
-    .treatise[data-view="me"] .t-body,
-    .treatise[data-view="modern"] .t-body {
-      display: block;
+    .t-body {
       padding-left: 1.6rem;
-      max-width: none;
-    }
-    .t-meridian {
-      display: none;
     }
     .inline-win {
       float: none;
@@ -1416,16 +1682,16 @@ const counts = {
       font-size: 1.16rem;
       line-height: 1.68;
     }
-    .t-modern {
-      font-size: 1.1rem;
-      margin-top: 1.75rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--hair);
+    .gl-bar {
+      padding-left: 0.9rem;
+      gap: 0.6rem;
     }
-    .treatise[data-view="modern"] .t-modern {
-      border-top: 0;
-      margin-top: 0;
-      padding-top: 0;
+    .gl-all {
+      letter-spacing: 0.1em;
+      padding-inline: 0.8rem;
+    }
+    .gl-hint {
+      font-size: 0.88rem;
     }
     .t-end {
       padding-bottom: 520px;
@@ -1448,63 +1714,201 @@ const counts = {
   if (root) {
     initSky(root);
 
-    // View toggle, remembered per viewer.
-    const KEY = "treatise-view";
-    const radios = root.querySelectorAll<HTMLInputElement>('input[name="t-view"]');
-    const apply = (v: string) => {
-      if (!["me", "modern", "both"].includes(v)) return;
-      root.dataset.view = v;
-      radios.forEach((r) => (r.checked = r.value === v));
+    // --- Glosses ---------------------------------------------------------
+    // Every glossed word is a span[role=button] with data-g (its entry) and
+    // aria-describedby (a hidden description, for screen readers). One shared
+    // popover shows the gloss: on hover (mouse), on tap (touch: tap again or tap
+    // elsewhere to close), and on keyboard focus (Enter toggles, Escape closes).
+    type GD = { g: string; d: string | null; s: string; ds: string | null; o: 0 | 1 };
+    const GLOSS: Record<string, GD> = JSON.parse(document.getElementById("gl-data")?.textContent || "{}");
+    const pop = document.getElementById("gl-pop") as HTMLElement | null;
+    const words = [...root.querySelectorAll<HTMLElement>(".gw")];
+    // Mark the words the section's own figure shows.
+    root.querySelectorAll<HTMLElement>(".t-sec[data-figure-terms]").forEach((sec) => {
+      const terms = new Set((sec.dataset.figureTerms ?? "").split(" "));
+      sec.querySelectorAll<HTMLElement>(".gw").forEach((w) => {
+        if (terms.has(w.dataset.g ?? "")) w.dataset.fig = "";
+      });
+    });
+    let open: HTMLElement | null = null;
+    let pinned = false;
+    let hideT = 0;
+    let lit: HTMLElement | null = null;
+    const figureOf = (w: HTMLElement) => {
+      if (!("fig" in w.dataset)) return null;
+      // An inline window inside the same paragraph run wins (the sword), else the section's own.
+      const sec = w.closest(".t-sec");
+      const inl = w.dataset.g && ["swerd", "sleen", "envye"].includes(w.dataset.g) ? sec?.querySelector<HTMLElement>(".inline-win .win") : null;
+      return inl ?? sec?.querySelector<HTMLElement>(".t-aside .win") ?? null;
+    };
+    const place = () => {
+      if (!pop || !open) return;
+      const r = open.getClientRects()[0] ?? open.getBoundingClientRect();
+      const vw = document.documentElement.clientWidth;
+      const vh = window.innerHeight;
+      const m = 10;
+      pop.style.left = "0px";
+      pop.style.top = "0px";
+      const pw = pop.offsetWidth;
+      const ph = pop.offsetHeight;
+      const cx = r.left + r.width / 2;
+      const left = Math.max(m, Math.min(vw - pw - m, cx - pw / 2));
+      const below = r.bottom + 12;
+      const above = r.top - 12 - ph;
+      // Prefer below; flip above when it would run off the bottom and there is room above.
+      const useAbove = below + ph > vh - m && above >= m;
+      const top = useAbove ? above : Math.min(below, Math.max(m, vh - ph - m));
+      pop.dataset.place = useAbove ? "above" : "below";
+      pop.style.left = `${Math.round(left)}px`;
+      pop.style.top = `${Math.round(top)}px`;
+      pop.style.setProperty("--ax", `${Math.round(Math.max(14, Math.min(pw - 14, cx - left)))}px`);
+    };
+    const close = () => {
+      window.clearTimeout(hideT);
+      if (open) open.setAttribute("aria-expanded", "false");
+      lit?.classList.remove("lit");
+      lit = null;
+      open = null;
+      pinned = false;
+      if (pop) pop.hidden = true;
+    };
+    const show = (w: HTMLElement, pin = false) => {
+      window.clearTimeout(hideT);
+      const d = GLOSS[w.dataset.g ?? ""];
+      if (!pop || !d) return;
+      if (open && open !== w) open.setAttribute("aria-expanded", "false");
+      open = w;
+      pinned = pin;
+      w.setAttribute("aria-expanded", "true");
+      const q = (c: string) => pop.querySelector<HTMLElement>(c)!;
+      q(".gp-w").textContent = w.firstChild?.textContent ?? "";
+      q(".gp-g").textContent = d.g;
+      q(".gp-d").textContent = d.d ?? "";
+      q(".gp-s1").textContent = d.s;
+      q(".gp-s2").textContent = d.ds ? `Definition: ${d.ds}` : "";
+      if (d.o) pop.dataset.ours = "";
+      else delete pop.dataset.ours;
+      const fig = figureOf(w);
+      if (fig) pop.dataset.fig = "";
+      else delete pop.dataset.fig;
+      if (lit !== fig) {
+        lit?.classList.remove("lit");
+        fig?.classList.add("lit");
+        lit = fig;
+      }
+      pop.hidden = false;
+      place();
+    };
+    const later = () => {
+      window.clearTimeout(hideT);
+      hideT = window.setTimeout(() => {
+        if (!pinned) close();
+      }, 180);
+    };
+    // Was this word's gloss already open (and pinned, or opened by touch) when the press began?
+    // Focus opens a gloss on press, so the click that follows must not read it as a second tap.
+    let pressWasOpen: boolean | null = null;
+    for (const w of words) {
+      w.addEventListener("pointerenter", (e) => {
+        if (e.pointerType === "mouse") show(w, pinned && open === w);
+      });
+      w.addEventListener("pointerleave", (e) => {
+        if (e.pointerType === "mouse" && !pinned) later();
+      });
+      w.addEventListener("pointerdown", (e) => {
+        pressWasOpen = open === w && (pinned || e.pointerType !== "mouse");
+      });
+      w.addEventListener("click", (e) => {
+        e.preventDefault();
+        // Touch / pen: a tap toggles. Mouse: a click pins the gloss open (or closes a pinned one).
+        const was = pressWasOpen ?? (open === w && pinned);
+        pressWasOpen = null;
+        if (was) close();
+        else show(w, true);
+      });
+      w.addEventListener("focus", () => {
+        if (open !== w) show(w, false);
+      });
+      w.addEventListener("blur", () => {
+        if (!pinned) later();
+      });
+      w.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          if (open === w && pinned) close();
+          else show(w, true);
+        } else if (e.key === "Escape" && open) {
+          e.preventDefault();
+          close();
+        }
+      });
+    }
+    pop?.addEventListener("pointerenter", () => window.clearTimeout(hideT));
+    pop?.addEventListener("pointerleave", (e) => {
+      if (e.pointerType === "mouse" && !pinned) later();
+    });
+    document.addEventListener("pointerdown", (e) => {
+      const t = e.target as Node;
+      if (open && !open.contains(t) && !pop?.contains(t)) close();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && open) close();
+    });
+    let raf = 0;
+    const follow = () => {
+      if (!open) return;
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        if (!open) return;
+        const r = open.getBoundingClientRect();
+        // Scrolled well away: let it go.
+        if (r.bottom < -40 || r.top > window.innerHeight + 40) close();
+        else place();
+      });
+    };
+    window.addEventListener("scroll", follow, { passive: true });
+    window.addEventListener("resize", follow);
+
+    // Show-all mode: interlinear glosses under every glossed word. Remembered per viewer.
+    const KEY = "treatise-gloss-all";
+    const allBtn = root.querySelector<HTMLButtonElement>(".gl-all");
+    const setAll = (on: boolean) => {
+      root.dataset.gloss = on ? "all" : "hover";
+      allBtn?.setAttribute("aria-pressed", String(on));
+      close();
     };
     try {
-      const saved = localStorage.getItem(KEY);
-      if (saved) apply(saved);
+      if (localStorage.getItem(KEY) === "1") setAll(true);
     } catch {
       /* storage unavailable */
     }
-    radios.forEach((r) =>
-      r.addEventListener("change", () => {
-        apply(r.value);
-        try {
-          localStorage.setItem(KEY, r.value);
-        } catch {
-          /* storage unavailable */
-        }
-      })
-    );
+    allBtn?.addEventListener("click", () => {
+      const on = root.dataset.gloss !== "all";
+      setAll(on);
+      try {
+        localStorage.setItem(KEY, on ? "1" : "0");
+      } catch {
+        /* storage unavailable */
+      }
+      bodies.forEach(drawConst);
+    });
 
-    // Each section's paragraphs become a constellation strung down the
-    // meridian (wide) or the left margin (narrow).
+    // Each section's paragraphs become a constellation strung down the left margin.
     const SVGNS = "http://www.w3.org/2000/svg";
-    const wide = window.matchMedia("(min-width: 1000px)");
     const drawConst = (body: HTMLElement) => {
       const svg = body.querySelector<SVGSVGElement>(".t-const");
       if (!svg) return;
       svg.replaceChildren();
       const box = body.getBoundingClientRect();
       if (!box.width) return;
-      const both = wide.matches && root.dataset.view === "both";
-      const mer = body.querySelector<HTMLElement>(".t-meridian")?.getBoundingClientRect();
-      const pts: { x: number; y: number; gold: boolean; first: boolean }[] = [];
-      for (const col of ["t-me", "t-modern"]) {
-        const el = body.querySelector<HTMLElement>(`.${col}`);
-        if (!el || !el.offsetParent) continue;
-        const ps = [...el.querySelectorAll<HTMLElement>("p:not(.t-tag)")];
-        ps.forEach((p, i) => {
-          const r = p.getBoundingClientRect();
-          const lh = parseFloat(getComputedStyle(p).lineHeight) || 24;
-          let x: number;
-          if (both && mer) {
-            const c = mer.left + mer.width / 2 - box.left;
-            x = col === "t-me" ? c - 20 : c + 20;
-          } else {
-            x = (pts.length % 2 ? 11 : 4);
-          }
-          pts.push({ x, y: r.top - box.top + lh * 0.55, gold: col === "t-me", first: i === 0 });
-        });
-      }
+      const pts: { x: number; y: number; first: boolean }[] = [];
+      const ps = [...body.querySelectorAll<HTMLElement>(".t-me > p")];
+      ps.forEach((p, i) => {
+        const r = p.getBoundingClientRect();
+        const lh = parseFloat(getComputedStyle(p).lineHeight) || 24;
+        pts.push({ x: i % 2 ? 11 : 4, y: r.top - box.top + Math.min(lh, 40) * 0.55, first: i === 0 });
+      });
       if (!pts.length) return;
-      pts.sort((a, b) => a.y - b.y);
       const path = document.createElementNS(SVGNS, "path");
       path.setAttribute("d", pts.map((p, i) => `${i ? "L" : "M"}${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(""));
       svg.appendChild(path);
@@ -1517,7 +1921,7 @@ const counts = {
         g.setAttribute("r", String(r * 3));
         svg.appendChild(g);
         const c = document.createElementNS(SVGNS, "circle");
-        c.setAttribute("class", `c-star${p.gold ? " gold" : ""}`);
+        c.setAttribute("class", "c-star gold");
         c.setAttribute("cx", p.x.toFixed(1));
         c.setAttribute("cy", p.y.toFixed(1));
         c.setAttribute("r", String(r));
@@ -1527,7 +1931,6 @@ const counts = {
     const bodies = [...root.querySelectorAll<HTMLElement>(".t-body")];
     const ro = new ResizeObserver((es) => es.forEach((e) => drawConst(e.target as HTMLElement)));
     bodies.forEach((b) => ro.observe(b));
-    radios.forEach((r) => r.addEventListener("change", () => bodies.forEach(drawConst)));
     document.fonts?.ready.then(() => bodies.forEach(drawConst));
 
     // Contents: join each part's stars with a faint line, and show the
