@@ -40,3 +40,4 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-p1-10-months.js copied byte-for-byte from astrolabe-video feb358e.
 2026-11-13: treatise-p1-11-holy-days.js copied byte-for-byte from astrolabe-video 932aae7.
 2026-11-13: treatise-p1-12-shadow-square.js treatise-p1-10-months.js treatise-p2-1-sun-degree.js copied byte-for-byte from astrolabe-video 5369e56.
+2026-11-13: treatise-p1-13-rule.js copied byte-for-byte from astrolabe-video e8f2c18.
