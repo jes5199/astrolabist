@@ -1460,6 +1460,11 @@ const tocParts = [
     z-index: 1;
     color: inherit;
   }
+  /* The parchment glass must show its deckled leaf, so it doesn't clip; the scene does, at
+     its own box (inside the ruled margin). Woodcut zooms and tall instruments stay in. */
+  .win[data-frame="parchment"] .win-glass :global(.scene svg) {
+    overflow: hidden;
+  }
   /* Figure miniatures: a square gilt frame with a thin inner rule, set into the page. */
   .win[data-frame="gilt"] .win-glass {
     inset: 5%;
