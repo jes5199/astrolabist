@@ -18,6 +18,7 @@ approved yet: Jes has not signed off on the framing lines.
 | `Geoffrey Chaucer, A Treatise on the Astrolabe (c. 1391), in W. W. Skeat's Middle English text (1894).` (meta description) | treatise.astro:285 | Doesn't mention the modern text. | provisional; awaiting Jes |
 | `Geoffrey Chaucer ✦ c. 1391` (hero kicker) | treatise.astro:335 |  | provisional; awaiting Jes |
 | `A Treatise on the Astrolabe` (h1) | treatise.astro:336 | Conventional modern title. | provisional; awaiting Jes |
+| Introduction under the subtitle: four paragraphs in Jes's first person ("For more than a thousand years…" … "I can only hope to follow in his footsteps.") | treatise.astro:339 | Jes's own words (boss-clod's edit of Jes's text, tg 17825), OK'd "for now" (Jes tg 17854). Not ours. Unsigned: the site has no bylines. Chaucer's dates c. 1343–1400 are the modern standard (Skeat: birth 1330–40, death 25 Oct 1400). | decided (Jes tg 17854) |
 | `“Litell Lowis my sone…”` (hero line) | treatise.astro:345 | Skeat's opening words, quoted. We chose to excerpt them and added the ellipsis. | provisional; awaiting Jes |
 | `Middle English text: W. W. Skeat (1894).` | treatise.astro:347 | Credit line (fine print, Jes tg 17848). | provisional; awaiting Jes |
 | `Glosses from Skeat's glossaries to the Treatise (1872) and to Chaucer (1894), for the Prologue and Part I §§ 1–3.` | treatise.astro:347 | Gloss variant. Credit for the glosses and the extent of the sample (fine print, Jes tg 17848). | provisional; awaiting Jes |

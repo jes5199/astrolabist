@@ -36,6 +36,7 @@ rows = [
     ("`Geoffrey Chaucer, A Treatise on the Astrolabe (c. 1391), in W. W. Skeat's Middle English text (1894).` (meta description)", where(P, 'description="Geoffrey Chaucer'), "Doesn't mention the modern text.", PROV),
     ("`Geoffrey Chaucer ✦ c. 1391` (hero kicker)", where(P, '<p class="t-kicker">'), "", PROV),
     ("`A Treatise on the Astrolabe` (h1)", where(P, '<h1><span class="h1-a">'), "Conventional modern title.", PROV),
+    ("Introduction under the subtitle: four paragraphs in Jes's first person (\"For more than a thousand years…\" … \"I can only hope to follow in his footsteps.\")", where(P, 'class="t-preface"'), "Jes's own words (boss-clod's edit of Jes's text, tg 17825), OK'd \"for now\" (Jes tg 17854). Not ours. Unsigned: the site has no bylines. Chaucer's dates c. 1343–1400 are the modern standard (Skeat: birth 1330–40, death 25 Oct 1400).", "decided (Jes tg 17854)"),
     ("`“Litell Lowis my sone…”` (hero line)", where(P, 'class="t-dedication"'), "Skeat's opening words, quoted. We chose to excerpt them and added the ellipsis.", PROV),
     ("`Middle English text: W. W. Skeat (1894).`", where(P, "Middle English text: W. W. Skeat"), "Credit line (fine print, Jes tg 17848).", PROV),
     ("`Glosses from Skeat's glossaries to the Treatise (1872) and to Chaucer (1894), for the Prologue and Part I §§ 1–3.`", where(P, "Glosses from Skeat's glossaries to the Treatise"), "Gloss variant. Credit for the glosses and the extent of the sample (fine print, Jes tg 17848).", PROV),
