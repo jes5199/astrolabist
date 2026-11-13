@@ -151,3 +151,4 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-prologue-oxford-globe-ink.js copied byte-for-byte from astrolabe-video 563e342.
 2026-11-13: lib/map-oldworld-data.js copied byte-for-byte from astrolabe-video 726caae.
 2026-11-13: treatise-prologue-languages-ink.js copied byte-for-byte from astrolabe-video 726caae.
+2026-11-13: treatise-p1-10-months-ink.js copied byte-for-byte from astrolabe-video d0d931c.
