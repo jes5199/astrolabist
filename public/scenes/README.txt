@@ -166,3 +166,5 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-p2-40-planet-rising-ink.js copied byte-for-byte from astrolabe-video eaa369a.
 2026-11-13: treatise-p2-6-twilight-ink.js copied byte-for-byte from astrolabe-video f0e30ce.
 2026-11-13: treatise-p2-5-between-ink.js copied byte-for-byte from astrolabe-video b9379a0.
+2026-11-13: treatise-p2-10-unequal-sum-ink.js copied byte-for-byte from astrolabe-video 58bb9a9.
+2026-11-13: treatise-p2-11-from-sunrise-ink.js copied byte-for-byte from astrolabe-video 0453f64.
