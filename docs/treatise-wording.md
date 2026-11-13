@@ -152,6 +152,7 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | clock times (H:MM), `in`, `out`, `meridian line`, `north`, `south`, `east`, `west` | treatise-p2-38-meridian-line.js | Part II §38 (astrolabe-video bfc9f42). Modern captions. Computed for 52°; declination ≈ −8° chosen so the times match "aboute 10 or 11" and "after 1"; no date shown. | **decided** |
 | `a town`, `further east`, `same meridian`, `noon`, `longitude` | treatise-p2-39-town-meridians.js | Part II §39 (astrolabe-video 8bea500). Modern captions. Towns unnamed (the text names none here; Oxford and Lynn are too close to show). The climates passage is not drawn. | **decided** |
 | `4 of 12`, `20 feet`, `3 × 20 = 60 feet`, `+ eye` | treatise-p2-41-tower.js | Part II §41 (astrolabe-video ffe3d92); also covers §41a/b. Modern. To scale except the instrument, drawn larger than true. | **decided** |
+| `1 of 12`, `2 of 12`, `60 feet`, `12 heights`, `6 heights`, `6 heights = 60 feet`, `1 height = 10 feet, + eye` | treatise-p2-42-two-stations.js | Part II §42 (astrolabe-video 1580477); also covers §42a/b, §43, §43a. Modern. To scale. Only the 1-then-2 case is drawn. | **decided** |
 
 ## Not on the page
 
