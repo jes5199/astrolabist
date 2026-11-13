@@ -86,6 +86,8 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | counting numeral `1`…`365` | treatise-p1-9-days.js | Part I §9 (astrolabe-video b994c88). Modern figures. | **decided: modern** (Jes, tg 17771 "modern both") |
 | month names `Januarius` … `December` | treatise-p1-10-months.js | Part I §10 (astrolabe-video feb358e). Latin, as on the instrument (consistent with II §1). Alternative: Chaucer's own spellings (Ianuare, Februare, Marcius, Aprile, Mayus, Iuin, Iulius…). | provisional; awaiting Jes (likely follows "Latin" for signs) |
 | day counts `31`, `28`, `30`… | treatise-p1-10-months.js | Part I §10. Modern figures. | **decided: modern** (Jes, tg 17771 "modern both") |
+| 36 saints' abbreviations `circ` `epi` `vicen` … `concep` `thom` `nati` | treatise-p1-11-holy-days.js | Part I §11 (astrolabe-video 932aae7). As ENGRAVED on Oxford HSM 47869's calendar ring, read from the museum photograph (astrolabe-video docs/video2/drawings/back47869.md). Alternative: expanded names (e.g. "Gregorius"). | provisional; awaiting Jes |
+| dominical letters `A`–`G`; day figures | treatise-p1-11-holy-days.js | Part I §11. Letters computed (1 Jan = A), matching the instrument; days in modern figures. | **decided: modern** for figures (Jes, tg 17771) |
 
 ## Not on the page
 
