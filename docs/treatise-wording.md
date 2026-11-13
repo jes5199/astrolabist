@@ -126,6 +126,7 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | `dawn to dusk`, `12 h 4 m`, `2 h 1 m`, `16 h 6 m`, `7 h 54 m` | treatise-p2-9-vulgar-day.js | Part II §9 (astrolabe-video 984f843). Modern (Chaucer: "day vulgar"). Chaucer's day, 12 March 1391 (midsummer has no full night at 52°). | **decided: modern** |
 | `20.8° + 9.2°`, `= 30°` | treatise-p2-10-unequal-sum.js | Part II §10 (astrolabe-video b1fc953). Modern. Uses the §7 midsummer day. | **decided: modern** |
 | `2 h 57 m` | treatise-p2-11-from-sunrise.js | Part II §11 (astrolabe-video 993769c). Modern. Chaucer's 12 March morning. | **decided: modern** |
+| `Saturday`; `1 Saturn` … `12 Venus` (modern planet names) | treatise-p2-12-planet-hours.js | Part II §12 (astrolabe-video 6a3c7c2). Chaucer's own example (Saturday 13 March) and order of planetary hours; no added astrological claim. | **decided: modern** |
 
 ## Not on the page
 
