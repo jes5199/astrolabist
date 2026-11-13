@@ -62,3 +62,4 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-p2-10-unequal-sum.js copied byte-for-byte from astrolabe-video b1fc953.
 2026-11-13: treatise-p2-11-from-sunrise.js treatise-p2-7-day-arc.js treatise-p2-8-equal-hours.js treatise-p2-10-unequal-sum.js copied byte-for-byte from astrolabe-video 0df1b4f.
 2026-11-13: treatise-p2-12-planet-hours.js copied byte-for-byte from astrolabe-video 6a3c7c2.
+2026-11-13: treatise-p2-13-noon.js copied byte-for-byte from astrolabe-video f18ee01.
