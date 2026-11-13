@@ -52,3 +52,6 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-p1-21-rete.js copied byte-for-byte from astrolabe-video 349d221.
 2026-11-13: treatise-p1-22-label.js copied byte-for-byte from astrolabe-video 1da41a4.
 2026-11-13: treatise-p1-23-almury.js copied byte-for-byte from astrolabe-video 9b177af.
+2026-11-13: treatise-p2-4-ascendant.js copied byte-for-byte from astrolabe-video e3761ba.
+2026-11-13: treatise-p2-5-between.js copied byte-for-byte from astrolabe-video b9d9945.
+2026-11-13: treatise-p2-6-twilight.js lib/sky.js copied byte-for-byte from astrolabe-video fcc1e69.

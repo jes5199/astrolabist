@@ -118,6 +118,9 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | ↳ `Elfeca` | = Alphecca (α CrB) | Skeat, Oxford Chaucer vol. 3 (1894), notes on Fig. 2 (Gutenberg #45027) ("Alpheta, Alphecca, or α Coronae Borealis"). | identification as noted |
 | ↳ `Alauue` | = α Oph (Rasalhague), **uncertain** | Arabic al-ḥawwāʾ = Ophiuchus; Skeat names α Oph "Raz Alhagus" on his figure. | identification as noted |
 | `almury` | treatise-p1-23-almury.js | Part I §23 (astrolabe-video 9b177af). Chaucer's word; his alternatives "Denticle of Capricorne", "Calculer". | source text |
+| `ascendant`, `Gemini 20°` | treatise-p2-4-ascendant.js | Part II §4 (astrolabe-video e3761ba). Modern (Chaucer: "assendent"); sign Latin. Rising degree only, no astrological "lord". | **decided** (modern labels; Latin signs) |
+| `26°`, `24°` | treatise-p2-5-between.js | Part II §5 (astrolabe-video b9d9945). | **decided: modern** |
+| `18°` ×2, `nadir`, `dawn`, `night` | treatise-p2-6-twilight.js | Part II §6 (astrolabe-video fcc1e69). Modern; "nadir" is Chaucer's word with no everyday modern equivalent (Chaucer: "the spring of day", "verrey night"). | **decided: modern** (tg 17787/17789) |
 
 ## Not on the page
 
