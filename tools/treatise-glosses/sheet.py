@@ -10,7 +10,7 @@ to two under upon with which ten ring plate plates hole net english latin greek 
 bodies possibly purpose suppose taken taking taught perceived translated excused many mortal noble part general only right here
 lo hard declare divided thing meekly ii iii iv v c n hand fast another age signe celestial""".split())
 forms = collections.Counter()
-for f in ["00-prologue.md", "p1-01.md", "p1-02.md", "p1-03.md"]:
+for f in ["00-prologue.md"] + [f"p1-{i:02d}.md" for i in range(1, 24)]:
     body = open(f"{cdir}/{f}").read().split("---", 2)[2]
     for w in re.findall(r"[A-Za-z]+(?:-[A-Za-z]+)*", body):
         forms[w.lower()] += 1

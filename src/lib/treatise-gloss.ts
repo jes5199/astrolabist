@@ -39,8 +39,6 @@ export const glossEntries = G.entries;
 
 const WORD = /[A-Za-z]+(?:-[A-Za-z]+)*/g;
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-// Skeat's italics arrive as _underscores_ (none in the sample, but keep them working).
-const inline = (s: string) => esc(s).replace(/_([^_]+)_/g, "<em>$1</em>");
 
 export type GlossStats = {
   tokens: number;
@@ -101,7 +99,42 @@ export function glossSection(slug: string, body: string, stats?: GlossStats, mod
   const blank = new Set(G.blank);
   const hit = new Set<number>();
   const spanHit = new Set<number>();
-  const out = paras.map((para) => {
+  const out = paras.map((raw) => {
+    // Skeat's italics (_Latin_): drop the marks, remember which characters were italic,
+    // and wrap italic runs in <em> inside each emitted chunk (so no <em> spans two units).
+    const ital: boolean[] = [];
+    let para = "";
+    let on = false;
+    for (let i = 0; i < raw.length; i++) {
+      if (raw[i] === "_") { on = !on; continue; }
+      para += raw[i];
+      ital.push(on);
+    }
+    const fmt = (a: number, b: number) => {
+      let o = "";
+      let i = a;
+      while (i < b) {
+        let j = i;
+        while (j < b && ital[j] === ital[i]) j++;
+        const t = esc(para.slice(i, j));
+        o += ital[i] && /\S/.test(t) ? `<em>${t}</em>` : t;
+        i = j;
+      }
+      return o;
+    };
+    // Bare numerals between words (90, 31., 23,) become their own ruby with the numeral
+    // repeated beneath: a lone text run before a ruby made Chromium break the line early.
+    const gap = (a: number, b: number) => {
+      let o = "";
+      let i = a;
+      for (const m of para.slice(a, b).matchAll(/\S*\d\S*/g)) {
+        const s = a + m.index!;
+        const e = s + m[0].length;
+        o += fmt(i, s) + `<ruby class="lu lu-num">${fmt(s, e)}<rt aria-hidden="true">${esc(m[0])}</rt></ruby>`;
+        i = e;
+      }
+      return o + fmt(i, b);
+    };
     const toks = [...para.matchAll(WORD)].map((m) => ({ w: m[0], lo: m[0].toLowerCase(), i: m.index!, end: m.index! + m[0].length }));
     const key: (string | null | undefined)[] = toks.map((t) => G.forms[t.lo]);
     const span: number[] = toks.map(() => 1); // tokens covered by a gloss unit starting here (0 = inside another)
@@ -173,10 +206,10 @@ export function glossSection(slug: string, body: string, stats?: GlossStats, mod
           stats.blankForms?.add(toks[a].lo);
         } else stats.identity = (stats.identity ?? 0) + span[a];
       }
-      if (!e || e.lineOnly) return esc(text);
+      if (!e || e.lineOnly) return fmt(toks[a].i, last.end);
       return (
         `<span class="gw${e.source === "ours" ? " gw-ours" : ""}" role="button" tabindex="0" aria-expanded="false" ` +
-        `data-g="${k}" data-w="${esc(text)}" aria-describedby="gd-${k}">${esc(text)}</span>`
+        `data-g="${k}" data-w="${esc(text)}" aria-describedby="gd-${k}">${fmt(toks[a].i, last.end)}</span>`
       );
     };
     // Punctuation touching a unit (no space between) rides with it, above and below.
@@ -198,15 +231,15 @@ export function glossSection(slug: string, body: string, stats?: GlossStats, mod
       const nextStart = endTok < toks.length ? toks[endTok].i : para.length;
       const from = lead(toks[a].i, pos);
       const to = trail(toks[endTok - 1].end, nextStart);
-      html += inline(para.slice(pos, from));
+      html += gap(pos, from);
       // Base: the gloss units inside this line unit, with the text between them.
-      let base = esc(para.slice(from, toks[a].i));
+      let base = fmt(from, toks[a].i);
       let line = "";
       let kind = "";
       let prevEnd = -1;
       for (let b = a; b < endTok; b++) {
         if (span[b] === 0) continue;
-        if (prevEnd >= 0) base += esc(para.slice(prevEnd, toks[b].i));
+        if (prevEnd >= 0) base += fmt(prevEnd, toks[b].i);
         base += glossUnit(b);
         prevEnd = toks[b + span[b] - 1].end;
         if (lineText[a] === null) {
@@ -220,13 +253,13 @@ export function glossSection(slug: string, body: string, stats?: GlossStats, mod
         kind = "dep";
         if (stats) stats.departures = (stats.departures ?? 0) + 1;
       }
-      base += esc(para.slice(prevEnd, to));
+      base += fmt(prevEnd, to);
       const pre = para.slice(from, toks[a].i);
       const post = para.slice(prevEnd, to);
-      html += `<ruby class="lu lu-${kind}">${base}<rt aria-hidden="true">${esc(pre + line + post)}</rt></ruby>`;
+      html += `<ruby class="lu lu-${kind}">${base}<rt aria-hidden="true">${ital[toks[a].i] ? `${esc(pre)}<em>${esc(line)}</em>${esc(post)}` : esc(pre + line + post)}</rt></ruby>`;
       pos = to;
     }
-    html += inline(para.slice(pos));
+    html += gap(pos, para.length);
     return html;
   });
   overrides.forEach((o, n) => {
