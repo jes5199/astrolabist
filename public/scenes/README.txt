@@ -34,3 +34,4 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-p1-4-meridional.js lib/back.js copied byte-for-byte from astrolabe-video bfe8a43.
 2026-11-13: treatise-p1-5-east-west.js copied byte-for-byte from astrolabe-video e80e012.
 2026-11-13: treatise-p1-6-right-left.js lib/painted.js lib/figures-rig.js treatise-prologue-gift.js copied byte-for-byte from astrolabe-video 7ab74e2.
+2026-11-13: treatise-p1-7-border.js copied byte-for-byte from astrolabe-video 7f49755.
