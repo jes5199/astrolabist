@@ -20,8 +20,8 @@ const instances = new WeakMap();
 const LOOP = 27000;
 const STILL = 21000; // ms: the two hours together, 30 degrees
 const LAYOUT = {
-  wide: { C: { x: -70, y: 10, k: 0.78 }, list: { x: 24, y: -76, size: 9.6, lh: 11, gap: 7, indent: 10, width: 122 } },
-  stack: { C: { x: 0, y: -70, k: 0.9 }, list: { x: -136, y: 48, size: 12.5, lh: 14, gap: 6, indent: 15, width: 272 } },
+  wide: { C: { x: -76, y: 27, k: 0.67 }, list: { x: 4, y: -76, size: 9.6, lh: 11, gap: 7, indent: 10, width: 142 } },
+  stack: { C: { x: 0, y: -52, k: 0.78 }, list: { x: -136, y: 46, size: 12.5, lh: 14, gap: 6, indent: 15, width: 272 } },
 };
 let C = LAYOUT.wide.C;
 const W = (px) => f(px / C.k);

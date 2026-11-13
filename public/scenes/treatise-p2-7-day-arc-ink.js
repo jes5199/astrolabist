@@ -19,8 +19,8 @@ const instances = new WeakMap();
 const LOOP = 31000;
 const STILL = 27000; // ms: both pricks, the day and the night measured
 const LAYOUT = {
-  wide: { C: { x: -66, y: 14, k: 0.8 }, list: { x: 32, y: -74, size: 9.6, lh: 11, gap: 6, indent: 11 } },
-  stack: { C: { x: 0, y: -52, k: 1.08 }, list: { x: -136, y: 82, size: 12.5, lh: 14, gap: 8, indent: 15, width: 272 } },
+  wide: { C: { x: -76, y: 27, k: 0.67 }, list: { x: 4, y: -74, size: 9.6, lh: 11, gap: 6, width: 142, indent: 11 } },
+  stack: { C: { x: 0, y: -52, k: 0.78 }, list: { x: -136, y: 46, size: 12.5, lh: 14, gap: 8, indent: 15, width: 272 } },
 };
 let C = LAYOUT.wide.C; // the layout being built (set by build)
 const W = (px) => f(px / C.k);
