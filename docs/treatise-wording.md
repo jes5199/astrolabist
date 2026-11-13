@@ -148,6 +148,7 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | `3 hours after midday`, `52° west of south` | treatise-p2-32-conjunction.js | Part II §32 (astrolabe-video 793a8af). Modern. The conjunction hour is our illustrative choice (the text gives none), on Chaucer's 12 March. | **decided: modern**; hour choice provisional |
 | `the sun`, `53° east of south`, `Alabor`, `50° west of south` | treatise-p2-33-quarter.js | Part II §33 (astrolabe-video 09f125d). Modern; engraved star name. Chaucer's II §3 settings. | **decided** |
 | `moon 41°`, `Alabor 12°`, `the moon: Virgo 15°` | treatise-p2-34-moon.js | Part II §34 (astrolabe-video f826d30). Modern captions; engraved star; Latin sign. Moon taken on the ecliptic (the text makes no exception for its latitude). | **decided** |
+| `east`, `star`, `night 1`, `night 4`, `lower: direct`, `higher: retrograde` | treatise-p2-35-retrograde.js | Part II §35 (astrolabe-video ddefaab). Modern captions. Altitudes are illustrative, not computed for a real planet. | **decided** |
 
 ## Not on the page
 

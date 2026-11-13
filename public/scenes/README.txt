@@ -85,3 +85,4 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-prologue-part-1..5.js copied byte-for-byte from astrolabe-video b688da9 (used by the gloss edition's Prologue five-parts windows).
 2026-11-13: treatise-p2-33-quarter.js copied byte-for-byte from astrolabe-video 09f125d.
 2026-11-13: treatise-p2-34-moon.js copied byte-for-byte from astrolabe-video f826d30.
+2026-11-13: treatise-p2-35-retrograde.js copied byte-for-byte from astrolabe-video ddefaab.
