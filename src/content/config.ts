@@ -64,6 +64,9 @@ const treatise = defineCollection({
         })
       )
       .optional(),
+    // "large": the section's figure is a full-column-width 3:2 window before the passage, for
+    // step-by-step procedure scenes (Jes tg 17914). Default: the square float beside the text.
+    sceneSize: z.enum(["large"]).optional(),
     saintsTable: z.boolean().optional(),
     plates: z
       .array(z.object({ src: z.string(), button: z.string(), title: z.string(), caption: z.string().optional(), width: z.number(), height: z.number() }))

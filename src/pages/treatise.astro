@@ -554,7 +554,7 @@ const tocParts = [
                     </header>
                     <div class="t-body">
                       <div class="t-me" lang="enm">
-                      <div class="t-aside" data-frame={frame}>
+                      <div class="t-aside" data-frame={frame} data-size={entry.data.sceneSize}>
                         <div class="win" data-frame={frame}>
                           {frame === "ring" && (
                           <svg class="win-ring" viewBox="-120 -120 240 240" aria-hidden="true">
@@ -1298,6 +1298,18 @@ const tocParts = [
     position: relative;
     width: 100%;
     aspect-ratio: 1;
+  }
+  /* Large figures (step-by-step procedures, Jes tg 17914): full column width, 3:2, set
+     before the passage rather than floated beside it. Scenes draw to a 300×200 viewBox. */
+  .t-sec .t-aside[data-size="large"] {
+    float: none;
+    width: 100%;
+    margin: 0.4rem 0 1.8rem;
+    shape-outside: none;
+  }
+  .t-sec .t-aside[data-size="large"] .win {
+    width: 100%;
+    aspect-ratio: 3 / 2;
   }
   .win-ring {
     position: absolute;
