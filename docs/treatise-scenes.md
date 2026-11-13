@@ -14,7 +14,7 @@ Kinds:
 `Effort` and `Reuses` are astrolabe-video's estimates (astrolabe-video c6d0e50): **1–2 h**, **½ day**, or
 **1 day+**. The 1 day+ rows build new library material: #1 held instrument and poses, #31 `lib/sky.js`,
 #66 the tower. `lib/plate.js` is lifted out at #19. Rows still to build: **31 × 1–2 h, 21 × ½ day,
-7 × 1 day+**, roughly 3–4 weeks of nominal effort. Observed pace so far has run well ahead of these grades. "Done" rows are already on
+7 × 1 day+**, about 186 h ≈ 23 working days of nominal effort (31×1.5 h + 21×4 h + 7×8 h). Observed pace so far has run well ahead of these grades. "Done" rows are already on
 `treatise/style-nightsky`.
 
 | # | Section | What the scene shows | Kind | Reuses | Effort | Status |
