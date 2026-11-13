@@ -139,6 +139,7 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | `A`, `F` (Chaucer's letters), `north`, `81°50′`, `21°50′`, `pole 51°50′` | treatise-p2-23-pole-star.js | Part II §23 (astrolabe-video 4532b23). Sky version; a figure-on-a-winter-night version is a possible later upgrade. | **decided: modern** |
 | `north`, `81°50′`, `21°50′`, `81°50′ + 21°50′ = 103°40′`, `half: pole 51°50′` | treatise-p2-24-never-sets.js | Part II §24 (astrolabe-video 1b2003c). Modern. | **decided: modern** |
 | `S`, `zenith`, `equator`, `38°10′`, `51°50′`, `90° − 38°10′ = 51°50′`, `south pole` | treatise-p2-25-latitude-noon.js | Part II §25 (astrolabe-video bea40ec). Modern (Chaucer: "pol antartik"). | **decided: modern** |
+| `latitude 52°` … `latitude 0°` (readout), `the right horizon`, `day = night` | treatise-p2-26-right-sphere.js | Part II §26 (astrolabe-video 503356d). Modern. Shown on a plate whose latitude slides to 0° (instead of a solid sphere). Note: at latitude 0 only the horizon (and meridian) is straight; Chaucer's "almikanteras … streighte" fits the horizon. | **decided: modern** |
 
 ## Not on the page
 
