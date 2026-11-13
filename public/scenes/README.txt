@@ -80,3 +80,4 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-p2-29-four-quarters.js copied byte-for-byte from astrolabe-video 5dfc993.
 2026-11-13: treatise-p2-30-planet-latitude.js copied byte-for-byte from astrolabe-video 308c33b.
 2026-11-13: treatise-p2-31-sunrise-azimuth.js copied byte-for-byte from astrolabe-video 1ce3664.
+2026-11-13: treatise-p2-31-sunrise-azimuth.js copied byte-for-byte from astrolabe-video 8eec225.

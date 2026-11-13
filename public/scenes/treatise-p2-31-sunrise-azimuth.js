@@ -36,7 +36,7 @@ const ACTS = [
 ].map((a) => {
   const A = amp(a.dec); // north of east (positive) or south
   const az = -(90 + A); // from the south, westward positive: east is -90
-  const word = Math.abs(A) < 0.05 ? "very east" : `${Math.round(Math.abs(A))}° ${A > 0 ? "north" : "south"} of east`;
+  const word = Math.abs(A) < 0.05 ? "due east" : `${Math.round(Math.abs(A))}° ${A > 0 ? "north" : "south"} of east`;
   return { ...a, A, az, word, at: rim(-nightFrom(a.rd), a.rd) };
 });
 
