@@ -123,6 +123,7 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | `18°` ×2, `nadir`, `dawn`, `night` | treatise-p2-6-twilight.js | Part II §6 (astrolabe-video fcc1e69). Modern; "nadir" is Chaucer's word with no everyday modern equivalent (Chaucer: "the spring of day", "verrey night"). | **decided: modern** (tg 17787/17789) |
 | `day 16 h 39 m`, `night 7 h 21 m` | treatise-p2-7-day-arc.js | Part II §7 (astrolabe-video ce56078). Modern (Chaucer: "ark of the day / ark of the night"). The day shown is midsummer (sun at head of Cancer), our choice; the text names no day. | **decided: modern**; day choice provisional |
 | `20.8° ÷ 15`, `= 1 h 23 m` | treatise-p2-8-equal-hours.js | Part II §8 (astrolabe-video 6bbf7cd). Modern; Chaucer: "departe hem by 15". Uses the §7 midsummer day. | **decided: modern** |
+| `dawn to dusk`, `12 h 4 m`, `2 h 1 m`, `16 h 6 m`, `7 h 54 m` | treatise-p2-9-vulgar-day.js | Part II §9 (astrolabe-video 984f843). Modern (Chaucer: "day vulgar"). Chaucer's day, 12 March 1391 (midsummer has no full night at 52°). | **decided: modern** |
 
 ## Not on the page
 
