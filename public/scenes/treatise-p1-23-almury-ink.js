@@ -17,7 +17,7 @@ import { front, node, f, rim, SILVER, NIGHT } from "./lib/front-ink.js";
 const instances = new WeakMap();
 const LOOP = 13000;
 const STILL = 9000; // ms: at rest, the degree under its point lit
-const C = { x: 0, y: 10, k: 0.9 };
+const C = { x: 0, y: 18, k: 0.62 }; // the hanging ring inside the window (its top 183 units up, at -95; astrolabist #47901)
 const W = (px) => f(px / C.k);
 const R = A.frontRadii;
 const TOOTH = "M-1.7 -82.6H1.7V-74.6H-1.7Z"; // as in the rete's outline: at the head of Capricorn (the top, as drawn)

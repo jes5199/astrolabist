@@ -16,7 +16,7 @@ import { back, node, label, f, rim, SILVER, T } from "./lib/back-ink.js";
 const instances = new WeakMap();
 const LOOP = 12000;
 const STILL = 9000; // ms: the year struck, 365 in the middle
-const C = { x: 0, y: 0, k: 0.9 };
+const C = { x: 0, y: 18, k: 0.62 }; // the hanging ring inside the window (its top 183 units up, at -95; astrolabist #47901)
 const W = (px) => f(px / C.k); // stroke widths in window units
 const MONTH_DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 const RAD = Math.PI / 180;
