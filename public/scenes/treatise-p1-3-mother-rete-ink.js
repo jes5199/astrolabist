@@ -6,7 +6,9 @@
 // STYLE SAMPLE (jes tg 17811; rougher, "more wood-cut", tg 17827): ink on vellum, in the spirit of the woodcut
 // diagrams of the early printed astrolabe books: bold cut lines, a little irregular; close hatching cut in the same
 // ink; solid black for the shadowed thickness; the parts drawn flat and apart and lettered; hand-coloured washes in
-// vermilion, slate blue and ochre (jes tg 17836; lib/woodcut.js).  Our own
+// vermilion, slate blue and ochre (jes tg 17836; lib/woodcut.js).  The parts named in words (jes tg 17871): mother,
+// climate (Chaucer's "plates compowned for diverse clymatz"), rete; and the spider of the film's web shot (our own
+// drawing, video/song/scenes.py spider()) lets itself down on its thread onto the rete, "a webbe of a loppe".  Our own
 // drawing; nothing is copied from any printed plate.  The mother (a) with her hollow, a plate (b) with its circles,
 // the rete (c): fanned apart, they slide together into one and part again.  Geometry from our constructed drawing of
 // Oxford inv. 47869 (shared module).  Drawn in currentColor (the frame's ink), a second ink for hatching, the
@@ -109,13 +111,31 @@ export function mount(el) {
     node("path", { d: A.rete, transform: `rotate(${A.morning.rot})`, fill: H2, "fill-rule": "evenodd", ...ink, "stroke-width": W(1.52) }, s);
   });
   // the letters, in red
-  const letters = ["a", "b", "c"].map((ch) => {
-    const t = node("text", { "text-anchor": "middle", "font-size": 18, "font-weight": 600, "letter-spacing": 0.5, fill: RED, "font-family": "inherit" }, svg);
+  const letters = ["mother", "climate", "rete"].map((ch, i) => {
+    const t = node("text", { "text-anchor": ["middle", "start", "start"][i], "font-size": 18, "font-weight": 600, "letter-spacing": 0.5, fill: RED, "font-family": "inherit" }, svg);
     t.textContent = ch;
     return t;
   });
+  // the spider: the film's (eight legs of two joints, a round head, an oval body), cut in ink, its body washed red;
+  // it hangs on a thread from above the leaf
+  const spider = node("g", {}, svg);
+  const ws = woodcut(defs, { freq: 0.25, wobble: 0.45, seed: 37 }); // in window units: fine, for a small beast
+  const thread = node("line", { x1: 0, y1: -260, x2: 0, y2: -2, stroke: "currentColor", "stroke-width": 0.6 }, spider);
+  const bug = node("g", { filter: ws.rough }, spider);
+  const SS = 0.46;
+  let legs = "";
+  for (const side of [-1, 1])
+    for (let k = 0; k < 4; k++) {
+      const a = ((-50 + k * 34) * Math.PI) / 180;
+      legs += `M0 0L${f(side * 16 * SS * Math.cos(a))} ${f(16 * SS * Math.sin(a) - 6 * SS)}L${f(side * 26 * SS * Math.cos(a))} ${f(26 * SS * Math.sin(a) + 6 * SS)}`;
+    }
+  node("path", { d: legs, fill: "none", stroke: "currentColor", "stroke-width": 1.1, "stroke-linejoin": "round", "stroke-linecap": "round" }, bug);
+  node("ellipse", { cx: 0, cy: f(8 * SS), rx: f(8 * SS), ry: f(10 * SS), fill: "currentColor" }, bug);
+  node("ellipse", ws.wash({ cx: 0, cy: f(8 * SS), rx: f(5.5 * SS), ry: f(7 * SS), fill: WASH.red, "fill-opacity": 0.9 }), bug);
+  node("circle", { cy: f(-4 * SS), r: f(6 * SS), fill: "currentColor" }, bug);
+  thread.setAttribute("filter", ws.rough);
   el.appendChild(svg);
-  const s = { parts, letters, raf: 0, t0: 0, tm: STILL };
+  const s = { parts, letters, spider, raf: 0, t0: 0, tm: STILL };
   instances.set(el, s);
   draw(s, STILL / 1000);
 }
@@ -135,12 +155,21 @@ function draw(s, t) {
     [1, 1],
   ];
   s.letters.forEach((l, i) => {
-    const x = APART[i][0] + (TOGETHER[0] - APART[i][0]) * u + at[i][0] * [36, 28, 28][i];
-    const y = APART[i][1] + (TOGETHER[1] - APART[i][1]) * u + at[i][1] * [36, 28, 28][i] + 6;
+    // the words by their parts: mother under her ring, climate and rete to the right
+    const off = [[-16, 72], [28, -22], [28, 34]][i];
+    const x = APART[i][0] + (TOGETHER[0] - APART[i][0]) * u + off[0];
+    const y = APART[i][1] + (TOGETHER[1] - APART[i][1]) * u + off[1];
     l.setAttribute("x", f(x));
     l.setAttribute("y", f(y));
     l.setAttribute("opacity", f(1 - u));
   });
+  // the spider: down on its thread onto the rete (a little bounce), rides it while the parts close and open, and
+  // climbs away before the round begins again
+  const rx = APART[2][0] + (TOGETHER[0] - APART[2][0]) * u;
+  const ry = APART[2][1] + (TOGETHER[1] - APART[2][1]) * u;
+  const down = span(t, 0.1, 1.0) * (1 - span(t, 11.2, 11.9));
+  const bob = 2.2 * Math.sin(Math.PI * span(t, 0.95, 1.35)) * (1 - span(t, 11.2, 11.9));
+  s.spider.setAttribute("transform", `translate(${f(rx + 4)} ${f(ry - 16 - 150 * (1 - down) + bob)})`);
 }
 
 export function start(el) {
