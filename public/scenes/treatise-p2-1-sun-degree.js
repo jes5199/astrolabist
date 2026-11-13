@@ -59,6 +59,7 @@ export function mount(el) {
   if (instances.has(el)) return;
   const svg = node("svg", { viewBox: "-100 -100 200 200", width: "100%", height: "100%", "aria-hidden": "true" });
   svg.style.fontFamily = "inherit";
+  svg.style.overflow = "visible"; // the limb runs on past the square to the round glass
   const turn = node("g", {}, svg); // the instrument, turned in the hand between the two examples
   const g = node("g", { fill: "none", stroke: "currentColor" }, turn);
   node("circle", { cx: C.x, cy: C.y, r: 100 * C.k, fill: NIGHT, "fill-opacity": 0.72, "stroke-width": 1.4 }, g);
@@ -112,7 +113,7 @@ export function mount(el) {
   along("Aprilis", lon(90 + 15), rm, 7.5);
   along("December", lon(334 + 17), rm, 7.5);
   along("November", lon(304 + 15), rm, 7.5);
-  along("Januarius", lon(15), rm, 7.5);
+  along("Ianuarius", lon(15), rm, 7.5);
 
   // ---- the rule
   const rule = node("g", {}, node("g", { transform: `translate(${C.x} ${C.y}) scale(${C.k})` }, turn));

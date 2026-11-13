@@ -2,6 +2,8 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Scene from "../components/Scene.astro";
+import PlateViewer from "../components/treatise/PlateViewer.astro";
+import SaintsTable from "../components/treatise/SaintsTable.astro";
 import { SITE_TITLE } from "../consts";
 import fs from "node:fs";
 import path from "node:path";
@@ -450,6 +452,10 @@ const counts = {
                         {inline.length > 0 && (
                           <script is:inline set:html={PLACE_INLINE}></script>
                         )}
+                        {(entry.data.plates ?? []).map((pl) => (
+                          <PlateViewer src={pl.src} button={pl.button} title={pl.title} caption={pl.caption} width={pl.width} height={pl.height} />
+                        ))}
+                        {entry.data.saintsTable && <SaintsTable />}
                       </div>
                       {privateModern && (
                         <details class="t-morrison">
@@ -462,7 +468,7 @@ const counts = {
                           </div>
                         </details>
                       )}
-                      <svg class="t-const" aria-hidden="true"></svg>
+<svg class="t-const" aria-hidden="true"></svg>
                     </div>
                   </div>
                 </article>
@@ -1321,7 +1327,7 @@ const counts = {
   .t-me :global(p) {
     margin: 0 0 1.1em;
   }
-  .t-me :global(p:nth-of-type(1)::first-letter) {
+  .t-me > :global(p:first-of-type::first-letter) {
     font-family: var(--black-font);
     font-weight: 700;
     font-variation-settings: "opsz" 72;
@@ -1399,7 +1405,7 @@ const counts = {
   :global(.gw-i) {
     display: none;
   }
-  .treatise[data-gloss="all"] .t-sec[data-glossed] .t-me :global(p) {
+  .treatise[data-gloss="all"] .t-sec[data-glossed] .t-me > :global(p) {
     line-height: 2.4;
   }
   .treatise[data-gloss="all"] :global(.gw-i) {

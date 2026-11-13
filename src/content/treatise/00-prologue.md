@@ -3,7 +3,7 @@ order: 0
 part: "Prologue"
 section: "Prologue"
 heading: "Prologue"
-scene: "demo-rete"
+scene: "treatise-prologue-gift"
 inlineScenes:
   - name: "treatise-prologue"
     after: "sleen envye"

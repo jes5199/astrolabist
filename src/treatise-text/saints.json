@@ -1,0 +1,686 @@
+[
+ {
+  "abbr": "circ",
+  "month": "January",
+  "day": 1,
+  "letter": "A",
+  "nameEn": "The Circumcision of Our Lord",
+  "nameLatin": "Circumcisio Domini",
+  "julian": "1 January",
+  "gregorian1391": "9 January",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "17**",
+   "url": "https://archive.org/details/dusumins00cath/page/n96/mode/1up"
+  },
+  "note": ""
+ },
+ {
+  "abbr": "epi",
+  "month": "January",
+  "day": 6,
+  "letter": "F",
+  "nameEn": "The Epiphany of Our Lord",
+  "nameLatin": "Epiphania Domini",
+  "julian": "6 January",
+  "gregorian1391": "14 January",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "17**",
+   "url": "https://archive.org/details/dusumins00cath/page/n96/mode/1up"
+  },
+  "note": ""
+ },
+ {
+  "abbr": "vicen",
+  "month": "January",
+  "day": 22,
+  "letter": "A",
+  "nameEn": "St Vincent (of Saragossa), deacon and martyr",
+  "nameLatin": "Vincentii martyris",
+  "julian": "22 January",
+  "gregorian1391": "30 January",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "17**",
+   "url": "https://archive.org/details/dusumins00cath/page/n96/mode/1up"
+  },
+  "note": ""
+ },
+ {
+  "abbr": "puri",
+  "month": "February",
+  "day": 2,
+  "letter": "E",
+  "nameEn": "The Purification of the Blessed Virgin Mary (Candlemas)",
+  "nameLatin": "Purificatio beatae Mariae",
+  "julian": "2 February",
+  "gregorian1391": "10 February",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "18**",
+   "url": "https://archive.org/details/dusumins00cath/page/n97/mode/1up"
+  },
+  "note": ""
+ },
+ {
+  "abbr": "scola",
+  "month": "February",
+  "day": 10,
+  "letter": "F",
+  "nameEn": "St Scholastica, virgin",
+  "nameLatin": "Scolasticae virginis",
+  "julian": "10 February",
+  "gregorian1391": "18 February",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "18**",
+   "url": "https://archive.org/details/dusumins00cath/page/n97/mode/1up"
+  },
+  "note": "Printed 'Scolastice'."
+ },
+ {
+  "abbr": "cath",
+  "month": "February",
+  "day": 22,
+  "letter": "D",
+  "nameEn": "The Chair of St Peter",
+  "nameLatin": "Cathedra Sancti Petri",
+  "julian": "22 February",
+  "gregorian1391": "2 March",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "18**",
+   "url": "https://archive.org/details/dusumins00cath/page/n97/mode/1up"
+  },
+  "note": ""
+ },
+ {
+  "abbr": "cedde",
+  "month": "March",
+  "day": 2,
+  "letter": "E",
+  "nameEn": "St Chad (Ceadda), bishop and confessor",
+  "nameLatin": "Cedde episcopi et confessoris",
+  "julian": "2 March",
+  "gregorian1391": "10 March",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "19**",
+   "url": "https://archive.org/details/dusumins00cath/page/n98/mode/1up"
+  },
+  "note": ""
+ },
+ {
+  "abbr": "greg'",
+  "month": "March",
+  "day": 12,
+  "letter": "A",
+  "nameEn": "St Gregory the Great, pope and confessor",
+  "nameLatin": "Gregorii papae et confessoris",
+  "julian": "12 March",
+  "gregorian1391": "20 March",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "19**",
+   "url": "https://archive.org/details/dusumins00cath/page/n98/mode/1up"
+  },
+  "note": "Printed 'Gregorii pape'."
+ },
+ {
+  "abbr": "anu",
+  "month": "March",
+  "day": 25,
+  "letter": "G",
+  "nameEn": "The Annunciation of Our Lord (Lady Day)",
+  "nameLatin": "Annunciatio dominica",
+  "julian": "25 March",
+  "gregorian1391": "2 April",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "19**",
+   "url": "https://archive.org/details/dusumins00cath/page/n98/mode/1up"
+  },
+  "note": ""
+ },
+ {
+  "abbr": "ambr",
+  "month": "April",
+  "day": 4,
+  "letter": "C",
+  "nameEn": "St Ambrose, bishop and doctor",
+  "nameLatin": "Ambrosii episcopi et doctoris",
+  "julian": "4 April",
+  "gregorian1391": "12 April",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "20**",
+   "url": "https://archive.org/details/dusumins00cath/page/n99/mode/1up"
+  },
+  "note": ""
+ },
+ {
+  "abbr": "elfe",
+  "month": "April",
+  "day": 19,
+  "letter": "D",
+  "nameEn": "St Alphege (Aelfheah), archbishop of Canterbury and martyr",
+  "nameLatin": "Alphei episcopi et martyris",
+  "julian": "19 April",
+  "gregorian1391": "27 April",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "20**",
+   "url": "https://archive.org/details/dusumins00cath/page/n99/mode/1up"
+  },
+  "note": "Spelling differs from the engraving: Dickinson prints 'Alphei', Procter & Wordsworth's breviary kalendar prints 'Alphegi archiepiscopi et martyris' on the same day (xiii Kal. Maii, letter d). 'elfe' is the vernacular form of the same name (Old English Aelfheah, Middle English Elphege/Elfege); this is a spelling, not a different feast."
+ },
+ {
+  "abbr": "marc",
+  "month": "April",
+  "day": 25,
+  "letter": "C",
+  "nameEn": "St Mark, evangelist",
+  "nameLatin": "Marci evangelistae",
+  "julian": "25 April",
+  "gregorian1391": "3 May",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "20**",
+   "url": "https://archive.org/details/dusumins00cath/page/n99/mode/1up"
+  },
+  "note": "Printed 'Marci evangeliste'."
+ },
+ {
+  "abbr": "philip",
+  "month": "May",
+  "day": 1,
+  "letter": "B",
+  "nameEn": "SS Philip and James, apostles",
+  "nameLatin": "Apostolorum Philippi et Jacobi",
+  "julian": "1 May",
+  "gregorian1391": "9 May",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "21**",
+   "url": "https://archive.org/details/dusumins00cath/page/n100/mode/1up"
+  },
+  "note": "'philip' names only the first of the pair."
+ },
+ {
+  "abbr": "dunsta",
+  "month": "May",
+  "day": 19,
+  "letter": "F",
+  "nameEn": "St Dunstan, archbishop of Canterbury",
+  "nameLatin": "Dunstani episcopi et confessoris",
+  "julian": "19 May",
+  "gregorian1391": "27 May",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "21**",
+   "url": "https://archive.org/details/dusumins00cath/page/n100/mode/1up"
+  },
+  "note": "Printed 'Dunstani episc. et conf.'"
+ },
+ {
+  "abbr": "aldel",
+  "month": "May",
+  "day": 25,
+  "letter": "E",
+  "nameEn": "St Aldhelm, bishop (of Sherborne) and confessor",
+  "nameLatin": "Aldelmi episcopi et confessoris",
+  "julian": "25 May",
+  "gregorian1391": "2 June",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "21**",
+   "url": "https://archive.org/details/dusumins00cath/page/n100/mode/1up"
+  },
+  "note": "Printed 'Aldelmi episc. et conf.'; middle lessons of St Urban (also 25 May)."
+ },
+ {
+  "abbr": "barna",
+  "month": "June",
+  "day": 11,
+  "letter": "A",
+  "nameEn": "St Barnabas, apostle",
+  "nameLatin": "Barnabae apostoli",
+  "julian": "11 June",
+  "gregorian1391": "19 June",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "22**",
+   "url": "https://archive.org/details/dusumins00cath/page/n101/mode/1up"
+  },
+  "note": ""
+ },
+ {
+  "abbr": "alba",
+  "month": "June",
+  "day": 22,
+  "letter": "E",
+  "nameEn": "St Alban, protomartyr (of Britain)",
+  "nameLatin": "Albani prothomartyris",
+  "julian": "22 June",
+  "gregorian1391": "30 June",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "22**",
+   "url": "https://archive.org/details/dusumins00cath/page/n101/mode/1up"
+  },
+  "note": ""
+ },
+ {
+  "abbr": "pe.p",
+  "month": "June",
+  "day": 29,
+  "letter": "E",
+  "nameEn": "SS Peter and Paul, apostles",
+  "nameLatin": "Apostolorum Petri et Pauli",
+  "julian": "29 June",
+  "gregorian1391": "7 July",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "22**",
+   "url": "https://archive.org/details/dusumins00cath/page/n101/mode/1up"
+  },
+  "note": ""
+ },
+ {
+  "abbr": "tho",
+  "month": "July",
+  "day": 7,
+  "letter": "F",
+  "nameEn": "The Translation of St Thomas (Becket) of Canterbury, martyr",
+  "nameLatin": "Translatio Sancti Thomae martyris",
+  "julian": "7 July",
+  "gregorian1391": "15 July",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "23**",
+   "url": "https://archive.org/details/dusumins00cath/page/n102/mode/1up"
+  },
+  "note": "'mart.' identifies Becket (translated 7 July 1220), not Thomas the apostle (21 Dec, 'thom' below)."
+ },
+ {
+  "abbr": "marga",
+  "month": "July",
+  "day": 20,
+  "letter": "E",
+  "nameEn": "St Margaret (of Antioch), virgin and martyr",
+  "nameLatin": "Margaretae virginis et martyris",
+  "julian": "20 July",
+  "gregorian1391": "28 July",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "23**",
+   "url": "https://archive.org/details/dusumins00cath/page/n102/mode/1up"
+  },
+  "note": ""
+ },
+ {
+  "abbr": "iac",
+  "month": "July",
+  "day": 25,
+  "letter": "C",
+  "nameEn": "St James (the Great), apostle",
+  "nameLatin": "Jacobi apostoli",
+  "julian": "25 July",
+  "gregorian1391": "2 August",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "23**",
+   "url": "https://archive.org/details/dusumins00cath/page/n102/mode/1up"
+  },
+  "note": ""
+ },
+ {
+  "abbr": "laur",
+  "month": "August",
+  "day": 10,
+  "letter": "E",
+  "nameEn": "St Laurence, martyr",
+  "nameLatin": "Laurentii martyris",
+  "julian": "10 August",
+  "gregorian1391": "18 August",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "24**",
+   "url": "https://archive.org/details/dusumins00cath/page/n103/mode/1up"
+  },
+  "note": ""
+ },
+ {
+  "abbr": "assu",
+  "month": "August",
+  "day": 15,
+  "letter": "C",
+  "nameEn": "The Assumption of the Blessed Virgin Mary",
+  "nameLatin": "Assumptio Beatae Mariae virginis",
+  "julian": "15 August",
+  "gregorian1391": "23 August",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "24**",
+   "url": "https://archive.org/details/dusumins00cath/page/n103/mode/1up"
+  },
+  "note": ""
+ },
+ {
+  "abbr": "bart",
+  "month": "August",
+  "day": 24,
+  "letter": "E",
+  "nameEn": "St Bartholomew, apostle",
+  "nameLatin": "Bartholomei apostoli",
+  "julian": "24 August",
+  "gregorian1391": "1 September",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "24**",
+   "url": "https://archive.org/details/dusumins00cath/page/n103/mode/1up"
+  },
+  "note": ""
+ },
+ {
+  "abbr": "mari",
+  "month": "September",
+  "day": 8,
+  "letter": "F",
+  "nameEn": "The Nativity of the Blessed Virgin Mary",
+  "nameLatin": "Nativitas Beatae Mariae virginis",
+  "julian": "8 September",
+  "gregorian1391": "16 September",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "25**",
+   "url": "https://archive.org/details/dusumins00cath/page/n104/mode/1up"
+  },
+  "note": "'mari' = Mary; on 8 Sept the feast is her Nativity."
+ },
+ {
+  "abbr": "mathe",
+  "month": "September",
+  "day": 21,
+  "letter": "E",
+  "nameEn": "St Matthew, apostle and evangelist",
+  "nameLatin": "Mathei apostoli et evangelistae",
+  "julian": "21 September",
+  "gregorian1391": "29 September",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "25**",
+   "url": "https://archive.org/details/dusumins00cath/page/n104/mode/1up"
+  },
+  "note": ""
+ },
+ {
+  "abbr": "mich",
+  "month": "September",
+  "day": 29,
+  "letter": "F",
+  "nameEn": "St Michael the Archangel (Michaelmas)",
+  "nameLatin": "Michaelis archangeli",
+  "julian": "29 September",
+  "gregorian1391": "7 October",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "25**",
+   "url": "https://archive.org/details/dusumins00cath/page/n104/mode/1up"
+  },
+  "note": ""
+ },
+ {
+  "abbr": "dion",
+  "month": "October",
+  "day": 9,
+  "letter": "B",
+  "nameEn": "St Denis (Dionysius) and his companions",
+  "nameLatin": "Dyonisii sociorumque ejus",
+  "julian": "9 October",
+  "gregorian1391": "17 October",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "26**",
+   "url": "https://archive.org/details/dusumins00cath/page/n105/mode/1up"
+  },
+  "note": ""
+ },
+ {
+  "abbr": "luce",
+  "month": "October",
+  "day": 18,
+  "letter": "D",
+  "nameEn": "St Luke, evangelist",
+  "nameLatin": "Lucae evangelistae",
+  "julian": "18 October",
+  "gregorian1391": "26 October",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "26**",
+   "url": "https://archive.org/details/dusumins00cath/page/n105/mode/1up"
+  },
+  "note": "'luce' is Luke (Lucae), not Lucy (Luciae, 13 Dec)."
+ },
+ {
+  "abbr": "simon",
+  "month": "October",
+  "day": 28,
+  "letter": "G",
+  "nameEn": "SS Simon and Jude, apostles",
+  "nameLatin": "Apostolorum Symonis et Judae",
+  "julian": "28 October",
+  "gregorian1391": "5 November",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "26**",
+   "url": "https://archive.org/details/dusumins00cath/page/n105/mode/1up"
+  },
+  "note": "'simon' names only the first of the pair."
+ },
+ {
+  "abbr": "mart",
+  "month": "November",
+  "day": 11,
+  "letter": "G",
+  "nameEn": "St Martin (of Tours), bishop and confessor (Martinmas)",
+  "nameLatin": "Martini episcopi et confessoris",
+  "julian": "11 November",
+  "gregorian1391": "19 November",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "27**",
+   "url": "https://archive.org/details/dusumins00cath/page/n106/mode/1up"
+  },
+  "note": ""
+ },
+ {
+  "abbr": "hugo",
+  "month": "November",
+  "day": 17,
+  "letter": "F",
+  "nameEn": "St Hugh of Lincoln, bishop and confessor",
+  "nameLatin": "Hugonis episcopi et confessoris",
+  "julian": "17 November",
+  "gregorian1391": "25 November",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "27**",
+   "url": "https://archive.org/details/dusumins00cath/page/n106/mode/1up"
+  },
+  "note": "Printed 'Hugonis epis. et con.'; canonised 1220, so in place by c. 1370."
+ },
+ {
+  "abbr": "kate",
+  "month": "November",
+  "day": 25,
+  "letter": "G",
+  "nameEn": "St Katherine (of Alexandria), virgin and martyr",
+  "nameLatin": "Katherinae virginis et martyris",
+  "julian": "25 November",
+  "gregorian1391": "3 December",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "27**",
+   "url": "https://archive.org/details/dusumins00cath/page/n106/mode/1up"
+  },
+  "note": ""
+ },
+ {
+  "abbr": "concep",
+  "month": "December",
+  "day": 8,
+  "letter": "F",
+  "nameEn": "The Conception of the Blessed Virgin Mary",
+  "nameLatin": "Conceptio Beatae Mariae",
+  "julian": "8 December",
+  "gregorian1391": "16 December",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "28**",
+   "url": "https://archive.org/details/dusumins00cath/page/n107/mode/1up"
+  },
+  "note": ""
+ },
+ {
+  "abbr": "thom",
+  "month": "December",
+  "day": 21,
+  "letter": "E",
+  "nameEn": "St Thomas, apostle",
+  "nameLatin": "Thomae apostoli",
+  "julian": "21 December",
+  "gregorian1391": "29 December",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "28**",
+   "url": "https://archive.org/details/dusumins00cath/page/n107/mode/1up"
+  },
+  "note": "Thomas the apostle, not Becket (29 Dec, 'Thomae Cantuariae archiepiscopi et mart.')."
+ },
+ {
+  "abbr": "nati",
+  "month": "December",
+  "day": 25,
+  "letter": "B",
+  "nameEn": "The Nativity of Our Lord (Christmas)",
+  "nameLatin": "Nativitas Domini Nostri Jesu Christi",
+  "julian": "25 December",
+  "gregorian1391": "2 January 1392",
+  "offsetDays": 8,
+  "source": {
+   "work": "Missale ad usum insignis et praeclarae ecclesiae Sarum (Kalendar)",
+   "edition": "ed. Francis Henry Dickinson, Burntisland: E prelo de Pitsligo, 1861-1883; Kalendar printed from the Sarum Missal of 1497",
+   "year": "1861-1883",
+   "page": "28**",
+   "url": "https://archive.org/details/dusumins00cath/page/n107/mode/1up"
+  },
+  "note": ""
+ }
+]
