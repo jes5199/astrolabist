@@ -77,7 +77,7 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | `25½°` | treatise-p2-2-altitude.js:143 | Part II §2 (astrolabe-video e5ff358). Chaucer's example altitude. | provisional; awaiting Jes |
 | `X`, the hour numerals (`1`…`9`), `Alhabor` | treatise-p2-3-time.js:122, :125 | Part II §3 (35daf72). The hour figure is computed (morning 9; night 9). | provisional; awaiting Jes |
 | `12 March`, `Aries 1°`, `13 December`, `Capricorn 1°` | treatise-p2-1-sun-degree.js:29, :30 | Part II §1 (96b870a). Chaucer's two examples. | provisional; awaiting Jes |
-| Engraved scale names `Aries`, `Pisces`, `Capricornus`, `Sagittarius`, `Marcius`, `Februarius`, `Aprilis`, `December`, `November`, `Januarius` | treatise-p2-1-sun-degree.js:105, :115 | Part II §1. Inscriptions on the instrument's back, in Latin as engraved. | provisional; awaiting Jes |
+| Engraved scale names `Aries`, `Pisces`, `Capricornus`, `Sagittarius`, `Marcius`, `Februarius`, `Aprilis`, `December`, `November`, `Januarius` | treatise-p2-1-sun-degree.js:105, :115 | Part II §1. Inscriptions on the instrument's back, in Latin as engraved. | **decided: Latin** (Jes, 2026-11-13, tg 17769) |
 | `south`, `north` | treatise-p1-4-meridional.js | Part I §4 (astrolabe-video bfe8a43). Ours; Chaucer says "south lyne / lyne meridional" and "north lyne / lyne of midnight". | provisional; awaiting Jes |
 | `east`, `west` | treatise-p1-5-east-west.js | Part I §5 (astrolabe-video e80e012). Ours; Chaucer says "Est lyne / lyne Orientale" and "West lyne / lyne Occidentale". | provisional; awaiting Jes |
 | `east`, `west` | treatise-p1-6-right-left.js | Part I §6 (astrolabe-video 7ab74e2). Ours, as in §5. | provisional; awaiting Jes |
@@ -91,3 +91,7 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 
 - Legibility pass: no wording changed. Lines were only moved or hidden.
 - Whole-treatise pass: star names corrected: `Aldeboran` → `Aldeberan` (Chaucer's spelling), `Alhaioth` → `Alhajoth` (attested form). Star-name rows marked verified (Skeat notes / Wikipedia). New entries: contents group titles and subtitles, `P`, the full-list disclosure, the `· supplementary` / `· spurious` kicker suffixes, the inline sword window's legend and label, the "HERE ENDETH" rubric, Skeat's group labels and colophon (source text), and the in-scene labels. The "Modern rendering — pending" note now appears on 11 sections.
+
+## Decisions
+
+- 2026-11-13 (tg 17769): zodiac sign names on the instrument are in **Latin** (Aries, Taurus, Gemini…) in all scenes, including Part I §8.
