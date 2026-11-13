@@ -70,3 +70,4 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-p2-19-rises-with.js copied byte-for-byte from astrolabe-video 5a73248.
 2026-11-13: treatise-p2-20-declination.js copied byte-for-byte from astrolabe-video 6d31e3d.
 2026-11-13: treatise-p2-21-plate-latitude.js copied byte-for-byte from astrolabe-video d9c5279.
+2026-11-13: treatise-p2-22-oxford.js copied byte-for-byte from astrolabe-video 512e17c.
