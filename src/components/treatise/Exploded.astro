@@ -1,0 +1,142 @@
+---
+// Part I medallion: the instrument taken apart, each piece named as Chaucer
+// names it. Hand-built from ellipses; nothing traced.
+const rx = 74;
+const ry = 17;
+const cx = 92;
+const layers = [
+  { y: 30, name: "the rewle", kind: "rule" },
+  { y: 70, name: "the riet", kind: "rete" },
+  { y: 110, name: "the plate", kind: "plate" },
+  { y: 156, name: "the moder", kind: "mater" },
+];
+const ticks = (y: number, r: number, k: number, n = 72) =>
+  Array.from({ length: n }, (_, i) => {
+    const a = (i / n) * Math.PI * 2;
+    const x0 = cx + r * Math.cos(a);
+    const y0 = y + r * (ry / rx) * Math.sin(a);
+    const x1 = cx + (r - k) * Math.cos(a);
+    const y1 = y + (r - k) * (ry / rx) * Math.sin(a);
+    return `M${x0.toFixed(1)} ${y0.toFixed(1)}L${x1.toFixed(1)} ${y1.toFixed(1)}`;
+  }).join("");
+const stars = [20, 70, 130, 200, 250, 310].map((d) => {
+  const a = (d * Math.PI) / 180;
+  const r = 44 + (d % 3) * 8;
+  return [cx + r * Math.cos(a), 70 + r * (ry / rx) * Math.sin(a)];
+});
+---
+
+<svg class="exploded" viewBox="0 0 330 200" role="img" aria-label="The parts of the astrolabe: the rule, the rete, the plate and the mother, held by the pin and wedge.">
+  <g class="x-pin">
+    <line x1={cx} y1="8" x2={cx} y2="186" />
+    <path d={`M${cx - 3} 186 L${cx + 3} 186 L${cx} 194 Z`} />
+  </g>
+  {
+    layers.map((l) => (
+      <g class={`x-layer x-${l.kind}`}>
+        {l.kind === "mater" && (
+          <>
+            <ellipse cx={cx} cy={l.y + 7} rx={rx + 6} ry={ry + 2} class="x-side" />
+            <rect x={cx - rx - 6} y={l.y - 1} width={2 * (rx + 6)} height="8" class="x-side" stroke="none" />
+            <ellipse cx={cx} cy={l.y} rx={rx + 6} ry={ry + 2} class="x-face" />
+            <path d={ticks(l.y, rx + 5, 4)} class="x-fine" />
+            <ellipse cx={cx} cy={l.y} rx={rx - 8} ry={ry - 2} class="x-well" />
+            <path d={`M${cx - 12} ${l.y - ry - 1} C ${cx - 8} ${l.y - ry - 16}, ${cx + 8} ${l.y - ry - 16}, ${cx + 12} ${l.y - ry - 1}`} class="x-face" />
+          </>
+        )}
+        {l.kind === "plate" && (
+          <>
+            <ellipse cx={cx} cy={l.y + 2} rx={rx - 8} ry={ry - 2} class="x-side" />
+            <ellipse cx={cx} cy={l.y} rx={rx - 8} ry={ry - 2} class="x-face" />
+            {[0.25, 0.45, 0.62, 0.78].map((k) => (
+              <ellipse cx={cx} cy={l.y - (ry - 2) * (1 - k) * 0.6} rx={(rx - 8) * k} ry={(ry - 2) * k} class="x-fine" />
+            ))}
+            <line x1={cx - rx + 8} y1={l.y} x2={cx + rx - 8} y2={l.y} class="x-fine" />
+          </>
+        )}
+        {l.kind === "rete" && (
+          <>
+            <ellipse cx={cx} cy={l.y} rx={rx - 8} ry={ry - 2} class="x-wire" />
+            <ellipse cx={cx + 10} cy={l.y - 1} rx={rx - 30} ry={(ry - 2) * 0.62} class="x-wire" />
+            <line x1={cx - rx + 8} y1={l.y} x2={cx + rx - 8} y2={l.y} class="x-wire" />
+            {stars.map(([x, y]) => (
+              <path d={`M${x.toFixed(1)} ${y.toFixed(1)} l -3 -5 l 6 0 z`} class="x-star" />
+            ))}
+          </>
+        )}
+        {l.kind === "rule" && (
+          <>
+            <path
+              d={`M${cx - rx + 6} ${l.y + 9} L${cx - 4} ${l.y - 2} L${cx + 4} ${l.y + 2} L${cx + rx - 6} ${l.y - 9} L${cx + 2} ${l.y + 5} Z`}
+              class="x-face"
+            />
+            <ellipse cx={cx} cy={l.y} rx="5" ry="2.4" class="x-face" />
+          </>
+        )}
+        <line x1={cx + rx + 4} y1={l.y} x2="196" y2={l.y} class="x-leader" />
+        <text x="202" y={l.y + 4} class="x-name">{l.name}</text>
+      </g>
+    ))
+  }
+  <line x1={cx + 6} y1="188" x2="196" y2="188" class="x-leader" />
+  <text x="202" y="192" class="x-name">the pyn &amp; the hors</text>
+</svg>
+
+<style>
+  .exploded {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: visible;
+  }
+  .exploded :is(line, ellipse, path, rect) {
+    vector-effect: non-scaling-stroke;
+  }
+  .x-face {
+    fill: #c99b4c;
+    stroke: #3b2810;
+    stroke-width: 0.8;
+  }
+  .x-side {
+    fill: #7b5424;
+    stroke: #3b2810;
+    stroke-width: 0.8;
+  }
+  .x-well {
+    fill: #9d7234;
+    stroke: #3b2810;
+    stroke-width: 0.6;
+  }
+  .x-fine {
+    fill: none;
+    stroke: #3b2810;
+    stroke-width: 0.5;
+  }
+  .x-wire {
+    fill: none;
+    stroke: #e2bd70;
+    stroke-width: 2.2;
+  }
+  .x-star {
+    fill: #f1d898;
+  }
+  .x-pin line {
+    stroke: #d4ad62;
+    stroke-width: 1.4;
+    stroke-dasharray: 3 3;
+  }
+  .x-pin path {
+    fill: #d4ad62;
+  }
+  .x-leader {
+    stroke: #8f7144;
+    stroke-width: 0.6;
+    stroke-dasharray: 1 2.5;
+  }
+  .x-name {
+    font-family: "Junicode 2", "EB Garamond", serif;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    fill: #e8d9b4;
+  }
+</style>
