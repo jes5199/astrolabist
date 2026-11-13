@@ -87,3 +87,8 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-p2-34-moon.js copied byte-for-byte from astrolabe-video f826d30.
 2026-11-13: treatise-p2-35-retrograde.js copied byte-for-byte from astrolabe-video ddefaab.
 2026-11-13: treatise-p2-38-meridian-line.js copied byte-for-byte from astrolabe-video bfc9f42.
+2026-11-13: lib/woodcut.js copied byte-for-byte from astrolabe-video d575ad4.
+2026-11-13: treatise-p1-3-mother-rete-ink.js copied byte-for-byte from astrolabe-video d575ad4.
+2026-11-13: treatise-p1-14-pin-horse-ink.js copied byte-for-byte from astrolabe-video d575ad4.
+2026-11-13: treatise-p2-36-houses-ink.js copied byte-for-byte from astrolabe-video deff733.
+2026-11-13: treatise-p2-37-houses-label-ink.js copied byte-for-byte from astrolabe-video 7ec8c51.
