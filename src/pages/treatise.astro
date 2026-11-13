@@ -149,6 +149,7 @@ const PLACE_INLINE = `(function (s) {
       if (at < 0) { p.before(w); return; }
       // norm() keeps length except where it collapses whitespace runs; map back by re-normalising prefixes.
       var raw = 0; while (raw < text.length && norm(text.slice(0, raw)).length < at) raw++;
+      while (raw < text.length && /\s/.test(text[raw])) raw++; // land on the phrase's first letter, not the space before it
       var hit = marks[0];
       for (var k = 0; k < marks.length; k++) if (marks[k][0] <= raw) hit = marks[k];
       var node = hit[1], off = raw - hit[0];
@@ -156,6 +157,34 @@ const PLACE_INLINE = `(function (s) {
       if (host && p.contains(host)) host.before(w);
       else if (off > 0 && off < node.nodeValue.length) node.parentNode.insertBefore(w, node.splitText(off));
       else node.parentNode.insertBefore(w, node);
+      // A float dropped mid-line would sit over the words already on that line, so a floated
+      // window moves back to the first word of the line its phrase starts on. Lines are only
+      // final once the web fonts are in, and they change with the width: so align then, and on resize.
+      w.__anchor = w.nextElementSibling;
+      if (!window.__alignPhraseWins) {
+        var lineTop = function (el) {
+          var r = document.createRange(); r.selectNodeContents(el.firstChild || el);
+          var rs = r.getClientRects(); return rs.length ? rs[0].top : el.getBoundingClientRect().top;
+        };
+        window.__alignPhraseWins = function () {
+          document.querySelectorAll(".inline-win[data-phrase]").forEach(function (v) {
+            if (!v.__anchor) return;
+            v.__anchor.before(v);
+            if (getComputedStyle(v).float === "none") return;
+            var top = lineTop(v.__anchor), s = v;
+            for (var q = v.previousSibling; q; q = q.previousSibling) {
+              if (q.nodeType === 3) { if (/\S/.test(q.nodeValue)) break; continue; }
+              if (q.nodeType !== 1 || q.classList.contains("inline-win")) break;
+              if (Math.abs(lineTop(q) - top) > 2) break;
+              s = q;
+            }
+            if (s !== v) s.before(v);
+          });
+        };
+        var t; window.addEventListener("resize", function () { clearTimeout(t); t = setTimeout(window.__alignPhraseWins, 150); });
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { requestAnimationFrame(window.__alignPhraseWins); });
+        window.addEventListener("load", function () { window.__alignPhraseWins(); });
+      }
       return;
     }
     if (w.dataset.size === "small") p.before(w);
