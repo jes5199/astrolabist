@@ -1,159 +1,229 @@
-// A Treatise on the Astrolabe, Part II, 3: "To knowe every tyme of the day by light of the sonne".
+// A Treatise on the Astrolabe, Part II, 3: "Tak the altitude of the sonne whan thee list ... set the degree of the
+// sonne ... among thyn almikanteras on the est side ... ley over thy label, up-on the degree of the sonne; and thanne
+// wol the point of thy label sitten in the bordure, up-on the verrey tyd of the day."  Chaucer's examples: 12 March
+// 1391, the sun 25 1/2 degrees high, the label on X, 9 o'clock, Gemini 20 rising; that night Alhabor 18 degrees high
+// in the west, the label past 8 o'clock, the ascendant rising.
 // Scene contract (astrolabist, src/components/Scene.astro): mount(el) once, then start(el) / stop(el).
 //
-// Chaucer's own example, on the front of the instrument: 12 March 1391, the sun in the first degree of Aries,
-// 25 1/2 degrees high before noon.  The rete is turned until the sun's degree lies on the circle of that
-// altitude on the east side (the left); the label is laid over the sun's degree; its point cuts the rim at the
-// letter X; the letters are counted from the line of midnight: nine of the clock.
-//
-// Second act, the same night: the day turns (the label stays on the sun and sweeps the hours) until the fair
-// white star Alhabor stands 12 degrees high in the west; the sun is under the horizon; the label, still over the
-// sun's degree, is counted from the line of midday: past nine by about ten degrees.
-//
-// The plate (latitude 52, as this instrument's is engraved) is computed here by stereographic projection.  How
-// far the rete turns and where the label cuts the rim come from the shared module, where they were computed on
-// our drawing: the label lands a degree and a half short of the X, about five minutes before nine.
-// COLOURED WOODCUT on vellum (jes tg 17847), replacing treatise-p2-3-time.js: shared lib/front-ink.js (the front
-// cut and washed by lib/woodcut.js); the sun ochre, Alhabor in ink, the reading in the printer's red.
-// Original line work; nothing is traced.
+// v2, A LARGE WINDOW, 3:2 (viewBox -150 -100 300 200), after II 4 v2 (jes tg 17908, 17914, 17917): Chaucer's steps one
+// at a time, each held, listed beside the instrument (the step being done in red).  By day, then by night.
+// The night star's altitude is the text's 18 degrees (the earlier scene used 12, from the film's song: wrong).  On our
+// constructed rete the night reading comes out past 8 o'clock as Chaucer says, but some forty minutes past rather than
+// his "2 degrees", and the rising degree near Libra 28 against his 23: so the night ascendant is ringed, not named.
+// By day the plate's geometry gives his figures exactly (9 o'clock; Gemini 20).  COLOURED WOODCUT on vellum: shared
+// lib/front-ink.js.  Original line work; nothing is traced.
 
 import A from "./lib/astrolabe-47869.js";
-import { front, node, f, rim, almucantar, SILVER, NIGHT, VELLUM, WASH } from "./lib/front-ink.js";
+import { front, node, f, rim, P, LAT, almucantar, SILVER, NIGHT, VELLUM, WASH } from "./lib/front-ink.js";
 
 const instances = new WeakMap();
-const RAD = Math.PI / 180;
-
-const C = { x: 0, y: 26, k: 0.64 }; // the instrument's centre in the window, and its scale (limb radius 100 -> 60)
+const LOOP = 48000;
+const STILL = 19500; // ms: by day, everything found
+const C = { x: -64, y: 12, k: 0.84 };
 const W = (px) => f(px / C.k);
-const LOOP = 44000; // ms
-const M = A.morning;
-const N = A.night;
-const ROT0 = M.rot - 75; // where the rete rests before it is turned
-const LABEL0 = M.label - 62; // where the label lies before it is laid over the sun
-const X_AT = 15 * (1 + A.hourLetters.indexOf("X")); // degrees clockwise from the top: 315
+const RAD = Math.PI / 180;
+const EPS = P.obliquity * RAD;
+const ZERO = A.rule.contract.zero_deg + 180;
+
+const ease = (u) => (u < 0 ? 0 : u > 1 ? 1 : u * u * (3 - 2 * u));
+const span = (t, a, b) => ease((t - a) / (b - a));
+const turn = (p, r) => [p[0] * Math.cos(r * RAD) - p[1] * Math.sin(r * RAD), p[0] * Math.sin(r * RAD) + p[1] * Math.cos(r * RAD)];
+const raOf = (l) => (Math.atan2(Math.cos(EPS) * Math.sin(l * RAD), Math.cos(l * RAD)) / RAD + 360) % 360;
+const decOf = (l) => Math.asin(Math.sin(EPS) * Math.sin(l * RAD));
+const ecl = (l) => rim(270 - raOf(l), (P.equator * Math.cos(decOf(l))) / (1 + Math.sin(decOf(l))));
+const off = (p, h) => {
+  const [c, r] = almucantar(h);
+  return Math.hypot(p[0], p[1] + c) - r;
+};
+// the turn of the rete that sets point p (on the rete) on the circle of altitude h, on the given side
+function setOn(p, h, west) {
+  let best = 0;
+  for (let r = 0; r < 360; r += 0.25) {
+    const a = turn(p, r);
+    const b = turn(p, r + 0.25);
+    if (off(a, h) * off(b, h) <= 0 && a[0] > 0 === west) {
+      let lo = r;
+      let hi = r + 0.25;
+      for (let k = 0; k < 40; k++) {
+        const m = (lo + hi) / 2;
+        if (off(turn(p, lo), h) * off(turn(p, m), h) <= 0) hi = m;
+        else lo = m;
+      }
+      best = lo;
+    }
+  }
+  return best;
+}
+const bearing = (p) => ((Math.atan2(p[0], -p[1]) / RAD) + 360) % 360;
+function rising(rot) {
+  let best = 0;
+  for (let l = 0; l < 360; l += 0.25) {
+    const a = turn(ecl(l), rot);
+    const b = turn(ecl(l + 0.25), rot);
+    if (a[0] < 0 && off(a, 0) * off(b, 0) <= 0) best = l + 0.125;
+  }
+  return best;
+}
+const SUN = ecl(A.morning.sunLongitude); // the first degree of Aries, on the rete
+const TIP = A.night.tip; // Alhabor's pointer, on the rete
+const DAY = { alt: A.morning.sunAlt, rot: setOn(SUN, A.morning.sunAlt, false) };
+DAY.label = bearing(turn(SUN, DAY.rot));
+DAY.asc = rising(DAY.rot);
+const NIGHT_ALT = 18;
+const NGT = { rot: setOn(TIP, NIGHT_ALT, true) };
+NGT.label = bearing(turn(SUN, NGT.rot));
+NGT.asc = rising(NGT.rot);
+const X_AT = 15 * (1 + A.hourLetters.indexOf("X")); // 315
+
+// the steps, with when each begins (s); the lines shown beside the instrument
+const STEPS = [
+  { t: 0.5, head: "By day", lines: ["the sun is 25½° high"] },
+  { t: 3.6, lines: ["set its degree on the", "25½° circle, east side"] },
+  { t: 8.2, lines: ["lay the label over it"] },
+  { t: 11.2, lines: ["it falls on X: from", "midnight, 9 o'clock"] },
+  { t: 16.0, lines: ["Gemini 20° is rising:", "the ascendant"] },
+  { t: 24.4, head: "By night", lines: ["Alhabor is 18° high,", "in the west"] },
+  { t: 27.4, lines: ["set it on the 18°", "circle, west side"] },
+  { t: 31.6, lines: ["lay the label over", "the sun's degree"] },
+  { t: 34.6, lines: ["from noon:", "past 8 o'clock"] },
+  { t: 39.4, lines: ["the degree rising:", "the ascendant"] },
+];
+const END = [24.0, 47.0]; // each half's end
 
 export function mount(el) {
   if (instances.has(el)) return;
   const uid = Math.random().toString(36).slice(2, 8);
-  const svg = node("svg", { viewBox: "-100 -100 200 200", width: "100%", height: "100%", "aria-hidden": "true" });
+  const svg = node("svg", { viewBox: "-150 -100 300 200", width: "100%", height: "100%", "aria-hidden": "true" });
   svg.style.fontFamily = "inherit";
-  const defs = node("defs", {}, svg);
-  const grad = node("radialGradient", { id: "glow-" + uid }, defs);
-  node("stop", { offset: 0, "stop-color": WASH.ochre, "stop-opacity": 0.75 }, grad);
-  node("stop", { offset: 1, "stop-color": WASH.ochre, "stop-opacity": 0 }, grad);
   const g = node("g", { transform: `translate(${C.x} ${C.y}) scale(${C.k})` }, svg);
-  // ---- the front, light: circles of altitude every ten degrees, no azimuths or hour lines, no letters
-  const fr = front(g, { scale: C.k, letters: false });
-  for (const a of fr.plate.almucantars) if (a.h % 10) a.el.setAttribute("display", "none");
-  for (const z of fr.plate.azimuths) z.el.setAttribute("display", "none");
-  for (const h of fr.plate.hours) h.setAttribute("display", "none");
-  // the circle of 25 1/2 degrees, the one the sun is set upon; and the circle of 12 degrees, for the star at night
-  const [up, r] = almucantar(M.sunAlt);
-  const circle = node("circle", { cy: f(-up), r: f(r), fill: "none", stroke: SILVER, "stroke-width": W(1.6), opacity: 0.35 }, fr.plate.clip);
-  const [up2, r2] = almucantar(N.starAlt);
-  const circle2 = node("circle", { cy: f(-up2), r: f(r2), fill: "none", stroke: SILVER, "stroke-width": W(1.6), opacity: 0 }, fr.plate.clip);
-  // ---- on the rete: the sun on its degree of the ecliptic, Alhabor on its pointer's tip
-  const rete = fr.rete.g;
-  const sun = node("g", { transform: `translate(${M.sunPoint[0]} ${M.sunPoint[1]})` }, rete);
-  const sunGlow = node("circle", { r: 12, fill: `url(#glow-${uid})`, opacity: 0.6 }, sun);
-  const sunDisc = node("circle", { r: 4.8, fill: WASH.ochre, stroke: SILVER, "stroke-width": W(1.6) }, sun);
-  const star = node("g", { transform: `translate(${N.tip[0]} ${N.tip[1]})` }, rete);
-  const starGlow = node("circle", { r: 11, fill: `url(#glow-${uid})`, opacity: 0 }, star);
-  node("circle", { r: 2.4, fill: "currentColor" }, star);
-  // ---- the label (the rule on the front), its own wobble as it turns; the pin over it
-  const label = node("g", { filter: fr.wc.rough }, g);
-  node("path", fr.wc.wash({ d: A.rule.d, fill: WASH.ochre, "fill-opacity": 0.7 }), label);
-  node("path", { d: A.rule.d, fill: "none", stroke: "currentColor", "stroke-width": W(1.2), "stroke-linejoin": "round" }, label);
+  const fr = front(g, { scale: C.k, faint: 0.4 });
+  fr.plate.clip.setAttribute("opacity", 0.35);
+  for (const h of fr.plate.hours) h.setAttribute("opacity", 0.15);
+  for (const z of fr.plate.azimuths) z.el.setAttribute("opacity", 0.25);
+  const letters = fr.letters;
+  for (const l of letters) l.setAttribute("opacity", 0.55);
+  // the two circles of altitude, each on its own side
+  const side = (west, id) => {
+    const cp = node("clipPath", { id }, g);
+    node("rect", { x: west ? 0 : -100, y: -100, width: 100, height: 200 }, cp);
+    return `url(#${id})`;
+  };
+  const circ = (h, west, id) => {
+    const [c, r] = almucantar(h);
+    return node("circle", { cy: f(-c), r: f(r), fill: "none", stroke: SILVER, "stroke-width": W(2), opacity: 0, "clip-path": side(west, id) }, fr.plate.clip.parentNode);
+  };
+  const dayCircle = circ(DAY.alt, false, "e" + uid);
+  const nightCircle = circ(NIGHT_ALT, true, "w" + uid);
+  // on the rete: the sun's degree (ochre, ringed red), Alhabor's tip (ringed red)
+  const sun = node("circle", { cx: f(SUN[0]), cy: f(SUN[1]), r: 4.4, fill: WASH.ochre, stroke: SILVER, "stroke-width": W(1.6), opacity: 0 }, fr.rete.g);
+  const star = node("circle", { cx: f(TIP[0]), cy: f(TIP[1]), r: 4.6, fill: "none", stroke: SILVER, "stroke-width": W(1.8), opacity: 0 }, fr.rete.g);
+  // the label, its own wobble as it turns; the pin over it
+  const label = node("g", { filter: fr.wc.rough, opacity: 0 }, g);
+  node("path", fr.wc.wash({ d: A.rule.d, fill: WASH.ochre, "fill-opacity": 0.75 }), label);
+  node("path", { d: A.rule.d, fill: "none", stroke: "currentColor", "stroke-width": W(1.3), "stroke-linejoin": "round" }, label);
   node("circle", { r: 4.2, fill: VELLUM, stroke: "currentColor", "stroke-width": W(1.2) }, g);
-  // ---- the count along the rim, the letter, the hour, the star's name
-  const R = A.frontRadii;
-  const count = node("path", { fill: "none", stroke: SILVER, "stroke-width": 2, "stroke-linecap": "round", opacity: 0 }, svg);
-  const text = (x, y, size, str) => {
-    const t = node("text", { x: f(x), y: f(y), "text-anchor": "middle", "font-size": size, "font-weight": 600, fill: SILVER, opacity: 0, "font-family": "inherit", stroke: NIGHT, "stroke-width": 3, "stroke-linejoin": "round", "paint-order": "stroke" }, svg);
-    t.textContent = str;
-    return t;
-  };
-  const xp = rim(X_AT, R.outer * C.k + 11);
-  const letter = text(C.x + xp[0], C.y + xp[1] + 5, 15, "X");
-  const hour = text(-79, 50, 18, "");
-  const hour2 = text(79, 50, 18, "");
-  const name = text(64, -40, 13, "Alhabor");
-
+  // the count along the rim (from midnight by day, from noon by night)
+  const count = node("path", { fill: "none", stroke: SILVER, "stroke-width": W(2.6), "stroke-linecap": "round", opacity: 0 }, g);
+  // the rising degree on the eastern horizon
+  const ascDay = node("circle", { r: 4, fill: SILVER, stroke: NIGHT, "stroke-width": W(1), opacity: 0 }, g);
+  const ascNight = node("circle", { r: 5, fill: "none", stroke: SILVER, "stroke-width": W(2), opacity: 0 }, g);
+  // the list of steps, beside the instrument
+  const list = node("g", {}, svg);
+  const X0 = 34;
+  let y = -78;
+  const rows = STEPS.map((st, i) => {
+    if (st.head) {
+      if (i) y = -78;
+      const h = node("text", { x: X0, y, "font-size": 13, "font-weight": 700, fill: SILVER, opacity: 0, "font-family": "inherit" }, list);
+      h.textContent = st.head;
+      y += 20;
+      st.headEl = h;
+    }
+    const els = st.lines.map((ln, j) => {
+      const t = node("text", { x: X0 + (j ? 11 : 0), y: y + j * 12, "font-size": 10, "font-weight": 600, fill: "currentColor", opacity: 0, "font-family": "inherit" }, list);
+      t.textContent = (j ? "" : `${(i % 5) + 1}  `) + ln;
+      return t;
+    });
+    y += 12 * st.lines.length + 9;
+    return els;
+  });
   el.appendChild(svg);
-  const s = { rete, label, circle, circle2, sunGlow, sunDisc, starGlow, count, letter, hour, hour2, name, raf: 0, t0: 0, at: 0 };
+  const s = { rete: fr.rete.g, letters, dayCircle, nightCircle, sun, star, label, count, ascDay, ascNight, rows, raf: 0, t0: 0, tm: STILL };
   instances.set(el, s);
-  draw(s, STILL); // the still: the morning, the rete set, the label laid, nine counted
+  draw(s, STILL / 1000);
 }
 
-// One moment of the scene.  rete, label: degrees clockwise; day: 1 morning lit, 0 not; night: likewise;
-// from, to: the count's arc along the rim (degrees clockwise from the top), cnt: its opacity; show: the
-// letter X; fig, fig2: the hour figures (morning on the left, night on the right) and their opacities.
-const STILL = { rete: M.rot, label: M.label, day: 1, night: 0, sun: 1, from: 180, to: M.label, cnt: 1, show: 1, fig: 9, figA: 1, fig2: 0, figB: 0 };
+// the rim's arc between two bearings (clockwise), as path data in the plate's units
+function arc(b0, b1, r) {
+  if (b1 - b0 < 0.5) return "";
+  const a = rim(b0, r);
+  const b = rim(b1, r);
+  return `M${f(a[0])} ${f(a[1])}A${r} ${r} 0 ${b1 - b0 > 180 ? 1 : 0} 1 ${f(b[0])} ${f(b[1])}`;
+}
 
-function draw(s, p) {
-  s.rete.setAttribute("transform", `rotate(${f(p.rete)})`);
-  s.label.setAttribute("transform", `rotate(${f(p.label - (A.rule.contract.zero_deg + 180))})`);
-  s.circle.setAttribute("opacity", f(0.3 + 0.7 * p.day));
-  s.circle2.setAttribute("opacity", f(p.night));
-  s.sunGlow.setAttribute("opacity", f((0.6 + 0.4 * p.day) * p.sun));
-  s.sunDisc.setAttribute("opacity", f(0.35 + 0.65 * p.sun));
-  s.starGlow.setAttribute("opacity", f(p.night));
-  s.name.setAttribute("opacity", f(p.night));
-  // the count: an arc outside the rim, clockwise from the line it is counted from to where the label points
-  const r = A.frontRadii.outer * C.k + 3.2;
-  if (p.cnt > 0.004 && p.to - p.from > 0.5) {
-    const a = rim(p.from, r);
-    const b = rim(p.to, r);
-    s.count.setAttribute("d", `M${f(C.x + a[0])} ${f(C.y + a[1])}A${f(r)} ${f(r)} 0 ${p.to - p.from > 180 ? 1 : 0} 1 ${f(C.x + b[0])} ${f(C.y + b[1])}`);
-    s.count.setAttribute("opacity", f(p.cnt));
+function draw(s, t) {
+  const night = t >= END[0];
+  // the rete: by day turned into the sun's setting; between, on round toward the night's; by night onto Alhabor's;
+  // at the end, on round to where the day began
+  const d0 = DAY.rot - 60;
+  const n0 = NGT.rot - 40;
+  let r;
+  if (t < END[0]) r = d0 + 60 * span(t, 3.8, 7.6) + (n0 - DAY.rot) * span(t, 22.4, 24.0);
+  else r = n0 + 40 * span(t, 27.6, 31.2) + (((d0 + 360 - NGT.rot) % 360) * span(t, 46.6, 48.0));
+  s.rete.setAttribute("transform", `rotate(${f(r)})`);
+  // the circles
+  s.dayCircle.setAttribute("opacity", f(span(t, 0.6, 1.2) * (1 - span(t, 21.6, 22.4))));
+  s.nightCircle.setAttribute("opacity", f(span(t, 24.6, 25.2) * (1 - span(t, 44.6, 45.4))));
+  s.sun.setAttribute("opacity", f(span(t, 1.0, 1.5) * (1 - span(t, 21.6, 22.4)) + span(t, 31.6, 32.0) * (1 - span(t, 44.6, 45.4))));
+  s.star.setAttribute("opacity", f(span(t, 25.0, 25.5) * (1 - span(t, 44.6, 45.4))));
+  // the label: laid over the sun's degree (by day at 8.2, by night at 31.6), taken away between
+  const lb = night ? NGT.label : DAY.label;
+  const lay = night ? span(t, 31.6, 33.4) : span(t, 8.2, 10.0);
+  const rest = lb + (night ? -50 : 50);
+  const shown = night ? span(t, 31.4, 31.8) * (1 - span(t, 44.6, 45.4)) : span(t, 8.0, 8.4) * (1 - span(t, 21.6, 22.4));
+  s.label.setAttribute("transform", `rotate(${f(rest + (lb - rest) * lay - ZERO)})`);
+  s.label.setAttribute("opacity", f(shown));
+  // the count: by day from midnight (180) to the label; by night from noon (0)
+  const R = A.frontRadii.outer + 4;
+  if (!night) {
+    const u = span(t, 11.6, 14.4);
+    s.count.setAttribute("d", arc(180, 180 + (DAY.label - 180) * u, R));
+    s.count.setAttribute("opacity", f(span(t, 11.4, 11.7) * (1 - span(t, 21.6, 22.4))));
   } else {
-    s.count.setAttribute("opacity", 0);
+    const u = span(t, 34.8, 37.6);
+    s.count.setAttribute("d", arc(0, NGT.label * u, R));
+    s.count.setAttribute("opacity", f(span(t, 34.6, 34.9) * (1 - span(t, 44.6, 45.4))));
   }
-  s.hour.textContent = p.fig > 0 ? String(p.fig) : "";
-  s.hour.setAttribute("opacity", f(p.figA));
-  s.hour2.textContent = p.fig2 > 0 ? String(p.fig2) : "";
-  s.hour2.setAttribute("opacity", f(p.figB));
-  s.letter.setAttribute("opacity", f(p.show));
-}
-
-const ease = (u) => (u < 0 ? 0 : u > 1 ? 1 : u * u * (3 - 2 * u));
-const span = (u, a, b) => ease((u - a) / (b - a));
-const mix = (a, b, t) => a + (b - a) * t;
-
-function pose(t) {
-  const u = t / LOOP;
-  // act 1, the morning
-  const turn = span(u, 0.02, 0.17);
-  const lay = span(u, 0.19, 0.26);
-  const c1 = span(u, 0.28, 0.37);
-  const show1 = span(u, 0.37, 0.39) * (1 - span(u, 0.46, 0.49));
-  // the day passes: the rete and the label upon the sun turn together
-  const day = span(u, 0.49, 0.66);
-  // act 2, the night
-  const c2 = span(u, 0.69, 0.78);
-  const show2 = span(u, 0.78, 0.8);
-  const out = span(u, 0.92, 1); // back to rest
-  const dayTurn = N.rot - M.rot;
-  const rete = mix(ROT0, M.rot, turn) + dayTurn * day + (ROT0 + 360 - N.rot) * out;
-  const label = mix(LABEL0, M.label, lay) + dayTurn * day + (LABEL0 + 360 - N.label) * out;
-  const morning = u < 0.49;
-  const to1 = mix(180, M.label, c1);
-  const to2 = mix(0, N.label, c2);
-  return {
-    rete,
-    label,
-    day: (turn > 0.985 ? 1 : 0) * (1 - span(u, 0.49, 0.52)),
-    night: span(u, 0.655, 0.67) * (1 - out),
-    sun: 1 - span(u, 0.57, 0.63) + out,
-    from: morning ? 180 : 0,
-    to: morning ? to1 : to2,
-    cnt: morning ? Math.min(1, c1 * 8) * (0.55 + 0.45 * show1) * (1 - span(u, 0.46, 0.49)) : Math.min(1, c2 * 8) * (0.55 + 0.45 * show2) * (1 - out),
-    show: show1,
-    fig: Math.min(9, Math.floor((to1 - 180) / 15 + 0.12)),
-    figA: c1 > 0.02 ? (0.55 + 0.45 * span(u, 0.37, 0.39)) * (1 - span(u, 0.46, 0.49)) : 0,
-    fig2: Math.min(9, Math.floor(to2 / 15 + 0.03)),
-    figB: c2 > 0.02 ? (0.55 + 0.45 * show2) * (1 - out) : 0,
-  };
+  // the letter X lit by day
+  const xi = Math.round(X_AT / 15);
+  s.letters.forEach((l, i) => {
+    const lit = i === xi ? span(t, 11.2, 11.6) * (1 - span(t, 21.6, 22.4)) : 0;
+    l.setAttribute("fill", lit > 0.5 ? SILVER : "currentColor");
+    l.setAttribute("opacity", f(0.55 + 0.45 * lit));
+  });
+  // the rising degrees
+  const pd = turn(ecl(DAY.asc), r);
+  s.ascDay.setAttribute("cx", f(pd[0]));
+  s.ascDay.setAttribute("cy", f(pd[1]));
+  s.ascDay.setAttribute("opacity", f(span(t, 16.0, 16.5) * (1 - span(t, 21.6, 22.4))));
+  const pn = turn(ecl(NGT.asc), r);
+  s.ascNight.setAttribute("cx", f(pn[0]));
+  s.ascNight.setAttribute("cy", f(pn[1]));
+  s.ascNight.setAttribute("opacity", f(span(t, 39.4, 39.9) * (1 - span(t, 44.6, 45.4))));
+  // the list: the step being done in red, those done in ink, those to come faint; each half shows only its own
+  STEPS.forEach((st, i) => {
+    const half = i < 5 ? 0 : 1;
+    const inHalf = half === 0 ? span(t, 0.2, 0.5) * (1 - span(t, 22.4, 23.0)) : span(t, 24.0, 24.4) * (1 - span(t, 46.4, 47.0));
+    const next = STEPS[i + 1] && (i + 1) % 5 ? STEPS[i + 1].t : END[half];
+    const now = t >= st.t && t < next;
+    const done = t >= next;
+    const a = (now || done ? 1 : 0.3) * inHalf;
+    for (const e of s.rows[i]) {
+      e.setAttribute("opacity", f(a));
+      e.setAttribute("fill", now ? SILVER : "currentColor");
+    }
+    if (st.headEl) st.headEl.setAttribute("opacity", f(inHalf));
+  });
 }
 
 export function start(el) {
@@ -161,9 +231,9 @@ export function start(el) {
   if (!s || s.raf) return;
   s.t0 = 0;
   const step = (now) => {
-    if (!s.t0) s.t0 = now - s.at;
-    s.at = (now - s.t0) % LOOP;
-    draw(s, pose(s.at));
+    if (!s.t0) s.t0 = now - s.tm;
+    s.tm = (now - s.t0) % LOOP;
+    draw(s, s.tm / 1000);
     s.raf = requestAnimationFrame(step);
   };
   s.raf = requestAnimationFrame(step);
@@ -180,6 +250,6 @@ export function stop(el) {
 export function seek(el, ms) {
   const s = instances.get(el);
   if (!s) return;
-  s.at = ((ms % LOOP) + LOOP) % LOOP;
-  draw(s, pose(s.at));
+  s.tm = ((ms % LOOP) + LOOP) % LOOP;
+  draw(s, s.tm / 1000);
 }
