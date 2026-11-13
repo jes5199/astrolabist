@@ -1,0 +1,5 @@
+To find the Sun’s longitude for each day in its orbit. Determine the day of the month and set the rule (ed. alidade) on that day. The tip of the rule points to the Sun’s longitude on the scale on the border.
+
+For example, to find the Sun’s longitude at noon, March 12, 1391, I find the scale of days on the back of my astrolabe, which I recognize by the names of the months written under the circle. I set the rule over this day and find that the tip of the rule lies on the first degree of Aries and a little. Thus, I have solved the problem.
+
+I would also like to know the Sun’s longitude at noon on December 13. I find the day of the month as before and set the rule on this date and find the point of the rule is on the first degree of Capricorn and a little. Now I have good practice for this problem.

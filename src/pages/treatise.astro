@@ -23,11 +23,10 @@ const partSlug: Record<string, string> = {
 const anchor = (part: string, section: string) =>
   part === "Prologue" ? "prologue" : `${partSlug[part]}-${section}`;
 
-// Optional LOCAL-ONLY modern text, read at build time from .private/<source>/<slug>.txt.
-// .private/ is git-excluded and guarded by hooks: it holds third-party text we have no
-// licence to publish (e.g. Morrison's translation, permission pending). It never exists
-// on Netlify, so production builds fall back to the frontmatter `modern` field or the placeholder.
-const PRIVATE_MODERN = { dir: ".private/morrison", credit: "James E. Morrison" };
+// Optional modern text, read at build time from <dir>/<slug>.txt if the file exists.
+// Morrison's translation is permitted on this branch only; publishing on the live site
+// still needs a second permission (see src/treatise-text/morrison/README.md).
+const PRIVATE_MODERN = { dir: "src/treatise-text/morrison", credit: "James E. Morrison" };
 const privateModern = (slug: string): string[] | null => {
   const f = path.join(process.cwd(), PRIVATE_MODERN.dir, `${slug}.txt`);
   if (!fs.existsSync(f)) return null;
@@ -59,7 +58,7 @@ const parts = ["Prologue", "Part I", "Part II"].map((name) => ({
       <p class="t-intro">
         Geoffrey Chaucer, <cite>A Treatise on the Astrolabe</cite> (c. 1391).
         Middle English text: W. W. Skeat (1894).{usesPrivate && (
-          <> Modern English: {PRIVATE_MODERN.credit}. <strong class="t-private">Private local preview; permission pending, not for publication.</strong></>
+          <> Modern English: {PRIVATE_MODERN.credit}. <strong class="t-private">Draft preview; publication permission pending.</strong></>
         )}
       </p>
     </header>
