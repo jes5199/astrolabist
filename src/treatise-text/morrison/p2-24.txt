@@ -1,0 +1,3 @@
+Another method of finding the altitude of the pole.
+
+Take any star that never sets in the region of interest and determine its maximum and minimum altitude from the horizon. Then take the altitude that is halfway between as the altitude of the pole in that place. (ed. This article seems to be identical to 23.)

@@ -1,0 +1,1 @@
+To find the azimuth from the Sun’s altitude. There is nothing more to do than measure the altitude of the Sun at any time and note the azimuth of the Sun’s position. This can also be done at night for any star, whether is in the east, west, north or south, or any place in between, from the azimuth of the star’s position.

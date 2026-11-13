@@ -4,6 +4,10 @@ part: "Prologue"
 section: "Prologue"
 heading: "Prologue"
 scene: "demo-rete"
+inlineScenes:
+  - name: "treatise-prologue"
+    after: "sleen envye"
+    label: "Figure: with this swerd shal I sleen envye"
 modern: ""
 ---
 

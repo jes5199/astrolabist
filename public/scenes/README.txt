@@ -1,0 +1,25 @@
+Scene modules for /treatise/ (loaded lazily by src/components/Scene.astro).
+Contract: export mount(el), start(el), stop(el).
+
+demo-rete.js, night-window.js
+  Written for this site. demo-rete is the Prologue's opening window;
+  night-window is the default for sections with no scene.
+
+From the astrolabe-video repository (web/scenes/...), copied byte-for-byte:
+  treatise-prologue.js         commit ae9749e (inline, at "sleen envye")
+  lib/figures-rig.js           commit ae9749e
+  lib/figures.js               commit ae9749e
+  lib/prologue-data.js         commit ae9749e
+  treatise-p1-1-ring.js        commit 5712b02
+  treatise-p1-2-shackle.js     commit 5712b02
+  treatise-p1-3-mother-rete.js commit 5712b02
+  treatise-p2-1-sun-degree.js  commit 96b870a (March and December acts)
+  treatise-p2-2-altitude.js    commit e5ff358 (unchanged through 96b870a)
+  treatise-p2-3-time.js        commit 35daf72 (morning and night acts; unchanged through 96b870a)
+  lib/astrolabe-47869.js       commit 0f3a311 (calendar parameters added; unchanged through 96b870a)
+
+The astrolabe outlines are constructed from Jes's own CC BY reconstruction
+drawing of Oxford, History of Science Museum, inv. 47869; the scenes' scales
+and projections are computed in the modules. The Prologue's figures, room and
+props are astrolabe-video's own drawing, made in code. Regenerate all of
+these there, not here.

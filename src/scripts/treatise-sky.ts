@@ -109,8 +109,8 @@ const RETE_NAMES: Record<string, string> = {
   Sirius: "Alhabor",
   Arcturus: "Alramech",
   Vega: "Wega",
-  Aldebaran: "Aldeboran",
-  Capella: "Alhaioth",
+  Aldebaran: "Aldeberan",
+  Capella: "Alhajoth",
   Spica: "Azimech",
   Procyon: "Algomeisa",
   Regulus: "Cor Leonis",
@@ -181,7 +181,7 @@ export function initSky(root: HTMLElement) {
 
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
   const BASE = 7.2 * 15 * D; // sidereal time at the top of the page
-  const RATE = 0.012 * D; // radians of sidereal time per CSS pixel scrolled
+  const RATE = 0.006 * D; // radians of sidereal time per CSS pixel scrolled
 
   let W = 0, H = 0, dpr = 1, R = 1, px = 0, py = 0, rmax = 1;
   let faint: Float32Array = new Float32Array(0); // x, y, size, alpha (sky coords)
@@ -445,20 +445,37 @@ export function initSky(root: HTMLElement) {
     [".t-sec-label", 18, 0.95],
     [".t-hero > :not(h1)", 14, 0.95],
     [".t-hero h1", 10, 0.7],
-    [".t-toc h2, .toc-text", 10, 0.95],
+    [".t-toc h2, .toc-band, .toc-group h3, .toc-caption, .toc-full", 10, 0.95],
     [".t-view", 10, 0.95],
-    [".t-part-head > :not(svg)", 14, 0.95],
+    [".t-part-head > :not(svg), .t-group-head p, .t-colophon, .t-part-end", 14, 0.95],
     [".t-end > *", 14, 0.95],
     // Sky windows: not erased (strength 0), but labels keep clear of them.
     [".win", 4, 0],
   ];
-  const veilEls = VEILS.map(([sel, pad, k]) => ({ els: [...root.querySelectorAll<HTMLElement>(sel)], pad, k }));
+  // With ~75 sections there are hundreds of candidate blocks; only those
+  // within a screen of the viewport are measured each frame. The set is kept
+  // by an IntersectionObserver, so a redraw reads a bounded number of rects.
+  const veilOf = new Map<Element, { pad: number; k: number }>();
+  VEILS.forEach(([sel, pad, k]) => root.querySelectorAll(sel).forEach((el) => veilOf.set(el, { pad, k })));
+  const live = new Set<Element>();
+  const veilIO = new IntersectionObserver(
+    (es) => {
+      for (const e of es) {
+        if (e.isIntersecting) live.add(e.target);
+        else live.delete(e.target);
+      }
+      drawRete(true);
+    },
+    { rootMargin: "100% 0px" }
+  );
+  veilOf.forEach((_, el) => veilIO.observe(el));
   type Box = { l: number; t: number; r: number; b: number; k: number };
   function veilBoxes(): Box[] {
     const out: Box[] = [];
     const hostTop = host!.getBoundingClientRect().top;
-    for (const v of veilEls) {
-      for (const el of v.els) {
+    for (const el of live) {
+      const v = veilOf.get(el)!;
+      {
         const r = el.getBoundingClientRect();
         if (!r.width || !r.height) continue;
         const t = r.top - hostTop, b = r.bottom - hostTop;

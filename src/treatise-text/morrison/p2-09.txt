@@ -1,0 +1,1 @@
+To find the length of the vulgar day, that is, from the beginning of morning twilight to the end of evening twilight. Find the time of the twilights as shown in item 2, above, and add them to the length of the artificial day, taking the length of the complete day until complete night. You can find the length of vulgar night in the same way.
