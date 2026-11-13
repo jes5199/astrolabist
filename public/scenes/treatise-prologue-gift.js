@@ -7,14 +7,14 @@
 // It swings and comes to rest; he brings it down before his face and turns it on its ring, front and back.  The
 // hand-over plays once; then the boy's turning of it goes round.  The figures are jointed (figures-rig.js,
 // figures.js); their poses are solved from the film's rig (prologue-gift-data.js); the room is the sword scene's
-// (prologue-data.js); the instrument is our constructed drawing of Oxford inv. 47869 (astrolabe-47869.js).
+// (prologue-data.js); the instrument is painted by lib/painted.js (our constructed drawing of Oxford inv. 47869).
 // Our own drawing throughout; nothing is traced.
 
 import RIG from "./lib/figures-rig.js";
 import D from "./lib/prologue-data.js";
 import Q from "./lib/prologue-gift-data.js";
-import A from "./lib/astrolabe-47869.js";
 import { build, along } from "./lib/figures.js";
+import { instrument } from "./lib/painted.js";
 
 const NS = "http://www.w3.org/2000/svg";
 const instances = new WeakMap();
@@ -24,11 +24,6 @@ const STILL = 4200; // ms: both thumbs in the ring
 const VIEW = { x: -10, y: 380, s: 1100 }; // the square of the film's picture that fills the window
 const INK = "#17100d";
 const DIA = 124; // the instrument's diameter, film units
-const K = DIA / 200;
-const PIVOT = -181; // where the ring bears on a thumb, instrument units above the centre
-const BRASS = "#d9b04c";
-const BRASS_DK = "#a87c2a";
-const BRASS_LT = "#efd98f";
 
 function node(tag, attrs, parent) {
   const n = document.createElementNS(NS, tag);
@@ -40,8 +35,6 @@ const clamp = (u) => (u < 0 ? 0 : u > 1 ? 1 : u);
 const ease = (u) => ((u = clamp(u)), u * u * (3 - 2 * u));
 const es = (t, a, b) => ease((t - a) / (b - a));
 const lerp = (a, b, u) => a + (b - a) * u;
-const r1 = (v) => +v.toFixed(1);
-const r3 = (v) => +v.toFixed(3);
 
 // recorded drawing calls of the film's prop code: {c, o, w, cap, d} or {c, dot: [x, y, r]}
 function replay(items, parent) {
@@ -91,54 +84,6 @@ function room(g, uid) {
   node("path", { d: arch, fill: "none", stroke: INK, "stroke-width": 3 }, g);
 }
 
-// the instrument as the miniature paints it, in its own units (limb radius 100, y down): brass, an ink contour.
-// Two faces: the front (plate under the rete) and the back (the scales and the rule); the ring is shared.
-function instrument(parent) {
-  const w = (px) => r3(px / K); // a film-unit stroke in instrument units
-  const g = node("g", {}, parent);
-  const ink = { stroke: INK, "stroke-width": w(2.6), "stroke-linejoin": "round" };
-  node("path", { d: A.throneFront.ring, fill: BRASS, ...ink, "stroke-width": w(1.6) }, g);
-  const face = (name) => node("g", { "data-face": name }, g);
-  // the front
-  const fr = face("front");
-  for (const k of ["base", "boss", "stem", "shackle"]) node("path", { d: A.throneFront[k], fill: BRASS, ...ink }, fr);
-  node("circle", { r: 100, fill: BRASS, ...ink }, fr);
-  node("circle", { r: A.frontRadii.hollow, fill: BRASS_LT, stroke: BRASS_DK, "stroke-width": w(1.2) }, fr);
-  let d = "";
-  for (let i = 0; i < 24; i++) {
-    const a = (i * Math.PI) / 12;
-    d += `M${r1(89 * Math.sin(a))} ${r1(-89 * Math.cos(a))}L${r1(97 * Math.sin(a))} ${r1(-97 * Math.cos(a))}`;
-  }
-  node("path", { d, stroke: BRASS_DK, "stroke-width": w(0.9), fill: "none" }, fr);
-  for (const alt of [0, 30, 60]) {
-    const L = (A.plate.latitude * Math.PI) / 180;
-    const h = (alt * Math.PI) / 180;
-    const den = Math.sin(L) + Math.sin(h);
-    node("circle", { cy: r1((-A.plate.equator * Math.cos(L)) / den), r: r1((A.plate.equator * Math.cos(h)) / den), fill: "none", stroke: BRASS_DK, "stroke-width": w(alt ? 0.6 : 1), "clip-path": "" }, fr);
-  }
-  node("path", { d: A.rete, fill: BRASS, "fill-rule": "evenodd", stroke: INK, "stroke-width": w(0.9), transform: `rotate(${A.morning.rot})` }, fr);
-  node("circle", { r: 6, fill: BRASS_DK, ...ink, "stroke-width": w(1) }, fr);
-  // the back
-  const bk = face("back");
-  for (const k of ["base", "boss", "stem", "shackle"]) node("path", { d: A.throneBack[k], fill: BRASS, ...ink }, bk);
-  node("circle", { r: 100, fill: BRASS_LT, ...ink }, bk);
-  for (const k of ["altitude", "degrees", "signs", "months", "days"]) node("circle", { r: A.backTiers[k], fill: "none", stroke: BRASS_DK, "stroke-width": w(0.8) }, bk);
-  const sq = +A.backSquare.outer;
-  node("path", { d: `M${-sq} 0V${sq}H${sq}V0`, fill: "none", stroke: BRASS_DK, "stroke-width": w(0.8) }, bk);
-  node("path", { d: A.alidade.body, fill: BRASS, stroke: INK, "stroke-width": w(1), transform: "rotate(-35)" }, bk);
-  node("circle", { r: 5, fill: BRASS_DK, ...ink, "stroke-width": w(1) }, bk);
-  // its hanging: hook (film units), sway (degrees), turn (0: the front to us; pi: the back)
-  return {
-    g,
-    set(hook, sway, turn) {
-      const c = Math.cos(turn);
-      const sq = Math.max(0.04, Math.abs(c));
-      g.setAttribute("transform", `translate(${r1(hook[0])} ${r1(hook[1])}) rotate(${r1(sway)}) scale(${r3(K * sq)} ${r3(K)}) translate(0 ${-PIVOT})`);
-      fr.setAttribute("display", c >= 0 ? "inline" : "none");
-      bk.setAttribute("display", c >= 0 ? "none" : "inline");
-    },
-  };
-}
 
 export function mount(el) {
   if (instances.has(el)) return;
@@ -157,7 +102,7 @@ export function mount(el) {
   g.appendChild(chaucer.layers[0]);
   replay(D.desk, node("g", { transform: `translate(${chPlace[4]} ${chPlace[5]})` }, g));
   g.appendChild(chaucer.layers[1]);
-  const inst = instrument(g);
+  const inst = instrument(g, DIA);
   el.appendChild(svg);
   const s = { lewis, chaucer, chPlace, inst, raf: 0, t0: 0, tm: STILL };
   instances.set(el, s);

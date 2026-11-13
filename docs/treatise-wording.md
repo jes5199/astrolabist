@@ -80,6 +80,7 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | Engraved scale names `Aries`, `Pisces`, `Capricornus`, `Sagittarius`, `Marcius`, `Februarius`, `Aprilis`, `December`, `November`, `Januarius` | treatise-p2-1-sun-degree.js:105, :115 | Part II §1. Inscriptions on the instrument's back, in Latin as engraved. | provisional; awaiting Jes |
 | `south`, `north` | treatise-p1-4-meridional.js | Part I §4 (astrolabe-video bfe8a43). Ours; Chaucer says "south lyne / lyne meridional" and "north lyne / lyne of midnight". | provisional; awaiting Jes |
 | `east`, `west` | treatise-p1-5-east-west.js | Part I §5 (astrolabe-video e80e012). Ours; Chaucer says "Est lyne / lyne Orientale" and "West lyne / lyne Occidentale". | provisional; awaiting Jes |
+| `east`, `west` | treatise-p1-6-right-left.js | Part I §6 (astrolabe-video 7ab74e2). Ours, as in §5. | provisional; awaiting Jes |
 
 ## Not on the page
 
