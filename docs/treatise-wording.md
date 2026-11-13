@@ -96,6 +96,7 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | `Pol Artik` | treatise-p1-14-pin-horse.js | Part I §14 (astrolabe-video d2c0b6d). Chaucer's own words. Honesty notes: the horse-head wedge is the general type (47869's wedge is not recorded); thicknesses drawn 3.5× deeper. | source text |
 | `south`, `north`, `east`, `west` | treatise-p1-15-front-quarters.js | Part I §15 (astrolabe-video 169e6da). | **decided: modern** (Jes, tg 17771) |
 | (none: the instrument's own hour letters and cross, as engraved) | treatise-p1-16-front-border.js | Part I §16 (astrolabe-video c20a560). | n/a |
+| `Cancer`, `equinoxial`, `Capricorn` | treatise-p1-17-three-circles.js | Part I §17 (astrolabe-video 2766b18). Short forms of Chaucer's "cercle of Cancer / Cercle Equinoxial / Cercle of Capricorne". Modern alternatives: Tropic of Cancer / equator / Tropic of Capricorn. | provisional; awaiting Jes |
 
 ## Not on the page
 
