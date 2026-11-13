@@ -8,9 +8,14 @@
 //     hand-entered list of bright stars with constellation lines, and the
 //     ecliptic band with its twelve signs.
 // Scrolling advances sidereal time, so the rete turns about the pole star
-// (Chaucer's diurnal motion). Nothing animates on its own: the rete canvas is
+// (Chaucer's diurnal motion). Nothing animates on its own: the canvas is
 // redrawn only when the scroll position changes, at most once per frame.
-// Under prefers-reduced-motion the sky is drawn once and never turns.
+// Under prefers-reduced-motion the sky never turns.
+//
+// Legibility: wherever text sits, the sky recedes. Each redraw erases the
+// canvas under every visible text block through a feathered mask (so the
+// words sit on plain night with soft edges, no blotches), and star or
+// constellation names that would land near text are not drawn at all.
 //
 // All positions are computed here from public-domain star coordinates
 // (approximate J2000 RA in hours, Dec in degrees, visual magnitude).
@@ -166,9 +171,10 @@ const SERIF = '"Junicode 2", "Junicode", Georgia, serif';
 
 export function initSky(root: HTMLElement) {
   const host = root.querySelector<HTMLElement>(".sky");
-  const plateC = host?.querySelector<HTMLCanvasElement>(".sky-plate");
   const reteC = host?.querySelector<HTMLCanvasElement>(".sky-rete");
-  if (!host || !plateC || !reteC) return;
+  if (!host || !reteC) return;
+  // The plate is static: drawn once per resize offscreen, blitted each frame.
+  const plateC = document.createElement("canvas");
   const pctx = plateC.getContext("2d");
   const rctx = reteC.getContext("2d");
   if (!pctx || !rctx) return;
@@ -196,7 +202,7 @@ export function initSky(root: HTMLElement) {
     W = host!.clientWidth;
     H = host!.clientHeight;
     dpr = Math.min(window.devicePixelRatio || 1, 1.75);
-    for (const c of [plateC!, reteC!]) {
+    for (const c of [plateC, reteC!]) {
       c.width = Math.round(W * dpr);
       c.height = Math.round(H * dpr);
     }
@@ -242,7 +248,7 @@ export function initSky(root: HTMLElement) {
       const rad = (40 + hr() * 90) * (rho(dec, R) / R + 0.6) * (R / 600);
       const g = h.createRadialGradient(x, y, 0, x, y, rad);
       const tint = hr() < 0.5 ? "150,165,255" : "190,160,230";
-      g.addColorStop(0, `rgba(${tint},${(0.008 + 0.012 * boost).toFixed(3)})`);
+      g.addColorStop(0, `rgba(${tint},${(0.007 + 0.01 * boost).toFixed(3)})`);
       g.addColorStop(1, `rgba(${tint},0)`);
       h.fillStyle = g;
       h.fillRect(x - rad, y - rad, rad * 2, rad * 2);
@@ -413,23 +419,84 @@ export function initSky(root: HTMLElement) {
     g.fillRect(0, 0, 64, 64);
   }
 
+  // Feather sprite for the text veils: a solid 2px core with a smooth
+  // falloff of F px on every side, drawn as a nine-slice around each block.
+  const F = 56;
+  const feather = document.createElement("canvas");
+  feather.width = feather.height = 2 * F + 2;
+  {
+    const g = feather.getContext("2d")!;
+    const img = g.createImageData(2 * F + 2, 2 * F + 2);
+    for (let y = 0; y < 2 * F + 2; y++) {
+      for (let x = 0; x < 2 * F + 2; x++) {
+        const dx = Math.max(0, F - x, x - (F + 1));
+        const dy = Math.max(0, F - y, y - (F + 1));
+        const t = Math.max(0, 1 - Math.hypot(dx, dy) / F);
+        const a = t * t * (3 - 2 * t); // smoothstep
+        img.data[(y * (2 * F + 2) + x) * 4 + 3] = Math.round(a * 255);
+      }
+    }
+    g.putImageData(img, 0, 0);
+  }
+
+  // What the sky must stay clear of: [selector, padding px, strength].
+  const VEILS: [string, number, number][] = [
+    [".t-body", 22, 0.97],
+    [".t-sec-label", 18, 0.95],
+    [".t-hero > :not(h1)", 14, 0.95],
+    [".t-hero h1", 10, 0.7],
+    [".t-toc h2, .toc-text", 10, 0.95],
+    [".t-view", 10, 0.95],
+    [".t-part-head > :not(svg)", 14, 0.95],
+    [".t-end > *", 14, 0.95],
+    // Sky windows: not erased (strength 0), but labels keep clear of them.
+    [".win", 4, 0],
+  ];
+  const veilEls = VEILS.map(([sel, pad, k]) => ({ els: [...root.querySelectorAll<HTMLElement>(sel)], pad, k }));
+  type Box = { l: number; t: number; r: number; b: number; k: number };
+  function veilBoxes(): Box[] {
+    const out: Box[] = [];
+    const hostTop = host!.getBoundingClientRect().top;
+    for (const v of veilEls) {
+      for (const el of v.els) {
+        const r = el.getBoundingClientRect();
+        if (!r.width || !r.height) continue;
+        const t = r.top - hostTop, b = r.bottom - hostTop;
+        if (b < -F - v.pad || t > H + F + v.pad) continue;
+        out.push({ l: r.left - v.pad, t: t - v.pad, r: r.right + v.pad, b: b + v.pad, k: v.k });
+      }
+    }
+    return out;
+  }
+  const near = (boxes: Box[], l: number, t: number, r: number, b: number, m: number) =>
+    boxes.some((x) => l < x.r + m && r > x.l - m && t < x.b + m && b > x.t - m);
+
   function angleNow() {
     if (reduce.matches) return BASE;
     const top = root.getBoundingClientRect().top + window.scrollY;
     return BASE + Math.max(0, window.scrollY - top + H) * RATE;
   }
 
+  let lastScroll = NaN;
   function drawRete(force = false) {
     const a = angleNow();
-    if (!force && Math.abs(a - lastAngle) < 1e-5) return;
+    // Text moves with the page even when the sky does not turn, so redraw
+    // whenever either changes.
+    if (!force && Math.abs(a - lastAngle) < 1e-5 && window.scrollY === lastScroll) return;
     lastAngle = a;
+    lastScroll = window.scrollY;
+    const narrow = W < 600;
+    const boxes = veilBoxes();
     const c = rctx!;
+    c.setTransform(1, 0, 0, 1, 0, 0);
+    c.clearRect(0, 0, reteC!.width, reteC!.height);
+    c.drawImage(plateC, 0, 0);
     c.setTransform(dpr, 0, 0, dpr, 0, 0);
-    c.clearRect(0, 0, W, H);
     c.translate(px, py);
     c.rotate(-a);
 
     if (haze) {
+      c.imageSmoothingQuality = "high";
       const S = haze.width / hazeScale;
       c.drawImage(haze, -S / 2, -S / 2, S, S);
     }
@@ -469,52 +536,88 @@ export function initSky(root: HTMLElement) {
       c.fill();
     }
 
-    // Sign names ride the band, turning with it.
-    c.font = `600 10px ${SERIF}`;
-    c.letterSpacing = "3px";
-    c.textAlign = "center";
+    // Labels are placed in screen space and skipped when they would land
+    // near text.
+    const ca = Math.cos(a), sa = Math.sin(a);
+    const rot = (x: number, y: number): [number, number] => [px + x * ca + y * sa, py - x * sa + y * ca];
+    c.setTransform(dpr, 0, 0, dpr, 0, 0);
     c.textBaseline = "middle";
+    const M = narrow ? 26 : 34; // clearance from any text block
+
+    // Sign names ride the band, turning with it.
+    c.font = `600 ${narrow ? 8.5 : 10}px ${SERIF}`;
+    c.letterSpacing = narrow ? "2px" : "3px";
+    c.textAlign = "center";
     c.fillStyle = "rgba(233,200,119,0.55)";
     for (const l of signLabels) {
+      const [x, y] = rot(l.x, l.y);
+      const w = c.measureText(l.text).width / 2 + 4;
+      if (near(boxes, x - w, y - w, x + w, y + w, M)) continue;
+      let ang = l.ang - a;
+      if (Math.cos(ang) < 0) ang += Math.PI; // keep the lettering upright
       c.save();
-      c.translate(l.x, l.y);
-      let ang = l.ang;
-      // Keep the lettering upright on screen.
-      const screen = ang - a;
-      if (Math.cos(screen) < 0) ang += Math.PI;
+      c.translate(x, y);
       c.rotate(ang);
       c.fillText(l.text, 0, 0);
       c.restore();
     }
 
-    // Upright labels: constellations and rete star names.
-    c.setTransform(dpr, 0, 0, dpr, 0, 0);
-    c.translate(px, py);
-    const ca = Math.cos(a), sa = Math.sin(a);
-    const rot = (x: number, y: number): [number, number] => [x * ca + y * sa, -x * sa + y * ca];
-    c.font = `500 10.5px ${SERIF}`;
-    c.letterSpacing = "5px";
-    c.fillStyle = "rgba(190,204,255,0.42)";
-    for (const l of figLabels) {
-      const [x, y] = rot(l.x, l.y);
-      c.fillText(l.text, x, y + 22);
+    // Constellation names (not on small screens, where they crowd).
+    if (!narrow) {
+      c.font = `500 10.5px ${SERIF}`;
+      c.letterSpacing = "5px";
+      c.fillStyle = "rgba(190,204,255,0.42)";
+      for (const l of figLabels) {
+        const [x, y0] = rot(l.x, l.y);
+        const y = y0 + 22;
+        const w = c.measureText(l.text).width / 2;
+        if (near(boxes, x - w, y - 7, x + w, y + 7, M)) continue;
+        c.fillText(l.text, x, y);
+      }
     }
-    c.font = `400 13px ${SERIF}`;
+
+    // Rete star names; on small screens only a few of the brightest.
+    c.font = `400 ${narrow ? 11.5 : 13}px ${SERIF}`;
     c.letterSpacing = "0.5px";
-    c.fillStyle = "rgba(240,214,150,0.55)";
+    c.fillStyle = "rgba(240,214,150,0.58)";
     c.textAlign = "left";
     for (const s of bright) {
       const label = RETE_NAMES[s.name];
-      if (!label) continue;
+      if (!label || (narrow && s.mag > 0.5 && s.name !== "Polaris")) continue;
       const [x, y] = rot(s.x, s.y);
+      const w = c.measureText(label).width;
+      if (near(boxes, x + 9, y - 16, x + 9 + w, y - 2, M)) continue;
       c.fillText(label, x + 9, y - 9);
     }
     c.letterSpacing = "0px";
+
+    // Let the sky recede behind text: erase it through feathered veils.
+    c.globalCompositeOperation = "destination-out";
+    for (const b of boxes) {
+      if (!b.k) continue;
+      const w = b.r - b.l, h = b.b - b.t;
+      c.globalAlpha = b.k;
+      // corners
+      c.drawImage(feather, 0, 0, F, F, b.l - F, b.t - F, F, F);
+      c.drawImage(feather, F + 2, 0, F, F, b.r, b.t - F, F, F);
+      c.drawImage(feather, 0, F + 2, F, F, b.l - F, b.b, F, F);
+      c.drawImage(feather, F + 2, F + 2, F, F, b.r, b.b, F, F);
+      // edges
+      c.drawImage(feather, F, 0, 2, F, b.l, b.t - F, w, F);
+      c.drawImage(feather, F, F + 2, 2, F, b.l, b.b, w, F);
+      c.drawImage(feather, 0, F, F, 2, b.l - F, b.t, F, h);
+      c.drawImage(feather, F + 2, F, F, 2, b.r, b.t, F, h);
+      // core
+      c.fillStyle = "#000";
+      c.fillRect(b.l, b.t, w, h);
+    }
+    c.globalAlpha = 1;
+    c.globalCompositeOperation = "source-over";
   }
 
   let queued = false;
   const onScroll = () => {
-    if (queued || reduce.matches) return;
+    if (queued) return;
     queued = true;
     requestAnimationFrame(() => {
       queued = false;
@@ -541,6 +644,8 @@ export function initSky(root: HTMLElement) {
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onResize);
   reduce.addEventListener?.("change", () => drawRete(true));
+  // Text reflows (fonts arriving, the view toggle) move the veils.
+  new ResizeObserver(() => drawRete(true)).observe(root);
   document.fonts?.ready.then(() => {
     drawPlate();
     drawRete(true);
