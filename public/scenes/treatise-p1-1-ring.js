@@ -76,7 +76,7 @@ function rete(parent) {
 }
 
 const LOOP = 14000;
-const C = { x: 0, y: 28, k: 0.58 };
+const C = { x: 0, y: 26, k: 0.64 };
 const PIVOT = -181; // where the ring bears on the thumb, instrument units above the centre
 const SWING = 13; // degrees
 

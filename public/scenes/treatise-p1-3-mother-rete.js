@@ -112,10 +112,10 @@ function draw(s, u) {
   const inn = [0, span(u, 0.1, 0.24), span(u, 0.26, 0.4), span(u, 0.42, 0.56)]; // each part gone in
   const face = span(u, 0.6, 0.76) * (1 - back); // turned to face us
   const tilt = TILT * (1 - face) * RAD;
-  const k = 0.55 + 0.05 * face;
+  const k = 0.6 + 0.03 * face;
   const gone = inn[3] * (1 - back);
-  const cx = -31 * (1 - face) * (1 - 0.6 * gone);
-  const cy = 22 + 4 * face;
+  const cx = -34 * (1 - face) * (1 - 0.6 * gone);
+  const cy = 18 + 6 * face;
   s.layers.forEach((g, i) => {
     const z = APART[i] * (1 - inn[i] * (1 - back)) + i * 1.5;
     g.setAttribute("transform", `translate(${f(cx + k * z * Math.sin(tilt))} ${f(cy)}) scale(${f(k * Math.cos(tilt))} ${f(k)})`);

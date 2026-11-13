@@ -21,7 +21,7 @@ const NS = "http://www.w3.org/2000/svg";
 const instances = new WeakMap();
 const RAD = Math.PI / 180;
 
-const C = { x: 0, y: 24, k: 0.6 }; // the instrument's centre in the window, and its scale (limb radius 100 -> 60)
+const C = { x: 0, y: 26, k: 0.64 }; // the instrument's centre in the window, and its scale (limb radius 100 -> 60)
 const NIGHT = "#0a1030";
 const SILVER = "#e4e7f3";
 const LIGHT = "#fff6dc";

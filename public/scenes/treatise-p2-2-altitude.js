@@ -18,9 +18,9 @@ const instances = new WeakMap();
 const RAD = Math.PI / 180;
 
 const SUN_ALT = 25.5; // degrees
-const SUN = [-79.6, -9.7]; // the sun's place in the window
-const FLAT = { x: -30, y: 14, k: 0.36 }; // face-on copy: centre, scale (limb radius 100 -> 36); the sun lies on its 25 1/2 degree line
-const TURN = { x: 52, y: 20, k: 0.5, tilt: 64 }; // turned copy
+const SUN = [-86, -12.7]; // the sun's place in the window
+const FLAT = { x: -30, y: 14, k: 0.4 }; // face-on copy: centre, scale (limb radius 100 -> 36); the sun lies on its 25 1/2 degree line
+const TURN = { x: 50, y: 24, k: 0.55, tilt: 64 }; // turned copy
 const CT = Math.cos(TURN.tilt * RAD);
 const ST = Math.sin(TURN.tilt * RAD);
 const VANE = { at: 75.5, half: 13.9, tall: 30, hole: 17 }; // along the rule, half width, height, hole height
@@ -137,7 +137,7 @@ export function mount(el) {
   const mark = node("circle", { r: 4.2, fill: "none", stroke: SILVER, "stroke-width": 0.9, opacity: 0 }, svg);
   const label = node(
     "text",
-    { x: -52, y: 66, "text-anchor": "middle", "font-size": 15, fill: SILVER, opacity: 0, "font-family": "inherit", stroke: NIGHT, "stroke-width": 3, "stroke-linejoin": "round", "paint-order": "stroke" },
+    { x: -50, y: 72, "text-anchor": "middle", "font-size": 15, fill: SILVER, opacity: 0, "font-family": "inherit", stroke: NIGHT, "stroke-width": 3, "stroke-linejoin": "round", "paint-order": "stroke" },
     svg
   );
   label.textContent = "25½°";

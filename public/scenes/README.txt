@@ -27,3 +27,5 @@ these there, not here.
 2026-11-13: treatise-prologue.js, treatise-p2-1-sun-degree.js, treatise-p2-2-altitude.js and
 treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 3a89640 (larger, haloed labels;
 Envy's flight clear of Lewis's hand). Libraries unchanged.
+2026-11-13: treatise-p1-1-ring.js, treatise-p1-3-mother-rete.js, treatise-p2-2-altitude.js and
+treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (instruments ~10% larger).
