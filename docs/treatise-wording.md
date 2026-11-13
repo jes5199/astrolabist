@@ -130,6 +130,9 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | degree counter ending `38.4°` | treatise-p2-13-noon.js | Part II §13 (astrolabe-video f18ee01). Modern. Chaucer's 12 March. | **decided: modern** |
 | `Aries 1°`, `Virgo 29°`, `March`, `September` | treatise-p2-14-sun-from-noon.js | Part II §14 (astrolabe-video 79c0abf). Signs Latin (decided); season month labels in modern English (explanatory labels, like II §1's "12 March"; not engraved names). | **decided** (Latin signs; modern labels) |
 | `Taurus 10°`, `Leo 20°`, `Scorpio 10°`; `same day: 14 h 43 m`, `day = night: 14 h 43 m` | treatise-p2-15-equal-days.js | Part II §15 (astrolabe-video da8e9df). Latin signs; modern captions. | **decided** |
+| `30° east: ascendant 1`, `30° west: ascendant 2`, `the middle, rising`, `the star's degree`, `Libra 22°` | treatise-p2-17-star-place.js | Part II §17 (astrolabe-video 3b6d423). Modern captions; Latin sign. **Interpretation:** "the middel degree by-twene bothe assendentes" shown as the middle counted on the border (in time), which is exact; the literal middle in zodiac degrees misses by ~26° at 52°. Alternative available. | provisional (interpretation) |
+| `Alabor`, `Cancer 4°` | treatise-p2-18-mediation.js | Part II §18 (astrolabe-video b0aa6d2). Engraved star name; mediation is the recorded one (by construction; checked independently in §21). | **decided** |
+| `Alabor`, `rises with Leo 14°` | treatise-p2-19-rises-with.js | Part II §19 (astrolabe-video 5a73248). Solved from the plate geometry. | **decided** |
 
 ## Not on the page
 

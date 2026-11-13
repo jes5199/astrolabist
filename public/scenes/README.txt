@@ -65,3 +65,6 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-p2-13-noon.js copied byte-for-byte from astrolabe-video f18ee01.
 2026-11-13: treatise-p2-14-sun-from-noon.js copied byte-for-byte from astrolabe-video 79c0abf.
 2026-11-13: treatise-p2-15-equal-days.js copied byte-for-byte from astrolabe-video da8e9df.
+2026-11-13: treatise-p2-17-star-place.js copied byte-for-byte from astrolabe-video 3b6d423.
+2026-11-13: treatise-p2-18-mediation.js copied byte-for-byte from astrolabe-video b0aa6d2.
+2026-11-13: treatise-p2-19-rises-with.js copied byte-for-byte from astrolabe-video 5a73248.
