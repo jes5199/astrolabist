@@ -50,6 +50,19 @@ const treatise = defineCollection({
     inlineScenes: z
       .array(z.object({ name: z.string(), after: z.string(), label: z.string(), size: z.enum(["small"]).optional() }))
       .optional(),
+    // Editorial inset notes (OUR words, set apart from Chaucer and the gloss line): each goes
+    // after the paragraph of the Middle English that contains `after`. Text may use *italic*.
+    insets: z
+      .array(
+        z.object({
+          after: z.string(),
+          title: z.string(),
+          intro: z.string().optional(),
+          items: z.array(z.object({ label: z.string(), text: z.string() })).optional(),
+          cite: z.string().optional(),
+        })
+      )
+      .optional(),
     saintsTable: z.boolean().optional(),
     plates: z
       .array(z.object({ src: z.string(), button: z.string(), title: z.string(), caption: z.string().optional(), width: z.number(), height: z.number() }))

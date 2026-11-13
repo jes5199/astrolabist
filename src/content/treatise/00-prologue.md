@@ -28,6 +28,22 @@ inlineScenes:
     after: "V. The fifte partie"
     label: "Figure: the fifth part (probably never written)"
     size: "small"
+insets:
+  - after: "V. The fifte partie"
+    title: "What became of the five parts"
+    intro: "Chaucer planned five parts. Only the first two have come down to us."
+    items:
+      - label: "I"
+        text: "Survives whole."
+      - label: "II"
+        text: "Survives: “nearly all, and probably all that ever was written” (§§ 1–40, with §§ 41–43 on finding heights)."
+      - label: "III"
+        text: "Was to be tables: of the fixed stars on the rete, the sun's declination, the longitudes of towns, clocks and noon altitudes. None is in the treatise. Such tables survive in other manuscripts, and some “may very well have been transmitted to little Lewis.”"
+      - label: "IV"
+        text: "Was to explain the motions of the heavens and their causes. “This was probably never written.”"
+      - label: "V"
+        text: "Was to give the general rules of astrology. “In all probability, none … of this fifth Part was ever written,” beyond what II §§ 36–37 say about the houses."
+    cite: "Quotations from W. W. Skeat, *The Complete Works of Geoffrey Chaucer*, vol. III (Oxford, 1894), introduction to the Treatise, § 24."
 modern: ""
 ---
 
