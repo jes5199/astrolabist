@@ -73,7 +73,8 @@ export function mount(el) {
     tp.textContent = name;
     return t;
   });
-  const count = label(svg, 0, 91, "", 16);
+  // the count, right under the month's day strokes at the foot (jes tg 17900)
+  const count = label(svg, 0, f(C.y + C.k * T.spacer + 13), "", 16);
   el.appendChild(svg);
   const s = { turn, names, count, raf: 0, t0: 0, tm: STILL };
   instances.set(el, s);
