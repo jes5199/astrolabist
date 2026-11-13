@@ -1,4 +1,4 @@
-"""Curation sheet: for each sample form not on the modern skip list, show candidate
+"""Curation sheet: for each glossed-section form not on the modern skip list, show candidate
 entries from the EETS (1872) and Oxford vol. 6 (1894) glossaries.
 usage: python3 -I sheet.py CONTENT_DIR eets.json oxf.json > sheet.txt"""
 import json, re, sys, collections
@@ -10,7 +10,8 @@ to two under upon with which ten ring plate plates hole net english latin greek 
 bodies possibly purpose suppose taken taking taught perceived translated excused many mortal noble part general only right here
 lo hard declare divided thing meekly ii iii iv v c n hand fast another age signe celestial""".split())
 forms = collections.Counter()
-for f in ["00-prologue.md"] + [f"p1-{i:02d}.md" for i in range(1, 24)]:
+for f in (["00-prologue.md"] + [f"p1-{i:02d}.md" for i in range(1, 24)] + [f"p2-{i:02d}.md" for i in range(1, 47)]
+          + ["p2-41a.md", "p2-41b.md", "p2-42a.md", "p2-42b.md", "p2-43a.md"]):
     body = open(f"{cdir}/{f}").read().split("---", 2)[2]
     for w in re.findall(r"[A-Za-z]+(?:-[A-Za-z]+)*", body):
         forms[w.lower()] += 1

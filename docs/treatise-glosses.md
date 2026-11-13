@@ -1,9 +1,17 @@
 # Treatise glosses (gloss variant, `treatise/style-gloss`)
 
-Status: **Prologue and Part I, 2026-11-13.** The Prologue and Part I §§ 1–23 are glossed (the sample was
-the Prologue and §§ 1–3; §§ 4–23 added on Jes's go, tg 17907). Part II shows Skeat's text unglossed
-after a note. Every gloss we wrote ourselves is listed in
-`docs/treatise-wording.md` as provisional, awaiting Jes.
+Status: **the whole Treatise, 2026-11-13.** The Prologue, Part I §§ 1–23 and all of Part II are glossed:
+§§ 1–40, the supplementary §§ 41–46 and the spurious §§ 41a, 41b, 42a, 42b, 43a (the sample was the
+Prologue and Part I §§ 1–3; the rest added on Jes's go, tg 17907). The sample-end note is gone. Every
+gloss and line departure we wrote ourselves is listed in `docs/treatise-wording.md` as provisional,
+awaiting Jes.
+
+Part II's English rubrics (frontmatter `heading`) and Latin lines (`latin`) are not glossed: the
+tokenizer reads only the section body, and the rubric is set as a heading in Skeat's spelling, with no
+modern line. The Latin stays as is. Skeat's italic Latin inside the body follows Part I: a term Skeat
+glosses keeps the Latin on the line (*umbra recta, orison rectum, in horoscopo, anni collecti et
+expansi*), *nota* reads "note", and the two short tags read in plain English (*et sic deinceps* "and so
+on", *et sic de ceteris* "and so for the rest"; both `paraphrase-phrase`).
 
 ## What is where
 
@@ -46,11 +54,12 @@ Wedgwood (*con … thank*), Bailey (*dignetes*), Tyrwhitt (*Somer*), Brae (*Lenn
   commentary, not definitions: the popover labels them "Skeat's note" / "From Skeat's introduction"
   and sets them as an indented italic note.
 - `ours`: only a plain modern equivalent of a spelling, where no Skeat entry was found
-  (14 entries with a popover, 16 forms, all from the sample; the rest are line-only respellings; see the
-  ledger). No `ours` entry may carry a definition (the gate checks).
+  (14 entries with a popover, 16 forms, all from the sample; the rest, including all 182 added in
+  Part II, are line-only respellings; see the ledger). No `ours` entry may carry a definition (the gate checks).
 - No popover: words spelled and used as in modern English; transparent respellings with no
   Skeat entry (*alle, olde, owne, whiche, wordes, betre, wryten, redeth, hereth, bereth*…, and in
-  §§ 4–23 *cercle, devyded, contieneth, monthes, turneth*…), which get an `ours` line-only word; and
+  §§ 4–23 *cercle, devyded, contieneth, monthes, turneth*…, and in Part II *wher-fore, schadwe, multiplye,
+  findest, worchest*…), which get an `ours` line-only word; and
   words whose sense here we could not source (*bisy, discret*). Better unglossed than guessed.
 - Skeat's `_italic_` Latin (*umbra versa, tropos, angulus primi motus…*) is set in italics on both
   lines; the tokenizer drops the underscores.
@@ -60,17 +69,25 @@ Wedgwood (*con … thank*), Bailey (*dignetes*), Tyrwhitt (*Somer*), Brae (*Lenn
 Prologue sense change in the §§ 4–23 pass: *certein* now maps to a plain *certain* (EETS); Skeat's
 note to Prol. l. 10 stays only on "I seye a certein of conclusiouns", the passage it annotates.
 
-## Counts (Prologue and Part I §§ 1–23; the §§ 4–23 pass in brackets)
+## Counts (the whole Treatise; Part II alone in brackets)
 
 | | |
 |---|---|
-| Word tokens | 3,592 (§§ 4–23: 2,607) |
-| Under each word, on the modern line | Skeat's gloss 1,193, ours 433, the same word (identity) 1,964, `·` 2 (*bisy*, *discret*) (§§ 4–23: Skeat 829, ours 342, identity 1,436, `·` 0) |
-| Distinct glossed forms | 607 forms and 16 phrases (such as *tak keep*, *that is to seyn*, *umbra versa*, *in the superfice of*) |
-| Entries | 596: EETS 223, Oxford glossary 192, Oxford names 17, ours 164 (14 with a popover; 150 plain respellings for the line only) (§§ 4–23: 329 new, of them 110 ours, all line-only) |
-| Sense choices (`overrides`) | 70 (§§ 4–23: 58, and one added in the Prologue, below) |
-| Departures in the minimal-translation line | 166 rows, 197 placements: modernised-form 101, reordered 32, paraphrase-phrase 18, added-word 15 (§§ 4–23: 109 rows, 129 placements) |
-| Second paragraphs | 33: 24 glossary definitions (EETS 20, Oxford 4; new: *hors, equinoxial, longitudes, mile-wey, scale, weyere*); 9 pieces of commentary, labelled as such: 6 "Skeat's note" (*Lowis, philosofre, suffisaunt, certein, Somer, Lenne*) and 3 "From Skeat's introduction" (*Astrolabie, rewle, clymatz*) |
+| Word tokens | 14,878 (Part II: 11,286; Prologue and Part I: 3,592) |
+| Under each word, on the modern line | Skeat's gloss 4,908, ours 1,777, the same word (identity) 8,191, `·` 2 (*bisy*, *discret*) (Part II: Skeat 3,715, ours 1,344, identity 6,227, `·` 0) |
+| Distinct glossed forms | 1,301 on the page; 1,225 mapped forms and 46 phrases (Part II added 618 forms and 30 phrases, such as *in cas that*, *par aventure*, *orison rectum*, *anni collecti et expansi*, *fulle see*) |
+| Entries | 1,242: EETS 449, Oxford glossary 417, Oxford names 30, ours 346 (14 with a popover; 332 line-only) (Part II: 646 new: EETS 226, Oxford glossary 225, Oxford names 13, ours 182, all line-only) |
+| Sense choices (`overrides`) | 369 (Part II: 299) |
+| Departures in the minimal-translation line | 698 rows, 1,017 placements: modernised-form 429, reordered 168, paraphrase-phrase 58, added-word 43 (Part II: 532 rows, 820 placements: modernised-form 328, reordered 136, paraphrase-phrase 40, added-word 28) |
+| Second paragraphs | 66: 57 glossary definitions (EETS 45, Oxford 12); 9 pieces of commentary, labelled as such: 6 "Skeat's note" (*Lowis, philosofre, suffisaunt, certein, Somer, Lenne*) and 3 "From Skeat's introduction" (*Astrolabie, rewle, clymatz*). Part II added 33 definitions (EETS 25, Oxford 8), among them *assendent, aspect, combust, dignite, hous, succedent, episicle, anni collecti, anni expansi, mote, rote*; no notes |
+
+Tokenizer fix in the Part II pass: a shorter line span that began on the same word as a longer one
+already placed used to overwrite it, and the words between dropped off the line (it happened in II
+§ 40, "latitude septentrional"). A span is now placed only on a word no other span has taken. Part I
+renders byte for byte as before (checked).
+
+Line spans are kept short enough to fit a phone column (a span is one unbreakable ruby): five long ones
+were split after the 390 px check found them cut off at the edge.
 
 ## The modern line
 
@@ -137,6 +154,28 @@ Definitions have `defSource` and `defRef` (page, or the Gutenberg line and Skeat
 | eets | Centre | 108 | 10709 | `the " centre " or` → `the "centre" or` |
 | eets | Bestes | 108 | 10663 | `the " beasts " or` → `the "beasts" or` |
 | oxf6 | Almury | 10 | 6322 | `the ' denticle ' or tooth like` → `the 'denticle' or tooth-like` (EETS prints *tooth-like*) |
+| oxf6 | Heep | 124 | 25012 | `gieat number` → `great number` |
+| oxf6 | Hous | 133 | 26523 | `a ' house' or portion of the sky (in astrologjO` → `a 'house' or portion of the sky (in astrology)` |
+| eets | Hole | 111 | 11167 | `Avhole` → `whole` |
+| eets | Vulgar | 119 | 12189 | `the " artificial" day` → `the "artificial" day` |
+| oxf6 | Naturel | 174 | 33169 | `'day natural '` → `'day natural'`; `' day artificial.'` → `'day artificial.'` |
+| eets | Strange | 117 | 11962 | `otcn` → `own`; `tlie` → `the` |
+| eets | Perche | 115 | 11638 | `liigh` → `high` |
+| eets | Ferther-over | 111 | 11061 | `Ferther-oner` → `Ferther-over` |
+| eets | Orizon rectum | 114 | 11591 | `representea` → `represented` |
+| eets | Aperceyve | 107 | 10532 | `Aperceyne, v.` → `Aperceyve, v.` |
+| eets | Clymat | 108 | 10735 | `two ^iven lines` → `two given lines` |
+| eets | Peyre | 115 | 11650 | `a " pair," a set` → `a "pair," a set` |
+| eets | Forþer | 111 | 11075 | `Forjjer` → `Forþer` |
+| oxf6 | Entere | 88 | 18947 | `set down in writmg` → `set down in writing` |
+| eets | Mote | 114 | 11496 | `mea?i motion` → `mean motion` |
+| oxf6 | Rotes | 219 | 40471 | `' roots,'` → `'roots,'` |
+
+Part II also reuses the Part I fixes for *Declinacioun* and *Umbra versa*. Not fixed, and so not used:
+the OCR of an italic word in *Hous* (`called /(fl/^j-^i-,`; the definition stops before it) and in
+*Entere* (`entere /a't`). Oxford entries at the start of the glossary (*Aboute, Abyde, Adden,
+Again*) sit on leaves with no printed page number in the Internet Archive map, so they are not cited;
+those words take EETS or an `ours` respelling instead.
 
 Also applied to every source: whitespace collapsed, line-end hyphens joined, Gutenberg's `_italic_`
 marks dropped.

@@ -168,7 +168,7 @@ export function glossSection(slug: string, body: string, stats?: GlossStats, mod
         if (!seq(ws, a)) continue;
         const endTok = a + ws.length; // exclusive
         // Must start and end on gloss-unit boundaries, and not overlap another span.
-        if (span[a] === 0 || (endTok < toks.length && span[endTok] === 0) || lineLen[a] === 0) continue;
+        if (span[a] === 0 || (endTok < toks.length && span[endTok] === 0) || lineLen[a] === 0 || lineText[a] !== null) continue;
         let ok = true;
         for (let k = a + 1; k < endTok; k++) if (lineText[k] !== null) ok = false;
         if (!ok) continue;

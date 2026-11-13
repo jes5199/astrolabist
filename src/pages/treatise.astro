@@ -338,7 +338,6 @@ const sections = await Promise.all(
     };
   })
 );
-const lastSample = sections.filter((s) => s.glossed).at(-1)?.entry.slug;
 
 // Gloss data for the page script, and one hidden description per entry for
 // assistive technology (each glossed word points at its entry by aria-describedby).
@@ -446,7 +445,7 @@ const tocParts = [
         <p class="t-hint">Read on, and the heavens turn about the lode-sterre.</p>
         <p class="t-intro">
           Middle English text: W. W. Skeat (1894). Glosses from Skeat's glossaries to the Treatise
-          (1872) and to Chaucer (1894), for the Prologue and Part I.
+          (1872) and to Chaucer (1894), for the whole Treatise.
         </p>
       </header>
 
@@ -618,12 +617,6 @@ const tocParts = [
                 </article>
                 {entry.data.colophon && (
                   <p class="t-colophon" lang="la">{entry.data.colophon}</p>
-                )}
-                {entry.slug === lastSample && (
-                  <aside class="t-sample-end" aria-label="End of the glosses">
-                    <p>The glosses run through Part I.</p>
-                    <p>Part II is shown in Skeat's text without glosses, for now.</p>
-                  </aside>
                 )}
               </>
             ))}
@@ -1808,22 +1801,6 @@ const tocParts = [
       inset 0 0 0 5px rgba(255, 226, 160, 0.9),
       inset 0 0 30px rgba(0, 0, 0, 0.6),
       0 0 50px 12px rgba(255, 214, 130, 0.35);
-  }
-
-  .t-sample-end {
-    max-width: 34rem;
-    margin: 0.5rem auto 3rem;
-    padding: 1rem 1.4rem;
-    text-align: center;
-    font-family: var(--modern-font);
-    font-size: 1.02rem;
-    line-height: 1.5;
-    color: #d6dbef;
-    border: 1px dashed var(--hair);
-    border-radius: 999px;
-  }
-  .t-sample-end p {
-    margin: 0;
   }
 
   /* --- the end ------------------------------------------------------ */
