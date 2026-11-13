@@ -3,6 +3,8 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Scene from "../components/Scene.astro";
 import { SITE_TITLE } from "../consts";
+import fs from "node:fs";
+import path from "node:path";
 
 const entries = (await getCollection("treatise")).sort(
   (a, b) => a.data.order - b.data.order
@@ -21,13 +23,25 @@ const partSlug: Record<string, string> = {
 const anchor = (part: string, section: string) =>
   part === "Prologue" ? "prologue" : `${partSlug[part]}-${section}`;
 
+// Optional LOCAL-ONLY modern text, read at build time from .private/<source>/<slug>.txt.
+// .private/ is git-excluded and guarded by hooks: it holds third-party text we have no
+// licence to publish (e.g. Morrison's translation, permission pending). It never exists
+// on Netlify, so production builds fall back to the frontmatter `modern` field or the placeholder.
+const PRIVATE_MODERN = { dir: ".private/morrison", credit: "James E. Morrison" };
+const privateModern = (slug: string): string[] | null => {
+  const f = path.join(process.cwd(), PRIVATE_MODERN.dir, `${slug}.txt`);
+  if (!fs.existsSync(f)) return null;
+  return fs.readFileSync(f, "utf8").split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+};
+
 const sections = await Promise.all(
   entries.map(async (entry) => {
     const { Content } = await entry.render();
     const { part, section } = entry.data;
-    return { entry, Content, id: anchor(part, section) };
+    return { entry, Content, id: anchor(part, section), privateModern: privateModern(entry.slug) };
   })
 );
+const usesPrivate = sections.some((s) => s.privateModern);
 
 const parts = ["Prologue", "Part I", "Part II"].map((name) => ({
   name,
@@ -44,7 +58,9 @@ const parts = ["Prologue", "Part I", "Part II"].map((name) => ({
       <h1>A Treatise on the Astrolabe</h1>
       <p class="t-intro">
         Geoffrey Chaucer, <cite>A Treatise on the Astrolabe</cite> (c. 1391).
-        Middle English text: W. W. Skeat (1894).
+        Middle English text: W. W. Skeat (1894).{usesPrivate && (
+          <> Modern English: {PRIVATE_MODERN.credit}. <strong class="t-private">Private local preview; permission pending, not for publication.</strong></>
+        )}
       </p>
     </header>
 
@@ -108,7 +124,7 @@ const parts = ["Prologue", "Part I", "Part II"].map((name) => ({
               <p class="t-part-rubric">{partRubric[p.name]}</p>
             </header>
           )}
-          {p.items.map(({ entry, Content, id }) => (
+          {p.items.map(({ entry, Content, id, privateModern }) => (
             <article class="t-sec" id={id}>
               <header class="t-sec-head">
                 <h3>
@@ -137,7 +153,9 @@ const parts = ["Prologue", "Part I", "Part II"].map((name) => ({
                 <Content />
               </div>
               <div class="t-modern">
-                {entry.data.modern ? (
+                {privateModern ? (
+                  privateModern.map((p) => <p>{p}</p>)
+                ) : entry.data.modern ? (
                   <p>{entry.data.modern}</p>
                 ) : (
                   <p class="t-pending">Modern rendering — pending</p>
@@ -335,6 +353,10 @@ const parts = ["Prologue", "Part I", "Part II"].map((name) => ({
     font-family: var(--modern-font);
     font-size: 1.2rem;
     line-height: 1.6;
+  }
+  .t-private {
+    color: #b3261e;
+    font-weight: 600;
   }
   .t-pending {
     margin: 0;
