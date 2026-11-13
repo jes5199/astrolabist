@@ -140,3 +140,5 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-p1-3-mother-rete-ink.js copied byte-for-byte from astrolabe-video ac57dfe.
 2026-11-13: treatise-p1-3-mother-rete-ink.js copied byte-for-byte from astrolabe-video e3a3ac8.
 2026-11-13: treatise-p1-10-months-ink.js copied byte-for-byte from astrolabe-video d0d931c.
+2026-11-13: treatise-p2-4-ascendant-ink.js copied byte-for-byte from astrolabe-video 4fa4225.
+2026-11-13: treatise-p2-3-time-ink.js copied byte-for-byte from astrolabe-video 750342d.
