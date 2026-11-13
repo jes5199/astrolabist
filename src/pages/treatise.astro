@@ -197,6 +197,9 @@ const sections = await Promise.all(
       privateModern: SHOW_MORRISON ? privateModern(entry.slug) : null,
       ring,
       title: heading || `${incipit(entry.body, part === "Prologue" ? 4 : 5)}…`,
+      // Skeat gives a rubric only in Part II; elsewhere the "title" is just the opening
+      // words, already on the page below it, so it is kept for screen readers only (Jes tg 17856).
+      rubric: Boolean(heading),
       field: i % STARFIELDS,
       scene: entry.data.scene ?? "night-window",
       frame: frameFor(entry.data.scene ?? "night-window"),
@@ -419,7 +422,7 @@ const tocParts = [
                 })()}
               </header>
             )}
-            {p.items.map(({ entry, Content, glossed, figureTerms, id, privateModern, ring, title, field, spin, i, kind, kicker, inline, scene, frame }, k) => (
+            {p.items.map(({ entry, Content, glossed, figureTerms, id, privateModern, ring, title, rubric, field, spin, i, kind, kicker, inline, scene, frame }, k) => (
               <>
                 {kind !== "main" && p.items[k - 1]?.kind !== kind && (
                   <header class={`t-group-head t-group-${kind}`} id={kind}>
@@ -461,7 +464,7 @@ const tocParts = [
                         {entry.data.part === "Prologue" ? kicker : <>{entry.data.part} · § <span class="t-num">{entry.data.section}</span></>}
                         {kind !== "main" && <span class="t-sec-kind"> · {kind}</span>}
                       </p>
-                      <h3 lang="enm">
+                      <h3 lang="enm" class={rubric ? undefined : "sr-only"}>
                         <span class="t-sec-title">{title}</span>
                       </h3>
                       {entry.data.latin && (
