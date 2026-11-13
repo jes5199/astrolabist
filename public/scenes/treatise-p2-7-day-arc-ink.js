@@ -1,26 +1,22 @@
 // A Treatise on the Astrolabe, Part II, 7: "Set the degree of thy sonne up-on thyn est orisonte, and ley thy label on
 // the degree of the sonne, and at the poynt of thy label in the bordure set a prikke. Turn thanne thy riet aboute til
-// the degree of the sonne sit up-on the west orisonte, and ley thy label up-on the same degree of the sonne, and at
-// the point of thy label set a-nother prikke. Rekne thanne the quantitee of tyme in the bordure by-twixe bothe
-// prikkes, and tak ther thyn ark of the day. The remenant of the bordure under the orisonte is the ark of the night."
+// the degree of the sonne sit up-on the west orisonte, and ley thy label up-on the same degree of the sonne, and at the
+// point of thy label set a-nother prikke. Rekne thanne the quantitee of tyme in the bordure by-twixe bothe prikkes,
+// and tak ther thyn ark of the day. The remenant of the bordure under the orisonte is the ark of the night."
 // Scene contract (astrolabist, src/components/Scene.astro): mount(el) once, then start(el) / stop(el).
-// COLOURED WOODCUT on vellum (jes tg 17847), replacing treatise-p2-7-day-arc.js: lib/front-ink.js (the same drawing cut
-// and washed by lib/woodcut.js); what the old scene lit silver is lit in the printer's red, gold in a deep ochre.
 //
-// The front with its rete, the sun at the head of Cancer (midsummer: the text gives no day; at this latitude the
-// difference is plainest then).  The sun set on the eastern horizon, the label laid on it, a prick; the rete turned
-// west until the sun sits on the western horizon, the label again, another prick; the border between the pricks is
-// lit as the arc of the day, the rest as the arc of the night, each with its length in hours.  All solved from the
-// plate's geometry; shared lib/front.js; the rete and label are our constructed drawing of inv. 47869's.
-// Original line work; nothing is traced.
+// v2, A LARGE WINDOW, 3:2 (viewBox -150 -100 300 200), as II 3 v2 (jes tg 17917): Chaucer's six steps one at a time,
+// listed beside the instrument, the step being done in red.  The sun at the head of Cancer (midsummer: the text gives
+// no day; the shared DAY_SUN_LONGITUDE of II 7, 8, 10).  Solved from the plate's geometry; COLOURED WOODCUT on vellum,
+// shared lib/front-ink.js; the rete and label are our constructed drawing of inv. 47869's.  Nothing is traced.
 
 import A from "./lib/astrolabe-47869.js";
-import { front, node, f, rim, P, almucantar, SILVER, NIGHT } from "./lib/front-ink.js";
+import { front, node, f, rim, P, almucantar, SILVER, NIGHT, VELLUM, WASH } from "./lib/front-ink.js";
 
 const instances = new WeakMap();
-const LOOP = 15000;
-const STILL = 11000; // ms: both pricks, the two arcs lit and measured
-const C = { x: 0, y: 10, k: 0.9 };
+const LOOP = 31000;
+const STILL = 27000; // ms: both pricks, the day and the night measured
+const C = { x: -64, y: 12, k: 0.84 };
 const W = (px) => f(px / C.k);
 const RAD = Math.PI / 180;
 const EPS = P.obliquity * RAD;
@@ -64,68 +60,110 @@ const ROT_W0 = onHorizon(1);
 const ROT_W = ROT_W0 < ROT_E ? ROT_W0 + 360 : ROT_W0; // turning westward (clockwise) from the east setting
 const B_E = bearingOf(SUN, ROT_E);
 const DAY = ROT_W - ROT_E; // degrees of the border the sun's label passes: the arc of the day
+
+const ROT_0 = ROT_E - 50; // where the rete rests before the sun is set
+const B_W = bearingOf(SUN, ROT_W);
+const ZERO = A.rule.contract.zero_deg + 180;
 const hm = (deg) => {
   const m = Math.round((deg / 15) * 60);
   return `${Math.floor(m / 60)} h ${m % 60} m`;
 };
+const STEPS = [
+  { t: 0.5, lines: ["set the sun's degree", "on the east horizon"] },
+  { t: 4.0, lines: ["lay the label on it;", "prick the border"] },
+  { t: 8.0, lines: ["turn the rete until", "it sits on the west"] },
+  { t: 13.0, lines: ["the label again;", "a second prick"] },
+  { t: 17.0, lines: ["between the pricks:", `the day, ${hm(DAY)}`] },
+  { t: 21.0, lines: ["the rest of the border:", `the night, ${hm(360 - DAY)}`] },
+];
+const END = 29.0;
 
 export function mount(el) {
   if (instances.has(el)) return;
-  const svg = node("svg", { viewBox: "-100 -100 200 200", width: "100%", height: "100%", "aria-hidden": "true" });
+  const uid = Math.random().toString(36).slice(2, 8);
+  const svg = node("svg", { viewBox: "-150 -100 300 200", width: "100%", height: "100%", "aria-hidden": "true" });
   svg.style.fontFamily = "inherit";
   const g = node("g", { transform: `translate(${C.x} ${C.y}) scale(${C.k})` }, svg);
   const fr = front(g, { scale: C.k, faint: 0.4 });
   fr.plate.clip.setAttribute("opacity", 0.3);
-  fr.plate.horizon.setAttribute("opacity", 1);
-  for (const l of fr.letters) l.setAttribute("opacity", 0.45);
-  fr.rete.g.setAttribute("opacity", 0.6);
-  // the two arcs of the border, day and night, on the ladder
+  for (const h of fr.plate.hours) h.setAttribute("opacity", 0.15);
+  for (const l of fr.letters) l.setAttribute("opacity", 0.5);
+  // the horizon's two halves, each lit when its step comes
+  const half = (west, id) => {
+    const cp = node("clipPath", { id }, g);
+    node("rect", { x: west ? 0 : -100, y: -100, width: 100, height: 200 }, cp);
+    return node("circle", { cy: f(-HC), r: f(HR), fill: "none", stroke: SILVER, "stroke-width": W(2.2), opacity: 0, "clip-path": `url(#${id})` }, fr.plate.clip.parentNode);
+  };
+  const eastH = half(false, "e" + uid);
+  const westH = half(true, "w" + uid);
+  // the sun's degree on the rete
+  const sp = at(SUN, 0);
+  const sun = node("circle", { cx: f(sp[0]), cy: f(sp[1]), r: 4.4, fill: WASH.ochre, stroke: SILVER, "stroke-width": W(1.6), opacity: 0 }, fr.rete.g);
+  // the arcs of the border
   const arc = (b0, sweep, stroke) => {
     const a = rim(b0, RB);
     const b = rim(b0 + sweep, RB);
-    return node("path", { d: `M${f(a[0])} ${f(a[1])}A${f(RB)} ${f(RB)} 0 ${sweep > 180 ? 1 : 0} 1 ${f(b[0])} ${f(b[1])}`, fill: "none", stroke, "stroke-width": W(4), opacity: 0 }, g);
+    return node("path", { d: `M${f(a[0])} ${f(a[1])}A${f(RB)} ${f(RB)} 0 ${sweep > 180 ? 1 : 0} 1 ${f(b[0])} ${f(b[1])}`, fill: "none", stroke, "stroke-width": W(5), opacity: 0 }, g);
   };
   const dayArc = arc(B_E, DAY, "#b9821c");
-  const nightArc = arc(B_E + DAY, 360 - DAY, SILVER);
-  const label = node("path", { d: A.rule.d, fill: NIGHT, "fill-opacity": 0.55, stroke: SILVER, "stroke-width": W(0.9), "stroke-linejoin": "round", opacity: 0 }, g);
-  const sun = node("circle", { r: 3.4, fill: "#b9821c", stroke: NIGHT, "stroke-width": W(0.6) }, g);
+  const nightArc = arc(B_E + DAY, 360 - DAY, WASH.blue);
+  // the label, its own wobble; the pin over it
+  const label = node("g", { filter: fr.wc.rough, opacity: 0 }, g);
+  node("path", fr.wc.wash({ d: A.rule.d, fill: WASH.ochre, "fill-opacity": 0.75 }), label);
+  node("path", { d: A.rule.d, fill: "none", stroke: "currentColor", "stroke-width": W(1.3), "stroke-linejoin": "round" }, label);
+  node("circle", { r: 4.2, fill: VELLUM, stroke: "currentColor", "stroke-width": W(1.2) }, g);
+  // the pricks in the border
   const prick = (b) => {
     const p = rim(b, RB);
-    return node("circle", { cx: f(p[0]), cy: f(p[1]), r: 2.6, fill: "currentColor", stroke: SILVER, "stroke-width": W(0.9), opacity: 0 }, g);
+    return node("circle", { cx: f(p[0]), cy: f(p[1]), r: 3, fill: SILVER, stroke: NIGHT, "stroke-width": W(0.9), opacity: 0 }, g);
   };
-  const pricks = [prick(B_E), prick(B_E + DAY)];
-  const word = (str, b, r) => {
-    const p = rim(b, r);
-    const t = node("text", { x: f(C.x + C.k * p[0]), y: f(C.y + C.k * p[1] + 5), "text-anchor": "middle", "font-size": 13, fill: SILVER, opacity: 0, "font-family": "inherit", stroke: NIGHT, "stroke-width": 3, "stroke-linejoin": "round", "paint-order": "stroke" }, svg);
-    t.textContent = str;
-    return t;
-  };
-  const words = [word(`day ${hm(DAY)}`, B_E + DAY / 2, 60), word(`night ${hm(360 - DAY)}`, B_E + DAY + (360 - DAY) / 2, 60)];
+  const pricks = [prick(B_E), prick(B_W)];
+  // the steps beside the instrument
+  const list = node("g", {}, svg);
+  const X0 = 34;
+  let y = -74;
+  const rows = STEPS.map((st, i) => {
+    const els = st.lines.map((ln, j) => {
+      const t = node("text", { x: X0 + (j ? 11 : 0), y: y + j * 11, "font-size": 9.6, "font-weight": 600, fill: "currentColor", opacity: 0, "font-family": "inherit" }, list);
+      t.textContent = (j ? "" : `${i + 1}  `) + ln;
+      return t;
+    });
+    y += 11 * st.lines.length + 6;
+    return els;
+  });
   el.appendChild(svg);
-  const s = { rete: fr.rete.g, label, sun, pricks, dayArc, nightArc, words, raf: 0, t0: 0, tm: STILL };
+  const s = { rete: fr.rete.g, eastH, westH, sun, dayArc, nightArc, label, pricks, rows, raf: 0, t0: 0, tm: STILL };
   instances.set(el, s);
   draw(s, STILL / 1000);
 }
 
 function draw(s, t) {
-  const out = 1 - span(t, 14.0, 14.8);
-  // the rete: at the east setting, turned to the west setting, then on round (the short way, as the sky turns) to
-  // the east setting again for the next loop
-  const r = ROT_E + DAY * span(t, 2.6, 6.4) + (360 - DAY) * span(t, 14.0, 14.8);
+  const out = 1 - span(t, END, END + 0.8);
+  // the rete: set the sun on the east; turn it on to the west; at the end on round (the short way) to the rest
+  const r = ROT_0 + 50 * span(t, 1.0, 3.4) + DAY * span(t, 8.6, 12.4) + (360 - 50 - DAY) * span(t, END + 0.4, END + 1.8);
   s.rete.setAttribute("transform", `rotate(${f(r)})`);
-  const sp = at(SUN, r);
-  s.sun.setAttribute("cx", f(sp[0]));
-  s.sun.setAttribute("cy", f(sp[1]));
-  // the label laid on the sun at each setting
-  const lay = span(t, 0.8, 1.4) * (1 - span(t, 2.2, 2.6)) + span(t, 6.8, 7.4) * (1 - span(t, 8.6, 9.0));
-  s.label.setAttribute("transform", `rotate(${f(bearingOf(SUN, r) - (A.rule.contract.zero_deg + 180))})`);
+  s.sun.setAttribute("opacity", f(span(t, 0.6, 1.0) * out));
+  s.eastH.setAttribute("opacity", f(span(t, 0.6, 1.2) * (1 - span(t, 7.6, 8.2))));
+  s.westH.setAttribute("opacity", f(span(t, 8.2, 8.8) * (1 - span(t, 16.6, 17.2))));
+  // the label: laid on the sun at the east (4.2), lifted (8.0), laid on it at the west (13.2), lifted (17.0)
+  const lb = t < 10 ? B_E : B_W;
+  const lay = t < 10 ? span(t, 4.2, 5.6) * (1 - span(t, 7.6, 8.2)) : span(t, 13.2, 14.6) * (1 - span(t, 16.6, 17.2));
+  s.label.setAttribute("transform", `rotate(${f(lb - 40 * (1 - lay) - ZERO)})`);
   s.label.setAttribute("opacity", f(lay));
-  s.pricks[0].setAttribute("opacity", f(span(t, 1.5, 1.8) * out));
-  s.pricks[1].setAttribute("opacity", f(span(t, 7.5, 7.8) * out));
-  s.dayArc.setAttribute("opacity", f(0.75 * span(t, 9.0, 9.6) * out));
-  s.nightArc.setAttribute("opacity", f(0.45 * span(t, 9.6, 10.2) * out));
-  s.words[0].setAttribute("opacity", f(span(t, 9.2, 9.8) * out));
-  s.words[1].setAttribute("opacity", f(span(t, 9.8, 10.4) * out));
+  s.pricks[0].setAttribute("opacity", f(span(t, 5.8, 6.2) * out));
+  s.pricks[1].setAttribute("opacity", f(span(t, 14.8, 15.2) * out));
+  s.dayArc.setAttribute("opacity", f(0.85 * span(t, 17.4, 18.2) * out));
+  s.nightArc.setAttribute("opacity", f(0.9 * span(t, 21.2, 22.0) * out));
+  STEPS.forEach((st, i) => {
+    const next = STEPS[i + 1] ? STEPS[i + 1].t : END;
+    const now = t >= st.t && t < next;
+    const done = t >= next;
+    const a = (now || done ? 1 : 0.3) * span(t, 0.2, 0.5) * out;
+    for (const e of s.rows[i]) {
+      e.setAttribute("opacity", f(a));
+      e.setAttribute("fill", now ? SILVER : "currentColor");
+    }
+  });
 }
 
 export function start(el) {
