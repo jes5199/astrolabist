@@ -150,6 +150,27 @@ const PLACE_INLINE = `(function (s) {
   me.querySelectorAll(":scope > .inline-win, :scope > .t-inset").forEach(function (w) {
     var p = ps[+w.dataset.after];
     if (!p) return;
+    if (w.dataset.phrase) {
+      // Float the window in at the phrase itself: find it in the paragraph's own words
+      // (not the modern line under them), and insert before the word where it starts.
+      var norm = function (t) { return t.replace(/\s+/g, " ").toLowerCase(); };
+      var want = norm(w.dataset.phrase), text = "", marks = [];
+      var walk = document.createTreeWalker(p, NodeFilter.SHOW_TEXT, { acceptNode: function (n) {
+        return n.parentElement && n.parentElement.closest("rt") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT; } });
+      for (var n = walk.nextNode(); n; n = walk.nextNode()) { marks.push([text.length, n]); text += n.nodeValue; }
+      var at = norm(text).indexOf(want);
+      if (at < 0) { p.before(w); return; }
+      // norm() keeps length except where it collapses whitespace runs; map back by re-normalising prefixes.
+      var raw = 0; while (raw < text.length && norm(text.slice(0, raw)).length < at) raw++;
+      var hit = marks[0];
+      for (var k = 0; k < marks.length; k++) if (marks[k][0] <= raw) hit = marks[k];
+      var node = hit[1], off = raw - hit[0];
+      var host = node.parentElement && node.parentElement.closest("ruby");
+      if (host && p.contains(host)) host.before(w);
+      else if (off > 0 && off < node.nodeValue.length) node.parentNode.insertBefore(w, node.splitText(off));
+      else node.parentNode.insertBefore(w, node);
+      return;
+    }
     if (w.dataset.size === "small") p.before(w);
     else p.after(w);
   });
@@ -527,7 +548,7 @@ const tocParts = [
                       </div>
                         {glossed ? glossed.map((h) => <p set:html={h} />) : <Content />}
                         {inline.map((sc, j) => (
-                          <div class="inline-win" data-after={sc.at} data-size={sc.size} data-frame={sc.frame}>
+                          <div class="inline-win" data-after={sc.at} data-size={sc.size} data-frame={sc.frame} data-phrase={sc.place === "phrase" ? sc.after : undefined}>
                             <div class="win" data-frame={sc.frame}>
                               {sc.frame === "ring" && (
                               <svg class="win-ring" viewBox="-120 -120 240 240" aria-hidden="true">
@@ -1589,6 +1610,14 @@ const tocParts = [
   }
   .inline-win .win {
     width: 100%;
+  }
+  /* Windows anchored at a phrase inside a paragraph float in where the phrase begins: small ones
+     on the left like the five parts (rule below), full-size ones on the right. */
+  .inline-win[data-phrase]:not([data-size]) {
+    float: right;
+    clear: right;
+    width: 10rem;
+    margin: 0.4rem 0 0.6rem 1.4rem;
   }
   /* The Prologue's five parts: small windows beside their short paragraphs. */
   .inline-win[data-size="small"] {
