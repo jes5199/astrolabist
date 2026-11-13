@@ -13,7 +13,7 @@ import A from "./lib/astrolabe-47869.js";
 import { back, node, label, f, rim, NIGHT, SILVER, T } from "./lib/back.js";
 
 const instances = new WeakMap();
-const NAMES = ["Januarius", "Februarius", "Marcius", "Aprilis", "Maius", "Junius", "Julius", "Augustus", "September", "October", "November", "December"];
+const NAMES = ["Ianuarius", "Februarius", "Marcius", "Aprilis", "Maius", "Iunius", "Iulius", "Augustus", "September", "October", "November", "December"];
 const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 const LOOP = 16000; // ms: once round the year (the loop joins without a seam)
 const STILL = (LOOP * (59 + 15.5)) / 365; // ms: the middle of March at the foot

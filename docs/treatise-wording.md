@@ -84,10 +84,12 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | numerals `10`–`90` | treatise-p1-7-border.js | Part I §7 (astrolabe-video 7f49755). Modern figures every 10 (Chaucer's "nombres of augrim" run every 5; long strokes still mark 5s). | **decided: modern** (Jes, 2026-11-13, tg 17771 "modern both") |
 | twelve sign names `Aries` … `Pisces` | treatise-p1-8-signs.js | Part I §8 (astrolabe-video 2441d5e). Latin, as the text lists them. Degree numbers "in augrim" omitted at window size. | **decided: Latin** (Jes, tg 17769) |
 | counting numeral `1`…`365` | treatise-p1-9-days.js | Part I §9 (astrolabe-video b994c88). Modern figures. | **decided: modern** (Jes, tg 17771 "modern both") |
-| month names `Januarius` … `December` | treatise-p1-10-months.js | Part I §10 (astrolabe-video feb358e). Latin, as on the instrument (consistent with II §1). Alternative: Chaucer's own spellings (Ianuare, Februare, Marcius, Aprile, Mayus, Iuin, Iulius…). | provisional; awaiting Jes (likely follows "Latin" for signs) |
+| month names `Ianuarius` … `December` (I for J, as engraved: Ianuarius, Iunius, Iulius) | treatise-p1-10-months.js | Part I §10 (astrolabe-video cc23619). Latin, as on the instrument (consistent with II §1). Alternative: Chaucer's own spellings (Ianuare, Februare, Marcius, Aprile, Mayus, Iuin, Iulius…). | provisional; awaiting Jes (likely follows "Latin" for signs) |
 | day counts `31`, `28`, `30`… | treatise-p1-10-months.js | Part I §10. Modern figures. | **decided: modern** (Jes, tg 17771 "modern both") |
 | 36 saints' abbreviations `circ` `epi` `vicen` … `concep` `thom` `nati` | treatise-p1-11-holy-days.js | Part I §11 (astrolabe-video 932aae7). As ENGRAVED on Oxford HSM 47869's calendar ring, read from the museum photograph (astrolabe-video docs/video2/drawings/back47869.md). Alternative: expanded names (e.g. "Gregorius"). | provisional; awaiting Jes |
 | dominical letters `A`–`G`; day figures | treatise-p1-11-holy-days.js | Part I §11. Letters computed (1 Jan = A), matching the instrument; days in modern figures. | **decided: modern** for figures (Jes, tg 17771) |
+| `umbra versa`, `umbra recta` | treatise-p1-12-shadow-square.js | Part I §12 (astrolabe-video f66b73e). Chaucer's own Latin terms. | source text |
+| numerals `3` `6` `9` `12` | treatise-p1-12-shadow-square.js | Part I §12. Modern figures. | **decided: modern** (Jes, tg 17771) |
 
 ## Not on the page
 
