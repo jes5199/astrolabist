@@ -358,8 +358,7 @@ const tocParts = [
         <div class="t-preface">
           <p>For more than a thousand years, the astrolabe was the ultimate representation of scientific knowledge of space and time, packed into a sort of portable computer.</p>
           <p>Geoffrey Chaucer (c. 1343–1400), the poet known for <cite>The Canterbury Tales</cite>, also wrote what is often called the oldest technical treatise in English: an instruction manual for the astrolabe, written as a letter to a ten-year-old boy, Lewis, possibly his own son or the son of a friend.</p>
-          <p>I present it here with new animated illustrations and a readable modern gloss.</p>
-          <p>Chaucer called himself a “<span lang="enm">lewd compilatour</span>” (an unlearned compiler), merely repackaging the brilliant work of the old astronomers. I can only hope to follow in his footsteps.</p>
+          <p>I present it here with new animated illustrations and a readable modern gloss. Chaucer called himself a “<span lang="enm">lewd compilatour</span>” (an unlearned compiler), merely repackaging the brilliant work of the old astronomers. I can only hope to follow in his footsteps.</p>
         </div>
         <p class="t-hint">Read on, and the heavens turn about the lode-sterre.</p>
         <p class="t-intro">
@@ -1218,7 +1217,7 @@ const tocParts = [
      Chaucer (night page, silver) and the modern line (gray). Marked with a red manicule. */
   .t-inset {
     clear: both;
-    margin: 1.4rem 0 1.8rem;
+    margin: 1.4rem auto 1.8rem; /* centred in the text column (Jes tg 17873) */
     padding: 0.9rem 1.1rem 0.8rem 1.2rem;
     background: linear-gradient(180deg, #f8f2e1, #efe4c6);
     color: #2b2118;
