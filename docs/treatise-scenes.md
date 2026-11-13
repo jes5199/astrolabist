@@ -80,7 +80,7 @@ Kinds:
 | 59 | II §34 moon's longitude | Moon on the almucantars | I | plate, rete | ½ day | |
 | 60 | II §35 direct or retrograde | A planet stepping back against the stars | S | sky | ½ day | |
 | 61 | II §36 the houses | The twelve houses from the ascendant | I | plate, rete | ½ day | ink pre-build held: astrolabe-video deff733 (treatise-p2-36-houses-ink.js; gates clean; not in the page tree until jes rules on ink) |
-| 62 | II §37 houses another way | The four angles | I | #61 | 1–2 h | |
+| 62 | II §37 houses another way | The four angles | I | #61 | 1–2 h | ink pre-build held: astrolabe-video 7ec8c51 (treatise-p2-37-houses-label-ink.js; gates clean; not in the page tree until jes rules on ink) |
 | 63 | II §38 meridian line on the ground | A metal plate, a pin, the sun's shadow marking the meridian | F | rig, sky, #54's ground | 1 day+ | |
 | 64 | II §39 meridians and longitudes of towns | Cities on their meridians *(town names: ledger)* | S | sky | ½ day | |
 | 65 | II §40 rising of a planet | A planet's rising degree | I | plate, rete | 1–2 h | |
