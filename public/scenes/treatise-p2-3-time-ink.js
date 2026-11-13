@@ -23,8 +23,8 @@ const instances = new WeakMap();
 const LOOP = 48000;
 const STILL = 19500; // ms: by day, everything found
 const LAYOUT = {
-  wide: { C: { x: -66, y: 14, k: 0.8 }, list: { x: 34, y: -78, size: 10, lh: 12, gap: 9, indent: 11, headSize: 13, headGap: 20, restart: true, number: (i) => (i % 5) + 1 } },
-  stack: { C: { x: 0, y: -52, k: 1.08 }, list: { x: -136, y: 80, size: 12.5, lh: 14, gap: 8, indent: 15, width: 272, headSize: 15, headGap: 20, restart: true, number: (i) => (i % 5) + 1 } },
+  wide: { C: { x: -76, y: 27, k: 0.67 }, list: { x: 4, y: -78, size: 10, lh: 12, gap: 9, width: 142, indent: 11, headSize: 13, headGap: 20, restart: true, number: (i) => (i % 5) + 1 } },
+  stack: { C: { x: 0, y: -52, k: 0.78 }, list: { x: -136, y: 46, size: 12.5, lh: 14, gap: 8, indent: 15, width: 272, headSize: 15, headGap: 20, restart: true, number: (i) => (i % 5) + 1 } },
 };
 let C = LAYOUT.wide.C; // the layout being built (set by build)
 const W = (px) => f(px / C.k);

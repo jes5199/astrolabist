@@ -18,7 +18,7 @@ import { front, node, f, rim, P, LAT, almucantar, SILVER, NIGHT } from "./lib/fr
 const instances = new WeakMap();
 const LOOP = 22000;
 const STILL = 17500; // ms: the ascendant named, its house shown
-const C = { x: 0, y: -4, k: 0.7 };
+const C = { x: 0, y: 15, k: 0.6 }; // the hanging ring inside the window: its top (183 units up) at -95 (astrolabist #47901)
 const W = (px) => f(px / C.k);
 const RAD = Math.PI / 180;
 const EPS = P.obliquity * RAD;
@@ -107,7 +107,7 @@ export function mount(el) {
     [8.4, 11.4, ["the degree on the eastern horizon"]],
     [11.8, 14.6, ["is the ascendant"]],
     [15.0, 20.6, ["its house: from 5° above it", "to 25° below"]],
-  ].map(([a, b, lines]) => ({ a, b, el: lines.map((str, i) => word(0, 95 - (lines.length - 1 - i) * 14, str, 13)) }));
+  ].map(([a, b, lines]) => ({ a, b, el: lines.map((str, i) => word(0, 92 - (lines.length - 1 - i) * 14, str, 13)) }));
   el.appendChild(svg);
   const s = { rete: fr.rete.g, east, house, ends, mark, deg, asc, caps, raf: 0, t0: 0, tm: STILL };
   instances.set(el, s);

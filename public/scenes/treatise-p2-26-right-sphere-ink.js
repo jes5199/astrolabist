@@ -29,8 +29,8 @@ const EQ = P.equator;
 const CAP = P.capricorn;
 const CAN = P.cancer;
 const LAYOUT = {
-  wide: { C: { x: -78, y: 8, k: 70 / P.capricorn }, list: { x: 4, y: -82, size: 9.4, lh: 10.5, gap: 5, indent: 10, width: 140 } },
-  stack: { C: { x: 0, y: -86, k: 100 / P.capricorn }, list: { x: -136, y: 42, size: 12.5, lh: 13.5, gap: 5, indent: 15, width: 272 } },
+  wide: { C: { x: -74, y: 8, k: 70 / P.capricorn }, list: { x: 4, y: -82, size: 9.4, lh: 10.5, gap: 5, indent: 10, width: 140 } },
+  stack: { C: { x: 0, y: -78, k: 100 / P.capricorn }, list: { x: -136, y: 46, size: 12.5, lh: 13.5, gap: 5, indent: 15, width: 272 } },
 };
 let C = LAYOUT.wide.C;
 const W = (px) => f(px / C.k);

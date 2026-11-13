@@ -28,7 +28,7 @@ const LOOP = 24000 / PACE;
 const STILL = 17000 / PACE; // ms: F on the horizon, the rising degree ringed
 const INK2 = "currentColor";
 const LAYOUT = {
-  wide: { C: { x: -66, y: -4, k: 0.84 }, loupe: { x: -12, y: 64, r: 31, m: 6 }, list: { x: 30, y: -84, size: 9.4, lh: 10.5, gap: 6, indent: 10, width: 118 } },
+  wide: { C: { x: -62, y: -4, k: 0.8 }, loupe: { x: -8, y: 60, r: 31, m: 6 }, list: { x: 30, y: -84, size: 9.4, lh: 10.5, gap: 6, indent: 10, width: 114 } },
   stack: { C: { x: 0, y: -86, k: 1.0 }, loupe: { x: 96, y: -156, r: 34, m: 6 }, list: { x: -136, y: 42, size: 12.5, lh: 14, gap: 6, indent: 15, width: 272 } },
 };
 let C = LAYOUT.wide.C;

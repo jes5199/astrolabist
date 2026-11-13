@@ -50,8 +50,8 @@ const arcD = (b0, sweep, r) => {
 
 const H = 24; // seconds per sign
 const LAYOUT = {
-  wide: { C: { x: -72, y: 12, k: 0.76 }, list: { x: 12, y: -80, size: 9.6, lh: 11, gap: 7, indent: 10, width: 134, headSize: 13, headGap: 18, restart: true, number: (i) => (i % 5) + 1 } },
-  stack: { C: { x: 0, y: -70, k: 0.9 }, list: { x: -136, y: 50, size: 12.5, lh: 14, gap: 6, indent: 15, width: 272, headSize: 15, headGap: 19, restart: true, number: (i) => (i % 5) + 1 } },
+  wide: { C: { x: -76, y: 27, k: 0.67 }, list: { x: 4, y: -80, size: 9.6, lh: 11, gap: 7, indent: 10, width: 142, headSize: 13, headGap: 18, restart: true, number: (i) => (i % 5) + 1 } },
+  stack: { C: { x: 0, y: -52, k: 0.78 }, list: { x: -136, y: 46, size: 12.5, lh: 14, gap: 6, indent: 15, width: 272, headSize: 15, headGap: 19, restart: true, number: (i) => (i % 5) + 1 } },
 };
 
 // kind: "right" (II 27) or "oblique" (II 28)
