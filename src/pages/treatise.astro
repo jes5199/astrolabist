@@ -361,14 +361,13 @@ const tocParts = [
           <p>I present it here with new animated illustrations and a readable modern gloss.</p>
           <p>Chaucer called himself a “<span lang="enm">lewd compilatour</span>” (an unlearned compiler), merely repackaging the brilliant work of the old astronomers. I can only hope to follow in his footsteps.</p>
         </div>
-        <p class="t-dedication" lang="enm">“Litell Lowis my sone…”</p>
+        <p class="t-hint">Read on, and the heavens turn about the lode-sterre.</p>
         <p class="t-intro">
           Middle English text: W. W. Skeat (1894). Glosses from Skeat's glossaries to the Treatise
           (1872) and to Chaucer (1894), for the Prologue and Part I §§ 1–3.{usesPrivate && (
             <> Modern rendering, folded under each section: {PRIVATE_MODERN.credit}. <strong class="t-private">Draft preview; publication permission pending.</strong></>
           )}
         </p>
-        <p class="t-hint">Read on, and the heavens turn about the lode-sterre.</p>
       </header>
 
       <nav class="t-toc" id="contents" aria-label="Contents">
@@ -908,7 +907,7 @@ const tocParts = [
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: var(--faint);
-    margin-top: 2.25rem;
+    margin: 0.5rem 0 2.25rem;
   }
   @media (prefers-reduced-motion: no-preference) {
     .t-hint {
