@@ -183,9 +183,6 @@ const sections = await Promise.all(
         return ok;
       });
     const kicker = part === "Prologue" ? "The Prologue" : `${part} · § ${section}`;
-    const label = heading
-      ? sentence(plain(incipit(heading, 6)))
-      : plain(incipit(entry.body, part === "Prologue" ? 4 : 5));
     // The glossed sample: Skeat's paragraphs with each glossed word made focusable.
     const glossed = GLOSS_SAMPLE.has(entry.slug) ? glossSection(entry.slug, entry.body, glossStats, LINE_MODE) : null;
     return {
@@ -200,7 +197,6 @@ const sections = await Promise.all(
       privateModern: SHOW_MORRISON ? privateModern(entry.slug) : null,
       ring,
       title: heading || `${incipit(entry.body, part === "Prologue" ? 4 : 5)}…`,
-      label,
       field: i % STARFIELDS,
       scene: entry.data.scene ?? "night-window",
       frame: frameFor(entry.data.scene ?? "night-window"),
@@ -282,14 +278,6 @@ const tocParts = [
   { id: "supplementary", title: "Supplementary propositions", sub: "printed by Skeat after the Explicit", quiet: true, count: starsFor("supplementary")?.items.length ?? 0 },
   { id: "spurious", title: "Spurious sections", sub: "so marked by Skeat", quiet: true, count: starsFor("spurious")?.items.length ?? 0 },
 ].filter((t) => t.count);
-// The full list keeps the old groups (Part II split from its appendices).
-const listGroups = [
-  { title: "Prologue", items: sections.filter((s) => s.entry.data.part === "Prologue") },
-  { title: "Part I", items: sections.filter((s) => s.entry.data.part === "Part I") },
-  { title: "Part II", items: sections.filter((s) => s.entry.data.part === "Part II" && s.kind === "main") },
-  { title: "Supplementary propositions", items: sections.filter((s) => s.kind === "supplementary") },
-  { title: "Spurious sections", items: sections.filter((s) => s.kind === "spurious") },
-].filter((g) => g.items.length);
 ---
 
 <BaseLayout
@@ -376,26 +364,6 @@ const listGroups = [
             </li>
           ))}
         </ol>
-        <details class="toc-full">
-          <summary>Every section, by its first words</summary>
-          <div class="toc-cols">
-            {listGroups.map((g) => (
-              <div class="toc-list">
-                <h3>{g.title}</h3>
-                <ol>
-                  {g.items.map((s) => (
-                    <li>
-                      <a href={`#${s.id}`}>
-                        <span class="tl-n">{s.entry.data.part === "Prologue" ? "" : `§ ${s.entry.data.section}`}</span>
-                        <span class="tl-t" lang="enm">{s.label}…</span>
-                      </a>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            ))}
-          </div>
-        </details>
       </nav>
 
       <p class="gl-hint">Under Chaucer's words, a modern line. Tap or hover a <span class="gl-cue">dotted</span> word for its definition and source.</p>
@@ -995,72 +963,9 @@ const listGroups = [
   .toc-parts a:hover .tp-title {
     color: #fff0c8;
   }
-  .toc-parts a:focus-visible,
-  .toc-full a:focus-visible,
-  .toc-full summary:focus-visible {
+  .toc-parts a:focus-visible {
     outline: 1px solid var(--gold);
     outline-offset: 2px;
-  }
-  .toc-full {
-    margin: 1.6rem auto 0;
-    max-width: 44rem;
-    font-family: var(--me-font);
-    text-align: center;
-  }
-  .toc-full summary {
-    cursor: pointer;
-    display: inline-block;
-    font-size: 0.8rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--faint);
-    padding: 0.3rem 0;
-  }
-  .toc-full summary:hover {
-    color: var(--gold);
-  }
-  .toc-cols {
-    margin-top: 1rem;
-    columns: 2 19rem;
-    column-gap: 2.5rem;
-    text-align: left;
-  }
-  .toc-list {
-    break-inside: avoid-column;
-  }
-  .toc-list h3 {
-    margin: 0.4rem 0 0.4rem;
-    font-size: 0.74rem;
-    font-weight: 500;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-  .toc-list ol {
-    list-style: none;
-    margin: 0 0 1rem;
-    padding: 0;
-  }
-  .toc-list li {
-    break-inside: avoid;
-  }
-  .toc-list a {
-    display: flex;
-    gap: 0.6rem;
-    padding: 0.18rem 0;
-    color: #d3d8ee;
-    text-decoration: none;
-    font-size: 0.98rem;
-    line-height: 1.35;
-  }
-  .toc-list a:hover {
-    color: #fff;
-  }
-  .tl-n {
-    flex: none;
-    width: 2.8rem;
-    color: var(--faint);
-    font-variant-numeric: oldstyle-nums;
   }
 
   /* --- star line under each part heading: one star per section ------ */
@@ -1194,9 +1099,6 @@ const listGroups = [
     }
     .toc-parts li[data-quiet] a {
       width: 8.5rem;
-    }
-    .toc-cols {
-      columns: 1;
     }
     .ts-band {
       display: block;
