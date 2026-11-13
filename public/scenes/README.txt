@@ -87,3 +87,4 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-p2-34-moon.js copied byte-for-byte from astrolabe-video f826d30.
 2026-11-13: treatise-p2-35-retrograde.js copied byte-for-byte from astrolabe-video ddefaab.
 2026-11-13: treatise-p2-38-meridian-line.js copied byte-for-byte from astrolabe-video bfc9f42.
+2026-11-13: treatise-p2-39-town-meridians.js copied byte-for-byte from astrolabe-video 8bea500.

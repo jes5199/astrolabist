@@ -150,6 +150,7 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | `moon 41°`, `Alabor 12°`, `the moon: Virgo 15°` | treatise-p2-34-moon.js | Part II §34 (astrolabe-video f826d30). Modern captions; engraved star; Latin sign. Moon taken on the ecliptic (the text makes no exception for its latitude). | **decided** |
 | `east`, `star`, `night 1`, `night 4`, `lower: direct`, `higher: retrograde` | treatise-p2-35-retrograde.js | Part II §35 (astrolabe-video ddefaab). Modern captions. Altitudes are illustrative, not computed for a real planet. | **decided** |
 | clock times (H:MM), `in`, `out`, `meridian line`, `north`, `south`, `east`, `west` | treatise-p2-38-meridian-line.js | Part II §38 (astrolabe-video bfc9f42). Modern captions. Computed for 52°; declination ≈ −8° chosen so the times match "aboute 10 or 11" and "after 1"; no date shown. | **decided** |
+| `a town`, `further east`, `same meridian`, `noon`, `longitude` | treatise-p2-39-town-meridians.js | Part II §39 (astrolabe-video 8bea500). Modern captions. Towns unnamed (the text names none here; Oxford and Lynn are too close to show). The climates passage is not drawn. | **decided** |
 
 ## Not on the page
 
