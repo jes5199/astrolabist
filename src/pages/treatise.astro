@@ -195,13 +195,19 @@ const partEndRubric: Record<string, string> = {
   "Part I": "HERE ENDETH THE DESCRIPCION OF THE ASTROLABIE.",
 };
 
-// Contents: one small constellation per group, stars on a gentle wave.
-const tocGroups = [
-  { key: "prologue", title: "Prologue", items: sections.filter((s) => s.entry.data.part === "Prologue") },
-  { key: "p1", title: "Part I", sub: "The descripcioun", items: sections.filter((s) => s.entry.data.part === "Part I") },
-  { key: "p2", title: "Part II", sub: "The conclusiouns", items: sections.filter((s) => s.entry.data.part === "Part II" && s.kind === "main") },
-  { key: "supp", title: "Supplementary propositions", sub: "printed by Skeat after the Explicit", items: sections.filter((s) => s.kind === "supplementary") },
-  { key: "spur", title: "Spurious sections", sub: "so marked by Skeat", items: sections.filter((s) => s.kind === "spurious") },
+// Contents. At the top: only the major divisions. Under each part's heading:
+// one line of stars, one per section, in order.
+const starName = (s: (typeof sections)[number]) => {
+  const d = s.entry.data;
+  const where = d.part === "Prologue" ? "Prologue" : `${d.part} § ${d.section}`;
+  const what = d.heading && d.part !== "Prologue" ? sentence(plain(d.heading)).replace(/[.,;:]+$/, "") : `${plain(incipit(s.entry.body, 5))}…`;
+  return `${where}: ${what}`;
+};
+const starGroups = [
+  { key: "p1", label: "Sections of Part I", items: sections.filter((s) => s.entry.data.part === "Part I") },
+  { key: "p2", label: "Sections of Part II", items: sections.filter((s) => s.entry.data.part === "Part II" && s.kind === "main") },
+  { key: "supplementary", label: "The supplementary propositions", items: sections.filter((s) => s.kind === "supplementary") },
+  { key: "spurious", label: "The spurious sections", items: sections.filter((s) => s.kind === "spurious") },
 ]
   .filter((g) => g.items.length)
   .map((g) => {
@@ -209,24 +215,34 @@ const tocGroups = [
     // Balanced rows on wide screens: at most 20 stars to a row.
     const rows = Math.ceil(g.items.length / 20);
     return {
-    ...g,
-    cols: Math.ceil(g.items.length / rows),
-    items: g.items.map((s, k) => ({
-      ...s,
-      dy: Math.round((jitter() - 0.5) * 18),
-      dx: Math.round((jitter() - 0.5) * 8),
-      mag: k === 0 ? 2 : 1,
-      num: s.entry.data.part === "Prologue" ? "P" : s.entry.data.section,
-    })),
-  };
+      ...g,
+      cols: Math.ceil(g.items.length / rows),
+      items: g.items.map((s, k) => ({
+        id: s.id,
+        kind: s.kind,
+        name: starName(s),
+        num: s.entry.data.section,
+        dy: Math.round((jitter() - 0.5) * 10),
+        mag: k === 0 ? 2 : 1,
+      })),
+    };
   });
-const counts = {
-  prologue: tocGroups.find((g) => g.key === "prologue")?.items.length ?? 0,
-  p1: tocGroups.find((g) => g.key === "p1")?.items.length ?? 0,
-  p2: tocGroups.find((g) => g.key === "p2")?.items.length ?? 0,
-  supp: tocGroups.find((g) => g.key === "supp")?.items.length ?? 0,
-  spur: tocGroups.find((g) => g.key === "spur")?.items.length ?? 0,
-};
+const starsFor = (key: string) => starGroups.find((g) => g.key === key);
+const tocParts = [
+  { id: "prologue", title: "Prologue", sub: "Litell Lowis my sone", quiet: false, count: 1 },
+  { id: "part-1", title: "Part I", sub: "The descripcioun", quiet: false, count: starsFor("p1")?.items.length ?? 0 },
+  { id: "part-2", title: "Part II", sub: "The conclusiouns", quiet: false, count: starsFor("p2")?.items.length ?? 0 },
+  { id: "supplementary", title: "Supplementary propositions", sub: "printed by Skeat after the Explicit", quiet: true, count: starsFor("supplementary")?.items.length ?? 0 },
+  { id: "spurious", title: "Spurious sections", sub: "so marked by Skeat", quiet: true, count: starsFor("spurious")?.items.length ?? 0 },
+].filter((t) => t.count);
+// The full list keeps the old groups (Part II split from its appendices).
+const listGroups = [
+  { title: "Prologue", items: sections.filter((s) => s.entry.data.part === "Prologue") },
+  { title: "Part I", items: sections.filter((s) => s.entry.data.part === "Part I") },
+  { title: "Part II", items: sections.filter((s) => s.entry.data.part === "Part II" && s.kind === "main") },
+  { title: "Supplementary propositions", items: sections.filter((s) => s.kind === "supplementary") },
+  { title: "Spurious sections", items: sections.filter((s) => s.kind === "spurious") },
+].filter((g) => g.items.length);
 ---
 
 <BaseLayout
@@ -294,38 +310,21 @@ const counts = {
       </header>
 
       <nav class="t-toc" id="contents" aria-label="Contents">
-        <h2>The Conclusiouns, as a constellacioun</h2>
-        <div class="toc-chart">
-          {tocGroups.map((g) => (
-            <section class={`toc-group toc-${g.key}`} aria-labelledby={`toc-h-${g.key}`}>
-              <h3 id={`toc-h-${g.key}`}>
-                <span class="toc-gtitle">{g.title}</span>
-                {g.sub && <span class="toc-gsub">{g.sub}</span>}
-              </h3>
-              <div class="toc-band">
-                <svg class="toc-lines" aria-hidden="true"></svg>
-                <ol style={`--cols:${g.cols}`}>
-                  {g.items.map((s) => (
-                    <li style={`--dy:${s.dy}px;--dx:${s.dx}px`} data-mag={s.mag} data-kind={s.kind}>
-                      <a href={`#${s.id}`} data-toc={s.id} aria-label={`${s.kicker}: ${s.label}`} data-caption-kicker={s.kicker} data-caption={s.label}>
-                        <span class="toc-star" aria-hidden="true"></span>
-                        <span class="toc-n" aria-hidden="true">{s.num}</span>
-                      </a>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </section>
+        <ol class="toc-parts">
+          {tocParts.map((t) => (
+            <li data-quiet={t.quiet ? "" : undefined}>
+              <a href={`#${t.id}`}>
+                <span class="tp-star" aria-hidden="true"></span>
+                <span class="tp-title">{t.title}</span>
+                <span class="tp-sub" lang="enm">{t.sub}</span>
+              </a>
+            </li>
           ))}
-        </div>
-        <p class="toc-caption" aria-hidden="true">
-          <span class="toc-ck">{sections[0].kicker}</span>
-          <span class="toc-ct" lang="enm">{sections[0].label}…</span>
-        </p>
+        </ol>
         <details class="toc-full">
           <summary>Every section, by its first words</summary>
           <div class="toc-cols">
-            {tocGroups.map((g) => (
+            {listGroups.map((g) => (
               <div class="toc-list">
                 <h3>{g.title}</h3>
                 <ol>
@@ -365,7 +364,7 @@ const counts = {
         parts.map((p) => (
           <section class="t-part" aria-label={p.name}>
             {p.name !== "Prologue" && (
-              <header class="t-part-head">
+              <header class="t-part-head" id={partSlug[p.name]}>
                 <svg class="part-rose" viewBox="-50 -50 100 100" aria-hidden="true">
                   <g fill="none" stroke="currentColor" stroke-width="0.5">
                     <circle r="46"></circle>
@@ -377,13 +376,55 @@ const counts = {
                 <p class="t-part-latin">{partLatin[p.name]}</p>
                 <h2>{p.name}</h2>
                 <p class="t-part-rubric" lang="enm">{partRubric[p.name]}</p>
+                {starsFor(p.name === "Part I" ? "p1" : "p2") && (() => {
+                  const g = starsFor(p.name === "Part I" ? "p1" : "p2")!;
+                  return (
+                  <nav class="t-stars" aria-label={g.label} data-group={g.key}>
+                    <div class="ts-band">
+                      <svg class="ts-lines" aria-hidden="true"></svg>
+                      <ol style={`--cols:${g.cols}`}>
+                        {g.items.map((st) => (
+                          <li style={`--dy:${st.dy}px`} data-mag={st.mag} data-kind={st.kind}>
+                            <a href={`#${st.id}`} data-toc={st.id} aria-label={st.name}>
+                              <span class="ts-star" aria-hidden="true"></span>
+                              <span class="ts-n" aria-hidden="true">{st.num}</span>
+                            </a>
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                    <p class="ts-cap" aria-hidden="true" lang="enm"></p>
+                  </nav>
+                  );
+                })()}
               </header>
             )}
             {p.items.map(({ entry, Content, glossed, figureTerms, id, privateModern, ring, title, field, spin, i, kind, kicker, inline }, k) => (
               <>
                 {kind !== "main" && p.items[k - 1]?.kind !== kind && (
-                  <header class={`t-group-head t-group-${kind}`}>
+                  <header class={`t-group-head t-group-${kind}`} id={kind}>
                     <p lang="enm">{plain(entry.data.note ?? "")}</p>
+                    {starsFor(kind) && (() => {
+                      const g = starsFor(kind)!;
+                      return (
+                  <nav class="t-stars" aria-label={g.label} data-group={g.key}>
+                    <div class="ts-band">
+                      <svg class="ts-lines" aria-hidden="true"></svg>
+                      <ol style={`--cols:${g.cols}`}>
+                        {g.items.map((st) => (
+                          <li style={`--dy:${st.dy}px`} data-mag={st.mag} data-kind={st.kind}>
+                            <a href={`#${st.id}`} data-toc={st.id} aria-label={st.name}>
+                              <span class="ts-star" aria-hidden="true"></span>
+                              <span class="ts-n" aria-hidden="true">{st.num}</span>
+                            </a>
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                    <p class="ts-cap" aria-hidden="true" lang="enm"></p>
+                  </nav>
+                      );
+                    })()}
                   </header>
                 )}
                 <article
@@ -781,162 +822,112 @@ const counts = {
     }
   }
 
-  /* --- contents: a small constellation per part ------------------- */
+  /* --- contents: the major divisions, in one row ------------------- */
   .t-toc {
-    margin: 5rem auto 3rem;
+    margin: 4.5rem auto 3rem;
     max-width: 62rem;
   }
-  .t-toc h2 {
-    font-family: var(--me-font);
-    font-weight: 500;
-    font-size: 0.85rem;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    text-align: center;
-    color: var(--gold);
-    margin: 0 0 2rem;
-  }
-  .toc-chart {
-    display: grid;
-    grid-template-columns: 11rem minmax(0, 1fr);
-    row-gap: 1.6rem;
-  }
-  .toc-group {
-    display: contents;
-  }
-  .toc-group h3 {
-    margin: 0;
-    padding-top: 0.55rem;
-    font-family: var(--me-font);
-    font-weight: 500;
-    line-height: 1.25;
-  }
-  .toc-gtitle {
-    display: block;
-    font-size: 0.8rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-  .toc-gsub {
-    display: block;
-    margin-top: 0.25rem;
-    font-size: 0.86rem;
-    color: var(--faint);
-  }
-  .toc-band {
-    position: relative;
-  }
-  .toc-lines {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: visible;
-    pointer-events: none;
-  }
-  .toc-lines :global(path) {
-    fill: none;
-    stroke: rgba(190, 204, 255, 0.38);
-    stroke-width: 1;
-    stroke-dasharray: 2 4;
-  }
-  .toc-band ol {
-    position: relative;
+  .toc-parts {
     list-style: none;
     margin: 0;
     padding: 0;
-    display: grid;
-    grid-template-columns: repeat(var(--cols), 2.5rem);
-    gap: 1.1rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.6rem 0;
+    position: relative;
   }
-  .toc-band li {
-    transform: translate(var(--dx), var(--dy));
+  .toc-parts li {
+    position: relative;
+    display: flex;
   }
-  .toc-band a {
+  /* A faint dotted thread from star to star. */
+  .toc-parts li + li::before {
+    content: "";
+    position: absolute;
+    top: 1.05rem;
+    right: calc(50% + 0.9rem);
+    width: calc(100% - 1.8rem);
+    border-top: 1px dashed rgba(190, 204, 255, 0.38);
+    pointer-events: none;
+  }
+  .toc-parts a {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.35rem;
-    padding: 0.35rem 0;
+    width: 11.5rem;
+    padding: 0.7rem 0.4rem 0.6rem;
+    border-radius: 6px;
+    text-align: center;
     color: inherit;
     text-decoration: none;
-    border-radius: 4px;
+    font-family: var(--me-font);
   }
-  .toc-star {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #f6f8ff;
-    box-shadow: 0 0 7px 2px rgba(170, 190, 255, 0.5);
-    transition: transform 0.25s, box-shadow 0.25s;
-  }
-  li[data-mag="2"] .toc-star {
+  .tp-star {
     width: 9px;
     height: 9px;
+    border-radius: 50%;
     background: #fff3d6;
     box-shadow: 0 0 10px 3px rgba(255, 220, 150, 0.5);
+    transition: transform 0.25s, box-shadow 0.25s;
   }
-  li[data-kind="supplementary"] .toc-star {
-    background: #e8cf95;
-    box-shadow: 0 0 6px 1px rgba(255, 220, 150, 0.35);
+  .tp-title {
+    font-size: 0.86rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-right: -0.3em;
   }
-  li[data-kind="spurious"] .toc-star {
+  .tp-sub {
+    font-size: 0.92rem;
+    line-height: 1.3;
+    color: #c3cae6;
+  }
+  .toc-parts li[data-quiet] a {
+    width: 9.5rem;
+  }
+  .toc-parts li[data-quiet] .tp-star {
+    width: 6px;
+    height: 6px;
+    margin: 1.5px 0;
     background: transparent;
     border: 1px solid rgba(214, 222, 255, 0.85);
     box-shadow: none;
   }
-  .toc-n {
-    font-family: var(--me-font);
-    font-size: 0.74rem;
-    line-height: 1;
-    color: #b9c1e0;
-    font-variant-numeric: oldstyle-nums;
+  .toc-parts li[data-quiet] .tp-title {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    color: #d9c38e;
   }
-  .toc-band a:hover .toc-star,
-  .toc-band a:focus-visible .toc-star,
-  .toc-band a.active .toc-star {
-    transform: scale(1.7);
+  .toc-parts li[data-quiet] .tp-sub {
+    font-size: 0.84rem;
+  }
+  .toc-parts a:hover .tp-star,
+  .toc-parts a:focus-visible .tp-star {
+    transform: scale(1.6);
     box-shadow: 0 0 14px 5px rgba(255, 220, 150, 0.7);
   }
-  .toc-band a:hover .toc-n,
-  .toc-band a:focus-visible .toc-n,
-  .toc-band a.active .toc-n {
-    color: var(--gold);
+  .toc-parts a:hover .tp-title {
+    color: #fff0c8;
   }
-  .toc-band a:focus-visible,
+  .toc-parts a:focus-visible,
   .toc-full a:focus-visible,
   .toc-full summary:focus-visible {
     outline: 1px solid var(--gold);
     outline-offset: 2px;
   }
-  .toc-caption {
-    margin: 1.8rem 0 0 11rem;
-    min-height: 3.2em;
-    font-family: var(--me-font);
-  }
-  .toc-ck {
-    display: block;
-    font-size: 0.78rem;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-  .toc-ct {
-    display: block;
-    font-size: 1.1rem;
-    color: var(--silver);
-  }
   .toc-full {
-    margin: 1.2rem 0 0 11rem;
+    margin: 1.6rem auto 0;
+    max-width: 44rem;
     font-family: var(--me-font);
+    text-align: center;
   }
   .toc-full summary {
     cursor: pointer;
-    width: max-content;
-    max-width: 100%;
-    font-size: 0.82rem;
+    display: inline-block;
+    font-size: 0.8rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--faint);
@@ -949,6 +940,7 @@ const counts = {
     margin-top: 1rem;
     columns: 2 19rem;
     column-gap: 2.5rem;
+    text-align: left;
   }
   .toc-list {
     break-inside: avoid-column;
@@ -988,30 +980,146 @@ const counts = {
     font-variant-numeric: oldstyle-nums;
   }
 
+  /* --- star line under each part heading: one star per section ------ */
+  .t-stars {
+    margin: 1.8rem auto 0;
+    max-width: 52rem;
+    text-align: center;
+  }
+  .ts-band {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+  }
+  .ts-lines {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+  }
+  .ts-lines :global(path) {
+    fill: none;
+    stroke: rgba(190, 204, 255, 0.4);
+    stroke-width: 1;
+    stroke-dasharray: 2 4;
+  }
+  .ts-band ol {
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(var(--cols), 2.25rem);
+    row-gap: 0.5rem;
+    justify-content: center;
+  }
+  .ts-band li {
+    transform: translateY(var(--dy));
+  }
+  .ts-band a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    min-width: 28px;
+    min-height: 2.6rem;
+    color: inherit;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+  .ts-star {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #f6f8ff;
+    box-shadow: 0 0 7px 2px rgba(170, 190, 255, 0.5);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  li[data-mag="2"] .ts-star {
+    width: 8px;
+    height: 8px;
+    background: #fff3d6;
+    box-shadow: 0 0 10px 3px rgba(255, 220, 150, 0.5);
+  }
+  li[data-kind="supplementary"] .ts-star {
+    background: #e8cf95;
+    box-shadow: 0 0 6px 1px rgba(255, 220, 150, 0.35);
+  }
+  li[data-kind="spurious"] .ts-star {
+    background: transparent;
+    border: 1px solid rgba(214, 222, 255, 0.85);
+    box-shadow: none;
+  }
+  .ts-n {
+    font-family: var(--me-font);
+    font-size: 0.78rem;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: none;
+    color: #d3d9ef;
+    font-variant-numeric: oldstyle-nums;
+  }
+  .ts-band a:hover .ts-star,
+  .ts-band a:focus-visible .ts-star,
+  .ts-band a.active .ts-star {
+    transform: scale(1.6);
+    box-shadow: 0 0 8px 2px rgba(255, 220, 150, 0.65);
+  }
+  .ts-band a:hover .ts-n,
+  .ts-band a:focus-visible .ts-n,
+  .ts-band a.active .ts-n {
+    color: var(--gold);
+  }
+  .ts-band a:focus-visible {
+    outline: 1px solid var(--gold);
+    outline-offset: 1px;
+  }
+  .ts-cap {
+    display: block;
+    min-height: 1.5em;
+    margin: 0.7rem auto 0 !important;
+    max-width: 40rem;
+    padding: 0 !important;
+    border: 0 !important;
+    font-family: var(--me-font);
+    font-size: 0.98rem;
+    line-height: 1.45;
+    letter-spacing: 0.02em !important;
+    text-transform: none;
+    color: #dfe4f5 !important;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .ts-cap.on {
+    opacity: 1;
+  }
+  .t-group-head .t-stars {
+    margin-top: 1.3rem;
+  }
+
   @media (max-width: 999.98px) {
-    .toc-chart {
-      grid-template-columns: minmax(0, 1fr);
-      row-gap: 0.4rem;
+    .toc-parts a {
+      width: 9.5rem;
     }
-    .toc-group h3 {
-      padding-top: 1rem;
+    /* Rows wrap here, so the thread between stars would run across them. */
+    .toc-parts li + li::before {
+      display: none;
     }
-    .toc-gtitle,
-    .toc-gsub {
-      display: inline;
-    }
-    .toc-gsub::before {
-      content: " · ";
-    }
-    .toc-band ol {
-      grid-template-columns: repeat(auto-fill, minmax(2.4rem, 1fr));
-    }
-    .toc-caption,
-    .toc-full {
-      margin-left: 0;
+    .toc-parts li[data-quiet] a {
+      width: 8.5rem;
     }
     .toc-cols {
       columns: 1;
+    }
+    .ts-band {
+      display: block;
+    }
+    .ts-band ol {
+      grid-template-columns: repeat(auto-fill, minmax(2rem, 1fr));
     }
   }
 
@@ -1136,7 +1244,7 @@ const counts = {
     text-align: center;
     padding: 5rem 0 1rem;
   }
-  .t-group-head p {
+  .t-group-head > p {
     display: inline-block;
     margin: 0;
     padding: 0.7rem 0;
@@ -1148,7 +1256,7 @@ const counts = {
     border-top: 1px solid var(--hair);
     border-bottom: 1px solid var(--hair);
   }
-  .t-group-supplementary p {
+  .t-group-supplementary > p {
     letter-spacing: 0.3em;
   }
   /* Skeat's "41a" keeps its small letter. */
@@ -1970,14 +2078,15 @@ const counts = {
     bodies.forEach((b) => ro.observe(b));
     document.fonts?.ready.then(() => bodies.forEach(drawConst));
 
-    // Contents: join each part's stars with a faint line, and show the
-    // title of the star under the pointer / keyboard focus (or of the
-    // section being read) in the caption below the chart.
+    // Star lines under each part heading: join the stars with a faint dotted
+    // line, and show the title of the star under the pointer / keyboard focus
+    // (or else of the section being read) in the caption under the line.
+    // A tap goes straight to the section.
     const drawBand = (band: HTMLElement) => {
-      const svg = band.querySelector<SVGSVGElement>(".toc-lines");
+      const svg = band.querySelector<SVGSVGElement>(".ts-lines");
       if (!svg) return;
       const box = band.getBoundingClientRect();
-      const pts = [...band.querySelectorAll<HTMLElement>(".toc-star")].map((st) => {
+      const pts = [...band.querySelectorAll<HTMLElement>(".ts-star")].map((st) => {
         const r = st.getBoundingClientRect();
         return [r.left + r.width / 2 - box.left, r.top + r.height / 2 - box.top];
       });
@@ -1989,50 +2098,54 @@ const counts = {
       );
       svg.replaceChildren(path);
     };
-    const bands = [...root.querySelectorAll<HTMLElement>(".toc-band")];
+    const bands = [...root.querySelectorAll<HTMLElement>(".ts-band")];
     const bandRO = new ResizeObserver((es) => es.forEach((e) => drawBand(e.target as HTMLElement)));
     bands.forEach((b) => bandRO.observe(b));
     document.fonts?.ready.then(() => bands.forEach(drawBand));
 
-    const capK = root.querySelector<HTMLElement>(".toc-ck");
-    const capT = root.querySelector<HTMLElement>(".toc-ct");
-    let pointed: HTMLElement | null = null;
-    let reading: HTMLElement | null = null;
-    const showCaption = () => {
-      const a = pointed ?? reading;
-      if (!a || !capK || !capT) return;
-      capK.textContent = a.dataset.captionKicker ?? "";
-      capT.textContent = `${a.dataset.caption ?? ""}…`;
+    type Line = { cap: HTMLElement | null; pointed: HTMLElement | null; reading: HTMLElement | null };
+    const lines = new Map<HTMLElement, Line>();
+    const showCaption = (nav: HTMLElement) => {
+      const l = lines.get(nav);
+      const a = l?.pointed ?? l?.reading;
+      if (!l?.cap) return;
+      l.cap.textContent = a ? a.getAttribute("aria-label") ?? "" : "";
+      l.cap.classList.toggle("on", !!a);
     };
-    root.querySelectorAll<HTMLElement>(".toc-band a").forEach((a) => {
-      const on = () => {
-        pointed = a;
-        showCaption();
-      };
-      const off = () => {
-        if (pointed === a) {
-          pointed = null;
-          showCaption();
-        }
-      };
-      a.addEventListener("pointerenter", on);
-      a.addEventListener("focus", on);
-      a.addEventListener("pointerleave", off);
-      a.addEventListener("blur", off);
+    root.querySelectorAll<HTMLElement>(".t-stars").forEach((nav) => {
+      lines.set(nav, { cap: nav.querySelector(".ts-cap"), pointed: null, reading: null });
+      nav.querySelectorAll<HTMLElement>("a").forEach((a) => {
+        const on = () => {
+          lines.get(nav)!.pointed = a;
+          showCaption(nav);
+        };
+        const off = () => {
+          const l = lines.get(nav)!;
+          if (l.pointed === a) {
+            l.pointed = null;
+            showCaption(nav);
+          }
+        };
+        a.addEventListener("pointerenter", on);
+        a.addEventListener("focus", on);
+        a.addEventListener("pointerleave", off);
+        a.addEventListener("blur", off);
+      });
     });
 
-    // Mark the section in view as active (window glow + contents star).
+    // Mark the section in view as active (window glow + its star).
     const links = new Map<string, HTMLElement>();
-    root.querySelectorAll<HTMLElement>(".toc-band [data-toc]").forEach((a) => links.set(a.dataset.toc!, a));
+    root.querySelectorAll<HTMLElement>(".t-stars [data-toc]").forEach((a) => links.set(a.dataset.toc!, a));
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
           e.target.classList.toggle("active", e.isIntersecting);
           const link = links.get(e.target.id);
           link?.classList.toggle("active", e.isIntersecting);
-          if (e.isIntersecting && link) {
-            reading = link;
-            showCaption();
+          const nav = link?.closest<HTMLElement>(".t-stars");
+          if (e.isIntersecting && link && nav) {
+            lines.get(nav)!.reading = link;
+            showCaption(nav);
           }
         }
       },
