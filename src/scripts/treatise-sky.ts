@@ -445,7 +445,7 @@ export function initSky(root: HTMLElement) {
     [".t-sec-label", 18, 0.95],
     [".t-hero > :not(h1)", 14, 0.95],
     [".t-hero h1", 10, 0.7],
-    [".toc-parts a, .ts-band, .ts-cap", 10, 0.95],
+    [".toc-parts a", 10, 0.95],
     [".gl-hint, .t-subtitle", 10, 0.95],
     [".t-part-head > :not(svg), .t-group-head p, .t-colophon, .t-part-end, .t-sample-end", 14, 0.95],
     [".t-end > *", 14, 0.95],
