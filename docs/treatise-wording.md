@@ -100,6 +100,23 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | `horizon`, `zenith` | treatise-p1-18-almucantars.js | Part I §18 (astrolabe-video 876ff9d). Modern; Chaucer's words are "Orisonte" and "Senith". | provisional; awaiting Jes |
 | `east` | treatise-p1-19-azimuths.js | Part I §19 (astrolabe-video 5ffa27a). | **decided: modern** (Jes, tg 17771) |
 | numerals `1`–`12` | treatise-p1-20-unequal-hours.js | Part I §20 (astrolabe-video e6688c8). Modern figures. | **decided: modern** (Jes, tg 17771) |
+| rete star names as ENGRAVED on 47869 (16) | treatise-p1-21-rete.js | Part I §21 (astrolabe-video 349d221). Names read from the instrument (ox47869.md); identifications below. Five pointers unnamed on the instrument stay unnamed. | source (the instrument) |
+| ↳ `Alabor` | = Sirius (α CMa) | astrolabe-video ox47869.md; Skeat, Oxford Chaucer vol. 3 (1894), notes on Fig. 2 (Gutenberg #45027) ("Alhabor or Sirius"). Chaucer: Alhabor. | identification as noted |
+| ↳ `Alacrab` | = Antares (α Sco) | ox47869.md; Skeat, Oxford Chaucer vol. 3 (1894), notes on Fig. 2 (Gutenberg #45027) ("Kalbalacrab or Antares"). | identification as noted |
+| ↳ `Wega` | = Vega (α Lyr) | ox47869.md; Skeat, Oxford Chaucer vol. 3 (1894), notes on Fig. 2 (Gutenberg #45027). | identification as noted |
+| ↳ `Denebalgedi` | = δ Cap (Deneb Algedi) | Skeat, Oxford Chaucer vol. 3 (1894), notes on Fig. 2 (Gutenberg #45027) ("Deneb Algebi … δ Capricorni"). | identification as noted |
+| ↳ `Delfin` | = a star of Delphinus, **uncertain** which (ε or α Del) | Skeat names only the constellation. | identification as noted |
+| ↳ `Altair` | = α Aql | Skeat, Oxford Chaucer vol. 3 (1894), notes on Fig. 2 (Gutenberg #45027). | identification as noted |
+| ↳ `Algoh` | = Algol (β Per) | Skeat, Oxford Chaucer vol. 3 (1894), notes on Fig. 2 (Gutenberg #45027) ("Algol, or β Persei"). | identification as noted |
+| ↳ `Bacncaycos` | = Baten Kaitos (ζ Cet), **probable** | Skeat, Oxford Chaucer vol. 3 (1894), notes on Fig. 2 (Gutenberg #45027) ("Batnkaitos … apparently ζ Ceti"). | identification as noted |
+| ↳ `Mencar` | = Menkar (α Cet) | Skeat, Oxford Chaucer vol. 3 (1894), notes on Fig. 2 (Gutenberg #45027). | identification as noted |
+| ↳ `Aldebora` | = Aldebaran (α Tau) | Skeat, Oxford Chaucer vol. 3 (1894), notes on Fig. 2 (Gutenberg #45027). Chaucer: Aldeberan. | identification as noted |
+| ↳ `Rigil` | = Rigel (β Ori) | Skeat, Oxford Chaucer vol. 3 (1894), notes on Fig. 2 (Gutenberg #45027). | identification as noted |
+| ↳ `Algomeysa` | = Procyon (α CMi) | Skeat, Oxford Chaucer vol. 3 (1894), notes on Fig. 2 (Gutenberg #45027). Chaucer: Algomeisa. | identification as noted |
+| ↳ `Alfard` | = Alphard (α Hya) | Skeat, Oxford Chaucer vol. 3 (1894), notes on Fig. 2 (Gutenberg #45027). | identification as noted |
+| ↳ `Coruus` | = δ Crv (Algorab), **probable** | Skeat, Oxford Chaucer vol. 3 (1894), notes on Fig. 2 (Gutenberg #45027) gives Algorab = δ Corvi on his rete. | identification as noted |
+| ↳ `Elfeca` | = Alphecca (α CrB) | Skeat, Oxford Chaucer vol. 3 (1894), notes on Fig. 2 (Gutenberg #45027) ("Alpheta, Alphecca, or α Coronae Borealis"). | identification as noted |
+| ↳ `Alauue` | = α Oph (Rasalhague), **uncertain** | Arabic al-ḥawwāʾ = Ophiuchus; Skeat names α Oph "Raz Alhagus" on his figure. | identification as noted |
 
 ## Not on the page
 
