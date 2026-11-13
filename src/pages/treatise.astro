@@ -147,13 +147,17 @@ const ringTicks = Array.from({ length: 72 }, (_, i) => {
 const PLACE_INLINE = `(function (s) {
   var me = s.parentElement;
   var ps = me.querySelectorAll(":scope > p");
-  me.querySelectorAll(":scope > .inline-win").forEach(function (w) {
+  me.querySelectorAll(":scope > .inline-win, :scope > .t-inset").forEach(function (w) {
     var p = ps[+w.dataset.after];
     if (!p) return;
     if (w.dataset.size === "small") p.before(w);
     else p.after(w);
   });
 })(document.currentScript);`;
+
+// Minimal inline markup for our editorial notes: HTML-escaped, then *italic*.
+const inlineMd = (t: string) =>
+  t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\*([^*]+)\*/g, "<i>$1</i>");
 
 const kindOf = (note?: string) =>
   !note ? "main" : /spurious/i.test(note) ? "spurious" : "supplementary";
@@ -187,6 +191,12 @@ const sections = await Promise.all(
         if (!ok) console.warn(`[treatise] inline scene ${sc.name} skipped: public/scenes/${sc.name}.js not found`);
         return ok;
       });
+    // Editorial inset notes (our words), placed like the inline windows.
+    const insets = (entry.data.insets ?? []).map((n, j) => {
+      const at = paras.findIndex((t) => t.includes(n.after.replace(/\s+/g, " ")));
+      if (at < 0) throw new Error(`treatise: inset "${n.title}" in ${entry.id}: phrase "${n.after}" not found in the Middle English`);
+      return { ...n, at, id: `inset-${entry.id.replace(/\W+/g, "-")}-${j}` };
+    });
     const kicker = part === "Prologue" ? "The Prologue" : `${part} · § ${section}`;
     // The glossed sample: Skeat's paragraphs with each glossed word made focusable.
     const glossed = GLOSS_SAMPLE.has(entry.slug) ? glossSection(entry.slug, entry.body, glossStats, LINE_MODE) : null;
@@ -209,6 +219,7 @@ const sections = await Promise.all(
       scene: entry.data.scene ?? "night-window",
       frame: frameFor(entry.data.scene ?? "night-window"),
       inline,
+      insets,
       spin: (i * 47) % 360,
     };
   })
@@ -437,7 +448,7 @@ const tocParts = [
                 })()}
               </header>
             )}
-            {p.items.map(({ entry, Content, glossed, figureTerms, id, privateModern, ring, title, rubric, field, spin, i, kind, kicker, inline, scene, frame }, k) => (
+            {p.items.map(({ entry, Content, glossed, figureTerms, id, privateModern, ring, title, rubric, field, spin, i, kind, kicker, inline, insets, scene, frame }, k) => (
               <>
                 {kind !== "main" && p.items[k - 1]?.kind !== kind && (
                   <header class={`t-group-head t-group-${kind}`} id={kind}>
@@ -542,7 +553,21 @@ const tocParts = [
                             </div>
                           </div>
                         ))}
-                        {inline.length > 0 && (
+                        {insets.map((n) => (
+                          <aside class="t-inset" data-after={n.at} role="note" aria-labelledby={n.id}>
+                            <p class="ti-head"><span class="ti-mark" aria-hidden="true">☞</span> <span id={n.id}>{n.title}</span></p>
+                            {n.intro && <p class="ti-intro" set:html={inlineMd(n.intro)} />}
+                            {n.items && (
+                              <dl class="ti-list">
+                                {n.items.map((it) => (
+                                  <div><dt>{it.label}</dt><dd set:html={inlineMd(it.text)} /></div>
+                                ))}
+                              </dl>
+                            )}
+                            {n.cite && <p class="ti-cite" set:html={inlineMd(n.cite)} />}
+                          </aside>
+                        ))}
+                        {(inline.length > 0 || insets.length > 0) && (
                           <script is:inline set:html={PLACE_INLINE}></script>
                         )}
                         {(entry.data.plates ?? []).map((pl) => (
@@ -1189,6 +1214,66 @@ const tocParts = [
     line-height: 1.15; /* global.css h2 has a fixed 2.25rem line-height that let the rubric rule graze the letters */
     margin: 0.2rem 0 0.6rem;
     text-shadow: 0 0 24px rgba(236, 201, 120, 0.35);
+  }
+  /* Editorial inset note: our words, set into the text on a slip of vellum, apart from
+     Chaucer (night page, silver) and the modern line (gray). Marked with a red manicule. */
+  .t-inset {
+    clear: both;
+    margin: 1.4rem 0 1.8rem;
+    padding: 0.9rem 1.1rem 0.8rem 1.2rem;
+    background: linear-gradient(180deg, #f8f2e1, #efe4c6);
+    color: #2b2118;
+    border-left: 3px solid #b8361f;
+    border-radius: 2px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+    font-family: var(--modern-font);
+    font-size: 0.98rem;
+    line-height: 1.5;
+    max-width: 36rem;
+  }
+  .t-inset p,
+  .t-inset dd {
+    margin: 0;
+    font-size: 0.98rem;
+    line-height: 1.5;
+  }
+  .ti-head {
+    font-family: var(--me-font);
+    font-size: 0.78rem !important;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #a3301b;
+    margin-bottom: 0.55rem !important;
+  }
+  .ti-mark {
+    letter-spacing: 0;
+    font-size: 1rem;
+  }
+  .ti-intro {
+    margin-bottom: 0.5rem !important;
+  }
+  .ti-list {
+    margin: 0;
+    display: grid;
+    gap: 0.35rem;
+  }
+  .ti-list > div {
+    display: grid;
+    grid-template-columns: 2.2rem 1fr;
+    gap: 0.4rem;
+  }
+  .ti-list dt {
+    font-family: var(--me-font);
+    color: #a3301b;
+    font-weight: 600;
+  }
+  .ti-list dd {
+    margin: 0;
+  }
+  .ti-cite {
+    margin-top: 0.6rem !important;
+    font-size: 0.82rem !important;
+    color: #5a4636;
   }
   .t-part-fig {
     width: min(18rem, 72vw);
