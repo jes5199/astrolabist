@@ -137,3 +137,4 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-p2-40-planet-rising-ink.js copied byte-for-byte from astrolabe-video 6006a4c.
 2026-11-13: treatise-p1-1-ring-back-ink.js copied byte-for-byte from astrolabe-video 30bad16.
 2026-11-13: treatise-p2-27-right-ascension-ink.js treatise-p2-28-oblique-ascension-ink.js treatise-p1-22-label-ink.js treatise-p2-7-day-arc-ink.js copied byte-for-byte from astrolabe-video 7346769.
+2026-11-13: treatise-p1-3-mother-rete-ink.js copied byte-for-byte from astrolabe-video ac57dfe.
