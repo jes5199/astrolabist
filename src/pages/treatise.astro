@@ -368,7 +368,7 @@ const listGroups = [
         </details>
       </nav>
 
-      <p class="gl-hint">Under Chaucer's words, a modern line. Tap or hover a word whose modern word is <span class="gl-cue">gold</span> for its definition and source.</p>
+      <p class="gl-hint">Under Chaucer's words, a modern line. Tap or hover a <span class="gl-cue">dotted</span> word for its definition and source.</p>
 
       <div class="gl-descs" hidden>
         {glossDesc.map((d) => <span id={d.id}>{d.text}</span>)}
@@ -1171,7 +1171,9 @@ const listGroups = [
     color: #cfd5ec;
   }
   .gl-cue {
-    color: #f0d48e;
+    text-decoration: underline dotted rgba(207, 213, 236, 0.75);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.22em;
   }
   .t-subtitle {
     margin: -0.6rem 0 1.4rem;
@@ -1497,18 +1499,17 @@ const listGroups = [
     line-height: 1.1;
     letter-spacing: 0.01em;
     padding-top: 0.12em;
-    color: #f0d48e;
+    color: #a3abcb; /* one gray for the whole modern line (Jes, tg 17830) */
     -webkit-user-select: none;
     user-select: none;
   }
-  /* The same word in modern English: quieter, so real glosses stand out. */
-  .t-sec[data-glossed] .t-me :global(ruby.lu-id rt),
-  .t-sec[data-glossed] .t-me :global(ruby.lu-blank rt) {
-    color: #a3abcb;
-  }
+  /* A word with a definition: a faint dotted underline, no colour (Jes, tg 17830). */
   :global(.gw) {
     cursor: help;
     border-radius: 2px;
+    text-decoration: underline dotted rgba(207, 213, 236, 0.55);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.2em;
     color: #fbf0d4;
     transition: color 0.15s, text-shadow 0.15s;
     -webkit-tap-highlight-color: transparent;
