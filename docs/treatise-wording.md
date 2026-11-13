@@ -153,6 +153,7 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | `a town`, `further east`, `same meridian`, `noon`, `longitude` | treatise-p2-39-town-meridians.js | Part II §39 (astrolabe-video 8bea500). Modern captions. Towns unnamed (the text names none here; Oxford and Lynn are too close to show). The climates passage is not drawn. | **decided** |
 | `4 of 12`, `20 feet`, `3 × 20 = 60 feet`, `+ eye` | treatise-p2-41-tower.js | Part II §41 (astrolabe-video ffe3d92); also covers §41a/b. Modern. To scale except the instrument, drawn larger than true. | **decided** |
 | `1 of 12`, `2 of 12`, `60 feet`, `12 heights`, `6 heights`, `6 heights = 60 feet`, `1 height = 10 feet, + eye` | treatise-p2-42-two-stations.js | Part II §42 (astrolabe-video 1580477); also covers §42a/b, §43, §43a. Modern. To scale. Only the 1-then-2 case is drawn. | **decided** |
+| Part I scenes in coloured woodcut (`treatise-p1-*-ink.js`, §1–5, §7–23) | treatise-p1-*-ink.js | Woodcut conversion (Jes tg 17847; astrolabe-video 7bfb7b7, ba5eac8, 730e315). Same wording as the night versions they replace; labels now printer's red, upright roman. Exceptions with new lettering: §3 and §14 samples (parts lettered a, b, c…; a–g). | **decided** (tg 17847) |
 
 ## Not on the page
 

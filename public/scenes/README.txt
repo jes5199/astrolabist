@@ -101,3 +101,14 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-p1-10-months-ink.js copied byte-for-byte from astrolabe-video ba5eac8.
 2026-11-13: treatise-p1-11-holy-days-ink.js copied byte-for-byte from astrolabe-video ba5eac8.
 2026-11-13: treatise-p1-12-shadow-square-ink.js copied byte-for-byte from astrolabe-video ba5eac8.
+2026-11-13: treatise-p1-13-rule-ink.js copied byte-for-byte from astrolabe-video 730e315.
+2026-11-13: treatise-p1-14-pin-horse-ink.js copied byte-for-byte from astrolabe-video 730e315.
+2026-11-13: treatise-p1-15-front-quarters-ink.js copied byte-for-byte from astrolabe-video 730e315.
+2026-11-13: treatise-p1-16-front-border-ink.js copied byte-for-byte from astrolabe-video 730e315.
+2026-11-13: treatise-p1-17-three-circles-ink.js copied byte-for-byte from astrolabe-video 730e315.
+2026-11-13: treatise-p1-18-almucantars-ink.js copied byte-for-byte from astrolabe-video 730e315.
+2026-11-13: treatise-p1-19-azimuths-ink.js copied byte-for-byte from astrolabe-video 730e315.
+2026-11-13: treatise-p1-20-unequal-hours-ink.js copied byte-for-byte from astrolabe-video 730e315.
+2026-11-13: treatise-p1-21-rete-ink.js copied byte-for-byte from astrolabe-video 730e315.
+2026-11-13: treatise-p1-22-label-ink.js copied byte-for-byte from astrolabe-video 730e315.
+2026-11-13: treatise-p1-23-almury-ink.js copied byte-for-byte from astrolabe-video 730e315.
