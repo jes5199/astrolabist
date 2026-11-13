@@ -41,7 +41,7 @@ export function mount(el) {
   const three = [P.cancer, P.equator, P.capricorn].map((r) => node("path", { d: circ(r), pathLength: 1, "stroke-dasharray": "1 1", "stroke-dashoffset": 1, fill: "none", stroke: "currentColor", "stroke-width": W(1.8) }, g));
   const words = ["Tropic of Cancer", "equator", "Tropic of Capricorn"].map((w, i) => {
     const r = [P.cancer, P.equator, P.capricorn][i];
-    const t = node("text", { x: 0, y: f(C.y + C.k * r - 5), "text-anchor": "middle", "font-size": 14, fill: SILVER, opacity: 0, "font-family": "inherit", stroke: NIGHT, "stroke-width": 3, "stroke-linejoin": "round", "paint-order": "stroke" }, svg);
+    const t = node("text", { x: 0, y: f(C.y + C.k * r - 3.5), "text-anchor": "middle", "font-size": 10, fill: SILVER, opacity: 0, "font-family": "inherit", stroke: NIGHT, "stroke-width": 3, "stroke-linejoin": "round", "paint-order": "stroke" }, svg);
     t.textContent = w;
     return t;
   });
