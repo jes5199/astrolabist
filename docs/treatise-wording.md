@@ -138,6 +138,18 @@ The Part I scenes (p1-1, p1-2, p1-3) and the Prologue miniature draw no words.
 | degree counter ending `38.4°` | treatise-p2-13-noon.js | Part II §13 (astrolabe-video f18ee01). Modern. Chaucer's 12 March. | **decided: modern** |
 | `Aries 1°`, `Virgo 29°`, `March`, `September` | treatise-p2-14-sun-from-noon.js | Part II §14 (astrolabe-video 79c0abf). Signs Latin (decided); season month labels in modern English (explanatory labels, like II §1's "12 March"; not engraved names). | **decided** (Latin signs; modern labels) |
 | `Taurus 10°`, `Leo 20°`, `Scorpio 10°`; `same day: 14 h 43 m`, `day = night: 14 h 43 m` | treatise-p2-15-equal-days.js | Part II §15 (astrolabe-video da8e9df). Latin signs; modern captions. | **decided** |
+| `30° east: ascendant 1`, `30° west: ascendant 2`, `the middle, rising`, `the star's degree`, `Libra 22°` | treatise-p2-17-star-place.js | Part II §17 (astrolabe-video 3b6d423). Modern captions; Latin sign. **Interpretation:** "the middel degree by-twene bothe assendentes" shown as the middle counted on the border (in time), which is exact; the literal middle in zodiac degrees misses by ~26° at 52°. Alternative available. | provisional (interpretation) |
+| `Alabor`, `Cancer 4°` | treatise-p2-18-mediation.js | Part II §18 (astrolabe-video b0aa6d2). Engraved star name; mediation is the recorded one (by construction; checked independently in §21). | **decided** |
+| `Alabor`, `rises with Leo 14°` | treatise-p2-19-rises-with.js | Part II §19 (astrolabe-video 5a73248). Solved from the plate geometry. | **decided** |
+| `62.1°`, `38.0°`, `declination 24.1° north` | treatise-p2-20-declination.js | Part II §20 (astrolabe-video 6d31e3d). Modern. 24.1° is the 47869 plate's own obliquity; Chaucer gives Ptolemy's 23°50′ in I §17. | **decided: modern** |
+| `equator`, `zenith`, `north`, `pole`, `52°` ×2, `latitude 52°` | treatise-p2-21-plate-latitude.js | Part II §21 (astrolabe-video d9c5279). Modern. | **decided: modern** |
+| `N`, `S`, `pole`, `zenith`, `equator`, `51°50′` ×2, `38°10′` ×2 | treatise-p2-22-oxford.js | Part II §22 (astrolabe-video 512e17c). Modern labels; the measures are Chaucer's own figures for Oxford. Note: the plate scenes use 52° (the 47869 drawing's round figure). | **decided: modern** |
+| `A`, `F` (Chaucer's letters), `north`, `81°50′`, `21°50′`, `pole 51°50′` | treatise-p2-23-pole-star.js | Part II §23 (astrolabe-video 4532b23). Sky version; a figure-on-a-winter-night version is a possible later upgrade. | **decided: modern** |
+| `north`, `81°50′`, `21°50′`, `81°50′ + 21°50′ = 103°40′`, `half: pole 51°50′` | treatise-p2-24-never-sets.js | Part II §24 (astrolabe-video 1b2003c). Modern. | **decided: modern** |
+| `S`, `zenith`, `equator`, `38°10′`, `51°50′`, `90° − 38°10′ = 51°50′`, `south pole` | treatise-p2-25-latitude-noon.js | Part II §25 (astrolabe-video bea40ec). Modern (Chaucer: "pol antartik"). | **decided: modern** |
+| `latitude 52°` … `latitude 0°` (readout), `the right horizon`, `day = night` | treatise-p2-26-right-sphere.js | Part II §26 (astrolabe-video 503356d). Modern. Shown on a plate whose latitude slides to 0° (instead of a solid sphere). Note: at latitude 0 only the horizon (and meridian) is straight; Chaucer's "almikanteras … streighte" fits the horizon. | **decided: modern** |
+| `Aries: 27.8° of the equator`, `Cancer: 32.3° of the equator` | treatise-p2-27-right-ascension.js | Part II §27 (astrolabe-video 798773d). Latin signs; modern captions. | **decided** |
+| `Aries: 12.3°, 0 h 49 m`, `Cancer: 38.3°, 2 h 33 m` | treatise-p2-28-oblique-ascension.js | Part II §28 (astrolabe-video 258e8ed). Latin signs; modern captions. | **decided** |
 
 ## Glosses we wrote (`src/treatise-text/glosses.json`, source `ours`)
 

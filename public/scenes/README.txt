@@ -65,3 +65,15 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-p2-13-noon.js copied byte-for-byte from astrolabe-video f18ee01.
 2026-11-13: treatise-p2-14-sun-from-noon.js copied byte-for-byte from astrolabe-video 79c0abf.
 2026-11-13: treatise-p2-15-equal-days.js copied byte-for-byte from astrolabe-video da8e9df.
+2026-11-13: treatise-p2-17-star-place.js copied byte-for-byte from astrolabe-video 3b6d423.
+2026-11-13: treatise-p2-18-mediation.js copied byte-for-byte from astrolabe-video b0aa6d2.
+2026-11-13: treatise-p2-19-rises-with.js copied byte-for-byte from astrolabe-video 5a73248.
+2026-11-13: treatise-p2-20-declination.js copied byte-for-byte from astrolabe-video 6d31e3d.
+2026-11-13: treatise-p2-21-plate-latitude.js copied byte-for-byte from astrolabe-video d9c5279.
+2026-11-13: treatise-p2-22-oxford.js copied byte-for-byte from astrolabe-video 512e17c.
+2026-11-13: treatise-p2-23-pole-star.js copied byte-for-byte from astrolabe-video 4532b23.
+2026-11-13: treatise-p2-24-never-sets.js copied byte-for-byte from astrolabe-video 1b2003c.
+2026-11-13: treatise-p2-25-latitude-noon.js copied byte-for-byte from astrolabe-video bea40ec.
+2026-11-13: treatise-p2-26-right-sphere.js copied byte-for-byte from astrolabe-video 503356d.
+2026-11-13: treatise-p2-27-right-ascension.js copied byte-for-byte from astrolabe-video 798773d.
+2026-11-13: treatise-p2-28-oblique-ascension.js copied byte-for-byte from astrolabe-video 258e8ed.
