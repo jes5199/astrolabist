@@ -374,7 +374,7 @@ const tocParts = [
       <header class="t-hero">
         <p class="t-kicker">Geoffrey Chaucer <span>✦</span> c. 1391</p>
         <h1><span class="h1-a">A Treatise</span> <span class="h1-b">on the Astrolabe</span></h1>
-        <p class="t-subtitle"><ruby lang="enm">Bred and mylk for childeren<rt>bread and milk for children</rt></ruby></p>
+        <p class="t-subtitle"><ruby lang="enm">“Bred and mylk for childeren”<rt>bread and milk for children</rt></ruby></p>
         {/* Jes's introduction (text tg 17825; OK'd "for now", Jes tg 17854). */}
         <div class="t-preface">
           <p>For more than a thousand years, the astrolabe was the ultimate representation of scientific knowledge of space and time, packed into a sort of portable computer.</p>
@@ -1189,8 +1189,8 @@ const tocParts = [
     margin: -0.6rem 0 1.4rem;
     font-family: var(--me-font);
     font-style: italic;
-    font-size: 1.35rem;
-    letter-spacing: 0.04em;
+    font-size: clamp(1.6rem, 3.4vw, 2.2rem); /* larger, in quotes (Jes tg 17881) */
+    letter-spacing: 0.03em;
     color: #ead9b0;
   }
   .t-subtitle ruby {
