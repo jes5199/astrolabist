@@ -201,7 +201,8 @@ export function initSky(root: HTMLElement) {
   function build() {
     W = host!.clientWidth;
     H = host!.clientHeight;
-    dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+    // Phones redraw this canvas on every scroll frame; at 1x it costs about a third as much (Jes tg 17923).
+    dpr = Math.min(window.devicePixelRatio || 1, host!.clientWidth < 600 ? 1 : 1.75);
     for (const c of [plateC, reteC!]) {
       c.width = Math.round(W * dpr);
       c.height = Math.round(H * dpr);
@@ -449,6 +450,7 @@ export function initSky(root: HTMLElement) {
     [".gl-hint, .t-subtitle", 10, 0.95],
     [".t-part-head > :not(svg), .t-group-head p, .t-colophon, .t-part-end, .t-sample-end", 14, 0.95],
     [".t-end > *", 14, 0.95],
+    [".t-pager a, .t-pagelabel", 12, 0.95],
     // Sky windows: not erased (strength 0), but labels keep clear of them.
     [".win", 4, 0],
   ];
@@ -513,7 +515,7 @@ export function initSky(root: HTMLElement) {
     c.rotate(-a);
 
     if (haze) {
-      c.imageSmoothingQuality = "high";
+      c.imageSmoothingQuality = W < 600 ? "low" : "high";
       const S = haze.width / hazeScale;
       c.drawImage(haze, -S / 2, -S / 2, S, S);
     }

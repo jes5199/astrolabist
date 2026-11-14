@@ -3,10 +3,10 @@
  * Lazy scene wrapper.
  *
  * Renders a static poster (inline SVG). If `name` is set, a module at
- * /scenes/<name>.js is imported when the wrapper comes within 200px of the
- * viewport. Module contract:
+ * /scenes/<name>.js is imported and mounted when the wrapper comes within one
+ * screen of the viewport. Module contract:
  *
- *   export function mount(el)   // build the scene inside `el` (called once per wrapper)
+ *   export function mount(el)   // build the scene inside `el` (called once per stage element)
  *   export function start(el)   // begin animating that mounted instance
  *   export function stop(el)    // pause it
  *
@@ -14,7 +14,13 @@
  * start() is skipped entirely under `prefers-reduced-motion: reduce`, so
  * mount() should leave a sensible still frame. If the module is missing or
  * throws, the poster stays.
- */
+ *
+ * Teardown (Jes tg 17923, iPhone performance): once a mounted scene is more
+ * than three screens away it is stopped, its stage element is replaced by a
+ * fresh empty one (scene modules keep their state in WeakMaps keyed by the
+ * stage, so it is freed with it), and the poster returns. Coming back near
+ * mounts it again on the new stage.
+  */
 interface Props {
   name?: string;
   label?: string;
@@ -84,52 +90,87 @@ const { name, label = "Figure" } = Astro.props;
   };
 
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const NEAR = "100% 0px"; // mount within one screen
+  const FAR = "300% 0px"; // tear down beyond three
 
   function setup(fig: HTMLElement) {
     const name = fig.dataset.scene;
-    const stage = fig.querySelector<HTMLElement>(".scene-stage");
+    let stage = fig.querySelector<HTMLElement>(".scene-stage");
     if (!name || !stage || !/^[a-z0-9-]+$/.test(name)) return;
 
     let mod: SceneModule | null = null;
-    let loading = false;
+    let loading: Promise<void> | null = null;
+    let mounted = false;
+    let near = false;
     let visible = false;
     let running = false;
 
     const sync = () => {
-      if (!mod) return;
+      if (!mod || !mounted) return;
       const want = visible && !reduce.matches;
       if (want && !running) {
-        mod.start?.(stage);
+        mod.start?.(stage!);
         running = true;
       } else if (!want && running) {
-        mod.stop?.(stage);
+        mod.stop?.(stage!);
         running = false;
       }
     };
 
-    const load = async () => {
-      if (loading) return;
-      loading = true;
+    const mountNow = () => {
+      if (!mod || mounted || !near) return;
       try {
-        const m = (await import(
-          /* @vite-ignore */ `/scenes/${name}.js`
-        )) as SceneModule;
-        if (typeof m.mount !== "function") return;
-        m.mount(stage);
-        mod = m;
+        mod.mount(stage!);
+        mounted = true;
         fig.classList.add("mounted");
         sync();
       } catch (err) {
-        // Missing or broken scene: keep the poster.
-        console.warn(`scene "${name}" not loaded`, err);
+        console.warn(`scene "${name}" did not mount`, err);
       }
+    };
+
+    const load = () => {
+      if (mod) return mountNow();
+      loading ??= import(/* @vite-ignore */ `/scenes/${name}.js`)
+        .then((m: SceneModule) => {
+          if (typeof m.mount === "function") mod = m;
+          mountNow();
+        })
+        .catch((err) => {
+          // Missing or broken scene: keep the poster.
+          console.warn(`scene "${name}" not loaded`, err);
+        });
+    };
+
+    const teardown = () => {
+      if (!mounted) return;
+      if (running) {
+        try {
+          mod?.stop?.(stage!);
+        } catch {}
+        running = false;
+      }
+      // A shallow clone keeps the class and the scoped-style attribute, without the scene inside.
+      const fresh = stage!.cloneNode(false) as HTMLElement;
+      stage!.replaceWith(fresh);
+      stage = fresh;
+      mounted = false;
+      fig.classList.remove("mounted");
     };
 
     new IntersectionObserver(
       (entries) => {
-        if (entries.some((e) => e.isIntersecting)) load();
+        for (const e of entries) near = e.isIntersecting;
+        if (near) load();
       },
-      { rootMargin: "200px" }
+      { rootMargin: NEAR }
+    ).observe(fig);
+
+    new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => !e.isIntersecting)) teardown();
+      },
+      { rootMargin: FAR }
     ).observe(fig);
 
     new IntersectionObserver((entries) => {

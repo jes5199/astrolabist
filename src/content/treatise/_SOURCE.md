@@ -45,7 +45,7 @@ Editing applied:
 - Skeat's English rubrics for Part II are in `heading`; his bracketed Latin
   rubrics are in `latin`. The part-level rubrics ("HERE BIGINNETH THE
   DESCRIPCION OF THE ASTROLABIE." / "HERE BIGINNEN THE CONCLUSIONS OF THE
-  ASTROLABIE.") are rendered by `src/pages/treatise.astro`, not stored per
+  ASTROLABIE.") are rendered by `src/pages/treatise/[...page].astro`, not stored per
   section.
 
 The `modern` field is intentionally empty: no modern-English rendering has been

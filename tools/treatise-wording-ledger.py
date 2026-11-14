@@ -9,7 +9,8 @@ import os
 import sys
 
 root = sys.argv[1]
-P = "src/pages/treatise.astro"
+P = "src/pages/treatise/[...page].astro"
+PG = "src/lib/treatise-pages.ts"
 S = "src/scripts/treatise-sky.ts"
 SC = "public/scenes"
 L = "src/lib/treatise-gloss.ts"
@@ -32,7 +33,9 @@ def where(path, *needles):
 
 PROV = "provisional; awaiting Jes"
 rows = [
-    ("`A Treatise on the Astrolabe - Astrolab.ist` (document title)", where(P, "title={`A Treatise on the Astrolabe"), "Site title comes from `src/consts.ts`.", PROV),
+    ('`A Treatise on the Astrolabe - Astrolab.ist` (document title); on later pages `A Treatise on the Astrolabe · <page label> - Astrolab.ist`', where(P, "title={`A Treatise on the Astrolabe"), 'Site title comes from `src/consts.ts`. The page part was added when the Treatise was split into pages (Jes tg 17923).', PROV),
+    ('Page labels for the split Treatise: `Prologue`, `Part I`, `Part II, §§ 1–12`, `Part II, §§ 13–25`, `Part II, §§ 26–37`, `Part II, § 38 to the end` (shown under the title on later pages, and in the pager)', where(PG, 'label: "Part II, §§ 1–12"'), 'OURS. Cut points chosen by measured page weight (Jes tg 17923: "break this into pages"). The last page also holds Skeat\'s supplementary and spurious sections.', 'provisional; published (tg 17869)'),
+    ('Pager at the foot of each page: `← <previous page label>` / `<next page label> →`; `Explicit` now only on the last page', where(P, 'class="t-pager"'), 'OURS (arrows and labels only).', 'provisional; published (tg 17869)'),
     ("`Geoffrey Chaucer, A Treatise on the Astrolabe (c. 1391), in W. W. Skeat's Middle English text (1894).` (meta description)", where(P, 'description="Geoffrey Chaucer'), "Doesn't mention the modern text.", PROV),
     ("`Geoffrey Chaucer ✦ c. 1391` (hero kicker)", where(P, '<p class="t-kicker">'), "", PROV),
     ("`A Treatise on the Astrolabe` (h1)", where(P, '<h1><span class="h1-a">'), "Conventional modern title.", PROV),
