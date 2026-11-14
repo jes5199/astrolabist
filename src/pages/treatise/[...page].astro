@@ -1,11 +1,11 @@
 ---
 import { getCollection } from "astro:content";
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Scene from "../components/Scene.astro";
-import PlateViewer from "../components/treatise/PlateViewer.astro";
-import SaintsTable from "../components/treatise/SaintsTable.astro";
-import { SITE_TITLE } from "../consts";
-import { frameFor } from "../lib/treatise-frames";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Scene from "../../components/Scene.astro";
+import PlateViewer from "../../components/treatise/PlateViewer.astro";
+import SaintsTable from "../../components/treatise/SaintsTable.astro";
+import { SITE_TITLE } from "../../consts";
+import { frameFor } from "../../lib/treatise-frames";
 import fs from "node:fs";
 import path from "node:path";
 import {
@@ -17,7 +17,15 @@ import {
   defKind,
   type GlossStats,
   type LineMode,
-} from "../lib/treatise-gloss";
+} from "../../lib/treatise-gloss";
+import { PAGES, pageHref, pageOf } from "../../lib/treatise-pages";
+
+// One route per page of the split Treatise (Jes tg 17923); /treatise/ itself is the Prologue page.
+export function getStaticPaths() {
+  return PAGES.map((p) => ({ params: { page: p.slug } }));
+}
+const PAGE = PAGES.find((p) => p.slug === Astro.params.page)!;
+const PAGE_AT = PAGES.indexOf(PAGE);
 
 // The modern line under each glossed section: "translation" (Skeat's glosses,
 // minimally joined into readable English; departures listed in glosses.json)
@@ -314,7 +322,9 @@ const sections = await Promise.all(
     });
     const kicker = part === "Prologue" ? "The Prologue" : `${part} · § ${section}`;
     // The glossed sample: Skeat's paragraphs with each glossed word made focusable.
-    const glossed = GLOSS_SAMPLE.has(entry.slug) ? glossSection(entry.slug, entry.body, glossStats, LINE_MODE) : null;
+    // Each section keeps its own gloss keys, so a page ships only the glosses it uses.
+    const secStats: GlossStats = { tokens: 0, glossed: 0, forms: new Set(), keys: new Set(), blankForms: new Set() };
+    const glossed = GLOSS_SAMPLE.has(entry.slug) ? glossSection(entry.slug, entry.body, secStats, LINE_MODE) : null;
     return {
       entry,
       Content,
@@ -334,6 +344,9 @@ const sections = await Promise.all(
       frame: frameFor(entry.data.scene ?? "night-window"),
       inline,
       insets,
+      page: pageOf(part, section, kind),
+      keys: secStats.keys,
+      secStats,
       spin: (i * 47) % 360,
     };
   })
@@ -341,7 +354,16 @@ const sections = await Promise.all(
 
 // Gloss data for the page script, and one hidden description per entry for
 // assistive technology (each glossed word points at its entry by aria-describedby).
-const usedKeys = [...glossStats.keys].sort();
+for (const { secStats: t } of sections) {
+  for (const k of ["tokens", "glossed", "skeat", "ours", "identity", "blank", "departures"] as const)
+    if (t[k] !== undefined) glossStats[k] = (glossStats[k] ?? 0) + t[k]!;
+  t.forms.forEach((f) => glossStats.forms.add(f));
+  t.keys.forEach((k) => glossStats.keys.add(k));
+  t.blankForms?.forEach((f) => glossStats.blankForms!.add(f));
+}
+// This page's sections, and only the glosses they use.
+const pageSections = sections.filter((s) => s.page === PAGE);
+const usedKeys = [...new Set(pageSections.flatMap((s) => [...s.keys]))].sort();
 const glossData = Object.fromEntries(
   usedKeys.map((k) => {
     const e = glossEntries[k];
@@ -354,17 +376,34 @@ const glossDesc = usedKeys.map((k) => {
   const parts = [e.gloss, e.def ? label + e.def : null, e.source === "ours" ? "Our gloss." : `Source: ${sourceLine(e)}.`].filter(Boolean);
   return { id: `gd-${k}`, text: parts.join(". ").replace(/\.\./g, ".") };
 });
-console.log(
+// Whole-Treatise totals, printed once (by the Prologue page) rather than once per page.
+if (!PAGE.slug) console.log(
   `[treatise glosses] sample: ${glossStats.tokens} word tokens, ${glossStats.glossed} glossed (${(
     (100 * glossStats.glossed) / Math.max(1, glossStats.tokens)
-  ).toFixed(1)}%); ${glossStats.forms.size} distinct forms; ${usedKeys.length} entries` +
+  ).toFixed(1)}%); ${glossStats.forms.size} distinct forms; ${glossStats.keys.size} entries` +
     `\n[treatise glosses] modern line (${LINE_MODE}): Skeat ${glossStats.skeat ?? 0}, ours ${glossStats.ours ?? 0}, identity ${glossStats.identity ?? 0}, blank ${glossStats.blank ?? 0} (${[...(glossStats.blankForms ?? [])].join(", ")}); departures ${glossStats.departures ?? 0}`
 );
 
-const parts = ["Prologue", "Part I", "Part II"].map((name) => ({
-  name,
-  items: sections.filter((s) => s.entry.data.part === name),
-}));
+const parts = ["Prologue", "Part I", "Part II"]
+  .map((name) => ({
+    name,
+    items: pageSections.filter((s) => s.entry.data.part === name),
+    // The part's heading goes on the page that holds its first section.
+    head: sections.find((s) => s.entry.data.part === name)?.page === PAGE,
+  }))
+  .filter((p) => p.items.length);
+const prevPage = PAGES[PAGE_AT - 1];
+const nextPage = PAGES[PAGE_AT + 1];
+// Old single-page anchors (/treatise/#part-2-30) and cross-page contents links: every section, part
+// heading and group heading id, mapped to the page that now holds it. Built here, checked by the page script.
+const idPage: Record<string, string> = {};
+for (const s of sections) {
+  const href = pageHref(s.page);
+  idPage[s.id] ??= href;
+  if (s.entry.data.part !== "Prologue") idPage[partSlug[s.entry.data.part]] ??= href;
+  if (s.kind !== "main") idPage[s.kind] ??= href;
+}
+idPage.contents = pageHref(PAGE);
 const partEndRubric: Record<string, string> = {
   "Part I": "HERE ENDETH THE DESCRIPCION OF THE ASTROLABIE.",
 };
@@ -377,11 +416,12 @@ const tocParts = [
   { id: "part-2", title: "Part II", sub: "The conclusiouns", quiet: false, count: countOf((s) => s.entry.data.part === "Part II" && s.kind === "main") },
   { id: "supplementary", title: "Supplementary propositions", sub: "printed by Skeat after the Explicit", quiet: true, count: countOf((s) => s.kind === "supplementary") },
   { id: "spurious", title: "Spurious sections", sub: "so marked by Skeat", quiet: true, count: countOf((s) => s.kind === "spurious") },
-].filter((t) => t.count);
+].filter((t) => t.count)
+  .map((t) => ({ ...t, href: `${idPage[t.id] === pageHref(PAGE) ? "" : idPage[t.id]}#${t.id}` }));
 ---
 
 <BaseLayout
-  title={`A Treatise on the Astrolabe - ${SITE_TITLE}`}
+  title={`A Treatise on the Astrolabe${PAGE.slug ? ` · ${PAGE.label}` : ""} - ${SITE_TITLE}`}
   description="Geoffrey Chaucer, A Treatise on the Astrolabe (c. 1391), in W. W. Skeat's Middle English text (1894)."
   noindex={true}
 >
@@ -431,11 +471,21 @@ const tocParts = [
       </defs>
     </svg>
 
+    {/* An old single-page link (/treatise/#part-2-30) goes on to the page that now holds that section. */}
+    <script is:inline define:vars={{ idPage }}>
+      (() => {
+        const id = decodeURIComponent(location.hash.slice(1));
+        const to = id && Object.hasOwn(idPage, id) ? idPage[id] : null;
+        const here = location.pathname.replace(/\/?$/, "/");
+        if (to && to !== here) location.replace(to + location.hash);
+      })();
+    </script>
     <div class="t-inner">
-      <header class="t-hero">
+      <header class="t-hero" data-first={PAGE.slug ? undefined : ""}>
         <p class="t-kicker">Geoffrey Chaucer <span>✦</span> c. 1391</p>
         <h1><span class="h1-a">A Treatise</span> <span class="h1-b">on the Astrolabe</span></h1>
         <p class="t-subtitle"><ruby lang="enm">“Bred and mylk for childeren”<rt>bread and milk for children</rt></ruby></p>
+        {PAGE.slug && <p class="t-pagelabel">{PAGE.label}</p>}
         {/* Jes's introduction (text tg 17825; OK'd "for now", Jes tg 17854). */}
         <div class="t-preface">
           <p>For more than a thousand years, the astrolabe was the ultimate representation of scientific knowledge of space and time, packed into a sort of portable computer.</p>
@@ -453,7 +503,7 @@ const tocParts = [
         <ol class="toc-parts">
           {tocParts.map((t) => (
             <li data-quiet={t.quiet ? "" : undefined}>
-              <a href={`#${t.id}`}>
+              <a href={t.href} aria-current={idPage[t.id] === pageHref(PAGE) ? "page" : undefined}>
                 <span class="tp-star" aria-hidden="true"></span>
                 <span class="tp-title">{t.title}</span>
                 <span class="tp-sub" lang="enm">{t.sub}</span>
@@ -480,7 +530,7 @@ const tocParts = [
       {
         parts.map((p) => (
           <section class="t-part" aria-label={p.name}>
-            {p.name !== "Prologue" && (
+            {p.name !== "Prologue" && p.head && (
               <header class="t-part-head" id={partSlug[p.name]}>
                 <svg class="part-rose" viewBox="-50 -50 100 100" aria-hidden="true">
                   <g fill="none" stroke="currentColor" stroke-width="0.5">
@@ -627,8 +677,13 @@ const tocParts = [
         ))
       }
 
+      <nav class="t-pager" aria-label="Pages of the Treatise">
+        {prevPage ? <a class="tpg-prev" href={pageHref(prevPage)} rel="prev"><span aria-hidden="true">←</span> {prevPage.label}</a> : <span></span>}
+        {nextPage && <a class="tpg-next" href={pageHref(nextPage)} rel="next">{nextPage.label} <span aria-hidden="true">→</span></a>}
+      </nav>
+
       <footer class="t-end">
-        <p class="t-explicit">Explicit</p>
+        {!nextPage && <p class="t-explicit">Explicit</p>}
         <p class="t-credit">
           Middle English: W. W. Skeat (1894). Glosses: W. W. Skeat, Early English Text Society (1872) and
           Oxford Chaucer (1894), except those marked as ours.
@@ -931,6 +986,46 @@ const tocParts = [
     .t-hint {
       display: block;
     }
+  }
+
+  /* --- pages after the first (Jes tg 17923): the hero keeps its title, drops the introduction --- */
+  .t-hero:not([data-first]) :is(.t-preface, .t-hint, .t-intro) {
+    display: none;
+  }
+  .t-pagelabel {
+    font-family: var(--modern-font);
+    font-size: 1.15rem;
+    letter-spacing: 0.04em;
+    color: #d6dbef;
+    margin: 1.25rem 0 0;
+  }
+  .toc-parts a[aria-current="page"] .tp-title {
+    color: var(--gold);
+  }
+
+  /* --- previous / next page ------------------------------------------ */
+  .t-pager {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    max-width: 46rem;
+    margin: 5rem auto 0;
+    font-family: var(--modern-font);
+    font-size: 1.05rem;
+  }
+  .t-pager a {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(236, 201, 120, 0.35);
+    padding-bottom: 0.15rem;
+  }
+  .t-pager a:hover,
+  .t-pager a:focus-visible {
+    border-bottom-color: var(--gold);
+  }
+  .tpg-next {
+    margin-left: auto;
+    text-align: right;
   }
 
   /* --- contents: the major divisions, in one row ------------------- */
@@ -1924,7 +2019,7 @@ const tocParts = [
 </style>
 
 <script>
-  import { initSky } from "../scripts/treatise-sky";
+  import { initSky } from "../../scripts/treatise-sky";
 
   const root = document.querySelector<HTMLElement>(".treatise");
   if (root) {
