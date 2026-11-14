@@ -195,9 +195,9 @@ const { name, label = "Figure" } = Astro.props;
       try {
         mod.mount(stage!);
         fitFilters(stage!);
-        // Once the scene has settled, draw its unchanging woodcut parts to bitmaps (scene-cache.ts).
+        // After its first two frames, draw the scene's woodcut parts to bitmaps (scene-cache.ts).
         const s = stage!;
-        cacheTimer = window.setTimeout(() => s.isConnected && cacheScene(s), 600);
+        cacheTimer = requestAnimationFrame(() => (cacheTimer = requestAnimationFrame(() => s.isConnected && cacheScene(s))));
         mounted = true;
         fig.classList.add("mounted");
         sync();
@@ -229,7 +229,7 @@ const { name, label = "Figure" } = Astro.props;
       }
       fig.classList.remove("running");
       clearInterval(refitTimer);
-      clearTimeout(cacheTimer);
+      cancelAnimationFrame(cacheTimer);
       uncacheScene(stage!);
       // A shallow clone keeps the class and the scoped-style attribute, without the scene inside.
       const fresh = stage!.cloneNode(false) as HTMLElement;

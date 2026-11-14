@@ -72,3 +72,17 @@ even be raster". Tg 17950: "the animations themselves were slow". Tg 17952: "sti
 - The bitmap computes the woodcut filter at its own resolution, so the wobble is a little smoother than the
   live filter when zoomed in (up to 4.7% of a scene's pixels differ at CSS-pixel scale). Jes accepted that
   in tg 17956 ("let's ship it").
+
+Ship 25 (Jes tg 17958: "can we apply that kind of fix everywhere"):
+
+- Pieces inside a part that change (a mark fading, a line being drawn) and text are kept out of the bitmap
+  as "live units". They are drawn live under a copy of the part's filter fitted to them alone. The bitmap
+  is drawn in two layers, below and above them, so paint order is kept. Unchanging pieces lying between
+  live units are drawn live with them.
+- Clip paths, masks and patterns inside a part stay visible while the part itself is hidden.
+- Parts that are empty at mount are cached once their filter has been fitted. Caching starts two frames
+  after mount instead of 0.6 s.
+- Coverage on all six pages: 162 of 174 outermost woodcut parts are cached (147 in ship 24). Against ship
+  24, animated frames at a fixed clock differ by at most 1.4% of a scene at CSS-pixel scale, and still
+  frames by at most 1.94%.
+
