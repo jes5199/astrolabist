@@ -117,12 +117,15 @@ const deckles = Array.from({ length: DECKLES }, (_, k) => {
     for (let i = 0; i < N; i++) {
       const u = i / N;
       const d = Math.max(0.15, Math.min(2.8, depth(side, u)));
-      const x = side === 0 ? u * 100 : side === 1 ? 100 - d : side === 2 ? 100 - u * 100 : d;
-      const y = side === 0 ? d : side === 1 ? u * 100 : side === 2 ? 100 - d : 100 - u * 100;
+      // Each side's first point is the corner, pulled in on both axes (otherwise a sliver juts out there).
+      const a = i === 0 ? d : u * 100;
+      const x = side === 0 ? a : side === 1 ? 100 - d : side === 2 ? 100 - a : d;
+      const y = side === 0 ? d : side === 1 ? a : side === 2 ? 100 - d : 100 - a;
       pts.push(`${x.toFixed(2)},${y.toFixed(2)}`);
     }
   }
-  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><filter id='b'><feGaussianBlur stdDeviation='0.18'/></filter><polygon points='${pts.join(" ")}' fill='white' filter='url(#b)'/></svg>`;
+  // No blur on the outline: on the iPhone a blurred mask edge read as a blurry paper edge (Jes tg 17937).
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><polygon points='${pts.join(" ")}' fill='white'/></svg>`;
   return `url("data:image/svg+xml,${encodeURIComponent(svg).replace(/'/g, "%27")}")`;
 });
 const deckleVars = deckles.map((d, k) => `--deckle-${k}:${d}`).join(";");
