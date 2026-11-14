@@ -720,6 +720,13 @@ const tocParts = [
     font-display: swap;
   }
 
+  /* Behind everything, the night (Jes tg 17960: "the scrolling still flashes a white color - can we make
+     the background for unloaded parts the dark blue?"). Safari fills not-yet-painted tiles with the root
+     background; the body keeps its own, so the page itself looks the same. */
+  html:has(.treatise) {
+    background-color: #060918;
+  }
+
   /* The night region runs full-bleed between the site header and footer. */
   body:has(.treatise) {
     overflow-x: clip;
