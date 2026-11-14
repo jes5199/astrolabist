@@ -80,6 +80,14 @@ const { name, label = "Figure" } = Astro.props;
   .scene.mounted .scene-poster {
     opacity: 0;
   }
+  /* A running scene gets its own compositing layer (Jes tg 17947, 17950: "the paper edge doesn't
+     change during the animation, can't we just pre-calculate it?"; "the animations themselves were
+     slow"). Its repaints then stay inside that layer, and the leaf beneath (torn mask, mottle, drop
+     shadow) is rasterised once instead of being redrawn under every frame. Only while running, so
+     at most a few such layers exist. */
+  .scene.running .scene-stage {
+    will-change: transform;
+  }
 </style>
 
 <script>
@@ -169,10 +177,12 @@ const { name, label = "Figure" } = Astro.props;
       if (want && !running) {
         mod.start?.(stage!);
         running = true;
+        fig.classList.add("running");
         refitTimer = window.setInterval(() => refitAll(stage!), 250);
       } else if (!want && running) {
         mod.stop?.(stage!);
         running = false;
+        fig.classList.remove("running");
         clearInterval(refitTimer);
       }
     };
@@ -211,6 +221,7 @@ const { name, label = "Figure" } = Astro.props;
         } catch {}
         running = false;
       }
+      fig.classList.remove("running");
       clearInterval(refitTimer);
       // A shallow clone keeps the class and the scoped-style attribute, without the scene inside.
       const fresh = stage!.cloneNode(false) as HTMLElement;
