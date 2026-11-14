@@ -40,3 +40,19 @@ page carries only the glosses its own sections use (popover data and the hidden 
 On screens narrower than 600px, the sky canvas renders at 1× device pixels with low-quality haze smoothing. It
 is redrawn on every scroll frame, and in the profile it was about 60% of the scroll cost on a throttled phone
 proxy.
+
+## Scene filter regions (`src/components/Scene.astro`)
+
+Jes, tg 17934 (iPhone): "scrolling reveals blank sections that take several seconds to fill in, and occasionally
+the entire page reloads a the top". The cause, measured in WebKit (Playwright's WPE build, iPhone 13 viewport at
+3×): the scenes' woodcut filters (`public/scenes/lib/woodcut.js`, feTurbulence and feDisplacementMap) cover an
+800×800-unit region around every part they roughen. WebKit renders SVG filters on the CPU over that whole region
+whenever the part changes, and holds buffers that size. On part-1 that meant 2.5–4 GB and frames of tens of
+seconds. Chromium accelerates these filters, so the earlier Chromium proxy did not show it.
+
+After a scene mounts, Scene.astro gives each filtered part its own copy of the filter, with the region fitted to
+the part's bounding box plus a margin (25% of its larger side, plus 6 units). The noise is laid in user space, so
+the drawing inside the region is unchanged: still frames of all 88 scenes are pixel-identical, live against
+fitted. Regions only grow. While a scene runs, every 250 ms, any part that has moved or grown past its region
+has the region widened. Parts that are empty at mount keep the original region. The scene modules are not
+changed (they are copied byte-for-byte from astrolabe-video).
