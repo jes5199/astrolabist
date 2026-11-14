@@ -90,63 +90,6 @@ const { name, label = "Figure" } = Astro.props;
   };
 
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-  // Filter regions (Jes tg 17934, iPhone: "blank sections that take several seconds to fill in, and
-  // occasionally the entire page reloads"). The woodcut filters of the scene modules cover 800×800
-  // user units round each part they roughen; WebKit renders SVG filters on the CPU, over the whole
-  // region, every frame the part changes, and keeps buffers that size at 3× pixels (measured in
-  // WebKit: 2–3.5 GB, frames of tens of seconds). Each filtered part gets its own copy of its filter
-  // with the region fitted to the part's bounding box (plus a margin for the wobble). The noise is laid
-  // in user space, so inside the region the drawing is unchanged. Regions only grow: while the scene
-  // runs, a part that moves or grows past its region has the region widened. Parts still empty at mount
-  // keep the original region until they have something in them. The scene modules are untouched.
-  const BIG = "800";
-  const MARGIN = 0.25; // of the part's larger side, plus a fixed 6 units
-  type Fit = { el: SVGGraphicsElement; f: SVGFilterElement | null; src: SVGFilterElement; x0: number; y0: number; x1: number; y1: number };
-  const fits = new WeakMap<HTMLElement, Fit[]>();
-  let fitN = 0;
-
-  function refit(fit: Fit) {
-    let bb: DOMRect;
-    try {
-      bb = fit.el.getBBox();
-    } catch {
-      return;
-    }
-    if (bb.width === 0 && bb.height === 0) return;
-    if (fit.f && bb.x >= fit.x0 && bb.y >= fit.y0 && bb.x + bb.width <= fit.x1 && bb.y + bb.height <= fit.y1) return;
-    const p = MARGIN * Math.max(bb.width, bb.height) + 6;
-    fit.x0 = Math.min(fit.x0, bb.x - p);
-    fit.y0 = Math.min(fit.y0, bb.y - p);
-    fit.x1 = Math.max(fit.x1, bb.x + bb.width + p);
-    fit.y1 = Math.max(fit.y1, bb.y + bb.height + p);
-    if (!fit.f) {
-      fit.f = fit.src.cloneNode(true) as SVGFilterElement;
-      fit.f.id = `${fit.src.id}-fit${fitN++}`;
-      fit.src.after(fit.f);
-      fit.el.setAttribute("filter", `url(#${fit.f.id})`);
-    }
-    fit.f.setAttribute("x", String(fit.x0));
-    fit.f.setAttribute("y", String(fit.y0));
-    fit.f.setAttribute("width", String(fit.x1 - fit.x0));
-    fit.f.setAttribute("height", String(fit.y1 - fit.y0));
-  }
-
-  function fitFilters(stage: HTMLElement) {
-    const list: Fit[] = [];
-    stage.querySelectorAll<SVGGraphicsElement>("[filter]").forEach((el) => {
-      const m = /^url\(#([^)]+)\)$/.exec(el.getAttribute("filter") || "");
-      if (!m) return;
-      const src = stage.querySelector<SVGFilterElement>(`filter[id="${CSS.escape(m[1])}"]`);
-      if (!src || src.getAttribute("filterUnits") !== "userSpaceOnUse" || src.getAttribute("width") !== BIG) return;
-      const fit: Fit = { el, f: null, src, x0: Infinity, y0: Infinity, x1: -Infinity, y1: -Infinity };
-      refit(fit);
-      list.push(fit);
-    });
-    fits.set(stage, list);
-  }
-
-  const refitAll = (stage: HTMLElement) => fits.get(stage)?.forEach(refit);
   const NEAR = "100% 0px"; // mount within one screen
   const FAR = "300% 0px"; // tear down beyond three
 
@@ -161,7 +104,6 @@ const { name, label = "Figure" } = Astro.props;
     let near = false;
     let visible = false;
     let running = false;
-    let refitTimer = 0;
 
     const sync = () => {
       if (!mod || !mounted) return;
@@ -169,11 +111,9 @@ const { name, label = "Figure" } = Astro.props;
       if (want && !running) {
         mod.start?.(stage!);
         running = true;
-        refitTimer = window.setInterval(() => refitAll(stage!), 250);
       } else if (!want && running) {
         mod.stop?.(stage!);
         running = false;
-        clearInterval(refitTimer);
       }
     };
 
@@ -181,7 +121,6 @@ const { name, label = "Figure" } = Astro.props;
       if (!mod || mounted || !near) return;
       try {
         mod.mount(stage!);
-        fitFilters(stage!);
         mounted = true;
         fig.classList.add("mounted");
         sync();
@@ -211,7 +150,6 @@ const { name, label = "Figure" } = Astro.props;
         } catch {}
         running = false;
       }
-      clearInterval(refitTimer);
       // A shallow clone keeps the class and the scoped-style attribute, without the scene inside.
       const fresh = stage!.cloneNode(false) as HTMLElement;
       stage!.replaceWith(fresh);
