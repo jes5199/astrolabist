@@ -56,3 +56,19 @@ the drawing inside the region is unchanged: still frames of all 88 scenes are pi
 fitted. Regions only grow. While a scene runs, every 250 ms, any part that has moved or grown past its region
 has the region widened. Parts that are empty at mount keep the original region. The scene modules are not
 changed (they are copied byte-for-byte from astrolabe-video).
+
+## Running scenes on their own layer, and pre-drawn woodcut parts
+
+Jes, tg 17947: "the paper edge doesn't change during the animation, can't we just pre-calculate it? it could
+even be raster". Tg 17950: "the animations themselves were slow". Tg 17952: "still choppy on the spider".
+
+- A running scene's stage has `will-change: transform` (Scene.astro). Its repaints stay in its own layer, so
+  the paper leaf beneath is not redrawn every frame.
+- `src/scripts/scene-cache.ts`: once a scene has mounted, each outermost woodcut-filtered part is drawn once
+  to a bitmap at device resolution, cropped to what can ever be on screen. The bitmap is shown in the part's
+  place, and the live part stays hidden in the document. Changes to the part's transform and opacity are
+  copied to the bitmap. Any other change to the part puts the live part back for good. Parts with text,
+  images or visibility settings stay live.
+- The bitmap computes the woodcut filter at its own resolution, so the wobble is a little smoother than the
+  live filter when zoomed in (up to 4.7% of a scene's pixels differ at CSS-pixel scale). Jes accepted that
+  in tg 17956 ("let's ship it").
