@@ -5,21 +5,29 @@ and also unload animations that are not scrolled into view".
 
 ## The pages (`src/lib/treatise-pages.ts`)
 
+Jes, tg 17962 (2026-11-15): "i think I want even smaller pages. like one proposition per page".
+
+One page per content entry (75), in reading order:
+
 | URL | Holds |
 | --- | --- |
 | `/treatise/` | hero, introduction, contents, Prologue |
-| `/treatise/part-1/` | Part I §§ 1–23 |
-| `/treatise/part-2/` | Part II §§ 1–12 |
-| `/treatise/part-2/13/` | Part II §§ 13–25 |
-| `/treatise/part-2/26/` | Part II §§ 26–37 |
-| `/treatise/part-2/38/` | Part II §§ 38–40, the supplementary propositions, the spurious sections |
+| `/treatise/part-1/` | Part I § 1, under the Part I heading |
+| `/treatise/part-1/<n>/` | Part I § n |
+| `/treatise/part-2/` | Part II § 1, under the Part II heading |
+| `/treatise/part-2/<n>/` | Part II § n, including the supplementary (41–46) and spurious (41a, 41b, 42a, 42b, 43a) sections |
 
-The cut points were chosen by measured HTML weight: the single page was 2.28 MB, and the cuts keep each page at
-roughly 300–450 KB of sections. One route file, `src/pages/treatise/[...page].astro`, renders every page. Each
-page carries only the glosses its own sections use (popover data and the hidden screen-reader descriptions).
+The URLs of the earlier six-page split (`/treatise/part-2/13/`, `/26/`, `/38/`) are now the pages of their
+first sections, so old links still land in the right place. `buildPages` throws if two entries would share a URL.
+One route file, `src/pages/treatise/[...page].astro`, renders every page. It renders and glosses only its
+own section; the Prologue page also glosses every section once, for the whole-Treatise totals printed in the
+build log. Each page carries only the glosses its own section uses.
 
-- Part headings appear on the page that holds the part's first section, and the contents links go to
-  `<page>#<id>`.
+- Part headings appear on the page of the part's first section. The supplementary and spurious group headings
+  appear on the page of their first section, and "HERE ENDETH THE DESCRIPCION" appears on Part I § 23 only.
+- The contents list the major divisions and then every section by number, with the current one marked. On
+  `/treatise/` they sit under the introduction. On every other page they come after the section and the pager,
+  so the proposition is first.
 - A pager at the foot of each page links to the previous and next pages. `Explicit` appears only on the last
   page.
 - Old single-page links such as `/treatise/#part-2-30` are forwarded by a small inline script, which maps every

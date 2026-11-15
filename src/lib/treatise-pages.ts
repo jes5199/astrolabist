@@ -1,37 +1,38 @@
-// /treatise/ is split into several pages (Jes tg 17923: "performance is quite bad on iphone. we're going
-// to need to break this into pages"). Cut points were chosen by measured page weight (about 300–450 KB of
-// HTML each); see docs/treatise-pages.md. The sky, the glosses and the scenes work the same on every page.
+// /treatise/ is split into pages, one proposition each (Jes tg 17923: "performance is quite bad on iphone.
+// we're going to need to break this into pages"; tg 17962: "i think I want even smaller pages. like one
+// proposition per page"). /treatise/ is the Prologue; each part's first section keeps the part's own URL
+// (/treatise/part-1/, /treatise/part-2/), and every other section is /treatise/part-N/<section>/. The URLs of
+// the earlier split (/treatise/part-2/13/, /26/, /38/) are the first sections of those pages, so they still
+// land where they did. See docs/treatise-pages.md.
 
 export type TreatisePage = {
   /** Astro rest param: undefined for /treatise/ itself. */
   slug: string | undefined;
   /** Short label for the pager and the page title. */
   label: string;
-  /** Does this section belong on this page? `n` is the section's leading number (0 for the Prologue). */
-  has: (part: string, n: number, kind: string) => boolean;
+  /** The content entry this page holds. */
+  id: string;
 };
 
-const p2 = (lo: number, hi: number) => (part: string, n: number, kind: string) =>
-  part === "Part II" && kind === "main" && n >= lo && n <= hi;
+type Entry = { id: string; data: { part: string; section: string } };
 
-export const PAGES: TreatisePage[] = [
-  { slug: undefined, label: "Prologue", has: (part) => part === "Prologue" },
-  { slug: "part-1", label: "Part I", has: (part) => part === "Part I" },
-  { slug: "part-2", label: "Part II, §§ 1–12", has: p2(1, 12) },
-  { slug: "part-2/13", label: "Part II, §§ 13–25", has: p2(13, 25) },
-  { slug: "part-2/26", label: "Part II, §§ 26–37", has: p2(26, 37) },
-  {
-    slug: "part-2/38",
-    label: "Part II, § 38 to the end",
-    has: (part, n, kind) => part === "Part II" && (kind !== "main" || n >= 38),
-  },
-];
+const partSlug: Record<string, string> = { "Part I": "part-1", "Part II": "part-2" };
+
+/** One page per entry, in reading order (entries must already be sorted). */
+export const buildPages = (entries: Entry[]): TreatisePage[] => {
+  const seen = new Set<string>();
+  return entries.map((e, k) => {
+    const { part, section } = e.data;
+    if (part === "Prologue") return { slug: undefined, label: "Prologue", id: e.id };
+    const ps = partSlug[part];
+    if (!ps) throw new Error(`treatise pages: unknown part ${part} (${e.id})`);
+    if (!/^[0-9]+[a-z]?$/.test(section)) throw new Error(`treatise pages: odd section "${section}" (${e.id})`);
+    const first = entries.findIndex((x) => x.data.part === part) === k;
+    const slug = first ? ps : `${ps}/${section}`;
+    if (seen.has(slug)) throw new Error(`treatise pages: two entries at /treatise/${slug}/`);
+    seen.add(slug);
+    return { slug, label: `${part}, § ${section}`, id: e.id };
+  });
+};
 
 export const pageHref = (p: TreatisePage) => (p.slug ? `/treatise/${p.slug}/` : "/treatise/");
-
-export const pageOf = (part: string, section: string, kind: string) => {
-  const n = part === "Prologue" ? 0 : parseInt(section, 10);
-  const p = PAGES.find((pg) => pg.has(part, n, kind));
-  if (!p) throw new Error(`treatise pages: no page for ${part} § ${section} (${kind})`);
-  return p;
-};

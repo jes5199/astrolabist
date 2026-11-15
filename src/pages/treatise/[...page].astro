@@ -18,14 +18,13 @@ import {
   type GlossStats,
   type LineMode,
 } from "../../lib/treatise-gloss";
-import { PAGES, pageHref, pageOf } from "../../lib/treatise-pages";
+import { buildPages, pageHref } from "../../lib/treatise-pages";
 
-// One route per page of the split Treatise (Jes tg 17923); /treatise/ itself is the Prologue page.
-export function getStaticPaths() {
-  return PAGES.map((p) => ({ params: { page: p.slug } }));
+// One route per proposition (Jes tg 17923, 17962); /treatise/ itself is the Prologue page.
+export async function getStaticPaths() {
+  const all = (await getCollection("treatise")).sort((a, b) => a.data.order - b.data.order);
+  return buildPages(all).map((p) => ({ params: { page: p.slug } }));
 }
-const PAGE = PAGES.find((p) => p.slug === Astro.params.page)!;
-const PAGE_AT = PAGES.indexOf(PAGE);
 
 // The modern line under each glossed section: "translation" (Skeat's glosses,
 // minimally joined into readable English; departures listed in glosses.json)
@@ -44,6 +43,10 @@ const FIGURE_TERMS: Record<string, string[]> = {
 const entries = (await getCollection("treatise")).sort(
   (a, b) => a.data.order - b.data.order
 );
+const PAGES = buildPages(entries);
+const PAGE = PAGES.find((p) => p.slug === Astro.params.page)!;
+const PAGE_AT = PAGES.indexOf(PAGE);
+const pageById = new Map(PAGES.map((p) => [p.id, p]));
 
 // Part-level rubrics from Skeat's text (see src/content/treatise/_SOURCE.md).
 const partRubric: Record<string, string> = {
@@ -286,8 +289,18 @@ const glossStats: GlossStats = { tokens: 0, glossed: 0, forms: new Set(), keys: 
 
 const sections = await Promise.all(
   entries.map(async (entry, i) => {
-    const { Content } = await entry.render();
     const { part, section } = entry.data;
+    const page = pageById.get(entry.id)!;
+    const kind = kindOf(entry.data.note);
+    const id = anchor(part, section);
+    // Sections on other pages need only where they are (anchors, contents). The Prologue page still
+    // glosses every section once, for the whole-Treatise totals it prints.
+    if (page !== PAGE) {
+      const secStats: GlossStats = { tokens: 0, glossed: 0, forms: new Set(), keys: new Set(), blankForms: new Set() };
+      if (!PAGE.slug && GLOSS_SAMPLE.has(entry.slug)) glossSection(entry.slug, entry.body, secStats, LINE_MODE);
+      return { entry, i, kind, id, page, secStats, keys: secStats.keys } as any;
+    }
+    const { Content } = await entry.render();
     // The Prologue's "heading" just repeats its name; label it by its first words.
     const heading = part === "Prologue" ? "" : entry.data.heading;
     const m = /^(\d+)([a-z]?)$/.exec(section);
@@ -295,7 +308,6 @@ const sections = await Promise.all(
       part === "Prologue"
         ? "PROLOGUS · LITELL LOWIS MY SONE"
         : `${partLatin[part]} · ${part === "Part II" ? "CONCLUSIO" : "CAPITULUM"} ${m ? roman(Number(m[1])) + (m[2] ? " " + m[2] : "") : section}`;
-    const kind = kindOf(entry.data.note);
     // Inline sky windows: find the paragraph of the Middle English holding the phrase.
     const paras = entry.body.split(/\n\s*\n/).map((t) => t.replace(/\s+/g, " ").trim()).filter(Boolean);
     const inline = (entry.data.inlineScenes ?? [])
@@ -336,7 +348,7 @@ const sections = await Promise.all(
       i,
       kind,
       kicker,
-      id: anchor(part, section),
+      id,
       ring,
       title: heading || `${incipit(entry.body, part === "Prologue" ? 4 : 5)}…`,
       // Skeat gives a rubric only in Part II; elsewhere the "title" is just the opening
@@ -347,7 +359,7 @@ const sections = await Promise.all(
       frame: frameFor(entry.data.scene ?? "night-window"),
       inline,
       insets,
-      page: pageOf(part, section, kind),
+      page,
       keys: secStats.keys,
       secStats,
       spin: (i * 47) % 360,
@@ -421,6 +433,18 @@ const tocParts = [
   { id: "spurious", title: "Spurious sections", sub: "so marked by Skeat", quiet: true, count: countOf((s) => s.kind === "spurious") },
 ].filter((t) => t.count)
   .map((t) => ({ ...t, href: `${idPage[t.id] === pageHref(PAGE) ? "" : idPage[t.id]}#${t.id}` }));
+// With one proposition per page (tg 17962), the contents also list every section by number.
+const tocSecs = [
+  { name: "Part I", pick: (s: (typeof sections)[number]) => s.entry.data.part === "Part I" },
+  { name: "Part II", pick: (s: (typeof sections)[number]) => s.entry.data.part === "Part II" && s.kind === "main" },
+  { name: "Supplementary", pick: (s: (typeof sections)[number]) => s.kind === "supplementary" },
+  { name: "Spurious", pick: (s: (typeof sections)[number]) => s.kind === "spurious" },
+]
+  .map((g) => ({
+    name: g.name,
+    items: sections.filter(g.pick).map((s) => ({ n: s.entry.data.section, href: pageHref(s.page), here: s.page === PAGE })),
+  }))
+  .filter((g) => g.items.length);
 ---
 
 <BaseLayout
@@ -502,6 +526,7 @@ const tocParts = [
         </p>
       </header>
 
+      {!PAGE.slug && (
       <nav class="t-toc" id="contents" aria-label="Contents">
         <ol class="toc-parts">
           {tocParts.map((t) => (
@@ -514,7 +539,18 @@ const tocParts = [
             </li>
           ))}
         </ol>
+        <div class="toc-secs">
+          {tocSecs.map((g) => (
+            <p class="ts-row">
+              <span class="ts-name">{g.name}</span>
+              {g.items.map((it) => (
+                <a href={it.href} aria-label={`${g.name} § ${it.n}`} aria-current={it.here ? "page" : undefined}>{it.n}</a>
+              ))}
+            </p>
+          ))}
+        </div>
       </nav>
+      )}
 
       <p class="gl-hint">Under Chaucer's words, a modern line. Tap or hover a <span class="gl-cue">dotted</span> word for its definition and source.</p>
 
@@ -560,7 +596,7 @@ const tocParts = [
             )}
             {p.items.map(({ entry, Content, glossed, figureTerms, id, ring, title, rubric, field, spin, i, kind, kicker, inline, insets, scene, frame }, k) => (
               <>
-                {kind !== "main" && p.items[k - 1]?.kind !== kind && (
+                {kind !== "main" && sections.find((x) => x.kind === kind) === p.items[k] && (
                   <header class={`t-group-head t-group-${kind}`} id={kind}>
                     <p lang="enm">{plain(entry.data.note ?? "")}</p>
                   </header>
@@ -673,7 +709,7 @@ const tocParts = [
                 )}
               </>
             ))}
-            {partEndRubric[p.name] && (
+            {partEndRubric[p.name] && sections.findLast((s) => s.entry.data.part === p.name) === p.items.at(-1) && (
               <p class="t-part-end" lang="enm">{partEndRubric[p.name]}</p>
             )}
           </section>
@@ -684,6 +720,33 @@ const tocParts = [
         {prevPage ? <a class="tpg-prev" href={pageHref(prevPage)} rel="prev"><span aria-hidden="true">←</span> {prevPage.label}</a> : <span></span>}
         {nextPage && <a class="tpg-next" href={pageHref(nextPage)} rel="next">{nextPage.label} <span aria-hidden="true">→</span></a>}
       </nav>
+
+      {/* Pages after the first: the contents follow the section and the pager (tg 17962), so the proposition comes first. Same markup as above. */}
+      {PAGE.slug && (
+      <nav class="t-toc" id="contents" aria-label="Contents">
+        <ol class="toc-parts">
+          {tocParts.map((t) => (
+            <li data-quiet={t.quiet ? "" : undefined}>
+              <a href={t.href} aria-current={idPage[t.id] === pageHref(PAGE) ? "page" : undefined}>
+                <span class="tp-star" aria-hidden="true"></span>
+                <span class="tp-title">{t.title}</span>
+                <span class="tp-sub" lang="enm">{t.sub}</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+        <div class="toc-secs">
+          {tocSecs.map((g) => (
+            <p class="ts-row">
+              <span class="ts-name">{g.name}</span>
+              {g.items.map((it) => (
+                <a href={it.href} aria-label={`${g.name} § ${it.n}`} aria-current={it.here ? "page" : undefined}>{it.n}</a>
+              ))}
+            </p>
+          ))}
+        </div>
+      </nav>
+      )}
 
       <footer class="t-end">
         {!nextPage && <p class="t-explicit">Explicit</p>}
@@ -1011,6 +1074,41 @@ const tocParts = [
   }
   .toc-parts a[aria-current="page"] .tp-title {
     color: var(--gold);
+  }
+  /* Every section by number, under the divisions (tg 17962: one proposition per page). */
+  .toc-secs {
+    margin: 1.6rem auto 0;
+    max-width: 46rem;
+    font-family: var(--modern-font);
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  .ts-row {
+    margin: 0.45rem 0;
+    line-height: 1.9;
+  }
+  .ts-name {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #9aa4c8;
+    margin-right: 0.5rem;
+  }
+  .ts-row a {
+    display: inline-block;
+    min-width: 1.9rem;
+    padding: 0 0.15rem;
+    color: #c3cae6;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+  .ts-row a:hover,
+  .ts-row a:focus-visible {
+    color: var(--gold);
+  }
+  .ts-row a[aria-current="page"] {
+    color: var(--gold);
+    box-shadow: inset 0 -1px 0 var(--gold);
   }
 
   /* --- previous / next page ------------------------------------------ */
