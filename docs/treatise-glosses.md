@@ -118,8 +118,8 @@ error. Its line is printed as written (its own punctuation and capitals; `_word_
 glossed words, popovers and ☞ marks in Chaucer's column are unchanged.
 
 The wording is ours, written from Skeat's Middle English, his glosses and notes, and plain English. No
-modern translation is consulted. Done so far: the Prologue, all of Part I, Part II §§ 1–30, and the
-closing "lo here the figure" line of every Part II section. The rest of Part II follows in batches. A unit's
+modern translation is consulted. Done so far: the Prologue, all of Part I, and Part II §§ 1–40. Still to do: the
+supplementary propositions (II §§ 41–46) and the spurious sections (41a–43a). A unit's
 Middle English is matched by its words only (numbers are ignored), so two clauses that differ only in their
 numbers ("the 3, to Mars" / "the 10, to Mars") must be one unit; the page build fails if one cannot be placed. (The wording
 ledger, `docs/treatise-wording.md`, predates the split pages and does not list these units; `clarity.txt`

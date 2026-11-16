@@ -19307,9 +19307,156 @@
    "whole": true
   },
   {
+   "section": "p2-31",
+   "match": "thou most first considere that the sonne aryseth nat al-wey verrey est but some tyme by north the est and som tyme by southe the est",
+   "line": "Bear in mind first that the sun does not always rise due east: sometimes it rises north of east, sometimes south of it.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-31",
+   "match": "sothly the sonne aryseth never-mo verrey est in oure orisonte but he be in the heved of aries or libra",
+   "line": "On our horizon it never rises exactly in the east except when it is at the start of Aries or of Libra.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-31",
+   "match": "now is thyn orisonte departed in parties by thy azimutz in significacion of partiez of the world",
+   "line": "Your azimuths cut your horizon into 24 parts, standing for 24 directions of the world,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-31",
+   "match": "al-be-it so that shipmen rikne thilke partiez in thanne is ther no more but waite in which azimut that thy sonne entreth at his arysing",
+   "line": "though sailors count these directions as 32. All you need do is watch which azimuth your sun comes up in at its rising;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-31",
+   "match": "and take ther the senith of the arysing of the sonne",
+   "line": "that azimuth is the point where the sun rises.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-31",
+   "match": "the manere of the devisioun of thyn astrolabie is this",
+   "line": "The way your astrolabe is divided up is as follows,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-31",
+   "match": "i mene as in this cas",
+   "line": "for this purpose, that is.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-31",
+   "match": "first is it devided in plages principalx with the lyne that goth from est to west and than with a-nother lyne that goth fro south to north",
+   "line": "It is first split into the four main quarters by the line from east to west and by a second line from south to north.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-31",
+   "match": "than is it devided in smale partiez of azimutz as est and est by southe whereas is the firste azimut above the est lyne",
+   "line": "Then it is split into the small parts of the azimuths, such as east, and east by south, which is the first azimuth past the east line;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-31",
+   "match": "and so forth fro partie to partie til that thou come agayn un-to the est lyne",
+   "line": "and so on, part after part, all the way round until you are back at the east line.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-31",
+   "match": "thus maistow understond also the senith of any sterre in which partie he ryseth c",
+   "line": "In the same way you can tell the rising point of any star, and in which part of the horizon it comes up.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-31",
+   "match": "and for the more declaracion lo here the figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-32",
+   "match": "considere the tyme of the coniunccion by thy kalender as thus",
+   "line": "Find the time of the conjunction from your calendar, like this:",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-32",
+   "match": "lok how many houres thilke coniunccion is fro the midday of the day precedent as sheweth by the canoun of thy kalender",
+   "line": "see how many hours after noon of the day before the conjunction falls, as the calendar's rule shows.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-32",
+   "match": "rikne thanne thilke nombre of houres in the bordure of thyn astrolabie as thou art wont to do in knowing of the houres of the day or of the night",
+   "line": "Count off that many hours on the border of your astrolabe, the way you usually do when finding the hours of the day or night,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-32",
+   "match": "and ley thy label over the degree of the sonne",
+   "line": "and lay your label across the sun's degree;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-32",
+   "match": "and thanne wol the point of thy label sitte up-on the hour of the coniunccion",
+   "line": "the label's point will then rest on the hour of the conjunction.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-32",
+   "match": "loke thanne in which azimut the degree of thy sonne sitteth and in that partie of the firmament is the coniunccioun",
+   "line": "Whichever azimuth the sun's degree now sits in, that is the part of the sky where the conjunction takes place.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
    "section": "p2-32",
    "match": "and for the more declaracioun lo here thy figure",
    "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-33",
+   "match": "this is no more to seyn but any tyme of the day tak the altitude of the sonne",
+   "line": "All this comes to is: at any hour of the day, take the sun's altitude,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-33",
+   "match": "and by the azimut in which he stondeth maystou seen in which partie of the firmament he is",
+   "line": "and the azimuth it stands in tells you what part of the sky it is in.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-33",
+   "match": "and in the same wyse maystou seen by the night of any sterre whether the sterre sitte est or west or north or any partie by-twene after the name of the azimut in which is the sterre",
+   "line": "At night, likewise, the name of the azimuth a star is in tells you whether that star lies east, west, north or somewhere between.",
    "kind": "sentence",
    "whole": true
   },
@@ -19322,6 +19469,62 @@
   },
   {
    "section": "p2-34",
+   "match": "tak the altitude of the mone and rikne thyn altitude up among thyne almikanteras on which syde that the mone stande",
+   "line": "Take the moon's altitude and count it up among your almucantars on whichever side the moon is on,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-34",
+   "match": "and set there a prikke",
+   "line": "putting a dot there.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-34",
+   "match": "tak thenne anon-right up-on the mones syde the altitude of any sterre fix which that thou knowest and set his centre up-on his altitude among thyn almikanteras ther the sterre is founde",
+   "line": "Straight afterwards, on the moon's side of the sky, take the altitude of a fixed star you know, and set that star's point on its almucantar, on the side where you saw it.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-34",
+   "match": "waite thanne which degree of the zodiak toucheth the prikke of the altitude of the mone and tak ther the degree in which the mone standeth",
+   "line": "Whichever degree of the zodiac now touches the moon's dot is the degree the moon is in.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-34",
+   "match": "this conclusioun is verrey soth yif the sterres in thyn astrolabie stonden after the trowthe",
+   "line": "This works perfectly well provided the stars on your astrolabe are set in their true places;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-34",
+   "match": "of comune tretis of astrolabie ne make non excepcioun whether the mone have latitude or non",
+   "line": "treatises on the astrolabe generally make no allowance for whether the moon has latitude or not,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-34",
+   "match": "ne on whether syde of the mone the altitude of the sterre fix be taken",
+   "line": "nor for which side of the moon the fixed star's altitude is taken on.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-34",
+   "match": "and nota that yif the mone shewe himself by light of day than maystow wyrke this same conclusioun by the sonne as wel as by the fix sterre",
+   "line": "Note too that if the moon is visible in daylight, you can work this with the sun just as well as with a fixed star.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-34",
    "match": "and for the more declaracioun lo here thy figure",
    "line": "To make this clearer, here is the figure.",
    "kind": "sentence",
@@ -19329,8 +19532,218 @@
   },
   {
    "section": "p2-35",
+   "match": "tak the altitude of any sterre that is cleped a planete and note it wel",
+   "line": "Take the altitude of any of the stars called planets, and write it down.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-35",
+   "match": "and tak eek anon the altitude of any sterre fix that thou knowest and note it wel also",
+   "line": "At the same time take the altitude of a fixed star you know, and write that down too.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-35",
+   "match": "come thanne agayn the thridde or the ferthe night next folwing",
+   "line": "Come back on the third or fourth night after,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-35",
+   "match": "for thanne shaltow aperceyve wel the moeving of a planete whether so he moeve forthward or bakward",
+   "line": "because by then you will clearly see the planet's motion, whether it is moving forward or backward.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-35",
+   "match": "awaite wel thanne whan that thy sterre fix is in the same altitude that she was whan thou toke hir firste altitude",
+   "line": "Wait until your fixed star is at the same altitude as when you first measured it,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-35",
+   "match": "and tak than eftsones the altitude of the forseide planete and note it wel",
+   "line": "then take the planet's altitude again, and write it down.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-35",
+   "match": "for trust wel yif so be that the planete be on the right syde of the meridional lyne so that his seconde altitude be lasse than his firste altitude was thanne is the planete directe",
+   "line": "If the planet is on the right side of the meridian line and its second altitude is less than its first, the planet is direct.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-35",
+   "match": "and yif he be on the west syde in that condicion thanne is he retrograd",
+   "line": "If it is on the west side under the same condition, it is retrograde.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-35",
+   "match": "and yif so be that this planete be up-on the est syde whan his altitude is taken so that his secounde altitude be more than his firste altitude thanne is he retrograde and yif he be on the west syde than is he directe",
+   "line": "And if the planet is on the east side when you measure it, and its second altitude is greater than its first, it is retrograde; on the west side, it is direct.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-35",
+   "match": "but the contrarie of thise parties is of the cours of the mone",
+   "line": "With the moon it is the other way round,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-35",
+   "match": "for sothly the mone moeveth the contrarie from othere planetes as in hir episicle but in non other manere",
+   "line": "for the moon moves opposite to the other planets in its epicycle, though in no other way.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-35",
    "match": "and for the more declaracioun lo here thy figure",
    "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-36",
+   "match": "set the by-ginning of the degree that assendeth up-on the ende of the houre inequal thanne wol the by-ginning of the hous sitte up-on the lyne of midnight",
+   "line": "Set the start of the rising degree on the end of the 8th unequal hour; the start of the 2nd house will then lie on the midnight line.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-36",
+   "match": "remove thanne the degree that assendeth and set him on the ende of the hour inequal and thanne wol the byginning of the hous sitte up-on the midnight lyne",
+   "line": "Next move the rising degree to the end of the 10th unequal hour, and the start of the 3rd house will lie on the midnight line.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-36",
+   "match": "bring up agayn the same degree that assendeth first and set him up-on the orisonte and thanne wol the be-ginning of the hous sitte up-on the lyne of midnight",
+   "line": "Bring that first rising degree back up and set it on the horizon; the start of the 4th house then lies on the midnight line.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-36",
+   "match": "tak thanne the nadir of the degree that first assendeth and set him on the ende of the houre inequal and thanne wol the by-ginning of the hous sitte up-on the lyne of midnight set thanne the nadir of the assendent on the ende of the houre than wol the byginning of the house sitte on the midnight lyne",
+   "line": "Now take the nadir of the first rising degree and set it on the end of the 2nd unequal hour: the start of the 5th house lies on the midnight line. Set the ascendant's nadir on the end of the 4th hour, and the start of the 6th house lies on the midnight line.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-36",
+   "match": "the byginning of the hous is nadir of the assendent and the byginning of the hous is nadir of the and the by-ginning of the hous is nadir of the and the by-ginning of the hous is the nadir of the and the byginning of the hous is nadir of the and the byginning of the hous is nadir of the",
+   "line": "The start of the 7th house is the nadir of the ascendant; the 8th is the nadir of the 2nd, the 9th of the 3rd, the 10th of the 4th, the 11th of the 5th, and the 12th of the 6th.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-36",
+   "match": "and for the more declaracion lo here the figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-37",
+   "match": "tak thyn assendent and thanne hastow thy angles",
+   "line": "Find your ascendant, and you have your four angles,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-37",
+   "match": "for wel thou wost that the opposit of thyn assendent that is to seyn thy by-ginning of the hous sit up-on the west orizonte",
+   "line": "since, as you know, the point opposite your ascendant, the start of the 7th house, sits on the west horizon;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-37",
+   "match": "and the byginning of the hous sit up-on the lyne meridional",
+   "line": "the start of the 10th house sits on the meridian line,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-37",
+   "match": "and his opposit up-on the lyne of midnight",
+   "line": "and its opposite on the midnight line.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-37",
+   "match": "thanne ley thy label over the degree that assendeth and rekne fro the point of thy label alle the degrees in the bordure til thou come to the meridional lyne",
+   "line": "Then lay your label over the rising degree, and count the degrees of the border from its point round to the meridian line;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-37",
+   "match": "and departe alle thilke degrees in evene parties and take the evene equacion of",
+   "line": "divide that count into three equal parts, giving three equal shares;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-37",
+   "match": "for ley thy label over everich of parties and than maistow see by thy label in which degree of the zodiak is the by-ginning of everich of thise same houses fro the assendent that is to seyn the beginning of the house next above thyn assendent",
+   "line": "lay your label on each of the three dividing points in turn, and it will show you which degree of the zodiac begins each of these houses above the ascendant: first the start of the 12th house, just above your ascendant,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-37",
+   "match": "and thanne the beginning of the house",
+   "line": "then the start of the 11th,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-37",
+   "match": "and thanne the up-on the meridional lyne",
+   "line": "and then the 10th, on the meridian line,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-37",
+   "match": "as i first seide",
+   "line": "as I said at the beginning.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-37",
+   "match": "the same wyse wirke thou fro the assendent doun to the lyne of midnight",
+   "line": "Work the same way from the ascendant down to the midnight line,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-37",
+   "match": "and thanne thus hastow other houses that is to seyn the byginning of the and the and the houses",
+   "line": "and you have three more houses: the starts of the 2nd, 3rd and 4th;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-37",
+   "match": "thanne is the nadir of thise houses the by-ginning of the houses that folwen",
+   "line": "the nadirs of these three are the starts of the three houses that follow them.",
    "kind": "sentence",
    "whole": true
   },
@@ -19343,8 +19756,239 @@
   },
   {
    "section": "p2-38",
+   "match": "tak a rond plate of metal",
+   "line": "Take a round metal plate,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-38",
+   "match": "for warping the brodere the bettre",
+   "line": "the wider the better, so that it does not warp,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-38",
+   "match": "and make ther-upon a iust compas a lite with-in the bordure",
+   "line": "and draw an exact circle on it a little inside the edge.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-38",
+   "match": "and ley this ronde plate up-on an evene grond or on an evene ston or on an evene stok fix in the gronde",
+   "line": "Lay the plate on level ground, or on a level stone, or on a level block of wood set firmly in the ground,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-38",
+   "match": "and ley it even by a level",
+   "line": "and make it true with a level.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-38",
+   "match": "and in centre of the compas stike an evene pin or a wyr upright",
+   "line": "In the centre of the circle stand a straight pin or wire upright,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-38",
+   "match": "the smallere the betere",
+   "line": "the thinner the better.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-38",
+   "match": "set thy pin by a plom-rewle evene upright",
+   "line": "Use a plumb-rule to set the pin exactly upright,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-38",
+   "match": "and let this pin be no lengere than a quarter of the diametre of thy compas fro the centre",
+   "line": "and make it no taller, from the centre, than a quarter of the circle's diameter.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-38",
+   "match": "and waite bisily aboute or of the clokke and whan the sonne shyneth whan the shadwe of the pin entreth any-thing with-in the cercle of thy plate an heer-mele and mark ther a prikke with inke",
+   "line": "At about 10 or 11 o'clock, while the sun is shining, watch closely for the moment the pin's shadow comes even a hair's breadth inside the circle, and mark the spot with a dot of ink.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-38",
+   "match": "abyde thanne stille waiting on the sonne after of the clokke til that the schadwe of the wyr or of the pin passe ony-thing out of the cercle of the compas be it never so lyte",
+   "line": "Then keep watching the sun after 1 o'clock, until the shadow of the wire or pin passes out of the circle again, however slightly,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-38",
+   "match": "and set ther a-nother prikke of inke",
+   "line": "and put a second dot of ink there.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-38",
+   "match": "take than a compas and mesure evene the middel by-twixe bothe prikkes",
+   "line": "With a pair of compasses, find the exact midpoint between the two dots,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-38",
+   "match": "and set ther a prikke",
+   "line": "and mark it with a dot.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-38",
+   "match": "take thanne a rewle and draw a stryke evene a-lyne fro the pin un-to the middel prikke",
+   "line": "Then with a ruler draw a straight line from the pin to that middle dot;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-38",
+   "match": "and tak ther thy lyne meridional for evere-mo as in that same place",
+   "line": "that is your meridian line, for good, at that spot.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-38",
+   "match": "and yif thow drawe a cros-lyne over-thwart the compas iustly over the lyne meridional than hastow est and west and south",
+   "line": "If you draw a line across the circle at exact right angles to the meridian line, you have east, west and south;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-38",
+   "match": "and par consequence than the nadir of the south lyne is the north lyne",
+   "line": "and it follows that the opposite of the south line is the north line.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-38",
    "match": "and for more declaracioun lo here thy figure",
    "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-39",
+   "match": "this lyne meridional is but a maner descripcion of lyne imagined that passeth upon the poles of this world and by the senith of oure heved",
+   "line": "This meridian line is simply a picture of an imaginary line that runs through the poles of the world and through the point straight above our heads.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-39",
+   "match": "and hit is y-cleped the lyne meridional",
+   "line": "It is called the meridian line",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-39",
+   "match": "for in what place that any maner man is at any tyme of the yeer whan that the sonne by moeving of the firmament cometh to his verrey meridian place than is hit verrey midday that we clepen oure noon as to thilke man",
+   "line": "because, wherever anyone is, at any time of year, when the turning of the sky brings the sun to its true meridian position, it is exactly midday, which we call noon, for that person;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-39",
+   "match": "and therfore is it cleped the lyne of midday",
+   "line": "and so it is called the line of midday.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-39",
+   "match": "and nota for evermo of citees or of tounes of whiche that o toun aprocheth more toward the est than doth that other toun truste wel that thilke tounes ban diverse meridians",
+   "line": "Note also that of any two cities or towns, if one lies further east than the other, the two towns have different meridians.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-39",
+   "match": "nota also that the arch of the equinoxial that is conteyned or bounded by-twixe the meridians is cleped the longitude of the toun",
+   "line": "The arc of the equinoctial enclosed between those two meridians is called the longitude of the town.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-39",
+   "match": "and yif so be that two tounes have y-lyke meridian or oon meridian than is the distance of hem bothe y-lyke fer fro the est",
+   "line": "If two towns share the same meridian, they are the same distance from the east,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-39",
+   "match": "and the contrarie",
+   "line": "and if they are the same distance from the east, they share a meridian.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-39",
+   "match": "and in this manere they chaunge nat her meridian but sothly they chaungen her almikanteras",
+   "line": "Such towns keep the same meridian but have different almucantars,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-39",
+   "match": "for the enhausing of the pool and the distance of the sonne",
+   "line": "because the height of the pole and the distance of the sun differ for them.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-39",
+   "match": "the longitude of a clymat is a lyne imagined fro est to west y-lyke distant by-twene them alle",
+   "line": "The longitude of a climate is an imaginary line from east to west, running at the same distance all along.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-39",
+   "match": "the latitude of a clymat is a lyne imagined from north to south the space of the erthe fro the byginning of the firste clymat unto the verrey ende of the same climat evene directe agayns the pole artik",
+   "line": "The latitude of a climate is an imaginary line running north and south across the earth, from the beginning of the first climate to the very end of that climate, pointing straight toward the Arctic pole.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-39",
+   "match": "thus seyn some auctours",
+   "line": "So some authors say;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-39",
+   "match": "and somme of hem seyn that yif men clepen the latitude thay mene the arch meridian that is contiened or intercept by-twixe the senith and the equinoxial",
+   "line": "and some of them say that by latitude people mean the arc of the meridian cut off between the zenith and the equinoctial.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-39",
+   "match": "thanne sey they that the distaunce fro the equinoxial unto the ende of a clymat evene agayns the pole artyk is the latitude of a clymat for sothe",
+   "line": "They then say that the true latitude of a climate is its distance from the equinoctial to its far end, toward the Arctic pole.",
    "kind": "sentence",
    "whole": true
   },
@@ -19356,16 +20000,212 @@
    "whole": true
   },
   {
-   "section": "p2-31",
-   "match": "and for the more declaracion lo here the figure",
-   "line": "To make this clearer, here is the figure.",
+   "section": "p2-40",
+   "match": "knowe by thyn almenak the degree of the ecliptik of any signe in which that the planete is rekned for to be and that is cleped the degree of his longitude",
+   "line": "Use your almanac to find the degree of the ecliptic, in whatever sign, where the planet is reckoned to be; this is called its degree of longitude.",
    "kind": "sentence",
    "whole": true
   },
   {
-   "section": "p2-36",
-   "match": "and for the more declaracion lo here the figure",
-   "line": "To make this clearer, here is the figure.",
+   "section": "p2-40",
+   "match": "and knowe also the degree of his latitude fro the ecliptik north or south",
+   "line": "Find also its latitude in degrees north or south of the ecliptic.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "and by thise samples folwinge in special maystow wirke for sothe in every signe of the zodiak",
+   "line": "With the following examples you will be able to do this in any sign of the zodiac.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "the degree of the longitude par aventure of venus or of another planete was of capricorne and the latitude of him was northward degrees fro the ecliptik lyne",
+   "line": "Say the longitude of Venus, or some other planet, was the 6th degree of Capricorn, and its latitude was 2 degrees north of the ecliptic line.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "i tok a subtil compas and cleped that oon poynt of my compas a and that other poynt f than tok i the point of a and set it in the ecliptik lyne evene in my zodiak in the degree of the longitude of venus that is to seyn in the degree of capricorne",
+   "line": "I took a fine pair of compasses and called one point A and the other F. I set point A on the ecliptic line of my zodiac, exactly at Venus's degree of longitude, the 6th degree of Capricorn;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "and thanne sette i the point of f upward in the same signe bycause that the latitude was north up-on the latitude of venus that is to seyn in the degree fro the heved of capricorne",
+   "line": "then, because the latitude was north, I set point F upward in the same sign at Venus's latitude, still at the 6th degree from the start of Capricorn,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "and thus have i degrees by-twixe my two prikkes",
+   "line": "so that my two points were 2 degrees apart.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "than leide i doun softely my compas and sette the degree of the longitude up-on the orisonte",
+   "line": "Then I laid the compasses down gently and set the degree of longitude on the horizon.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "tho tok i and wexede my label in maner of a peyre tables to resceyve distinctly the prikkes of my compas",
+   "line": "I coated my label with wax, like a writing tablet, so that it would take the marks of the compass points clearly.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "tho tok i this forseide label and leide it fix over the degree of my longitude",
+   "line": "I laid this label firmly over my degree of longitude,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "tho tok i up my compas and sette the point of a in the wex on my label as evene as i coude gesse over the ecliptik lyne in the ende of the longitude",
+   "line": "picked up the compasses, and pressed point A into the wax on the label, as squarely over the ecliptic line as I could judge, at the end of the longitude;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "and sette the point of f endlang in my label up-on the space of the latitude inwarde and over the zodiak that is to seyn north-ward fro the ecliptik",
+   "line": "and set point F along the label at the distance of the latitude, inward across the zodiac, that is, north of the ecliptic.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "than leide i doun my compas and lokede wel in the wey upon the prikke of a and of f",
+   "line": "Then I put the compasses down and looked carefully at the marks of A and F;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "tho turned i my riet til that the prikke of f sat up-on the orisonte",
+   "line": "I turned my rete until the mark of F sat on the horizon,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "than saw i wel that the body of venus in hir latitude of degrees septentrionalis assended in the ende of the degree in the heved of capricorne",
+   "line": "and saw clearly that the body of Venus, at its northern latitude of 2 degrees, rose at the end of the 6th degree, at the start of Capricorn.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "and nota that in the same maner maistow wirke with any latitude septentrional in alle signes",
+   "line": "Note that you can work the same way with any northern latitude in any sign;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "but sothly the latitude meridional of a planete in capricorne may not be take by-cause of the litel space by-twixe the ecliptik and the bordure of the astrolabie",
+   "line": "but a southern latitude of a planet in Capricorn cannot be taken, because there is so little room between the ecliptic and the edge of the astrolabe;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "but sothly in alle other signes it may",
+   "line": "in all the other signs it can.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "also the degree par aventure of iuppiter or of a-nother planete was in the first degree of pisces in longitude and his latitude was degrees meridional",
+   "line": "Again, say Jupiter, or another planet, was at the first degree of Pisces in longitude, with a latitude of 3 degrees south.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "tho tok i the point of a and sette it in the firste degree of pisces on the ecliptik and thanne sette i the point of f dounward in the same signe by-cause that the latitude was south degrees that is to seyn fro the heved of pisces",
+   "line": "I set point A at the first degree of Pisces on the ecliptic, and, because the latitude was 3 degrees south, set point F downward in the same sign, measuring from the start of Pisces,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "and thus have i degrees by-twixe bothe prikkes",
+   "line": "so that the two points were 3 degrees apart;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "thanne sette i the degree of the longitude up-on the orisonte",
+   "line": "then I set the degree of longitude on the horizon.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "tho tok i my label and leide it fix upon the degree of the longitude",
+   "line": "I laid my label firmly over the degree of longitude,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "tho sette i the point of a on my label evene over the ecliptik lyne in the ende evene of the degree of the longitude and sette the point of f endlang in my label the space of degrees of the latitude fro the zodiak this is to seyn southward fro the ecliptik toward the bordure",
+   "line": "set point A on the label directly over the ecliptic line, at the very end of the degree of longitude, and set point F along the label 3 degrees of latitude away, that is, south of the ecliptic, toward the edge;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "and turned my riet til the prikke of f sat up-on the orisonte",
+   "line": "and turned my rete until the mark of F sat on the horizon.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "thanne saw i wel that the body of iuppiter in his latitude of degrees meridional ascended with degrees of pisces in horoscopo",
+   "line": "Then I saw clearly that the body of Jupiter, at its southern latitude of 3 degrees, was rising together with the 14th degree of Pisces, _in horoscopo_.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "and in this maner maistow wirke with any latitude meridional as i first seide save in capricorne",
+   "line": "You can work like this with any southern latitude, as I said, except in Capricorn.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "and yif thou wolt pleye this craft with the arysing of the mone loke thou rekne wel hir cours houre by houre",
+   "line": "If you want to try this art on the rising of the moon, be sure to reckon its course carefully hour by hour,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "for she ne dwelleth nat in a degree of hir longitude but a litel whyle as thou wel knowest",
+   "line": "for, as you well know, it stays in any one degree of its longitude only a short while;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-40",
+   "match": "but natheles yif thou rekne hir verreye moeving by thy tables houre after houre thou shall do wel y-now",
+   "line": "but if you reckon its true motion from your tables hour after hour, [you will do well enough].",
    "kind": "sentence",
    "whole": true
   },

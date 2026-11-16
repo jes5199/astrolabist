@@ -1114,40 +1114,298 @@ That is, measured from the path the sun took that day, not from the sun's path t
 > And for the more declaracioun, lo here the figure.
 To make this clearer, here is the figure.
 
-# Part II: for now only the closing line of each section (tg 18041); the rest follows in later batches.
+## p2-31
+> Thou most first considere that the sonne aryseth nat al-wey verrey est, but some tyme by north the est, and som tyme by southe the est.
+Bear in mind first that the sun does not always rise due east: sometimes it rises north of east, sometimes south of it.
+> Sothly, the sonne aryseth never-mo verrey est in oure orisonte, but he be in the heved of Aries or Libra.
+On our horizon it never rises exactly in the east except when it is at the start of Aries or of Libra.
+> Now is thyn orisonte departed in 24 parties by thy azimutz, in significacion of 24 partiez of the world;
+Your azimuths cut your horizon into 24 parts, standing for 24 directions of the world,
+> al-be-it so that shipmen rikne thilke partiez in 32. Thanne is ther no more but waite in which azimut that thy sonne entreth at his arysing;
+though sailors count these directions as 32. All you need do is watch which azimuth your sun comes up in at its rising;
+> and take ther the senith of the arysing of the sonne.
+that azimuth is the point where the sun rises.
+> The manere of the devisioun of thyn Astrolabie is this;
+The way your astrolabe is divided up is as follows,
+> I mene, as in this cas.
+for this purpose, that is.
+> First is it devided in 4 plages principalx with the lyne that goth from est to west, and than with a-nother lyne that goth fro south to north.
+It is first split into the four main quarters by the line from east to west and by a second line from south to north.
+> Than is it devided in smale partiez of azimutz, as est, and est by southe, whereas is the firste azimut above the est lyne;
+Then it is split into the small parts of the azimuths, such as east, and east by south, which is the first azimuth past the east line;
+> and so forth, fro partie to partie, til that thou come agayn un-to the est lyne.
+and so on, part after part, all the way round until you are back at the east line.
+> Thus maistow understond also the senith of any sterre, in which partie he ryseth, &c.
+In the same way you can tell the rising point of any star, and in which part of the horizon it comes up.
+> And for the more declaracion, lo here the figure.
+To make this clearer, here is the figure.
 
 ## p2-32
+> Considere the tyme of the coniunccion by thy kalender, as thus;
+Find the time of the conjunction from your calendar, like this:
+> lok how many houres thilke coniunccion is fro the midday of the day precedent, as sheweth by the canoun of thy kalender.
+see how many hours after noon of the day before the conjunction falls, as the calendar's rule shows.
+> Rikne thanne thilke nombre of houres in the bordure of thyn Astrolabie, as thou art wont to do in knowing of the houres of the day or of the night;
+Count off that many hours on the border of your astrolabe, the way you usually do when finding the hours of the day or night,
+> and ley thy label over the degree of the sonne;
+and lay your label across the sun's degree;
+> and thanne wol the point of thy label sitte up-on the hour of the coniunccion.
+the label's point will then rest on the hour of the conjunction.
+> Loke thanne in which azimut the degree of thy sonne sitteth, and in that partie of the firmament is the coniunccioun.
+Whichever azimuth the sun's degree now sits in, that is the part of the sky where the conjunction takes place.
 > And for the more declaracioun, lo here thy figure.
 To make this clearer, here is the figure.
 
 ## p2-33
+> This is no more to seyn but any tyme of the day tak the altitude of the sonne;
+All this comes to is: at any hour of the day, take the sun's altitude,
+> and by the azimut in which he stondeth, maystou seen in which partie of the firmament he is.
+and the azimuth it stands in tells you what part of the sky it is in.
+> And in the same wyse maystou seen, by the night, of any sterre, whether the sterre sitte est or west or north, or any partie by-twene, after the name of the azimut in which is the sterre.
+At night, likewise, the name of the azimuth a star is in tells you whether that star lies east, west, north or somewhere between.
 > And for the more declaracioun, lo here the figure.
 To make this clearer, here is the figure.
 
 ## p2-34
+> Tak the altitude of the mone, and rikne thyn altitude up among thyne almikanteras on which syde that the mone stande;
+Take the moon's altitude and count it up among your almucantars on whichever side the moon is on,
+> and set there a prikke.
+putting a dot there.
+> Tak thenne anon-right, up-on the mones syde, the altitude of any sterre fix which that thou knowest, and set his centre up-on his altitude among thyn almikanteras ther the sterre is founde.
+Straight afterwards, on the moon's side of the sky, take the altitude of a fixed star you know, and set that star's point on its almucantar, on the side where you saw it.
+> Waite thanne which degree of the zodiak toucheth the prikke of the altitude of the mone, and tak ther the degree in which the mone standeth.
+Whichever degree of the zodiac now touches the moon's dot is the degree the moon is in.
+> This conclusioun is verrey soth, yif the sterres in thyn Astrolabie stonden after the trowthe;
+This works perfectly well provided the stars on your astrolabe are set in their true places;
+> of comune, tretis of Astrolabie ne make non excepcioun whether the mone have latitude, or non;
+treatises on the astrolabe generally make no allowance for whether the moon has latitude or not,
+> ne on whether syde of the mone the altitude of the sterre fix be taken.
+nor for which side of the moon the fixed star's altitude is taken on.
+> And nota, that yif the mone shewe himself by light of day, than maystow wyrke this same conclusioun by the sonne, as wel as by the fix sterre.
+Note too that if the moon is visible in daylight, you can work this with the sun just as well as with a fixed star.
 > And for the more declaracioun, lo here thy figure.
 To make this clearer, here is the figure.
 
 ## p2-35
+> Tak the altitude of any sterre that is cleped a planete, and note it wel.
+Take the altitude of any of the stars called planets, and write it down.
+> And tak eek anon the altitude of any sterre fix that thou knowest, and note it wel also.
+At the same time take the altitude of a fixed star you know, and write that down too.
+> Come thanne agayn the thridde or the ferthe night next folwing;
+Come back on the third or fourth night after,
+> for thanne shaltow aperceyve wel the moeving of a planete, whether so he moeve forthward or bakward.
+because by then you will clearly see the planet's motion, whether it is moving forward or backward.
+> Awaite wel thanne whan that thy sterre fix is in the same altitude that she was whan thou toke hir firste altitude;
+Wait until your fixed star is at the same altitude as when you first measured it,
+> and tak than eftsones the altitude of the forseide planete, and note it wel.
+then take the planet's altitude again, and write it down.
+> For trust wel, yif so be that the planete be on the right syde of the meridional lyne, so that his seconde altitude be lasse than his firste altitude was, thanne is the planete directe.
+If the planet is on the right side of the meridian line and its second altitude is less than its first, the planet is direct.
+> And yif he be on the west syde in that condicion, thanne is he retrograd.
+If it is on the west side under the same condition, it is retrograde.
+> And yif so be that this planete be up-on the est syde whan his altitude is taken, so that his secounde altitude be more than his firste altitude, thanne is he retrograde, and yif he be on the west syde, than is he directe.
+And if the planet is on the east side when you measure it, and its second altitude is greater than its first, it is retrograde; on the west side, it is direct.
+> But the contrarie of thise parties is of the cours of the mone;
+With the moon it is the other way round,
+> for sothly, the mone moeveth the contrarie from othere planetes as in hir episicle, but in non other manere.
+for the moon moves opposite to the other planets in its epicycle, though in no other way.
 > And for the more declaracioun, lo here thy figure.
 To make this clearer, here is the figure.
 
+## p2-36
+> Set the by-ginning of the degree that assendeth up-on the ende of the 8 houre inequal;
+Set the start of the rising degree on the end of the 8th unequal hour; the start of the 2nd house will then lie on the midnight line.
+> thanne wol the by-ginning of the 2 hous sitte up-on the lyne of midnight.
+=
+> Remove thanne the degree that assendeth, and set him on the ende of the 10 hour inequal;
+Next move the rising degree to the end of the 10th unequal hour, and the start of the 3rd house will lie on the midnight line.
+> and thanne wol the byginning of the 3 hous sitte up-on the midnight lyne.
+=
+> Bring up agayn the same degree that assendeth first, and set him up-on the orisonte;
+Bring that first rising degree back up and set it on the horizon; the start of the 4th house then lies on the midnight line.
+> and thanne wol the be-ginning of the 4 hous sitte up-on the lyne of midnight.
+=
+> Tak thanne the nadir of the degree that first assendeth, and set him on the ende of the 2 houre inequal;
+Now take the nadir of the first rising degree and set it on the end of the 2nd unequal hour: the start of the 5th house lies on the midnight line. Set the ascendant's nadir on the end of the 4th hour, and the start of the 6th house lies on the midnight line.
+> and thanne wol the by-ginning of the 5 hous sitte up-on the lyne of midnight;
+=
+> set thanne the nadir of the assendent on the ende of the 4 houre, than wol the byginning of the 6 house sitte on the midnight lyne.
+=
+> The byginning of the 7 hous is nadir of the assendent, and the byginning of the 8 hous is nadir of the 2;
+The start of the 7th house is the nadir of the ascendant; the 8th is the nadir of the 2nd, the 9th of the 3rd, the 10th of the 4th, the 11th of the 5th, and the 12th of the 6th.
+> and the by-ginning of the 9 hous is nadir of the 3;
+=
+> and the by-ginning of the 10 hous is the nadir of the 4;
+=
+> and the byginning of the 11 hous is nadir of the 5;
+=
+> and the byginning of the 12 hous is nadir of the 6.
+=
+> And for the more declaracion, lo here the figure.
+To make this clearer, here is the figure.
+
 ## p2-37
+> Tak thyn assendent, and thanne hastow thy 4 angles;
+Find your ascendant, and you have your four angles,
+> for wel thou wost that the opposit of thyn assendent, that is to seyn, thy by-ginning of the 7 hous, sit up-on the west orizonte;
+since, as you know, the point opposite your ascendant, the start of the 7th house, sits on the west horizon;
+> and the byginning of the 10 hous sit up-on the lyne meridional;
+the start of the 10th house sits on the meridian line,
+> and his opposit up-on the lyne of midnight.
+and its opposite on the midnight line.
+> Thanne ley thy label over the degree that assendeth, and rekne fro the point of thy label alle the degrees in the bordure, til thou come to the meridional lyne;
+Then lay your label over the rising degree, and count the degrees of the border from its point round to the meridian line;
+> and departe alle thilke degrees in 3 evene parties, and take the evene equacion of 3;
+divide that count into three equal parts, giving three equal shares;
+> for ley thy label over everich of 3 parties, and than maistow see by thy label in which degree of the zodiak is the by-ginning of everich of thise same houses fro the assendent: that is to seyn, the beginning of the 12 house next above thyn assendent;
+lay your label on each of the three dividing points in turn, and it will show you which degree of the zodiac begins each of these houses above the ascendant: first the start of the 12th house, just above your ascendant,
+> and thanne the beginning of the 11 house;
+then the start of the 11th,
+> and thanne the 10, up-on the meridional lyne;
+and then the 10th, on the meridian line,
+> as I first seide.
+as I said at the beginning.
+> The same wyse wirke thou fro the assendent doun to the lyne of midnight;
+Work the same way from the ascendant down to the midnight line,
+> and thanne thus hastow other 3 houses, that is to seyn, the byginning of the 2, and the 3, and the 4 houses;
+and you have three more houses: the starts of the 2nd, 3rd and 4th;
+> thanne is the nadir of thise 3 houses the by-ginning of the 3 houses that folwen.
+the nadirs of these three are the starts of the three houses that follow them.
 > And for the more declaracioun, lo here thy figure.
 To make this clearer, here is the figure.
 
 ## p2-38
+> Tak a rond plate of metal;
+Take a round metal plate,
+> for warping, the brodere the bettre;
+the wider the better, so that it does not warp,
+> and make ther-upon a iust compas, a lite with-in the bordure;
+and draw an exact circle on it a little inside the edge.
+> and ley this ronde plate up-on an evene grond, or on an evene ston, or on an evene stok fix in the gronde;
+Lay the plate on level ground, or on a level stone, or on a level block of wood set firmly in the ground,
+> and ley it even by a level.
+and make it true with a level.
+> And in centre of the compas stike an evene pin or a wyr upright;
+In the centre of the circle stand a straight pin or wire upright,
+> the smallere the betere.
+the thinner the better.
+> Set thy pin by a plom-rewle evene upright;
+Use a plumb-rule to set the pin exactly upright,
+> and let this pin be no lengere than a quarter of the diametre of thy compas, fro the centre.
+and make it no taller, from the centre, than a quarter of the circle's diameter.
+> And waite bisily, aboute 10 or 11 of the clokke and whan the sonne shyneth, whan the shadwe of the pin entreth any-thing with-in the cercle of thy plate an heer-mele, and mark ther a prikke with inke.
+At about 10 or 11 o'clock, while the sun is shining, watch closely for the moment the pin's shadow comes even a hair's breadth inside the circle, and mark the spot with a dot of ink.
+> Abyde thanne stille waiting on the sonne after 1 of the clokke, til that the schadwe of the wyr or of the pin passe ony-thing out of the cercle of the compas, be it never so lyte;
+Then keep watching the sun after 1 o'clock, until the shadow of the wire or pin passes out of the circle again, however slightly,
+> and set ther a-nother prikke of inke.
+and put a second dot of ink there.
+> Take than a compas, and mesure evene the middel by-twixe bothe prikkes;
+With a pair of compasses, find the exact midpoint between the two dots,
+> and set ther a prikke.
+and mark it with a dot.
+> Take thanne a rewle, and draw a stryke, evene a-lyne fro the pin un-to the middel prikke;
+Then with a ruler draw a straight line from the pin to that middle dot;
+> and tak ther thy lyne meridional for evere-mo, as in that same place.
+that is your meridian line, for good, at that spot.
+> And yif thow drawe a cros-lyne over-thwart the compas, iustly over the lyne meridional, than hastow est and west and south;
+If you draw a line across the circle at exact right angles to the meridian line, you have east, west and south;
+> and, par consequence, than the nadir of the south lyne is the north lyne.
+and it follows that the opposite of the south line is the north line.
 > And for more declaracioun, lo here thy figure.
 To make this clearer, here is the figure.
 
 ## p2-39
+> This lyne meridional is but a maner descripcion of lyne imagined, that passeth upon the poles of this world and by the senith of oure heved.
+This meridian line is simply a picture of an imaginary line that runs through the poles of the world and through the point straight above our heads.
+> And hit is y-cleped the lyne meridional;
+It is called the meridian line
+> for in what place that any maner man is at any tyme of the yeer, whan that the sonne by moeving of the firmament cometh to his verrey meridian place, than is hit verrey midday, that we clepen oure noon, as to thilke man;
+because, wherever anyone is, at any time of year, when the turning of the sky brings the sun to its true meridian position, it is exactly midday, which we call noon, for that person;
+> and therfore is it cleped the lyne of midday.
+and so it is called the line of midday.
+> And nota, for evermo, of 2 citees or of 2 tounes, of whiche that o toun aprocheth more toward the est than doth that other toun, truste wel that thilke tounes ban diverse meridians.
+Note also that of any two cities or towns, if one lies further east than the other, the two towns have different meridians.
+> Nota also, that the arch of the equinoxial, that is conteyned or bounded by-twixe the 2 meridians, is cleped the longitude of the toun.
+The arc of the equinoctial enclosed between those two meridians is called the longitude of the town.
+> And yif so be that two tounes have y-lyke meridian, or oon meridian, than is the distance of hem bothe y-lyke fer fro the est;
+If two towns share the same meridian, they are the same distance from the east,
+> and the contrarie.
+and if they are the same distance from the east, they share a meridian.
+> And in this manere they chaunge nat her meridian, but sothly they chaungen her almikanteras;
+Such towns keep the same meridian but have different almucantars,
+> for the enhausing of the pool and the distance of the sonne.
+because the height of the pole and the distance of the sun differ for them.
+> The longitude of a clymat is a lyne imagined fro est to west, y-lyke distant by-twene them alle.
+The longitude of a climate is an imaginary line from east to west, running at the same distance all along.
+> The latitude of a clymat is a lyne imagined from north to south the space of the erthe, fro the byginning of the firste clymat unto the verrey ende of the same climat, evene directe agayns the pole artik.
+The latitude of a climate is an imaginary line running north and south across the earth, from the beginning of the first climate to the very end of that climate, pointing straight toward the Arctic pole.
+> Thus seyn some auctours;
+So some authors say;
+> and somme of hem seyn that yif men clepen the latitude, thay mene the arch meridian that is contiened or intercept by-twixe the senith and the equinoxial.
+and some of them say that by latitude people mean the arc of the meridian cut off between the zenith and the equinoctial.
+> Thanne sey they that the distaunce fro the equinoxial unto the ende of a clymat, evene agayns the pole artyk, is the latitude of a clymat for sothe.
+They then say that the true latitude of a climate is its distance from the equinoctial to its far end, toward the Arctic pole.
 > And for more declaracioun, lo here thy figure.
 To make this clearer, here is the figure.
 
-## p2-31
-> And for the more declaracion, lo here the figure.
-To make this clearer, here is the figure.
-
-## p2-36
-> And for the more declaracion, lo here the figure.
-To make this clearer, here is the figure.
+## p2-40
+> Knowe by thyn almenak the degree of the ecliptik of any signe in which that the planete is rekned for to be, and that is cleped the degree of his longitude;
+Use your almanac to find the degree of the ecliptic, in whatever sign, where the planet is reckoned to be; this is called its degree of longitude.
+> and knowe also the degree of his latitude fro the ecliptik, north or south.
+Find also its latitude in degrees north or south of the ecliptic.
+> And by thise samples folwinge in special, maystow wirke for sothe in every signe of the zodiak.
+With the following examples you will be able to do this in any sign of the zodiac.
+> The degree of the longitude, par aventure, of Venus or of another planete, was 6 of Capricorne, and the latitude of him was northward 2 degrees fro the ecliptik lyne.
+Say the longitude of Venus, or some other planet, was the 6th degree of Capricorn, and its latitude was 2 degrees north of the ecliptic line.
+> I tok a subtil compas, and cleped that oon poynt of my compas A, and that other poynt F. Than tok I the point of A, and set it in the ecliptik lyne evene in my zodiak, in the degree of the longitude of Venus, that is to seyn, in the 6 degree of Capricorne;
+I took a fine pair of compasses and called one point A and the other F. I set point A on the ecliptic line of my zodiac, exactly at Venus's degree of longitude, the 6th degree of Capricorn;
+> and thanne sette I the point of F upward in the same signe, bycause that the latitude was north, up-on the latitude of Venus, that is to seyn, in the 6 degree fro the heved of Capricorne;
+then, because the latitude was north, I set point F upward in the same sign at Venus's latitude, still at the 6th degree from the start of Capricorn,
+> and thus have I 2 degrees by-twixe my two prikkes.
+so that my two points were 2 degrees apart.
+> Than leide I doun softely my compas, and sette the degree of the longitude up-on the orisonte;
+Then I laid the compasses down gently and set the degree of longitude on the horizon.
+> tho tok I and wexede my label in maner of a peyre tables to resceyve distinctly the prikkes of my compas.
+I coated my label with wax, like a writing tablet, so that it would take the marks of the compass points clearly.
+> Tho tok I this forseide label, and leide it fix over the degree of my longitude;
+I laid this label firmly over my degree of longitude,
+> tho tok I up my compas, and sette the point of A in the wex on my label, as evene as I coude gesse over the ecliptik lyne, in the ende of the longitude;
+picked up the compasses, and pressed point A into the wax on the label, as squarely over the ecliptic line as I could judge, at the end of the longitude;
+> and sette the point of F endlang in my label up-on the space of the latitude, inwarde and over the zodiak, that is to seyn, north-ward fro the ecliptik.
+and set point F along the label at the distance of the latitude, inward across the zodiac, that is, north of the ecliptic.
+> Than leide I doun my compas, and lokede wel in the wey upon the prikke of A and of F;
+Then I put the compasses down and looked carefully at the marks of A and F;
+> tho turned I my riet til that the prikke of F sat up-on the orisonte;
+I turned my rete until the mark of F sat on the horizon,
+> than saw I wel that the body of Venus, in hir latitude of 2 degrees septentrionalis, assended, in the ende of the 6 degree, in the heved of Capricorne.
+and saw clearly that the body of Venus, at its northern latitude of 2 degrees, rose at the end of the 6th degree, at the start of Capricorn.
+> And nota, that in the same maner maistow wirke with any latitude septentrional in alle signes;
+Note that you can work the same way with any northern latitude in any sign;
+> but sothly the latitude meridional of a planete in Capricorne may not be take, by-cause of the litel space by-twixe the ecliptik and the bordure of the Astrolabie;
+but a southern latitude of a planet in Capricorn cannot be taken, because there is so little room between the ecliptic and the edge of the astrolabe;
+> but sothly, in alle other signes it may.
+in all the other signs it can.
+> Also the degree, par aventure, of Iuppiter or of a-nother planete, was in the first degree of Pisces in longitude, and his latitude was 3 degrees meridional;
+Again, say Jupiter, or another planet, was at the first degree of Pisces in longitude, with a latitude of 3 degrees south.
+> tho tok I the point of A, and sette it in the firste degree of Pisces on the ecliptik, and thanne sette I the point of F dounward in the same signe, by-cause that the latitude was south 3 degrees, that is to seyn, fro the heved of Pisces;
+I set point A at the first degree of Pisces on the ecliptic, and, because the latitude was 3 degrees south, set point F downward in the same sign, measuring from the start of Pisces,
+> and thus have I 3 degrees by-twixe bothe prikkes;
+so that the two points were 3 degrees apart;
+> thanne sette I the degree of the longitude up-on the orisonte.
+then I set the degree of longitude on the horizon.
+> Tho tok I my label, and leide it fix upon the degree of the longitude;
+I laid my label firmly over the degree of longitude,
+> tho sette I the point of A on my label, evene over the ecliptik lyne, in the ende evene of the degree of the longitude, and sette the point of F endlang in my label the space of 3 degrees of the latitude fro the zodiak, this is to seyn, southward fro the ecliptik, toward the bordure;
+set point A on the label directly over the ecliptic line, at the very end of the degree of longitude, and set point F along the label 3 degrees of latitude away, that is, south of the ecliptic, toward the edge;
+> and turned my riet til the prikke of F sat up-on the orisonte;
+and turned my rete until the mark of F sat on the horizon.
+> thanne saw I wel that the body of Iuppiter, in his latitude of 3 degrees meridional, ascended with 14 degrees of Pisces in horoscopo.
+Then I saw clearly that the body of Jupiter, at its southern latitude of 3 degrees, was rising together with the 14th degree of Pisces, _in horoscopo_.
+> And in this maner maistow wirke with any latitude meridional, as I first seide, save in Capricorne.
+You can work like this with any southern latitude, as I said, except in Capricorn.
+> And yif thou wolt pleye this craft with the arysing of the mone, loke thou rekne wel hir cours houre by houre;
+If you want to try this art on the rising of the moon, be sure to reckon its course carefully hour by hour,
+> for she ne dwelleth nat in a degree of hir longitude but a litel whyle, as thou wel knowest;
+for, as you well know, it stays in any one degree of its longitude only a short while;
+> but natheles, yif thou rekne hir verreye moeving by thy tables houre after houre, [thou shall do wel y-now].
+but if you reckon its true motion from your tables hour after hour, [you will do well enough].
