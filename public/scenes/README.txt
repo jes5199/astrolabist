@@ -173,3 +173,12 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-13: treatise-p1-17-three-circles-ink.js treatise-p2-15-equal-days-ink.js treatise-p2-20-declination-ink.js copied byte-for-byte from astrolabe-video b56c7db.
 2026-11-16: treatise-prologue-languages-ink.js copied byte-for-byte from astrolabe-video 9626d99.
 2026-11-16: treatise-prologue.js copied byte-for-byte from astrolabe-video 1afa413.
+2026-11-16: treatise-prologue-twice-ink.js copied byte-for-byte from astrolabe-video 9c24213.
+2026-11-16: treatise-prologue-oxford-globe-ink.js copied byte-for-byte from astrolabe-video 9c24213.
+2026-11-16: treatise-prologue-cause-1-ink.js copied byte-for-byte from astrolabe-video 9c24213.
+2026-11-16: treatise-prologue-cause-2a-ink.js copied byte-for-byte from astrolabe-video 9c24213.
+2026-11-16: treatise-prologue-cause-2b.js copied byte-for-byte from astrolabe-video 9c24213.
+2026-11-16: treatise-prologue-gift.js copied byte-for-byte from astrolabe-video 9c24213.
+2026-11-16: treatise-prologue-part-1.js copied byte-for-byte from astrolabe-video 9c24213.
+2026-11-16: treatise-prologue-part-2.js copied byte-for-byte from astrolabe-video 9c24213.
+2026-11-16: treatise-prologue-part-3.js copied byte-for-byte from astrolabe-video 9c24213.

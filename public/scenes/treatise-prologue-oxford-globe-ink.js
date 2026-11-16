@@ -7,14 +7,16 @@
 // (jes tg 17890); Oxford is pricked in red; its
 // latitude is measured up its meridian from the equator: 51 degrees 50 minutes, Chaucer's own figure for Oxford
 // (II 22; the instrument's plates are drawn for 52); then its zenith, straight up, and its horizon, the plane the
-// plate is made for.  Orthographic projection; lib/woodcut.js; our own drawing.
+// plate is made for.  Oxford, its name and the equator's stand throughout (jes tg 18021); nothing fades to a bare
+// globe (tg 18016): as the loop begins again the zenith and horizon go and the latitude runs back down to the
+// equator, then climbs again.  Orthographic projection; lib/woodcut.js; our own drawing.
 
 import { woodcut, RED, VELLUM, WASH } from "./lib/woodcut.js";
 
 const NS = "http://www.w3.org/2000/svg";
 const instances = new WeakMap();
-const LOOP = 14000;
-const STILL = 8000; // ms: the latitude, the zenith and the horizon shown
+const LOOP = 12000;
+const STILL = 7000; // ms: the latitude, the zenith and the horizon shown
 const RAD = Math.PI / 180;
 const G = { x: 6, y: 10, r: 62 };
 const TILT = 10 * RAD; // the north pole toward us
@@ -105,7 +107,7 @@ export function mount(el) {
 
 function draw(s, t) {
   // the sphere is always there; what is drawn on it comes and goes
-  const vis = 1 - span(t, 13.2, 13.9);
+  const back = 1 - span(t, 0, 0.5); // the last loop's marks, going as this one begins
   const lon = AT; // Oxford's meridian
   let d = "";
   for (let m = -180; m < 180; m += 30) d += meridian(m + lon);
@@ -113,7 +115,7 @@ function draw(s, t) {
   s.grid.setAttribute("d", d);
   s.eq.setAttribute("d", parallel(0));
   const P = proj(LAT, lon);
-  const on = span(t, 0.6, 1.0) * vis;
+  const on = 1;
   s.town.setAttribute("cx", f(P[0]));
   s.town.setAttribute("cy", f(P[1]));
   s.town.setAttribute("opacity", f(on));
@@ -121,17 +123,17 @@ function draw(s, t) {
   s.tTown.setAttribute("y", f(P[1] + 9));
   s.tTown.setAttribute("opacity", f(on));
   // the latitude: up the meridian from the equator
-  const up = LAT * span(t, 1.5, 3.1);
+  const up = LAT * (t < 0.55 ? 1 - span(t, 0, 0.55) : span(t, 0.6, 2.2));
   s.arc.setAttribute("d", up > 0.5 ? meridian(lon, 0, up) : "");
-  s.arc.setAttribute("opacity", f(span(t, 1.4, 1.6) * vis));
+  s.arc.setAttribute("opacity", 1);
   const E = proj(0, lon);
   s.tEq.setAttribute("x", f(E[0]));
   s.tEq.setAttribute("y", f(E[1] + 15));
-  s.tEq.setAttribute("opacity", f(span(t, 1.5, 1.9) * vis));
+  s.tEq.setAttribute("opacity", 1);
   const M = proj(LAT / 2, lon);
   s.tLat.setAttribute("x", f(M[0] - 6));
   s.tLat.setAttribute("y", f(M[1] + 4));
-  s.tLat.setAttribute("opacity", f(span(t, 2.9, 3.4) * vis));
+  s.tLat.setAttribute("opacity", f(Math.max(back, span(t, 2.0, 2.4))));
   // the zenith, straight up from the town; the horizon, the plane that touches the globe there
   const n = tilt(vec(LAT, lon));
   const Z = scr(n, G.r + 30);
@@ -139,7 +141,7 @@ function draw(s, t) {
   s.zen.setAttribute("y1", f(P[1]));
   s.zen.setAttribute("x2", f(Z[0]));
   s.zen.setAttribute("y2", f(Z[1]));
-  const zo = span(t, 4.1, 4.7) * vis;
+  const zo = Math.max(back, span(t, 3.0, 3.6));
   s.zen.setAttribute("opacity", f(zo));
   s.tZen.setAttribute("x", f(Z[0] - 2));
   s.tZen.setAttribute("y", f(Z[1] - 5));
@@ -155,7 +157,7 @@ function draw(s, t) {
     hd += `${a ? "L" : "M"}${f(q[0])} ${f(q[1])}`;
   }
   s.hor.setAttribute("d", hd + "Z");
-  const ho = span(t, 5.1, 5.7) * vis;
+  const ho = Math.max(back, span(t, 4.0, 4.6));
   s.hor.setAttribute("opacity", f(ho));
   s.tHor.setAttribute("x", f(P[0] + 14));
   s.tHor.setAttribute("y", f(P[1] - 13));

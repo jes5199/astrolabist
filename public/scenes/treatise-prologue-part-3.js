@@ -1,5 +1,6 @@
 // A Treatise on the Astrolabe, the Prologue: "this tretis, divided in fyve parties" ... "The thridde partie shal contienen diverse tables of longitudes and latitudes of sterres fixe, declinacions of the sonne, and tables of longitudes of citees and of tounes."
 // Scene contract (astrolabist, src/components/Scene.astro): mount(el) once, then start(el) / stop(el).
+// The loop never rests on an empty leaf (jes tg 18016): the drawing draws itself back out at the end and starts again at once.
 //
 // Part III, the tables: a page ruled for tables, a few rows ruled firm, the rest only pricked out in dashes, and no figures in the cells: present in intent, not in the text.
 // The part's state is Skeat's (Oxford Chaucer vol. III, 1894, introduction to the Treatise): "probably consisted entirely of tables, and some at least of these may very well have been transmitted to little Lewis".
@@ -68,21 +69,23 @@ export function mount(el) {
 }
 
 function draw(s, t) {
-  const out = 1 - span(t, 5.8, 6.4);
+  const n = s.parts.length;
   s.parts.forEach((p, i) => {
+    // drawn back out at the end, the last first
+    const out = 1 - span(t, 4.9 + (1.2 * (n - 1 - i)) / n, 5.5 + (1.2 * (n - 1 - i)) / n);
     if (p.getAttribute("data-cell")) {
       p.setAttribute("opacity", f(0.28 * span(t, 2.6 + 0.12 * i * 0.1, 3.2 + 0.12 * i * 0.1) * out));
       return;
     }
     const firm = p.getAttribute("data-firm");
-    const u = span(t, 0.2 + 0.16 * i, 0.9 + 0.16 * i);
+    const u = span(t, 0.05 + 0.16 * i, 0.75 + 0.16 * i);
     if (firm === "0") {
       p.setAttribute("stroke-dasharray", "0.02 0.03"); // pricked out, never ruled
       p.setAttribute("stroke-dashoffset", "0");
       p.setAttribute("opacity", f(0.45 * u * out));
     } else {
-      drawIn(p, u);
-      p.setAttribute("opacity", f((i < 2 ? 1 : 0.85) * out));
+      drawIn(p, u * out);
+      p.setAttribute("opacity", f(i < 2 ? 1 : 0.85));
     }
   });
 }

@@ -1,5 +1,6 @@
 // A Treatise on the Astrolabe, the Prologue: "this tretis, divided in fyve parties" ... "The seconde partie shal teche thee werken the verrey practik of the forseide conclusiouns."
 // Scene contract (astrolabist, src/components/Scene.astro): mount(el) once, then start(el) / stop(el).
+// The loop never rests on an empty leaf (jes tg 18016): the drawing draws itself back out at the end and starts again at once.
 //
 // Part II, the practice: the back of the instrument with its rule sighting the sun, the beam through both sights; drawn finished but for a faint unfinished edge, a hair short of whole.
 // The part's state is Skeat's (Oxford Chaucer vol. III, 1894, introduction to the Treatise): "we have nearly all, and probably all that ever was written".
@@ -65,20 +66,21 @@ export function mount(el) {
 }
 
 function draw(s, t) {
-  const out = 1 - span(t, 5.8, 6.4);
+  const out = 1 - span(t, 4.9, 5.2);
+  const back = (a) => 1 - span(t, a, a + 0.7); // drawn back out at the end, the last drawn first
   const [rim, rest, c1, c2, ring, rule, sun, beam] = s.parts;
-  drawIn(rim, span(t, 0.2, 1.8), 0.93); // a hair short of closing
-  rest.setAttribute("opacity", f(0.5 * span(t, 1.8, 2.2) * out));
+  drawIn(rim, span(t, 0.05, 1.65) * back(5.7), 0.93); // a hair short of closing
+  rest.setAttribute("opacity", f(0.5 * span(t, 1.65, 2.05) * out));
   rest.setAttribute("stroke-dasharray", "0.004 0.012");
   rest.setAttribute("stroke-dashoffset", "0");
   rest.setAttribute("d", rim.getAttribute("d"));
-  drawIn(c1, span(t, 0.6, 1.8));
-  drawIn(c2, span(t, 0.8, 2.0));
-  drawIn(ring, span(t, 1.2, 1.8));
-  drawIn(rule, span(t, 1.8, 2.6));
-  sun.setAttribute("opacity", f(span(t, 2.4, 2.9) * out));
-  drawIn(beam, span(t, 2.9, 3.6));
-  for (const p of [rim, c1, c2, ring, rule, beam]) p.setAttribute("opacity", f((p === c1 || p === c2 ? 0.7 : 1) * out));
+  drawIn(c1, span(t, 0.45, 1.65) * back(5.6));
+  drawIn(c2, span(t, 0.65, 1.85) * back(5.5));
+  drawIn(ring, span(t, 1.05, 1.65) * back(5.4));
+  drawIn(rule, span(t, 1.65, 2.45) * back(5.2));
+  sun.setAttribute("opacity", f(span(t, 2.25, 2.75) * back(5.0)));
+  drawIn(beam, span(t, 2.75, 3.45) * back(4.8));
+  for (const p of [rim, c1, c2, ring, rule, beam]) p.setAttribute("opacity", f(p === c1 || p === c2 ? 0.7 : 1));
 }
 
 export function start(el) {

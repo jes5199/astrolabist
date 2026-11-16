@@ -19,6 +19,8 @@ import { instrument } from "./lib/painted.js";
 const NS = "http://www.w3.org/2000/svg";
 const instances = new WeakMap();
 const LOOP = 14000;
+const W1 = "too hard at ten years old";
+const W2 = "plain words, in English";
 const STILL = 3600; // ms: the great Latin book, the head shaken over it
 const VIEW = { x: -10, y: 380, s: 1100 };
 const INK = "#17100d";
@@ -133,10 +135,9 @@ export function mount(el) {
     t.textContent = str;
     return t;
   };
-  const w1 = words("too hard at ten years old");
-  const w2 = words("plain words, in English");
+  const w1 = words(W1);
   el.appendChild(svg);
-  const s = { lewis, chaucer, chPlace, inst, big, great, little, w1, w2, raf: 0, t0: 0, tm: STILL };
+  const s = { lewis, chaucer, chPlace, inst, big, great, little, w1, raf: 0, t0: 0, tm: STILL };
   instances.set(el, s);
   draw(s, STILL / 1000);
 }
@@ -161,8 +162,13 @@ function draw(s, t) {
   s.inst.set(hl, 1.2 * Math.sin((2 * Math.PI * t) / 2.6), 0);
   s.inst.g.setAttribute("opacity", swap.toFixed(3));
   s.little.setAttribute("opacity", swap.toFixed(3));
-  s.w1.setAttribute("opacity", (es(t, 1.2, 1.8) * (1 - es(t, 5.6, 6.0))).toFixed(3));
-  s.w2.setAttribute("opacity", (es(t, 7.2, 7.8) * (1 - es(t, 13.0, 13.4))).toFixed(3));
+  // a caption is always up (jes tg 18021): the first hands to the second as the books change, and comes back as the
+  // great book does;
+  // one line, its words changed at a moment's dimming, never gone and never doubled
+  const second = t >= 6.3 && t < 13.5;
+  const dip = Math.max(0, 1 - Math.min(Math.abs(t - 6.3), Math.abs(t - 13.5)) / 0.3);
+  s.w1.textContent = second ? W2 : W1;
+  s.w1.setAttribute("opacity", (1 - 0.5 * dip).toFixed(3));
 }
 
 export function start(el) {

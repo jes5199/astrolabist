@@ -8,7 +8,7 @@
 // hand-over plays once; then the boy's turning of it goes round.  The figures are jointed (figures-rig.js,
 // figures.js); their poses are solved from the film's rig (prologue-gift-data.js); the room is the sword scene's
 // (prologue-data.js); the instrument is painted by lib/painted.js (our constructed drawing of Oxford inv. 47869).
-// Our own drawing throughout; nothing is traced.
+// Its line stands as a caption throughout (jes tg 18021).  Our own drawing throughout; nothing is traced.
 
 import RIG from "./lib/figures-rig.js";
 import D from "./lib/prologue-data.js";
@@ -103,6 +103,10 @@ export function mount(el) {
   replay(D.desk, node("g", { transform: `translate(${chPlace[4]} ${chPlace[5]})` }, g));
   g.appendChild(chaucer.layers[1]);
   const inst = instrument(g, DIA);
+  // the line as the picture's caption, always (jes tg 18021), as the sword scene's (tg 18018)
+  node("rect", { x: -96, y: 80, width: 192, height: 17, fill: "#f4efe2", "fill-opacity": 0.93, stroke: INK, "stroke-width": 0.6 }, svg);
+  const cap = node("text", { x: 0, y: 92, "text-anchor": "middle", "font-size": 10, "font-weight": 600, "font-style": "italic", fill: "#7d2622", "font-family": "inherit" }, svg);
+  cap.textContent = "\u201cI have given thee a sufficient astrolabe\u201d";
   el.appendChild(svg);
   const s = { lewis, chaucer, chPlace, inst, raf: 0, t0: 0, tm: STILL };
   instances.set(el, s);

@@ -1,5 +1,6 @@
 // A Treatise on the Astrolabe, the Prologue: "this tretis, divided in fyve parties" ... "The firste partie of this tretis shal reherse the figures and the membres of thyn Astrolabie."
 // Scene contract (astrolabist, src/components/Scene.astro): mount(el) once, then start(el) / stop(el).
+// The loop never rests on an empty leaf (jes tg 18016): the drawing draws itself back out at the end and starts again at once.
 //
 // Part I, the instrument's figures and members: the front (limb, rete, label) and its suspension drawn in, whole and gold, and held.
 // The part's state is Skeat's (Oxford Chaucer vol. III, 1894, introduction to the Treatise): "Of Part i. we have the whole."
@@ -53,13 +54,14 @@ export function mount(el) {
 }
 
 function draw(s, t) {
-  const out = 1 - span(t, 5.8, 6.4);
+  const n = s.parts.length;
   s.parts.forEach((p, i) => {
-    drawIn(p, span(t, 0.2 + 0.25 * i, 1.4 + 0.25 * i));
-    p.setAttribute("opacity", f(out));
+    // drawn in, one after another; at the end drawn back out, the last first
+    const back = span(t, 5.4 + 0.08 * (n - 1 - i), 5.9 + 0.08 * (n - 1 - i));
+    drawIn(p, span(t, 0.05 + 0.15 * i, 1.05 + 0.15 * i) * (1 - back));
   });
   // the rete's metal fills in once it is drawn
-  s.parts[7].setAttribute("fill-opacity", f(0.18 * span(t, 3.0, 3.6) * out));
+  s.parts[7].setAttribute("fill-opacity", f(0.18 * span(t, 3.0, 3.6) * (1 - span(t, 4.8, 5.2))));
 }
 
 export function start(el) {

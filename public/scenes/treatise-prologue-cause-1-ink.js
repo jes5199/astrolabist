@@ -5,14 +5,15 @@
 //
 // The first cause (jes tg 17876).  COLOURED WOODCUT on vellum.  The instrument, small; out of it the conclusions,
 // numbered, spiral away, fainter as they go, on past the edge of the leaf: more than anyone knows.  Then "a certein"
-// of them, the forty-six that Part II teaches, come up in the printer's red.  Shared lib/front-ink.js; our own
-// drawing.
+// of them, the forty-six that Part II teaches, come up in the printer's red.  "more than anyone knows" stands
+// throughout (jes tg 18021); the numbers draw back into the instrument at the loop's end and pour out again at once,
+// so the leaf is never bare (tg 18016).  Shared lib/front-ink.js; our own drawing.
 
 import { front, node, f, RED, VELLUM } from "./lib/front-ink.js";
 
 const instances = new WeakMap();
-const LOOP = 14000;
-const STILL = 10500; // ms: all the numbers out, the taught ones red
+const LOOP = 13000;
+const STILL = 9500; // ms: all the numbers out, the taught ones red
 const C = { x: 0, y: -6, k: 0.3 }; // the instrument, small, in the middle
 const N = 300; // numbers drawn; beyond the leaf they go on unseen
 const TAUGHT = 46; // Part II's conclusions
@@ -48,7 +49,8 @@ export function mount(el) {
     t.textContent = str;
     return t;
   };
-  const w1 = word(90, "more than anyone knows");
+  const w1 = word(-86, "more than anyone knows");
+  w1.setAttribute("opacity", 1);
   const w2 = word(90, "a certain number, taught here");
   el.appendChild(svg);
   const s = { nums, w1, w2, raf: 0, t0: 0, tm: STILL };
@@ -57,19 +59,19 @@ export function mount(el) {
 }
 
 function draw(s, t) {
-  const out = 1 - span(t, 13.0, 13.8);
-  const red = span(t, 7.0, 8.0);
+  const red = span(t, 6.4, 7.4) * (1 - span(t, 11.2, 11.8));
   s.nums.forEach((e, i) => {
     const n = i + 1;
-    const at = 0.4 + 6 * Math.sqrt(n / N); // they come out one after another, faster and faster
+    const at = 0.05 + 5.4 * Math.sqrt(n / N); // they come out one after another, faster and faster
+    const home = 11.4 + 1.4 * (1 - Math.sqrt(n / N)); // and draw back in, the farthest first
+    const out = 1 - span(t, home, home + 0.3);
     const fade = Math.max(0.15, 1 - n / 340); // fainter as they go
     const taught = n <= TAUGHT;
     const a = span(t, at, at + 0.4) * out * (taught ? 1 : fade * (1 - 0.5 * red));
     e.setAttribute("opacity", f(a));
     if (taught) e.setAttribute("fill", red > 0.5 ? RED : "currentColor");
   });
-  s.w1.setAttribute("opacity", f(span(t, 4.8, 5.4) * (1 - span(t, 6.6, 7.0))));
-  s.w2.setAttribute("opacity", f(span(t, 7.6, 8.2) * out));
+  s.w2.setAttribute("opacity", f(span(t, 7.0, 7.6) * (1 - span(t, 12.2, 12.7))));
 }
 
 export function start(el) {

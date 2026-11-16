@@ -5,14 +5,15 @@
 // (jes tg 17902.)  COLOURED WOODCUT on vellum.  Two small leaves.  On the left a line is written once, and fades
 // away: forgotten.  On the right the same line is written, and written again, and stays.  The writing is a hand's
 // scribble, not words (nothing is put in Chaucer's mouth); the rubric gives the clause.  lib/woodcut.js; our own
-// drawing.
+// drawing.  The words stand throughout (jes tg 18021), and the leaves are never blank (jes tg 18016): the twice-written
+// lines stay to the loop's end and, as it begins again, each fades as the pen comes to write it again.
 
 import { woodcut, RED, VELLUM, WASH } from "./lib/woodcut.js";
 
 const NS = "http://www.w3.org/2000/svg";
 const instances = new WeakMap();
-const LOOP = 13000;
-const STILL = 9600; // ms: the once-written line gone, the twice-written one standing
+const LOOP = 12000;
+const STILL = 9000; // ms: the once-written line gone, the twice-written one standing
 const LEAF = { w: 82, h: 104, y: -18 };
 
 function node(tag, attrs, parent) {
@@ -71,8 +72,11 @@ export function mount(el) {
   };
   const once = line(L, 3);
   const twice = [line(R, 3), line(R, 4)];
+  // the last loop's two lines, still there as this one begins
+  const ghost = [line(R, 3), line(R, 4)];
+  for (const p of ghost) p.setAttribute("stroke-dashoffset", 0);
   const word = (x, y, str, size = 13) => {
-    const t = node("text", { x, y, "text-anchor": "middle", "font-size": size, "font-weight": 600, fill: RED, opacity: 0, "font-family": "inherit", stroke: VELLUM, "stroke-width": 3.5, "stroke-linejoin": "round", "paint-order": "stroke" }, svg);
+    const t = node("text", { x, y, "text-anchor": "middle", "font-size": size, "font-weight": 600, fill: RED, "font-family": "inherit", stroke: VELLUM, "stroke-width": 3.5, "stroke-linejoin": "round", "paint-order": "stroke" }, svg);
     t.textContent = str;
     return t;
   };
@@ -80,24 +84,21 @@ export function mount(el) {
   const tTwice = word(R, LEAF.y - LEAF.h / 2 - 6, "twice");
   const cap = [word(0, 62, "better written twice", 13), word(0, 78, "than forgotten once", 13)];
   el.appendChild(svg);
-  const s = { once, twice, tOnce, tTwice, cap, raf: 0, t0: 0, tm: STILL };
+  const s = { once, twice, ghost, raf: 0, t0: 0, tm: STILL };
   instances.set(el, s);
   draw(s, STILL / 1000);
 }
 
 function draw(s, t) {
-  const out = 1 - span(t, 12.0, 12.8);
-  s.tOnce.setAttribute("opacity", f(span(t, 0.3, 0.8) * out));
-  s.tTwice.setAttribute("opacity", f(span(t, 0.3, 0.8) * out));
   // once: written, then it fades away
-  s.once.setAttribute("stroke-dashoffset", f(1 - span(t, 1.0, 3.0)));
-  s.once.setAttribute("opacity", f(1 - span(t, 5.5, 8.0)));
-  // twice: written, and written again; it stays
-  s.twice[0].setAttribute("stroke-dashoffset", f(1 - span(t, 1.0, 3.0)));
-  s.twice[1].setAttribute("stroke-dashoffset", f(1 - span(t, 3.4, 5.4)));
-  for (const p of s.twice) p.setAttribute("opacity", f(out));
-  s.cap[0].setAttribute("opacity", f(span(t, 8.2, 8.8) * out));
-  s.cap[1].setAttribute("opacity", f(span(t, 8.6, 9.2) * out));
+  s.once.setAttribute("stroke-dashoffset", f(1 - span(t, 0.1, 1.9)));
+  s.once.setAttribute("opacity", f(1 - span(t, 4.4, 6.6)));
+  // twice: written, and written again; it stays to the end
+  s.twice[0].setAttribute("stroke-dashoffset", f(1 - span(t, 0.1, 1.9)));
+  s.twice[1].setAttribute("stroke-dashoffset", f(1 - span(t, 2.3, 4.1)));
+  // each of the last loop's lines goes just as the pen comes to write it again
+  s.ghost[0].setAttribute("opacity", f(1 - span(t, 0, 0.5)));
+  s.ghost[1].setAttribute("opacity", f(1 - span(t, 1.9, 2.4)));
 }
 
 export function start(el) {

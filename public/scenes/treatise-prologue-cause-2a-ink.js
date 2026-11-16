@@ -13,7 +13,7 @@ import { woodcut } from "./lib/woodcut.js";
 
 const instances = new WeakMap();
 const LOOP = 12000;
-const STILL = 8200; // ms: the sight gone out, the star missed, the cross
+const STILL = 7000; // ms: the sight gone out, the star missed, the cross
 const RAD = Math.PI / 180;
 const B = { x: -44, y: 48, k: 0.36 }; // the instrument's back
 const SAYS = 40; // the book's setting, degrees
@@ -69,18 +69,24 @@ export function mount(el) {
 }
 
 function draw(s, t) {
+  // the book and its setting lie open throughout; a caption is always up (jes tg 18021), and the rule is turning
+  // within a moment of the loop's start (tg 18016)
   const out = 1 - span(t, 10.6, 11.4);
-  s.book.setAttribute("opacity", f(span(t, 0.2, 0.8) * out));
-  s.rub.setAttribute("opacity", f(span(t, 1.0, 1.5) * out));
-  const a = SAYS * span(t, 2.0, 3.6) * (1 - span(t, 10.8, 11.8));
+  s.book.setAttribute("opacity", 1);
+  s.rub.setAttribute("opacity", 1);
+  const a = SAYS * span(t, 0.3, 1.9) * (1 - span(t, 10.8, 11.8));
   s.rule.setAttribute("transform", `rotate(${f(-a)})`);
-  const reach = REACH * 1.15 * span(t, 3.9, 5.0);
+  const reach = REACH * 1.15 * span(t, 2.2, 3.3);
   s.sight.setAttribute("x2", f(B.x + reach * Math.cos(SAYS * RAD)));
   s.sight.setAttribute("y2", f(B.y - reach * Math.sin(SAYS * RAD)));
-  s.sight.setAttribute("opacity", f(span(t, 3.8, 4.0) * out));
-  s.cross.setAttribute("opacity", f(span(t, 5.3, 5.7) * out));
-  s.c1.setAttribute("opacity", f(span(t, 1.2, 1.7) * (1 - span(t, 5.4, 5.8))));
-  s.c2.setAttribute("opacity", f(span(t, 5.9, 6.4) * out));
+  s.sight.setAttribute("opacity", f(span(t, 2.1, 2.3) * out));
+  s.cross.setAttribute("opacity", f(span(t, 3.5, 3.9) * out));
+  // one line, its words changed at a moment's dimming, never gone and never doubled
+  const second = t >= 3.8 && t < 11.6;
+  const dip = Math.max(0, 1 - Math.min(Math.abs(t - 3.8), Math.abs(t - 11.6)) / 0.3);
+  s.c1.textContent = second ? "it does not keep its promise" : "the book's setting";
+  s.c1.setAttribute("opacity", f(1 - 0.5 * dip));
+  s.c2.setAttribute("opacity", 0);
 }
 
 export function start(el) {
