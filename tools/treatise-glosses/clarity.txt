@@ -816,6 +816,292 @@ Or, if you prefer, take the highest altitude of any fixed star you know, and its
 > And for more declaracion, lo here thy figure.
 To make this clearer, here is the figure.
 
+## p2-16
+> Understond wel that thy zodiak is departid in two halfe cercles, as fro the heved of Capricorne un-to the heved of Cancer;
+Your zodiac falls into two halves: one running from the start of Capricorn to the start of Cancer,
+> and agaynward fro the heved of Cancer un-to the heved of Capricorne.
+and the other running back from the start of Cancer to the start of Capricorn.
+> The heved of Capricorne is the lowest point, wher-as the sonne goth in winter;
+The start of Capricorn is the lowest point, where the sun travels in winter,
+> and the heved of Cancer is the heyest point, in whiche the sonne goth in somer.
+and the start of Cancer the highest, where it travels in summer.
+> And ther-for understond wel, that any two degrees that ben y-lyke fer fro any of thise two hevedes, truste wel that thilke two degrees ben of y-lyke declinacioun, be it southward or northward;
+So any two degrees lying the same distance from either of these two points have the same declination, north or south;
+> and the dayes of hem ben y-lyke of lengthe, and the nightes also;
+on those two degrees the days are of equal length, and so are the nights;
+> and the shadwes y-lyke, and the altitudes y-lyke at midday for evere.
+and the shadows match, and so do the noon altitudes, every year.
+> And for more declaracioun, lo here thy figure.
+To make this clearer, here is the figure.
+
+## p2-17
+> Tak the altitude of this sterre whan he is on the est side of the lyne meridional, as ney as thou mayst gesse;
+Take this star's altitude while it is on the east side of the meridian line, as closely as you can judge,
+> and tak an assendent a-non right by som maner sterre fix which that thou knowest;
+and straight away find the ascendant by some fixed star you know;
+> and for-get nat the altitude of the firste sterre, ne thyn assendent.
+keep both in mind, the first star's altitude and your ascendant.
+> And whan that this is don, espye diligently whan this same firste sterre passeth any-thing the south westward, and hath him a-non right in the same noumbre of altitude on the west side of this lyne meridional as he was caught on the est side;
+After that, watch carefully for the moment this same star has moved past the south toward the west and stands at exactly the altitude on the west side of the meridian line that you caught it at on the east side;
+> and tak a newe assendent a-non right by som maner sterre fixe which that thou knowest;
+then straight away find a new ascendant by some fixed star you know,
+> and for-get nat this secounde assendent.
+and keep this second ascendant in mind too.
+> And whan that this is don, rikne thanne how manye degrees ben by-twixe the firste assendent and the seconde assendent, and rikne wel the middel degree by-twene bothe assendentes, and set thilke middel degree up-on thin est orisonte;
+Next, count the degrees between the first ascendant and the second, work out the degree halfway between them, and set that middle degree on your east horizon;
+> and waite thanne what degree that sit up-on the lyne meridional, and tak ther the verrey degree of the ecliptik in which the sterre stondeth for the tyme.
+then see which degree sits on the meridian line: that is the true degree of the ecliptic where the star stands at present.
+> For in the ecliptik is the longitude of a celestial body rekened, evene fro the heved of Aries un-to the ende of Pisces.
+For a heavenly body's longitude is counted along the ecliptic, straight from the start of Aries to the end of Pisces.
+> And his latitude is rikned after the quantite of his declinacion, north or south to-warde the poles of this world;
+Its latitude is counted by how far it lies north or south, toward the poles of the world,
+> as thus.
+like this.
+> Yif it be of the sonne or of any fix sterre, rekene his latitude or his declinacioun fro the equinoxial cercle;
+For the sun or a fixed star, count its latitude or declination from the equinoctial circle;
+> and yif it be of a planete, rekne than the quantitee of his latitude fro the ecliptik lyne.
+for a planet, count its latitude from the ecliptic line.
+> Al-be-it so that fro the equinoxial may the declinacion or the latitude of any body celestial be rikned, after the site north or south, and after the quantitee of his declinacion.
+Even so, the declination or latitude of any heavenly body can be counted from the equinoctial, by whether it lies north or south and by how far.
+> And right so may the latitude or the declinacion of any body celestial, save only of the sonne, after his site north or south, and after the quantitee of his declinacioun, be rekned fro the ecliptik lyne;
+In the same way, the latitude or declination of any heavenly body except the sun can be counted from the ecliptic line, by whether it lies north or south and by how far;
+> fro which lyne alle planetes som tyme declynen north or south, save only the for-seide sonne.
+every planet sometimes strays north or south of that line, all except the sun.
+> And for the more declaracioun, lo here thy figure.
+To make this clearer, here is the figure.
+
+## p2-18
+> Set the centre of the sterre up-on the lyne meridional, and tak keep of thy zodiak, and loke what degree of any signe that sit on the same lyne meridional at that same tyme, and tak the degree in which the sterre standeth;
+Bring the star's point onto the meridian line, look at your zodiac, and see which degree of which sign lies on that line at the same moment: take that as the star's degree;
+> and with that same degree comth that same sterre un-to that same lyne fro the orisonte.
+the star reaches the meridian, climbing from the horizon, together with that degree.
+> And for more declaracioun, lo here thy figure.
+To make this clearer, here is the figure.
+
+## p2-19
+> Set the centre of the sterre up-on the est orisonte, and loke what degree of any signe that sit up-on the same orisonte at that same tyme.
+Bring the star's point onto the east horizon, and see which degree of which sign lies on the horizon at the same moment.
+> And understond wel, that with that same degree aryseth that same sterre;
+The star rises together with that degree;
+> and this merveyllous arysing with a strange degree in another signe is by-cause that the latitude of the sterre fix is either north or south fro the equinoxial.
+and the reason for this curious rising with an unrelated degree in another sign is that the fixed star's latitude lies north or south of the equinoctial.
+> But sothly the latitudes of planetes ben comunly rekned fro the ecliptik, bi-cause that non of hem declineth but fewe degrees out fro the brede of the zodiak.
+Planets' latitudes, though, are usually counted from the ecliptic, since none of them strays more than a few degrees beyond the width of the zodiac.
+> And tak good keep of this chapitre of arysing of the celestial bodies;
+Pay close attention to this chapter on the rising of the heavenly bodies.
+> for truste wel, that neyther mone ne sterre as in oure embelif orisonte aryseth with that same degree of his longitude, save in o cas;
+You can be sure that on our oblique horizon neither the moon nor any star rises with the degree of its own longitude, except in a single case:
+> and that is, whan they have no latitude fro the ecliptik lyne.
+when it has no latitude from the ecliptic line.
+> But natheles, som tyme is everiche of thise planetes under the same lyne.
+And yet each of the planets does lie on that line at times.
+> And for more declaracioun, lo here thy figure.
+To make this clearer, here is the figure.
+
+## p2-20
+> Set the degree of any signe up-on the lyne meridional, and rikne his altitude in almikanteras fro the est orizonte up to the same degree set in the forseide lyne, and set ther a prikke.
+Bring any degree of any sign onto the meridian line, count its height in almucantars from the east horizon up to where that degree now sits, and mark the spot with a dot.
+> Turne up thanne thy riet, and set the heved of Aries or Libra in the same meridional lyne, and set ther a-nother prikke.
+Then turn the rete until the start of Aries or of Libra lies on that same line, and put a second dot there.
+> And whan that this is don, considere the altitudes of hem bothe;
+Now compare the two heights:
+> for sothly the difference of thilke altitudes is the declinacion of thilke degree fro the equinoxial.
+the gap between them is how far that degree lies from the equinoctial, its declination.
+> And yif so be that thilke degree be northward fro the equinoxial, than is his declinacion north;
+A degree north of the equinoctial has a northern declination;
+> yif it be southward, than is it south.
+one south of it, a southern.
+> And for the more declaracioun, lo here thy figure.
+To make this clearer, here is the figure.
+
+## p2-21
+> Rikne how manye degrees of almikanteras, in the meridional lyne, be fro the cercle equinoxial un-to the senith;
+Count the almucantar degrees along the meridian line between the equinoctial circle and the zenith,
+> or elles fro the pool artik un-to the north orisonte;
+or else between the Arctic pole and the north horizon;
+> and for so gret a latitude or for so smal a latitude is the table compouned.
+whatever that count comes to, large or small, is the latitude the plate was made for.
+> And for more declaracion, lo here thy figure.
+To make this clearer, here is the figure.
+
+## p2-22
+> Understond wel, that as fer is the heved of Aries or Libra in the equinoxial from oure orisonte as is the senith from the pole artik;
+The start of Aries or Libra, on the equinoctial, stands as far above our horizon as the zenith stands from the Arctic pole;
+> and as hey is the pol artik fro the orisonte, as the equinoxial is fer fro the senith.
+and the Arctic pole rises above the horizon by the same amount as the equinoctial lies from the zenith.
+> I prove it thus by the latitude of Oxenford.
+Oxford's latitude shows that this is so.
+> Understond wel, that the heyghte of oure pool artik fro oure north orisonte is 51 degrees and 50 minutes;
+Our Arctic pole stands 51 degrees 50 minutes above our north horizon;
+> than is the senith from oure pool artik 38 degrees and 10 minutes;
+so our zenith is 38 degrees 10 minutes from the pole;
+> than is the equinoxial from oure senith 51 degrees and 50 minutes;
+the equinoctial is 51 degrees 50 minutes from our zenith;
+> than is oure south orisonte from oure equinoxial 38 degrees and 10 minutes.
+and our south horizon is 38 degrees 10 minutes from the equinoctial.
+> Understond wel this rekning.
+Make sure you follow this arithmetic.
+> Also for-get nat that the senith is 90 degrees of heyghte fro the orisonte, and oure equinoxial is 90 degrees from oure pool artik.
+Remember too that the zenith is 90 degrees above the horizon, and the equinoctial 90 degrees from our Arctic pole.
+> Also this shorte rewle is soth, that the latitude of any place in a regioun is the distance fro the senith unto the equinoxial.
+And this short rule holds: a place's latitude is the distance from its zenith to the equinoctial.
+> And for more declaracioun, lo here thy figure.
+To make this clearer, here is the figure.
+
+## p2-23
+> In some winters night, whan the firmament is clere and thikke-sterred, waite a tyme til that any sterre fix sit lyne-right perpendiculer over the pol artik, and clepe that sterre A. And wayte a-nother sterre that sit lyne-right under A, and under the pol, and clepe that sterre F. And understond wel, that F is nat considered but only to declare that A sit evene overe the pool.
+On a winter night with a clear sky full of stars, wait until some fixed star stands straight above the Arctic pole; call it A. Look for a second star standing in line below A and below the pole, and call it F. F serves only to show you that A is exactly above the pole.
+> Tak thanne a-non right the altitude of A from the orisonte, and forget it nat.
+At once take A's altitude above the horizon, and keep it in mind.
+> Lat A and F go farwel til agayns the dawening a gret whyle;
+Then leave A and F alone for a long while, until it is nearly dawn;
+> and come thanne agayn, and abyd til that A is evene under the pol and under F;
+come back and wait until A is straight below the pole, with F above it,
+> for sothly, than wol F sitte over the pool, and A wol sitte under the pool.
+so that now F is over the pole and A under it.
+> Tak than eft-sones the altitude of A from the orisonte, and note as wel his secounde altitude as his firste altitude;
+Take A's altitude again and write down both readings, the second as well as the first.
+> and whan that this is don, rikne how manye degrees that the firste altitude of A excedeth his seconde altitude, and tak half thilke porcioun that is exceded, and adde it to his seconde altitude;
+Then see by how many degrees the first reading exceeds the second, halve that difference, and add the half to the second reading;
+> and tak ther the elevacioun of thy pool, and eke the latitude of thy regioun.
+the result is the height of your pole, and the latitude of your region as well,
+> For thise two ben of a nombre;
+since the two are always the same number:
+> this is to seyn, as many degrees as thy pool is elevat, so michel is the latitude of the regioun.
+however many degrees your pole is raised, that is the region's latitude.
+> Ensample as thus: par aventure, the altitude of A in the evening is 56 degrees of heyghte.
+An example: say A stands 56 degrees high in the evening.
+> Than wol his seconde altitude or the dawing be 48;
+Before dawn its second reading will be 48,
+> that is 8 lasse than 56, that was his firste altitude at even.
+8 less than the 56 of the evening.
+> Take thanne the half of 8, and adde it to 48, that was his seconde altitude, and than hastow 52. Now hastow the heyghte of thy pol, and the latitude of the regioun.
+Half of 8 is 4; add it to the 48 of the second reading and you get 52. That is the height of your pole and the latitude of the region.
+> But understond wel, that to prove this conclusioun and many a-nother fair conclusioun, thou most have a plomet hanging on a lyne heyer than thin heved on a perche;
+To test this, and many another fine problem, you need a plumb-bob on a cord, hung from a pole higher than your head;
+> and thilke lyne mot hange evene perpendiculer by-twixe the pool and thyn eye;
+the cord must hang dead straight between the pole star's region and your eye;
+> and thanne shaltow seen yif A sitte evene over the pool and over F at evene;
+then you can check that A is truly above the pole and above F in the evening,
+> and also yif F sitte evene over the pool and over A or day.
+and that F is truly above the pole and above A before daybreak.
+> And for more declaracion, lo here thy figure.
+To make this clearer, here is the figure.
+
+## p2-24
+> Tak any sterre fixe that nevere dissendeth under the orisonte in thilke regioun, and considere his heyest altitude and his lowest altitude fro the orisonte;
+Choose a fixed star that never sinks below the horizon where you are, and observe both its greatest and its least height above the horizon;
+> and make a nombre of bothe thise altitudes.
+add the two heights together.
+> Tak thanne and abate half that nombre, and tak ther the elevacioun of the pol artik in that same regioun.
+Half of that sum is how high the Arctic pole stands in that region.
+> And for more declaracioun, lo here thy figure.
+To make this clearer, here is the figure.
+
+## p2-26
+> The excellence of the spere solide, amonges other noble conclusiouns, sheweth manifeste the diverse assenciouns of signes in diverse places, as wel in the righte cercle as in the embelif cercle.
+Among its other fine uses, the solid globe makes plain how differently the signs rise in different places, on the right circle and on the oblique circle alike.
+> Thise auctours wryten that thilke signe is cleped of right ascensioun, with which more part of the cercle equinoxial and lasse part of the zodiak ascendeth;
+The authorities write that a sign is said to be of right ascension when, as it rises, more of the equinoctial circle comes up with it than of the zodiac;
+> and thilke signe assendeth embelif, with whiche lasse part of the equinoxial and more part of the zodiak assendeth.
+and a sign rises obliquely when less of the equinoctial and more of the zodiac comes up.
+> Ferther-over they seyn, that in thilke cuntrey where as the senith of hem that dwellen there is in the equinoxial lyne, and her orisonte passing by the poles of this worlde, thilke folke han this right cercle and the right orisonte;
+They say further that where people live with their zenith on the equinoctial line, and their horizon running through both poles of the world, those people have the right circle and the right horizon;
+> and evere-mo the arch of the day and the arch of the night is ther y-like long, and the sonne twyes every yeer passinge thorow the senith of her heved;
+there the arcs of day and night are always the same length, the sun passes straight overhead twice a year,
+> and two someres and two winteres in a yeer han this forseide poeple.
+and those people have two summers and two winters in every year.
+> And the almikanteras in her Astrolabies ben streighte as a lyne, so as sheweth in this figure.
+On their astrolabes the almucantars are straight lines, as this figure shows.
+> The utilite to knowe the assenciouns in the righte cercle is this: truste wel that by mediacioun of thilke assenciouns thise astrologiens, by hir tables and hir instrumentz, knowen verreyly the assencioun of every degree and minut in al the zodiak, as shal be shewed.
+Knowing the ascensions in the right circle matters because, by means of them, astronomers with their tables and instruments can find the exact ascension of every degree and minute of the zodiac, as will be shown.
+> And nota, that this forseid righte orisonte, that is cleped orison rectum, divydeth the equinoxial in-to right angles;
+Note that this right horizon, called _orison rectum_, cuts the equinoctial at right angles,
+> and the embelif orisonte, wher-as the pol is enhaused up-on the orisonte, overkerveth the equinoxial in embelif angles, as sheweth in the figure.
+while the oblique horizon, where the pole is raised above the horizon, cuts it at slanting angles, as the figure shows.
+> And for the more declaracioun, lo here the figure.
+To make this clearer, here is the figure.
+
+## p2-27
+> Set the heved of what signe thee liste to knowe his assending in the right cercle up-on the lyne meridional;
+To find how any sign ascends in the right circle, bring the start of that sign onto the meridian line,
+> and waite wher thyn almury toucheth the bordure, and set ther a prikke.
+see where your almury meets the border, and mark it with a dot.
+> Turne thanne thy riet westward til that the ende of the forseide signe sitte up-on the meridional lyne;
+Then turn the rete westward until the end of that sign reaches the meridian line,
+> and eft-sones waite wher thyn almury toucheth the bordure, and set ther another prikke.
+and again mark with a dot where the almury meets the border.
+> Rikne thanne the nombre of degrees in the bordure by-twixe bothe prikkes, and tak the assencioun of the signe in the right cercle.
+The degrees of border between the two dots are the sign's ascension in the right circle.
+> And thus maystow wyrke with every porcioun of thy zodiak, &c.
+You can do the same with any stretch of your zodiac.
+> And for the more declaracioun, lo here thy figure.
+To make this clearer, here is the figure.
+
+## p2-28
+> Set the heved of the signe which as thee list to knowe his ascensioun up-on the est orisonte, and waite wher thyn almury toucheth the bordure, and set ther a prikke.
+Bring the start of the sign whose ascension you want onto the east horizon, and put a dot where the almury meets the border.
+> Turne thanne thy riet upward til that the ende of the same signe sitte up-on the est orisonte, and waite eft-sones wher as thyn almury toucheth the bordure, and set ther a-nother prikke.
+Turn the rete upward until that sign's end reaches the east horizon, and put another dot where the almury now meets the border.
+> Rikne thanne the noumbre of degrees in the bordure by-twixe bothe prikkes, and tak ther the assencioun of the signe in the embelif cercle.
+The degrees of border between the two dots are the sign's ascension in the oblique circle.
+> And understond wel, that alle signes in thy zodiak, fro the heved of Aries unto the ende of Virgo, ben cleped signes of the north fro the equinoxial;
+All the signs of your zodiac from the start of Aries to the end of Virgo are called northern signs, north of the equinoctial,
+> and these signes arysen by-twixe the verrey est and the verrey north in oure orisonte generaly for evere.
+and on our horizon they always rise somewhere between due east and due north.
+> And alle signes fro the heved of Libra un-to the ende of Pisces ben cleped signes of the south fro the equinoxial;
+All the signs from the start of Libra to the end of Pisces are called southern signs, south of the equinoctial,
+> and thise signes arysen ever-mo by-twixe the verrey est and the verrey south in oure orisonte.
+and on our horizon they always rise between due east and due south.
+> Also every signe by-twixe the heved of Capricorne un-to the ende of Geminis aryseth on oure orisonte in lasse than two houres equales;
+Again, each sign from the start of Capricorn to the end of Gemini takes less than two equal hours to rise on our horizon;
+> and thise same signes, fro the heved of Capricorne un-to the ende of Geminis, ben cleped 'tortuos signes' or 'croked signes,' for they arisen embelif on oure orisonte;
+these signs, Capricorn through Gemini, are called 'tortuous' or 'crooked' signs, because they come up slantwise on our horizon;
+> and thise crokede signes ben obedient to the signes that ben of right assencioun.
+and the crooked signs are subject to the signs of right ascension.
+> The signes of right assencioun ben fro the heved of Cancer to the ende of Sagittare;
+The signs of right ascension run from the start of Cancer to the end of Sagittarius;
+> and thise signes arysen more upright, and they ben called eke sovereyn signes;
+they come up more upright, and are also called sovereign signs,
+> and everich of hem aryseth in more space than in two houres.
+and each of them takes more than two hours to rise.
+> Of which signes, Gemini obeyeth to Cancer;
+Of these, Gemini is subject to Cancer, Taurus to Leo, Aries to Virgo, Pisces to Libra, Aquarius to Scorpio, and Capricorn to Sagittarius.
+> and Taurus to Leo;
+=
+> Aries to Virgo;
+=
+> Pisces to Libra;
+=
+> Aquarius to Scorpioun;
+=
+> and Capricorne to Sagittare.
+=
+> And thus ever-mo two signes, that ben y-lyke fer fro the heved of Capricorne, obeyen everích of hem til other.
+So in every case the two signs that lie the same distance from the start of Capricorn are paired, one subject to the other.
+> And for more declaracioun, lo here the figure.
+To make this clearer, here is the figure.
+
+## p2-29
+> Take the altitude of thy sonne whan thee list, and note wel the quarter of the world in which the sonne is for the tyme by the azimutz.
+Take the sun's altitude whenever you like, and use the azimuths to note which quarter of the world it is in at that moment.
+> Turne thanne thyn Astrolabie, and set the degree of the sonne in the almikanteras of his altitude, on thilke side that the sonne stant, as is the manere in taking of houres;
+Then turn your astrolabe over and set the sun's degree on the almucantar of that altitude, on the side where the sun is, just as you do when finding the hour;
+> and ley thy label on the degree of the sonne, and rikene how many degrees of the bordure ben by-twixe the lyne meridional and the point of thy label;
+lay your label on the sun's degree, and count the degrees of border between the meridian line and the label's point,
+> and note wel that noumbre.
+and keep that number carefully.
+> Turne thanne a-gayn thyn Astrolabie, and set the point of thy gret rewle, ther thou takest thyne altitudes, up-on as many degrees in his bordure fro his meridional as was the point of thy label fro the lyne meridional on the wombe-syde.
+Turn the astrolabe back again, and set the point of the big rule you take altitudes with that same number of degrees from the meridian on the back border as the label's point was from the meridian line on the front.
+> Tak thanne thyn Astrolabie with bothe handes sadly and slely, and lat the sonne shyne thorow bothe holes of thy rewle;
+Now hold the astrolabe steadily and deftly in both hands, and let the sun shine through both holes of the rule;
+> and sleyly, in thilke shyninge, lat thyn Astrolabie couch adoun evene up-on a smothe grond, and thanne wol the verrey lyne meridional of thyn Astrolabie lye evene south, and the est lyne wole lye est, and the west lyne west, and north lyne north, so that thou werke softly and avisely in the couching;
+keeping the sunlight coming through, lower the astrolabe carefully until it lies flat on smooth ground; its meridian line will then point due south, its east line east, its west line west and its north line north, so long as you lay it down gently and with care;
+> and thus hastow the 4 quarters of the firmament.
+and there you have the four quarters of the sky.
+> And for the more declaracioun, lo here the figure.
+To make this clearer, here is the figure.
+
 ## p2-30
 > Lok whan that a planete is in the lyne meridional, yif that hir altitude be of the same heyghte that is the degree of the sonne for that day, and than is the planete in the verrey wey of the sonne, and hath no latitude.
 Watch for a planet crossing the meridian. If its altitude is the same as the altitude of the sun's degree for that day, the planet is exactly on the sun's path and has no latitude.
@@ -829,50 +1115,6 @@ That is, measured from the path the sun took that day, not from the sun's path t
 To make this clearer, here is the figure.
 
 # Part II: for now only the closing line of each section (tg 18041); the rest follows in later batches.
-
-## p2-16
-> And for more declaracioun, lo here thy figure.
-To make this clearer, here is the figure.
-
-## p2-17
-> And for the more declaracioun, lo here thy figure.
-To make this clearer, here is the figure.
-
-## p2-18
-> And for more declaracioun, lo here thy figure.
-To make this clearer, here is the figure.
-
-## p2-19
-> And for more declaracioun, lo here thy figure.
-To make this clearer, here is the figure.
-
-## p2-20
-> And for the more declaracioun, lo here thy figure.
-To make this clearer, here is the figure.
-
-## p2-22
-> And for more declaracioun, lo here thy figure.
-To make this clearer, here is the figure.
-
-## p2-24
-> And for more declaracioun, lo here thy figure.
-To make this clearer, here is the figure.
-
-## p2-26
-> And for the more declaracioun, lo here the figure.
-To make this clearer, here is the figure.
-
-## p2-27
-> And for the more declaracioun, lo here thy figure.
-To make this clearer, here is the figure.
-
-## p2-28
-> And for more declaracioun, lo here the figure.
-To make this clearer, here is the figure.
-
-## p2-29
-> And for the more declaracioun, lo here the figure.
-To make this clearer, here is the figure.
 
 ## p2-32
 > And for the more declaracioun, lo here thy figure.
@@ -900,14 +1142,6 @@ To make this clearer, here is the figure.
 
 ## p2-39
 > And for more declaracioun, lo here thy figure.
-To make this clearer, here is the figure.
-
-## p2-21
-> And for more declaracion, lo here thy figure.
-To make this clearer, here is the figure.
-
-## p2-23
-> And for more declaracion, lo here thy figure.
 To make this clearer, here is the figure.
 
 ## p2-31
