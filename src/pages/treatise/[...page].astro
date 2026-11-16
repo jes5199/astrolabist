@@ -146,9 +146,15 @@ const ringTicks = Array.from({ length: 72 }, (_, i) => {
 // before it, so it sits beside that paragraph's first lines. A phrase window goes in
 // at its phrase, behind a small red ☞ that ties the figure to its line (Jes tg 17901).
 // (String.raw: the regexes below keep their backslashes.)
+// Two columns: the section's own figure goes into the first Middle English cell, so it floats beside the
+// opening lines there as it did beside the whole text.
+const SPLIT_ASIDE = String.raw`(function (s) {
+  var me = s.parentElement, a = me.querySelector(":scope > .t-aside"), c = me.querySelector(".pr-first > .pr-me");
+  if (a && c) c.prepend(a);
+})(document.currentScript);`;
 const PLACE_INLINE = String.raw`(function (s) {
   var me = s.parentElement;
-  var ps = me.querySelectorAll(":scope > p");
+  var ps = me.querySelectorAll(":scope > p, :scope > .pr > .pr-me > p");
   me.querySelectorAll(":scope > .inline-win, :scope > .t-inset").forEach(function (w) {
     var p = ps[+w.dataset.after];
     if (!p) return;
@@ -228,7 +234,7 @@ const PLACE_INLINE = String.raw`(function (s) {
           return r.top - (lh - r.height) / 2;
         };
         window.__alignPhraseWins = function () {
-          var wins = [].slice.call(document.querySelectorAll(".inline-win[data-phrase]")).filter(function (v) { return v.__mark && v.__mark.isConnected; });
+          var wins = [].slice.call(document.querySelectorAll(".inline-win[data-phrase]")).filter(function (v) { return v.__mark && v.__mark.isConnected && !document.documentElement.classList.contains("t-modview"); });
           wins.forEach(function (v) {
             var mk = v.__mark, p = mk.closest("p");
             var tol = parseFloat(getComputedStyle(p).fontSize) * 0.5;
@@ -281,6 +287,23 @@ const PLACE_INLINE = String.raw`(function (s) {
 // Minimal inline markup for our editorial notes: HTML-escaped, then *italic*.
 const inlineMd = (t: string) =>
   t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\*([^*]+)\*/g, "<i>$1</i>");
+
+// Two columns (Jes tg 17988: "modern text separate from original text, not woven together. two columns.
+// on mobile have some way to toggle between two views"). The modern column is the same modern line that sat
+// under the words: each ruby gives its <rt>; the text between rubies stays; "·" (no clean equivalent) drops out.
+// The k-th <span> of a modern paragraph is the k-th word unit of its Middle English, so that on the phone's
+// modern view a figure can sit at the same phrase.
+const modernOf = (html: string) =>
+  html
+    .replace(/<ruby class="lu[^"]*">[\s\S]*?<rt aria-hidden="true">([\s\S]*?)<\/rt><\/ruby>/g, (_, rt) => `\u0001${rt.replace(/·/g, "")}\u0002`)
+    .replace(/<(?!\/?em>)[^>]+>/g, "")
+    .replace(/\s+([,.;:!?)])/g, "$1")
+    .replace(/\s+/g, " ")
+    .replace(/\u0001/g, "<span>")
+    .replace(/\u0002/g, "</span>")
+    .replace(/<span>\s*<\/span>\s?/g, "<span></span>")
+    .replace(/ (<span>[,.;:!?)])/g, "$1")
+    .trim();
 
 const kindOf = (note?: string) =>
   !note ? "main" : /spurious/i.test(note) ? "spurious" : "supplementary";
@@ -552,7 +575,13 @@ const tocSecs = [
       </nav>
       )}
 
-      <p class="gl-hint">Under Chaucer's words, a modern line. Tap or hover a <span class="gl-cue">dotted</span> word for its definition and source.</p>
+      <p class="gl-hint"><span class="gh-wide">Chaucer's words on the left, a modern line on the right.</span><span class="gh-narrow">Chaucer's words, or a modern line: switch with the button at the foot of the screen.</span> Tap or hover a <span class="gl-cue">dotted</span> word for its definition and source.</p>
+      {pageSections.some((s) => s.glossed) && (
+        <div class="t-view" role="group" aria-label="Text to show">
+          <button type="button" data-view="me" aria-pressed="true">Chaucer</button>
+          <button type="button" data-view="mod" aria-pressed="false">Modern</button>
+        </div>
+      )}
 
       <div class="gl-descs" hidden>
         {glossDesc.map((d) => <span id={d.id}>{d.text}</span>)}
@@ -652,7 +681,13 @@ const tocSecs = [
                           </div>
                         </div>
                       </div>
-                        {glossed ? glossed.map((h) => <p set:html={h} />) : <Content />}
+                        {glossed ? glossed.map((h, j) => (
+                          <div class={j === 0 ? "pr pr-first" : "pr"}>
+                            <div class="pr-me"><p set:html={h} /></div>
+                            <p class="pr-mod" lang="en" set:html={modernOf(h)} />
+                          </div>
+                        )) : <Content />}
+                        {glossed && <script is:inline set:html={SPLIT_ASIDE}></script>}
                         {inline.map((sc, j) => (
                           <div class="inline-win" data-after={sc.at} data-size={sc.size} data-frame={sc.frame} data-side={sc.side} data-phrase={sc.place === "phrase" ? sc.after : undefined}>
                             <div class="win" data-frame={sc.frame}>
@@ -1815,9 +1850,9 @@ const tocSecs = [
     fill: #ffe7b0;
   }
 
-  /* --- glossed sections: Chaucer above, a modern line beneath --------- */
-  /* Every word is a ruby: the modern word sits under it, centred; a long
-     modern word widens the column instead of overlapping its neighbour. */
+  /* --- glossed sections ------------------------------------------- */
+  /* Every word is a ruby whose <rt> holds its modern word. Since tg 17988 the <rt>s are hidden and the
+     modern line is set apart in its own column (see "two columns" below); these rules are the base. */
   .t-sec[data-glossed] .t-me > :global(p) {
     line-height: 2.55;
   }
@@ -1859,6 +1894,119 @@ const tocSecs = [
   :global(.gw:focus-visible) {
     outline: 1.5px solid var(--gold);
     outline-offset: 2px;
+  }
+
+  /* --- two columns (Jes tg 17988) ---------------------------------- */
+  /* Wide: Chaucer's words on the left with the figures, the modern line on the right, row by row so each
+     modern paragraph starts level with its Middle English. Narrow: one column, and a switch shows one or
+     the other. The modern words no longer sit under Chaucer's. */
+  .t-sec[data-glossed] .t-me :global(rt) {
+    display: none;
+  }
+  .t-sec[data-glossed] .t-me :global(ruby.lu) {
+    white-space: normal;
+  }
+  .pr-mod {
+    font-family: var(--modern-font);
+    font-size: 1.06rem;
+    line-height: 1.7;
+    color: #c3cae6;
+    margin: 0 0 1.1em;
+  }
+  .t-me > .pr-first > .pr-me > :global(p:first-of-type::first-letter) {
+    font-family: var(--black-font);
+    font-weight: 700;
+    font-variation-settings: "opsz" 72;
+    color: var(--gold);
+    float: left;
+    font-size: 3.7em;
+    line-height: 0.84;
+    padding: 0.06em 0.1em 0 0;
+    text-shadow:
+      0 0 18px rgba(236, 201, 120, 0.55),
+      0 0 2px rgba(255, 240, 200, 0.8);
+  }
+  .gh-narrow {
+    display: none;
+  }
+  .t-view {
+    display: none;
+  }
+  @media (min-width: 1000px) {
+    .t-sec[data-glossed] {
+      max-width: 74rem;
+    }
+    .pr {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      column-gap: 2.75rem;
+    }
+    .pr-mod {
+      padding-left: 1.4rem;
+      border-left: 1px solid rgba(190, 204, 255, 0.16);
+      /* level with the Middle English, whose first line sits a little lower in its taller line box */
+      padding-top: 0.2rem;
+    }
+    .t-sec[data-glossed] .t-aside {
+      width: min(15rem, 40%);
+    }
+    .t-sec[data-glossed] .inline-win {
+      width: 12.5rem;
+    }
+    .t-sec[data-glossed] .inline-win[data-size="small"] {
+      width: 11.5rem;
+    }
+  }
+  @media (max-width: 999.98px) {
+    .gh-wide {
+      display: none;
+    }
+    .gh-narrow {
+      display: inline;
+    }
+    .pr-mod {
+      display: none;
+      font-size: 1.12rem;
+    }
+    :global(html.t-modview) .pr-me > :global(p) {
+      display: none;
+    }
+    :global(html.t-modview) .pr-mod {
+      display: block;
+    }
+    .t-view {
+      display: flex;
+      position: fixed;
+      z-index: 40;
+      left: 50%;
+      bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+      transform: translateX(-50%);
+      padding: 4px;
+      gap: 4px;
+      border-radius: 999px;
+      background: rgba(11, 16, 48, 0.92);
+      border: 1px solid rgba(236, 201, 120, 0.45);
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.55);
+    }
+    .t-view button {
+      font-family: var(--modern-font);
+      font-size: 0.98rem;
+      padding: 0.45rem 1.05rem;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: #c3cae6;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .t-view button[aria-pressed="true"] {
+      background: var(--gold);
+      color: #0b1030;
+    }
+    .t-view button:focus-visible {
+      outline: 2px solid #fff3d6;
+      outline-offset: 2px;
+    }
   }
 
   /* The popover: one shared element, placed by script. */
@@ -2132,6 +2280,62 @@ const tocSecs = [
   const root = document.querySelector<HTMLElement>(".treatise");
   if (root) {
     initSky(root);
+
+    // --- Two columns: the phone's switch (Jes tg 17988) ------------------
+    // Below 1000px one column shows, Chaucer's or the modern line. In the modern view the figures that sit
+    // inside Chaucer's paragraphs (at their phrases) move out to just before the paragraph, so they stay on
+    // screen; switching back puts them at their phrases again. The choice is remembered on this device only.
+    const views = root.querySelectorAll<HTMLButtonElement>(".t-view button");
+    if (views.length) {
+      const narrow = window.matchMedia("(max-width: 999.98px)");
+      let view = "me";
+      try {
+        view = localStorage.getItem("treatise-view") === "mod" ? "mod" : "me";
+      } catch {}
+      const apply = () => {
+        const mod = narrow.matches && view === "mod";
+        document.documentElement.classList.toggle("t-modview", mod);
+        views.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.view === view)));
+        type Win = HTMLElement & { __mark?: Element; __home?: [Node, Node | null] };
+        if (mod)
+          root.querySelectorAll<Win>(".pr-me .inline-win, .pr-me .t-inset").forEach((w) => {
+            const row = w.closest(".pr");
+            const p = row?.querySelector<HTMLElement>(".pr-me > p");
+            const m = row?.querySelector<HTMLElement>(".pr-mod");
+            if (!p || !m || w.__home) return;
+            w.__home = [w.parentNode!, w.nextSibling];
+            if (w.__mark && p.contains(w.__mark)) {
+              // the first word unit after the ☞, and its twin in the modern line
+              const units = [...p.querySelectorAll("ruby.lu")];
+              const k = units.findIndex((u) => w.__mark!.compareDocumentPosition(u) & Node.DOCUMENT_POSITION_FOLLOWING);
+              const twin = k >= 0 ? m.querySelectorAll(":scope > span")[k] : null;
+              if (twin) twin.before(w);
+              else m.before(w);
+            } else if (p.compareDocumentPosition(w) & Node.DOCUMENT_POSITION_FOLLOWING) m.after(w);
+            else m.before(w);
+          });
+        else
+          root.querySelectorAll<Win>(".inline-win, .t-inset").forEach((w) => {
+            if (!w.__home) return;
+            const [par, next] = w.__home;
+            w.__home = undefined;
+            if (w.__mark?.isConnected) w.__mark.before(w);
+            else par.insertBefore(w, next && next.parentNode === par ? next : null);
+          });
+        if (!mod) (window as any).__alignPhraseWins?.();
+      };
+      views.forEach((b) =>
+        b.addEventListener("click", () => {
+          view = b.dataset.view === "mod" ? "mod" : "me";
+          try {
+            localStorage.setItem("treatise-view", view);
+          } catch {}
+          apply();
+        })
+      );
+      narrow.addEventListener?.("change", apply);
+      if (view === "mod") apply();
+    }
 
     // --- Glosses ---------------------------------------------------------
     // Every glossed word is a span[role=button] with data-g (its entry) and

@@ -35,6 +35,24 @@ build log. Each page carries only the glosses its own section uses.
 - Every page keeps `noindex` and stays out of the sitemap (the sitemap filter matches `/treatise/`). None is
   linked from the site nav.
 
+## Two columns (Jes tg 17988)
+
+Jes, tg 17988 (2026-11-16): "modern text separate from original text, not woven together. two columns. on mobile
+have some way to toggle between two views."
+
+- Each paragraph of a glossed section is a row (`.pr`): Chaucer's words (`.pr-me`, with the glossed words, the ☞
+  marks and the figures) and the modern line (`.pr-mod`). The modern line is the one that used to sit under the
+  words: `modernOf` takes each ruby's `<rt>`, keeps the text between rubies, and drops the "·" placeholders. The
+  `<rt>`s stay in the markup but are hidden.
+- The k-th `<span>` of a modern paragraph is the k-th word unit (`ruby.lu`) of its Middle English.
+- 1000px and up: the two cells sit side by side in a grid, Chaucer about 3:2 wider, so each modern paragraph
+  starts level with its Middle English. The section's own figure moves into the first Chaucer cell (`SPLIT_ASIDE`)
+  and floats there.
+- Below 1000px: one column. A switch fixed at the foot of the screen ("Chaucer" / "Modern") shows one or the other.
+  The choice is kept in `localStorage` (`treatise-view`), on that device only. In the modern view the figures that
+  sit at a phrase move to the same word unit in the modern paragraph, and come back to their phrase on switching back.
+  `__alignPhraseWins` does nothing while `html.t-modview` is set.
+
 ## Scenes (`src/components/Scene.astro`)
 
 - A scene mounts within one screen of the viewport and animates only while it is on screen.
