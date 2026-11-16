@@ -45,9 +45,17 @@ have some way to toggle between two views."
   words: `modernOf` takes each ruby's `<rt>`, keeps the text between rubies, and drops the "·" placeholders. The
   `<rt>`s stay in the markup but are hidden.
 - The k-th `<span>` of a modern paragraph is the k-th word unit (`ruby.lu`) of its Middle English.
-- 1000px and up: the two cells sit side by side in a grid, Chaucer about 3:2 wider, so each modern paragraph
-  starts level with its Middle English. The section's own figure moves into the first Chaucer cell (`SPLIT_ASIDE`)
-  and floats there.
+- 1000px and up (Jes tg 17995: "I want the art on prologue to be in the center line"): three columns per row,
+  Chaucer | art | modern, with a faint line down the centre. The page script moves the row's figures out of
+  Chaucer's paragraph into the centre cell and sets each one's top level with its ☞ phrase (or its paragraph),
+  never above the figure before it (`level()`, run again whenever Chaucer's paragraphs change size, e.g. when a
+  web font arrives). The centre cell is a flex column, so the figures' margins never collapse. A large
+  step-by-step figure goes above its row at full width instead. With JavaScript off, the figures stay in
+  Chaucer's paragraphs.
+- Both columns use the same face, size, weight and colour (tg 17995: "both versions the same font
+  size/weight/color except for the dictionary stuff"); only the glossed words and the ☞ marks differ. Both
+  open with the drop cap. With the `<rt>` hidden the rubies are plain inline text, so the drop cap floats
+  beside the first line.
 - Below 1000px: one column. A switch fixed at the foot of the screen ("Chaucer" / "Modern") shows one or the other.
   The choice is kept in `localStorage` (`treatise-view`), on that device only. In the modern view the figures that
   sit at a phrase move to the same word unit in the modern paragraph, and come back to their phrase on switching back.
