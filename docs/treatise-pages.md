@@ -50,7 +50,8 @@ have some way to toggle between two views."
   Chaucer's paragraph into the centre cell and sets each one's top level with its ☞ phrase (or its paragraph),
   never above the figure before it (`level()`, run again whenever Chaucer's paragraphs change size, e.g. when a
   web font arrives). The centre cell is a flex column, so the figures' margins never collapse. A large
-  step-by-step figure goes above its row at full width instead. With JavaScript off, the figures stay in
+  step-by-step figure goes above its row at full width instead. An editorial note (`.t-inset`, e.g. the Prologue's "What became of the five parts")
+  runs centred across both columns between the rows (Jes tg 18045). With JavaScript off, the figures stay in
   Chaucer's paragraphs.
 - Both columns use the same face, size, weight and colour (tg 17995: "both versions the same font
   size/weight/color except for the dictionary stuff"); only the glossed words and the ☞ marks differ. Both

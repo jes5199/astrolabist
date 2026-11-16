@@ -105,6 +105,24 @@ Middle English, Skeat's glosses and notes and plain English only (no modern tran
 The popover keeps Skeat's exact gloss. `LINE_MODE = "strict"` in `treatise.astro` switches back.
 Every span is listed in the wording ledger.
 
+### Clarity pass (Jes tg 18041, 18043)
+
+Jes, tg 18041: "'lo here the figure' on 1/3 is not sensible in modern english"; tg 18043: "we should do a
+clarity pass on the modern english". Since the two-column layout (tg 17988) the modern line is read as running
+text, so it is being rewritten sentence by sentence into natural modern English, in
+`tools/treatise-glosses/clarity.txt`. Each unit is a Middle English sentence or clause copied from the text,
+with the modern line that stands for it. `build_glosses.py` turns them into `lineSpans` of kind `sentence`
+with `whole: true`, and fails if a unit's Middle English is not in its section. On the page
+(`glossSection`) a sentence span takes all its words: any smaller span inside it is superseded, not an
+error. Its line is printed as written (its own punctuation and capitals; `_word_` for italics). The
+glossed words, popovers and ☞ marks in Chaucer's column are unchanged.
+
+The wording is ours, written from Skeat's Middle English, his glosses and notes, and plain English. No
+modern translation is consulted. Done so far: the Prologue, all of Part I, Part II § 30, and the closing
+"lo here the figure" line of every Part II section. The rest of Part II follows in batches. (The wording
+ledger, `docs/treatise-wording.md`, predates the split pages and does not list these units; `clarity.txt`
+is their record.)
+
 ## Provenance in the data
 
 Each entry in `glosses.json` carries `source` and `ref`: Skeat's headword (`head`), the printed page

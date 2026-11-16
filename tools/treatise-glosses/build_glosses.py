@@ -170,6 +170,52 @@ for sec, phrase, word, key in OVERRIDES:
     ov.append({"section": sec, "match": ph, "word": word.lower(), "key": key})
 KINDS = {"added-word", "reordered", "modernised-form", "paraphrase-phrase"}
 spans = []
+# Clarity pass (Jes tg 18041, 18043): whole Middle English sentences (or clauses) rendered as one modern
+# sentence, from clarity.txt. They come first in lineSpans: on the page a sentence span takes its words,
+# and any smaller span inside it is superseded. "whole": the line is printed as written, punctuation and
+# capitals included (the smaller spans borrow the Middle English punctuation instead).
+def read_clarity(path):
+    units, sec, cur = [], None, None
+    for n, raw in enumerate(open(path, encoding="utf-8"), 1):
+        line = raw.rstrip("\n")
+        if line.startswith("## "):
+            sec, cur = line[3:].strip(), None
+            continue
+        if not line.strip() or line.startswith("#"):
+            continue
+        if line.startswith("> "):
+            cur = {"section": sec, "me": [line[2:].strip()], "line": None, "at": n}
+            units.append(cur)
+            continue
+        if cur is None:
+            errors.append(f"clarity.txt:{n}: modern line with no Middle English above it")
+            continue
+        if line.strip() == "=":
+            # this unit's Middle English joins the one before; one modern line covers both
+            if len(units) < 2 or units[-2]["section"] != sec or cur["line"] is not None:
+                errors.append(f"clarity.txt:{n}: '=' must follow a Middle English line, after another unit")
+            else:
+                units[-2]["me"] += cur["me"]; units.pop(); cur = units[-1]
+            continue
+        if cur["line"] is not None:
+            errors.append(f"clarity.txt:{n}: two modern lines for one unit")
+        cur["line"] = line.strip()
+    return units
+CLARITY = os.path.join(HERE, "clarity.txt")
+for u in (read_clarity(CLARITY) if os.path.exists(CLARITY) else []):
+    sec = u["section"]
+    if sec not in joined:
+        errors.append(f"clarity.txt:{u['at']}: unknown section {sec!r}")
+        continue
+    if not u["line"]:
+        errors.append(f"clarity.txt:{u['at']}: no modern line")
+        continue
+    if re.search(r"[<>]", u["line"]):
+        errors.append(f"clarity.txt:{u['at']}: markup in the modern line")
+    ph = " ".join(re.findall(r"[A-Za-z]+(?:-[A-Za-z]+)*", " ".join(u["me"]).lower()))
+    if f" {ph} " not in f" {joined[sec]} ":
+        errors.append(f"clarity.txt:{u['at']}: Middle English not found in {sec}: {' '.join(u['me'])[:60]!r}")
+    spans.append({"section": sec, "match": ph, "line": u["line"], "kind": "sentence", "whole": True})
 for sec, match, line, kind in TRANSLATION:
     ph = " ".join(re.findall(r"[A-Za-z]+(?:-[A-Za-z]+)*", match.lower()))
     if f" {ph} " not in f" {joined[sec]} ":

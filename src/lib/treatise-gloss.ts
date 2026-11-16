@@ -29,7 +29,7 @@ type Data = {
   phrases: { words: string; key: string }[];
   overrides: { section: string; match: string; word: string; key: string | null }[];
   blank: string[];
-  lineSpans: { section: string; match: string; line: string; kind: string }[];
+  lineSpans: { section: string; match: string; line: string; kind: string; whole?: boolean }[];
 };
 const G = data as Data;
 
@@ -95,10 +95,13 @@ export type LineMode = "translation" | "strict";
 export function glossSection(slug: string, body: string, stats?: GlossStats, mode: LineMode = "translation"): string[] {
   const paras = body.split(/\n\s*\n/).map((p) => p.replace(/\s+/g, " ").trim()).filter(Boolean);
   const overrides = G.overrides.filter((o) => o.section === slug);
-  const spans = mode === "translation" ? G.lineSpans.filter((s) => s.section === slug) : [];
+  // Sentence spans (the clarity pass, tg 18043) first: each takes its whole sentence, and a smaller span
+  // inside one is superseded rather than an error.
+  const spans = mode === "translation" ? G.lineSpans.filter((s) => s.section === slug && s.kind === "sentence").concat(G.lineSpans.filter((s) => s.section === slug && s.kind !== "sentence")) : [];
   const blank = new Set(G.blank);
   const hit = new Set<number>();
   const spanHit = new Set<number>();
+  const superseded = new Set<number>();
   const out = paras.map((raw) => {
     // Skeat's italics (_Latin_): drop the marks, remember which characters were italic,
     // and wrap italic runs in <em> inside each emitted chunk (so no <em> spans two units).
@@ -162,12 +165,18 @@ export function glossSection(slug: string, body: string, stats?: GlossStats, mod
     const lineLen: number[] = span.slice();
     const lineText: (string | null)[] = toks.map(() => null);
     const lineKind: (string | null)[] = toks.map(() => null);
+    const lineWhole: boolean[] = toks.map(() => false);
+    const inSentence: boolean[] = toks.map(() => false);
     spans.forEach((s, n) => {
       const ws = s.match.split(" ");
       for (let a = 0; a + ws.length <= toks.length; a++) {
         if (!seq(ws, a)) continue;
         const endTok = a + ws.length; // exclusive
         // Must start and end on gloss-unit boundaries, and not overlap another span.
+        if (s.kind !== "sentence" && inSentence.slice(a, endTok).every(Boolean)) {
+          superseded.add(n);
+          continue;
+        }
         if (span[a] === 0 || (endTok < toks.length && span[endTok] === 0) || lineLen[a] === 0 || lineText[a] !== null) continue;
         let ok = true;
         for (let k = a + 1; k < endTok; k++) if (lineText[k] !== null) ok = false;
@@ -176,6 +185,8 @@ export function glossSection(slug: string, body: string, stats?: GlossStats, mod
         for (let k = a + 1; k < endTok; k++) lineLen[k] = 0;
         lineText[a] = s.line;
         lineKind[a] = s.kind;
+        lineWhole[a] = !!s.whole;
+        if (s.kind === "sentence") for (let k = a; k < endTok; k++) inSentence[k] = true;
         spanHit.add(n);
       }
     });
@@ -249,14 +260,14 @@ export function glossSection(slug: string, body: string, stats?: GlossStats, mod
         }
       }
       if (lineText[a] !== null) {
-        line = cap(lineText[a]!, toks[a].w);
-        kind = "dep";
+        line = lineWhole[a] ? lineText[a]! : cap(lineText[a]!, toks[a].w);
+        kind = lineWhole[a] ? "sen" : "dep";
         if (stats) stats.departures = (stats.departures ?? 0) + 1;
       }
       base += fmt(prevEnd, to);
-      const pre = para.slice(from, toks[a].i);
-      const post = para.slice(prevEnd, to);
-      html += `<ruby class="lu lu-${kind}">${base}<rt aria-hidden="true">${ital[toks[a].i] ? `${esc(pre)}<em>${esc(line)}</em>${esc(post)}` : esc(pre + line + post)}</rt></ruby>`;
+      const pre = lineWhole[a] ? "" : para.slice(from, toks[a].i);
+      const post = lineWhole[a] ? "" : para.slice(prevEnd, to);
+      html += `<ruby class="lu lu-${kind}">${base}<rt aria-hidden="true">${lineWhole[a] ? esc(line).replace(/_([^_]+)_/g, "<em>$1</em>") : ital[toks[a].i] ? `${esc(pre)}<em>${esc(line)}</em>${esc(post)}` : esc(pre + line + post)}</rt></ruby>`;
       pos = to;
     }
     html += gap(pos, para.length);
@@ -266,7 +277,7 @@ export function glossSection(slug: string, body: string, stats?: GlossStats, mod
     if (!hit.has(n)) throw new Error(`treatise glosses: override "${o.match}" (${o.word}) not found in ${slug}`);
   });
   spans.forEach((s, n) => {
-    if (!spanHit.has(n)) throw new Error(`treatise glosses: line span "${s.match}" not placed in ${slug} (missing, or splits a glossed phrase)`);
+    if (!spanHit.has(n) && !superseded.has(n)) throw new Error(`treatise glosses: line span "${s.match}" not placed in ${slug} (missing, or splits a glossed phrase)`);
   });
   return out;
 }

@@ -15962,6 +15962,1560 @@
  "lineSpans": [
   {
    "section": "00-prologue",
+   "match": "litell lowis my sone i have perceived wel by certeyne evidences thyn abilite to lerne sciencez touchinge noumbres and proporciouns",
+   "line": "Little Lewis, my son, I can see clearly from certain signs that you are able to learn the sciences of numbers and proportions,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "and as wel considere i thy bisy preyere in special to lerne the tretis of the astrolabie",
+   "line": "and I also see how earnestly you have asked, above all, to learn the Treatise of the Astrolabe.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "than for as mechel as a philosofre seith he wrappeth him in his frend that condescendeth to the rightful preyers of his frend ther-for have i geven thee a suffisaunt astrolabie as for oure orizonte compowned after the latitude of oxenford",
+   "line": "A philosopher says, 'he wraps himself in his friend who grants his friend's just requests,' and so I have given you an astrolabe good enough for our horizon, made for the latitude of Oxford.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "up-on which by mediacion of this litel tretis i purpose to teche thee a certein nombre of conclusions apertening to the same instrument",
+   "line": "With it, and with the help of this little treatise, I mean to teach you a certain number of the problems that belong to that instrument.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "i seye a certein of conclusiouns for three causes",
+   "line": "I say \"a certain number\" of problems for three reasons.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "the furste cause is this truste wel that alle the conclusiouns that han ben founde or elles possibly mighten be founde in so noble an instrument as an astrolabie ben un-knowe perfitly to any mortal man in this regioun as i suppose",
+   "line": "The first reason is this: you can be sure that nobody in this country knows perfectly all the problems that have been found, or that could ever be found, in so noble an instrument as an astrolabe. So I believe.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "a-nother cause is this",
+   "line": "Another reason is this:",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "that sothly in any tretis of the astrolabie that i have seyn there ben some conclusions that wole nat in alle thinges performen hir bihestes",
+   "line": "in every treatise on the astrolabe that I have seen, some of the problems do not fully deliver what they promise,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "and some of hem ben to harde to thy tendre age of ten yeer to conseyve",
+   "line": "and some are too hard for you to grasp at the tender age of ten.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "this tretis divided in fyve parties wole i shewe thee under ful lighte rewles and naked wordes in english",
+   "line": "I will set out this treatise for you in five parts, with very easy rules and plain words, in English,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "for latin ne canstow yit but smal my lyte sone",
+   "line": "because you still know only a little Latin, my little son.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "but natheles suffyse to thee thise trewe conclusiouns in english as wel as suffyseth to thise noble clerkes grekes thise same conclusiouns in greek and to arabiens in arabik and to iewes in ebrew and to the latin folk in latin",
+   "line": "Still, let these true problems in English be enough for you, just as the same problems are enough for the noble Greek scholars in Greek, for the Arabs in Arabic, for the Jews in Hebrew, and for the Latin people in Latin.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "whiche latin folk han hem furst out of othre diverse langages and writen in hir owne tonge that is to sein in latin",
+   "line": "The Latin people first took them from various other languages and wrote them in their own tongue, that is, in Latin.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "and god wot that in alle thise langages and in many mo han thise conclusiouns ben suffisantly lerned and taught and yit by diverse rewles right as diverse pathes leden diverse folk the righte wey to rome",
+   "line": "And God knows these problems have been learned and taught well enough in all these languages and many more, each by its own rules, just as different roads lead different people the right way to Rome.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "now wol i prey meekly every discret persone that redeth or hereth this litel tretis to have my rewde endyting for excused and my superfluite of wordes for two causes",
+   "line": "So I ask, humbly, that anyone of good judgement who reads this little book, or hears it read, forgive its homely style and its wordiness. I have two reasons.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "the firste cause is for that curious endyting and hard sentence is ful hevy atones for swich a child to lerne",
+   "line": "The first reason is that elaborate writing and difficult ideas, both at once, are far too heavy for so young a child to learn.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "and the seconde cause is this that sothly me semeth betre to wryten un-to a child twyes a good sentence than he for-gete it ones",
+   "line": "And the second reason is this: it truly seems better to me to write a good point twice for a child than to have him forget it once.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "and lowis yif so be that i shewe thee in my lighte english as trewe conclusiouns touching this matere and naught only as trewe but as many and as subtil conclusiouns as ben shewed in latin in any commune tretis of the astrolabie con me the more thank",
+   "line": "And Lewis, if in my easy English I show you problems as true as those shown in Latin in any ordinary treatise on the astrolabe, and not only as true but as many and as subtle, then give me all the more thanks.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "and preye god save the king that is lord of this langage and alle that him feyth bereth and obeyeth everech in his degree the more and the lasse",
+   "line": "And ask God to keep the king, the lord of this tongue, with all his loyal and obedient subjects, high and low, each in their station.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "but considere wel that i ne usurpe nat to have founde this werk of my labour or of myn engin",
+   "line": "But understand that I do not pretend to have discovered this work by my own labour or wit.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "i nam but a lewd compilatour of the labour of olde astrologiens and have hit translated in myn english only for thy doctrine",
+   "line": "I am only an unlearned compiler of the work of the old astronomers, and I have put it into my English only to teach you,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "and with this swerd shal i sleen envye",
+   "line": "and with this sword I shall slay envy.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "i the firste partie of this tretis shal reherse the figures and the membres of thyn astrolabie bi-cause that thou shalt han the grettre knowing of thyn owne instrument",
+   "line": "I. The first part of this treatise will describe the markings and the parts of your astrolabe, so that you will know your own instrument better.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "ii the second partie shal teche thee werken the verrey practik of the forseide conclusiouns as ferforth and as narwe as may be shewed in so smal an instrument portatif aboute",
+   "line": "II. The second part will teach you to work the actual problems described above, as fully and as precisely as so small a portable instrument can show them.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "for wel wot every astrologien that smalest fraccions ne wol nat ben shewed in so smal an instrument as in subtil tables calculed for a cause",
+   "line": "For every astronomer knows well that the smallest fractions cannot be shown on so small an instrument the way they can in precise tables calculated for the purpose.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "iii the thridde partie shal contienen diverse tables of longitudes and latitudes of sterres fixe for the astrolabie and tables of declinacions of the sonne and tables of longitudes of citeez and of townes",
+   "line": "III. The third part will contain various tables: the longitudes and latitudes of the fixed stars on the astrolabe, the declinations of the sun, and the longitudes of cities and towns;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "and as wel for the governance of a clokke as for to finde the altitude meridian",
+   "line": "tables for setting a clock and for finding the sun's height at noon;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "and many another notable conclusioun after the kalendres of the reverent clerkes frere i somer and frere n lenne",
+   "line": "and many other notable problems, following the calendars of the reverend scholars Friar J. Somer and Friar N. Lynn.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "iv the ferthe partie shal ben a theorik to declare the moevinge of the celestial bodies with the causes",
+   "line": "IV. The fourth part will be a theory explaining the motions of the heavenly bodies and their causes.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "the whiche ferthe partie in special shal shewen a table of the verray moeving of the mone from houre to houre every day and in every signe after thyn almenak",
+   "line": "In particular, this fourth part will give a table of the moon's true motion from hour to hour, every day and in every sign, following your almanac.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "upon which table ther folwith a canon suffisant to teche as wel the maner of the wyrking of that same conclusioun as to knowe in oure orizonte with which degree of the zodiac that the mone ariseth in any latitude",
+   "line": "After that table comes a rule, enough to teach you both how to work that problem and how to find, on our horizon, which degree of the zodiac the moon rises with, at any latitude,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "and the arising of any planete after his latitude fro the ecliptik lyne",
+   "line": "and the rising of any planet according to its latitude from the ecliptic.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "v the fifte partie shal ben an introductorie after the statutz of oure doctours in which thou maist lerne a gret part of the general rewles of theorik in astrologie",
+   "line": "V. The fifth part will be an introduction, following the statutes of our scholars, in which you can learn a large part of the general rules of astrological theory.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "in which fifte partie shaltow finde tables of equacions of houses aftur the latitude of oxenford",
+   "line": "In this fifth part you will find tables for dividing the houses at the latitude of Oxford,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
+   "match": "and tables of dignetes of planetes and other noteful thinges yif god wol vouche-sauf and his modur the mayde mo than i be-hete c",
+   "line": "tables of the dignities of the planets, and other useful things, more than I promise, if God and his mother the Virgin will grant it.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-01",
+   "match": "thyn astrolabie hath a ring to putten on the thoumbe of thy right hand in taking the heighte of thinges",
+   "line": "Your astrolabe has a ring to put on the thumb of your right hand when you take the height of things.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-01",
+   "match": "and tak keep for from hennes-forthward i wol clepe the heighte of any thing that is taken by thy rewle the altitude with-oute mo wordes",
+   "line": "And take note: from now on, when you take the height of anything with your rule, I will simply call it the altitude.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-02",
+   "match": "this ring renneth in a maner turet fast to the moder of thyn astrolabie in so rowm a space that hit desturbeth nat the instrument to hangen after his righte centre",
+   "line": "This ring turns in a kind of swivel fixed to the mother of your astrolabe, with so much room that it does not stop the instrument from hanging straight from its true centre.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-03",
+   "match": "the moder of thyn astrolabie is the thikkeste plate perced with a large hole that resseyveth in hir wombe the thinne plates compowned for diverse clymatz and thy riet shapen in manere of a net or of a webbe of a loppe",
+   "line": "The Mother of your astrolabe is the thickest plate, pierced with a large hole. In its hollow it holds the thin plates made for different latitudes, and your rete, shaped like a net or a spider's web.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-03",
+   "match": "and for the more declaracioun lo here the figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-04",
+   "match": "this moder is devyded on the bak-half with a lyne that cometh dessendinge fro the ring down to the nethereste bordure",
+   "line": "On the back, this mother is divided by a line that runs down from the ring to the bottom of the border.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-04",
+   "match": "the whiche lyne fro the for-seide ring un-to the centre of the large hole amidde is cleped the south lyne or elles the lyne meridional",
+   "line": "The part of this line from the ring to the centre of the large hole in the middle is called the south line, or the meridian line.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-04",
+   "match": "and the remenant of this lyne downe to the bordure is cleped the north lyne or elles the lyne of midnight",
+   "line": "The remainder, running down to the border, goes by the name of north line, also called the line of midnight.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-04",
+   "match": "and for the more declaracioun lo here the figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-05",
+   "match": "over-thwart this for-seide longe lyne ther crosseth him another lyne of the same lengthe from est to west",
+   "line": "Another line of the same length crosses this long line at right angles, from east to west.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-05",
+   "match": "of the whiche lyne from a litel croys in the bordure un-to the centre of the large hole is cleped the est lyne or elles the lyne orientale",
+   "line": "The part of it from a little cross in the border to the centre of the large hole is called the east line, or the oriental line,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-05",
+   "match": "and the remenant of this lyne fro the forseide un-to the bordure is cleped the west lyne or the lyne occidentale",
+   "line": "and the rest of the line, from the centre to the border, is called the west line, or the occidental line.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-05",
+   "match": "now hastow here the foure quarters of thin astrolabie devyded after the foure principals plages or quarters of the firmament",
+   "line": "These are the four quarters of your astrolabe, laid out to match the sky's four main quarters, the compass points.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-05",
+   "match": "and for the more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-06",
+   "match": "the est side of thyn astrolabie is cleped the right side and the west side is cleped the left side",
+   "line": "Your astrolabe's east side counts as its right; its west side counts as its left.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-06",
+   "match": "forget nat this litel lowis",
+   "line": "Do not forget this, little Lewis.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-06",
+   "match": "put the ring of thyn astrolabie upon the thoumbe of thy right hand and thanne wole his right syde be toward thy left syde and his left syde wol be toward thy right syde",
+   "line": "Put the ring of your astrolabe on the thumb of your right hand, and its right side will be toward your left, and its left side toward your right.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-06",
+   "match": "tak this rewle general as wel on the bak as on the wombe-side",
+   "line": "Take this as a general rule, on the back as well as on the front.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-06",
+   "match": "upon the ende of this est lyne as i first seide is marked a litel wher-as evere-mo generaly is considered the entring of the first degree in which the sonne aryseth",
+   "line": "At the end of this east line, as I said before, there is a little mark, which is always taken to be the start of the first degree in which the sun rises.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-06",
+   "match": "and for the more declaracioun lo here the figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-07",
+   "match": "fro this litel up to the ende of the lyne meridional under the ring shaltow finden the bordure devyded with degrees",
+   "line": "From this little mark up to the end of the meridian line, under the ring, you will find the border divided into 90 degrees,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-07",
+   "match": "and by that same proporcioun is every quarter of thin astrolabie devyded",
+   "line": "and every quarter of your astrolabe is divided in the same way.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-07",
+   "match": "over the whiche degrees ther ben noumbres of augrim that devyden thilke same degrees fro fyve to fyve as sheweth by longe strykes by-twene",
+   "line": "Above these degrees are Arabic numerals that mark them off in fives, with long strokes between.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-07",
+   "match": "of whiche longe strykes the space by-twene contienith a mile-wey",
+   "line": "The space between two long strokes is a mile-way, that is, twenty minutes of time.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-07",
+   "match": "and every degree of the bordure contieneth foure minutes that is to seyn minutes of an houre",
+   "line": "And every degree of the border is four minutes, that is, minutes of an hour.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-07",
+   "match": "and for more declaracioun lo here the figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-08",
+   "match": "under the compas of thilke degrees ben writen the names of the twelve signes as aries taurus gemini cancer leo virgo libra scorpio sagittarius capricornus aquarius pisces",
+   "line": "Inside the circle of those degrees are written the names of the twelve signs: Aries, Taurus, Gemini, Cancer, Leo, Virgo, Libra, Scorpio, Sagittarius, Capricorn, Aquarius, Pisces.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-08",
+   "match": "and the nombres of the degrees of tho signes ben writen in augrim above and with longe devisiouns fro fyve to fyve",
+   "line": "The numbers of the degrees of those signs are written above them in Arabic numerals, with long divisions every five degrees,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-08",
+   "match": "devyded fro tyme that the signe entreth un-to the laste ende",
+   "line": "counted from where each sign begins to where it ends.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-08",
+   "match": "but understond wel that thise degrees of signes ben everich of hem considered of minutes and every minute of secondes and so forth in-to smale fraccions infinit as seith alkabucius",
+   "line": "But understand that each of these degrees of the signs is made of 60 minutes, and every minute of 60 seconds, and so on into ever smaller fractions without end, as Alchabitius says.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-08",
+   "match": "and ther-for know wel that a degree of the bordure contieneth foure minutes and a degree of a signe contieneth minutes and have this in minde",
+   "line": "So remember this: a degree of the border is four minutes, and a degree of a sign is 60 minutes.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-08",
+   "match": "and for the more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-09",
+   "match": "next this folweth the cercle of the dayes that ben figured in maner of degrees that contienen in noumbre",
+   "line": "Next comes the circle of the days, marked like degrees, 365 of them,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-09",
+   "match": "divyded also with longe strykes fro fyve to fyve and the nombres in augrim writen under that cercle",
+   "line": "also marked off in fives with long strokes, and with the numbers written in Arabic numerals under the circle.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-09",
+   "match": "and for more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-10",
+   "match": "next the cercle of the dayes folweth the cercle of the names of the monthes",
+   "line": "After the circle of the days comes the circle of the names of the months,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-10",
+   "match": "that is to seyen ianuare februare marcius aprile mayus iuin iulius augustus septembre october novembre decembre",
+   "line": "that is: January, February, March, April, May, June, July, August, September, October, November, December.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-10",
+   "match": "the names of thise monthes were cleped in arabiens somme for hir propretees and some by statutz of lordes some by other lordes of rome",
+   "line": "These months were named, among the Arabians, some for their qualities, some by decrees of rulers, and some by other rulers of Rome.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-10",
+   "match": "eek of thise monthes as lyked to iulius cesar and to cesar augustus some were compowned of diverse nombres of dayes as iuil and august",
+   "line": "And some of these months were given different numbers of days, as Julius Caesar and Caesar Augustus pleased, such as July and August.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-10",
+   "match": "thanne hath ianuare dayes februare march aprille may iunius iulius augustus september octobre novembre december",
+   "line": "The day counts run: 31 in January, 28 in February, 31 in March, 30 in April, 31 in May, 30 in June, 31 in July, 31 in August, 30 in September, 31 in October, 30 in November, 31 in December.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-10",
+   "match": "natheles al-though that iulius cesar took dayes out of feverer and put hem in his moneth of iuille and augustus cesar cleped the moneth of august after his name and ordeyned it of dayes yit truste wel that the sonne dwelleth ther-for nevere the more ne lesse in oon signe than in another",
+   "line": "But although Julius Caesar took two days from February and put them into his month of July, and Augustus Caesar named the month of August after himself and gave it 31 days, you can be sure that the sun stays no longer and no shorter in one sign than in another because of it.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-11",
+   "match": "than folwen the names of the halidayes in the kalender and next hem the lettres of the abc on which they fallen",
+   "line": "After that come the calendar's saints' days, each beside the letter of the alphabet that its date falls on.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-11",
+   "match": "and for the more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-12",
+   "match": "next the forseide cercle of the abc under the cros-lyne is marked the scale in maner of two squyres or elles in manere of laddres that serveth by hise poyntes and his devisiouns of ful many a subtil conclusioun",
+   "line": "Next to this circle of letters, below the cross-line, the scale is marked, shaped like two set-squares, or like ladders. With its 12 points and its divisions it serves for a great many subtle problems.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-12",
+   "match": "of this forseide scale fro the croos-lyne un-to the verre angle is cleped umbra versa and the nether partie is cleped the umbra recta or elles umbra extensa",
+   "line": "The part of this scale from the cross-line to the corner is called _umbra versa_, and the lower part is called _umbra recta_, or _umbra extensa_.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-12",
+   "match": "and for the more declaracioun lo here the figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-13",
+   "match": "thanne hastow a brood rewle that hath on either ende a square plate perced with a certein holes some more and some lesse to resseyven the stremes of the sonne by day and eek by mediacioun of thyn eye to knowe the altitude of sterres by nighte",
+   "line": "Then you have a broad rule, with a square plate at each end pierced with a number of holes, some larger and some smaller. They let through the sun's rays by day, and by night, with your eye at them, they let you find the altitude of the stars.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-13",
+   "match": "and for the more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-14",
+   "match": "thanne is ther a large pyn in maner of an extree that goth thorow the hole that halt the tables of the clymates and the riet in the wombe of the moder thorw which pyn ther goth a litel wegge which that is cleped the hors that streyneth alle thise parties to-hepe",
+   "line": "A big pin, like an axle, comes next. It passes through the hole that keeps the latitude plates and the rete inside the mother's hollow, and a small wedge known as 'the horse' goes through the pin to clamp all the pieces together.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-14",
+   "match": "this forseide grete pyn in maner of an extree is imagined to be the pol artik in thyn astrolabie",
+   "line": "This great pin, like an axle, stands for the Arctic Pole on your astrolabe.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-14",
+   "match": "and for the more declaracioun lo here the figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-15",
+   "match": "the wombe-side of thyn astrolabie is also devyded with a longe croys in foure quarters from est to west fro south to north fro right syde to left syde as is the bak-syde",
+   "line": "The front of your astrolabe is also divided into four quarters by a long cross, from east to west, from south to north, from right side to left side, just like the back.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-15",
+   "match": "and for the more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-16",
+   "match": "the bordure of which wombe-side is devyded fro the poynt of the est lyne un-to the poynt of the south lyne under the ring in degres",
+   "line": "The border of the front is divided into 90 degrees from the end of the east line to the end of the south line under the ring,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-16",
+   "match": "and by that same proporcioun is every quarter devyded as is the bak-syde that amonteth degrees",
+   "line": "and every quarter is divided the same way, as on the back, 360 degrees in all.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-16",
+   "match": "and understond wel that degrees of this bordure ben answering and consentrik to the degrees of the equinoxial that is devyded in the same nombre as every othere cercle is in the heye hevene",
+   "line": "Understand that the degrees of this border match the degrees of the equinoctial and share its centre, and the equinoctial is divided into the same number of degrees as every other circle in the high heavens.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-16",
+   "match": "this same bordure is devyded also with lettres capitals and a smal croys above the south lyne that sheweth the houres equals of the clokke",
+   "line": "This border is also marked with 23 capital letters and a small cross above the south line, which show the 24 equal hours of the clock.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-16",
+   "match": "and as i have said of thise degrees maken a mile-wey and mile-wey maken an houre",
+   "line": "As I have said, 5 of these degrees make a mile-way, and 3 mile-ways make an hour.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-16",
+   "match": "and every degree of this bordure conteneth minutes and every minut secoundes",
+   "line": "Every degree of this border is 4 minutes, and every minute 60 seconds.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-16",
+   "match": "now have i told thee twye",
+   "line": "Now I have told you twice.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-16",
+   "match": "and for the more declaracioun lo here the figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "the plate under thy riet is descryved with principal cercles",
+   "line": "The plate under your rete is drawn with 3 main circles.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "of which the leste is cleped the cercle of cancer by-cause that the heved of cancer turneth evermor consentrik up-on the same cercle",
+   "line": "The smallest is called the circle of Cancer, because the beginning of Cancer always turns on that same circle, around the same centre.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "in this heved of cancer is the grettest declinacioun northward of the sonne",
+   "line": "At this beginning of Cancer the sun reaches its greatest declination to the north.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "and ther-for is he cleped the solsticioun of somer",
+   "line": "That is why it is called the summer solstice.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "whiche declinacioun aftur ptholome is degrees and minutes as wel in cancer as in capricorne",
+   "line": "According to Ptolemy, this declination is 23 degrees and 50 minutes, in Cancer and in Capricorn alike.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "this signe of cancre is cleped the tropik of somer of tropos that is to seyn agaynward",
+   "line": "This sign of Cancer is called the tropic of summer, from _tropos_, which means 'turning back',",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "for thanne by-ginneth the sonne to passe fro us-ward",
+   "line": "because then the sun begins to move away from us.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "and for the more declaracioun lo here the figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "the middel cercle in wydnesse of thise is cleped the cercle equinoxial",
+   "line": "The middle-sized of these 3 circles is called the equinoctial circle,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "up-on whiche turneth evermo the hedes of aries and libra",
+   "line": "and the beginnings of Aries and Libra always turn on it.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "and understond wel that evermo this cercle equinoxial turneth iustly fro verrey est to verrey west",
+   "line": "Understand that this equinoctial circle always turns exactly from due east to due west,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "as i have shewed thee in the spere solide",
+   "line": "as I have shown you on the solid globe.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "this same cercle is cleped also the weyere equator of the day",
+   "line": "This circle is also called the weigher, the _equator_, of the day,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "for whan the sonne is in the hevedes of aries and libra than ben the dayes and the nightes ilyke of lengthe in al the world",
+   "line": "since day and night last equally long everywhere on earth while the sun stands at the start of Aries or of Libra.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "and ther-fore ben thise two signes called the equinoxies",
+   "line": "That is why these two signs are called the equinoxes.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "and alle that moeveth with-in the hevedes of thise aries and libra his moeving is cleped northward",
+   "line": "Anything that moves between the beginnings of Aries and Libra, on the inner side, is said to move northward,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "and alle that moeveth with-oute thise hevedes his moeving is cleped south-ward as fro the equinoxial",
+   "line": "and anything that moves on the outer side is said to move southward from the equinoctial.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "tak keep of thise latitudes north and sowth and forget it nat",
+   "line": "Pay attention to these latitudes north and south, and do not forget them.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "by this cercle equinoxial ben considered the houres of the clokke",
+   "line": "The 24 hours of the clock are reckoned by this equinoctial circle,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "for everemo the arysing of degrees of the equinoxial maketh an houre equal of the clokke",
+   "line": "because the rising of 15 degrees of the equinoctial always makes one equal hour of the clock.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "this equinoxial is cleped the girdel of the firste moeving or elles of the angulus primi motus vel primi mobilis",
+   "line": "This equinoctial is called the girdle of the first motion, _angulus primi motus vel primi mobilis_.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "and nota that firste moeving is cleped moeving of the firste moevable of the spere whiche moeving is fro est to west and eft agayn in-to est",
+   "line": "Note that the first motion means the motion of the first movable, the eighth sphere, which moves from east to west and back round to the east.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "also it is clepid girdel of the first moeving for it departeth the firste moevable that is to seyn the spere in two ilyke parties evene-distantz fro the poles of this world",
+   "line": "It is called the 'girdle' of the first motion because it divides the first movable, that is, the sphere, into two equal halves, each the same distance from the poles of the world.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "the wydeste of thise three principal cercles is cleped the cercle of capricorne by-cause that the heved of capricorne turneth evermo consentrik up-on the same cercle",
+   "line": "Of the three main circles, the largest bears the name of Capricorn, since the first point of Capricorn always travels round on it, sharing its centre.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "in the heved of this for-seide capricorne is the grettest declinacioun southward of the sonne and ther-for is it cleped the solsticioun of winter",
+   "line": "At the beginning of Capricorn the sun reaches its greatest declination to the south, and so it is called the winter solstice.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "this signe of capricorne is also cleped the tropik of winter for thanne byginneth the sonne to come agayn to us-ward",
+   "line": "This sign of Capricorn is also called the tropic of winter, because then the sun begins to come back toward us.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-17",
+   "match": "and for the more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-18",
+   "match": "upon this forseide plate ben compassed certein cercles that highten almicanteras of which som of hem semen perfit cercles and somme semen inperfit",
+   "line": "On this plate certain circles are drawn with compasses, called almucantars. Some of them look like complete circles and some look incomplete.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-18",
+   "match": "the centre that standith a-middes the narwest cercle is cleped the senith",
+   "line": "The centre in the middle of the smallest circle is called the zenith,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-18",
+   "match": "and the netherest cercle or the firste cercle is clepid the orisonte that is to seyn the cercle that devydeth the two emisperies that is the partie of the hevene a-bove the erthe and the partie be-nethe",
+   "line": "and the lowest one, the first, is named the horizon. It is the circle separating the two hemispheres: the half of the sky over the earth and the half under it.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-18",
+   "match": "thise almicanteras ben compowned by two and two al-be-it so that on divers astrolabies some almicanteras ben devyded by oon and some by two and somme by three after the quantite of the astrolabie",
+   "line": "These almucantars are drawn every two degrees, though on different astrolabes some are drawn every degree, some every two, and some every three, depending on the size of the astrolabe.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-18",
+   "match": "this forseide senith is imagened to ben the verrey point over the crowne of thyn heved",
+   "line": "This zenith is taken to be the point exactly above the crown of your head,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-18",
+   "match": "and also this senith is the verrey pool of the orisonte in every regioun",
+   "line": "and it is also the true pole of the horizon, wherever you are.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-18",
+   "match": "and for the more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-19",
+   "match": "from this senith as it semeth ther come a maner crokede strykes lyke to the clawes of a loppe or elles like to the werk of a womanes calle in kerving overthwart the almikanteras",
+   "line": "From this zenith, as it seems, come curving lines like a spider's legs, or like the mesh of a woman's hairnet, cutting across the almucantars.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-19",
+   "match": "and thise same strykes or divisiouns ben cleped azimuthz",
+   "line": "These lines, or divisions, are called azimuths.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-19",
+   "match": "and they devyden the orisonte of thyn astrolabie in four and twenty devisiouns",
+   "line": "They divide the horizon of your astrolabe into twenty-four parts.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-19",
+   "match": "and thise azimutz serven to knowe the costes of the firmament and to othre conclusiouns as for to knowe the cenith of the sonne and of every sterre",
+   "line": "These azimuths are used to find the directions of the sky, and for other problems, such as finding the azimuth of the sun and of every star.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-19",
+   "match": "and for more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-20",
+   "match": "next thise azimutz under the cercle of cancer ben ther twelve devisiouns embelif moche like to the shap of the azimutes that shewen the spaces of the houres of planetes",
+   "line": "Beyond these azimuths, below the circle of Cancer, there are twelve slanting divisions, shaped much like the azimuths, which show the spans of the planetary hours.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-20",
+   "match": "and for more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "the riet of thyn astrolabie with thy zodiak shapen in maner of a net or of a loppe-webbe after the olde descripcioun which thow mayst tornen up and doun as thy-self lyketh conteneth certein nombre of sterres fixes with hir longitudes and latitudes determinat",
+   "line": "The rete of your astrolabe, with your zodiac on it, is shaped like a net or a cobweb, as the old description has it, and you can turn it round however you like. It carries a certain number of fixed stars, each at its exact longitude and latitude,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "yif so be that the makere have nat erred",
+   "line": "provided the maker has made no mistake.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "the names of the sterres ben writen in the margin of the riet ther as they sitte",
+   "line": "The names of the stars are written on the rete beside where they sit,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "of whiche sterres the smale poynt is cleped the centre",
+   "line": "and the small point that marks each star is called its centre.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "and understond also that alle sterres sittinge with-in the zodiak of thyn astrolabie ben cleped sterres of the north for they arysen by northe the est lyne",
+   "line": "Understand also that all the stars set inside the zodiac of your astrolabe are called 'stars of the north,' because they rise north of the east line.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "and alle the remenant fixed out of the zodiak ben cleped sterres of the south but i sey nat that they arysen alle by southe the est lyne",
+   "line": "All the other fixed stars, outside the zodiac, are called 'stars of the south'; but I do not say they all rise south of the east line.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "witnesse on aldeberan and algomeysa",
+   "line": "Aldebaran and Algomeysa show that they do not.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "generally understond this rewle that thilke sterres that ben cleped sterres of the north arysen rather than the degree of hir longitude and alle the sterres of the south arysen after the degree of hir longitude",
+   "line": "Take this as a general rule: the stars called stars of the north rise before the degree of their longitude, and all the stars of the south rise after the degree of their longitude.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "this is to seyn sterres fixed in thyn astrolabie",
+   "line": "I mean the fixed stars on your astrolabe.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "the mesure of this longitude of sterres is taken in the lyne ecliptik of hevene under which lyne whan that the sonne and the mone ben lyne-right or elles in the superfice of this lyne than is the eclips of the sonne or of the mone",
+   "line": "This longitude of the stars is measured along the ecliptic line of the heavens. When the sun and the moon are in a straight line on this line, or close to it, there is an eclipse of the sun or of the moon,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "as i shal declare and eek the cause why",
+   "line": "as I shall explain, together with the reason why.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "but sothly the ecliptik lyne of thy zodiak is the outtereste bordure of thy zodiak ther the degrees ben marked",
+   "line": "On your astrolabe, though, the ecliptic line of your zodiac is the outermost edge of your zodiac, where the degrees are marked.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "thy zodiak of thyn astrolabie is shapen as a compas which that conteneth a large brede as after the quantite of thyn astrolabie",
+   "line": "The zodiac of your astrolabe is a broad ring, as broad as the size of your astrolabe allows,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "in ensample that the zodiak in hevene is imagened to ben a superfice contening a latitude of twelve degrees wheras al the remenant of cercles in the hevene ben imagined verrey lynes with-oute eny latitude",
+   "line": "to show that the zodiac in the heavens is thought of as a band twelve degrees wide, whereas all the other circles in the heavens are thought of as true lines with no width at all.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "amiddes this celestial zodiak ys imagined a lyne which that is cleped the ecliptik lyne under which lyne is evermo the wey of the sonne",
+   "line": "Down the middle of this heavenly zodiac runs an imagined line called the ecliptic line, and the sun's path always lies along it.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "thus ben ther six degrees of the zodiak on that on side of the lyne and six degrees on that other",
+   "line": "So there are six degrees of the zodiac on one side of the line and six on the other.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "this zodiak is devided in twelve principal devisiouns that departen the twelve signes",
+   "line": "This zodiac is divided into twelve main parts, which separate the twelve signs.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "and for the streitnes of thin astrolabie than is every smal devisioun in a signe departid by two degrees and two",
+   "line": "Because your astrolabe is small, the little divisions within each sign are marked every two degrees,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "i mene degrees contening sixty minutes",
+   "line": "and by degrees I mean degrees of sixty minutes.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "and this forseide hevenissh zodiak is cleped the cercle of the signes or the cercle of the bestes",
+   "line": "People call this zodiac in the heavens the circle of the signs, and also the circle of the beasts.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "for zodia in langage of greek sowneth bestes in latin tonge",
+   "line": "That is because _zodia_ in Greek means 'beasts' in Latin,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "and in the zodiak ben the twelve signes that ban names of bestes",
+   "line": "and the zodiac holds the twelve signs, which have the names of beasts;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "or elles for whan the sonne entreth in any of the signes he taketh the propretee of swich bestes",
+   "line": "or because when the sun enters any of the signs it takes on the nature of that beast;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "or elles for that the sterres that ben there fixed ben disposed in signes of bestes or shape like bestes",
+   "line": "or because the stars fixed there are arranged in the figures of beasts, or shaped like beasts;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "or elles whan the planetes ben under thilke signes they causen us by hir influence operaciouns and effectes lyk to the operaciouns of bestes",
+   "line": "or because when the planets are in those signs, their influence works effects in us like the ways of beasts.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "and understonde also that whan an hot planete cometh in-to an hot signe than encresseth his hete",
+   "line": "Know too that a hot planet entering a hot sign grows hotter,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "and yif a planete be cold thanne amenuseth his coldnesse by-cause of the hote signe",
+   "line": "and if the planet is cold, its coldness lessens, because of the hot sign.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "and by this conclusioun maystow take ensample in alle the signes be they moist or drye or moeble or fix",
+   "line": "You can apply this to all the signs, whether they are moist or dry, movable or fixed,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "rekening the qualitee of the planete as i first seide",
+   "line": "taking account of the planet's nature as I said first.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "and everich of thise twelve signes hath respecte to a certein parcelle of the body of a man and hath it in governance",
+   "line": "Each of these twelve signs is linked to a certain part of the human body and governs it:",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "as aries hath thyn heved and taurus thy nekke and thy throte gemini thyn armholes and thyn armes and so forth",
+   "line": "Aries has your head, Taurus your neck and throat, Gemini your armpits and arms, and so on,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "as shal be shewed more pleyn in the fifte partie of this tretis",
+   "line": "as will be shown more plainly in the fifth part of this treatise.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "this zodiak which that is part of the eighte spere over-kerveth the equinoxial",
+   "line": "This zodiac, which is part of the eighth sphere, crosses the equinoctial,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "and he over-kerveth him again in evene parties",
+   "line": "crossing it again on the opposite side, so that they cut each other in halves;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "and that on half declineth southward and that other northward as pleynly declareth the tretis of the spere",
+   "line": "one half of the zodiac slopes to the south and the other to the north, as the treatise on the sphere plainly explains.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-21",
+   "match": "and for more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-22",
+   "match": "thanne hastow a label that is schapen lyk a rewle save that it is streit and hath no plates on either ende with holes",
+   "line": "Then you have a label, shaped like a rule except that it is narrow and has no pierced plates at its ends.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-22",
+   "match": "but with the smale point of the forseide label shallow calcule thyne equaciouns in the bordure of thin astrolabie as by thyn almury",
+   "line": "With the small point of this label you will work out your reckonings on the border of your astrolabe, as you do with your almury.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-22",
+   "match": "and for the more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-23",
+   "match": "thyn almury is cleped the denticle of capricorne or elles the calculer",
+   "line": "Your almury is called the tooth of Capricorn, or the calculator.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-23",
+   "match": "this same almury sit fix in the bed of capricorne and it serveth of many a necessarie conclusioun in equaciouns of thinges as shal be shewed",
+   "line": "It sits fixed at the beginning of Capricorn, and it is used for many necessary problems in working out quantities, as will be shown.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p1-23",
+   "match": "and for the more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-30",
+   "match": "lok whan that a planete is in the lyne meridional yif that hir altitude be of the same heyghte that is the degree of the sonne for that day and than is the planete in the verrey wey of the sonne and hath no latitude",
+   "line": "Watch for a planet crossing the meridian. If its altitude is the same as the altitude of the sun's degree for that day, the planet is exactly on the sun's path and has no latitude.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-30",
+   "match": "and yif the altitude of the planete be heyere than the degree of the sonne than is the planete north fro the wey of the sonne swich a quantite of latitude as sheweth by thyn almikanteras",
+   "line": "If the planet stands higher than the sun's degree, it is north of the sun's path, by as much latitude as your almucantars show.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-30",
+   "match": "and yif the altitude of the planete be lasse than the degree of the sonne thanne is the planete south fro the wey of the sonne swich a quantite of latitude as sheweth by thyn almikanteras",
+   "line": "If it stands lower, it is south of the sun's path, by as much latitude as your almucantars show.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-30",
+   "match": "this is to seyn fro the wey wher-as the sonne wente thilke day but nat from the wey of the sonne in every place of the zodiak",
+   "line": "That is, measured from the path the sun took that day, not from the sun's path through every part of the zodiac.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-30",
+   "match": "and for the more declaracioun lo here the figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-01",
+   "match": "and for the more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-02",
+   "match": "and for the more declaracioun lo here the figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-04",
+   "match": "and for the more declaracioun lo here the figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-05",
+   "match": "and for more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-06",
+   "match": "and for the more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-07",
+   "match": "and for the more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-08",
+   "match": "and for the more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-09",
+   "match": "and for the more declaracioun lo here the figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-10",
+   "match": "and for the more declaracioun lo here the figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-11",
+   "match": "and for the more declaracioun lo here the figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-12",
+   "match": "and for the more declaracioun lo here the figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-13",
+   "match": "and for the more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-14",
+   "match": "and for the more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-15",
+   "match": "and for the more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-16",
+   "match": "and for more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-17",
+   "match": "and for the more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-18",
+   "match": "and for more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-19",
+   "match": "and for more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-20",
+   "match": "and for the more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-22",
+   "match": "and for more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-24",
+   "match": "and for more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-26",
+   "match": "and for the more declaracioun lo here the figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-27",
+   "match": "and for the more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-28",
+   "match": "and for more declaracioun lo here the figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-29",
+   "match": "and for the more declaracioun lo here the figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-32",
+   "match": "and for the more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-33",
+   "match": "and for the more declaracioun lo here the figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-34",
+   "match": "and for the more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-35",
+   "match": "and for the more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-37",
+   "match": "and for the more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-38",
+   "match": "and for more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-39",
+   "match": "and for more declaracioun lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-03",
+   "match": "and for the more declaracion lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-21",
+   "match": "and for more declaracion lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-23",
+   "match": "and for more declaracion lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-25",
+   "match": "and for more declaracion lo here thy figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-31",
+   "match": "and for the more declaracion lo here the figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-36",
+   "match": "and for the more declaracion lo here the figure",
+   "line": "To make this clearer, here is the figure.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "00-prologue",
    "match": "thyn",
    "line": "your",
    "kind": "modernised-form"

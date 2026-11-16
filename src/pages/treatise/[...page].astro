@@ -179,8 +179,10 @@ const PLACE_INLINE = String.raw`(function (s) {
       var mk = document.createElement("span");
       mk.className = "ph-mark";
       mk.setAttribute("aria-hidden", "true");
-      var host = node.parentElement && node.parentElement.closest("ruby");
-      if (host && p.contains(host)) host.before(mk);
+      // Before the phrase's first word: its glossed word if it is one, else at the letter. (Rubies are plain
+      // inline text now, tg 17988, and one may hold a whole sentence, tg 18043, so not before the ruby.)
+      var host = node.parentElement && node.parentElement.closest(".gw");
+      if (host && p.contains(host) && off === 0) host.before(mk);
       else if (off > 0 && off < node.nodeValue.length) node.parentNode.insertBefore(mk, node.splitText(off));
       else node.parentNode.insertBefore(mk, node);
       mk.before(w);
@@ -209,7 +211,7 @@ const PLACE_INLINE = String.raw`(function (s) {
                 if (r) out.push({ t: c, o: o, r: r });
               }
             } else if (c.nodeType === 1) {
-              if (c.tagName === "RUBY") { var r1 = firstChar(c); if (r1) out.push({ el: c, r: r1 }); continue; }
+              if (c.tagName === "RUBY") { units(c, out); continue; } // a ruby may hold a whole sentence: its words
               if (c.classList.contains("inline-win") || c.tagName === "RT" || getComputedStyle(c).display === "none") continue;
               if (c.classList.contains("ph-mark")) { out.push({ el: c, r: c.getBoundingClientRect() }); continue; }
               if (!c.firstChild) { var r2 = firstChar(c); if (r2) out.push({ el: c, r: r2 }); }
@@ -2365,20 +2367,27 @@ const tocSecs = [
           const art = row.querySelector<HTMLElement>(".pr-art");
           if (!p || !m || !art) return;
           if (centre) {
-            row.querySelectorAll<Win>(".pr-me > .t-aside, .pr-me .inline-win").forEach((w) => {
+            row.querySelectorAll<Win>(".pr-me > .t-aside, .pr-me .inline-win, .pr-me .t-inset").forEach((w) => {
               park(w);
               if (w.matches('.t-aside[data-size="large"]')) row.before(w);
+              // An editorial note runs centred across both columns, between the rows (Jes tg 18045:
+              // "'what became of the five parts' should be centered, not one of the columns").
+              else if (w.matches(".t-inset")) (p.compareDocumentPosition(w) & Node.DOCUMENT_POSITION_FOLLOWING ? row.after(w) : row.before(w));
               else art.appendChild(w);
             });
           } else if (mod) {
             row.querySelectorAll<Win>(".pr-me .inline-win, .pr-me .t-inset").forEach((w) => {
               park(w);
               if (w.__mark && p.contains(w.__mark)) {
-                // the first word unit after the ☞, and its twin in the modern line
+                // The word unit holding the ☞ (a whole sentence, after the clarity pass: the figure goes after
+                // its modern sentence), else the first unit after it (the figure goes before its twin).
                 const units = [...p.querySelectorAll("ruby.lu")];
-                const k = units.findIndex((u) => w.__mark!.compareDocumentPosition(u) & Node.DOCUMENT_POSITION_FOLLOWING);
-                const twin = k >= 0 ? m.querySelectorAll(":scope > span")[k] : null;
-                if (twin) twin.before(w);
+                const twins = m.querySelectorAll(":scope > span");
+                const inside = units.findIndex((u) => u.contains(w.__mark!));
+                const k = inside >= 0 ? inside : units.findIndex((u) => w.__mark!.compareDocumentPosition(u) & Node.DOCUMENT_POSITION_FOLLOWING);
+                const twin = k >= 0 ? twins[k] : null;
+                if (twin && inside >= 0) twin.after(w);
+                else if (twin) twin.before(w);
                 else m.before(w);
               } else if (p.compareDocumentPosition(w) & Node.DOCUMENT_POSITION_FOLLOWING) m.after(w);
               else m.before(w);
