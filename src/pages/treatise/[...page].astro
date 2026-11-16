@@ -575,11 +575,11 @@ const tocSecs = [
       </nav>
       )}
 
-      <p class="gl-hint"><span class="gh-wide">Chaucer's words on the left, a modern line on the right.</span><span class="gh-narrow">Chaucer's words, or a modern line: switch with the button at the foot of the screen.</span> Tap or hover a <span class="gl-cue">dotted</span> word for its definition and source.</p>
+      <p class="gl-hint"><span class="gh-wide">A modern line on the left, Chaucer's words on the right.</span><span class="gh-narrow">A modern line, or Chaucer's words: switch with the button at the foot of the screen.</span> Tap or hover a <span class="gl-cue">dotted</span> word for its definition and source.</p>
       {pageSections.some((s) => s.glossed) && (
         <div class="t-view" role="group" aria-label="Text to show">
-          <button type="button" data-view="me" aria-pressed="true">Chaucer</button>
-          <button type="button" data-view="mod" aria-pressed="false">Modern</button>
+          <button type="button" data-view="mod" aria-pressed="true">Modern</button>
+          <button type="button" data-view="me" aria-pressed="false">Chaucer</button>
         </div>
       )}
 
@@ -1898,9 +1898,9 @@ const tocSecs = [
   }
 
   /* --- two columns (Jes tg 17988) ---------------------------------- */
-  /* Wide: Chaucer's words on the left with the figures, the modern line on the right, row by row so each
-     modern paragraph starts level with its Middle English. Narrow: one column, and a switch shows one or
-     the other. The modern words no longer sit under Chaucer's. */
+  /* Wide: the modern line on the left, the figures in the centre, Chaucer's words on the right (tg 18003),
+     row by row so each modern paragraph starts level with its Middle English. Narrow: one column, and a
+     switch shows one or the other, modern first. The modern words no longer sit under Chaucer's. */
   .t-sec[data-glossed] .t-me :global(rt) {
     display: none;
   }
@@ -1943,11 +1943,21 @@ const tocSecs = [
     .t-sec[data-glossed] {
       max-width: 74rem;
     }
-    /* Chaucer | art | modern: the figures stand on the centre line between the two texts (tg 17995). */
+    /* The figures stand on the centre line between the two texts (tg 17995). */
+    /* modern | art | Chaucer (tg 18003: "can we put the modern text on the left") */
     .pr {
       display: grid;
       grid-template-columns: minmax(0, 1fr) 13rem minmax(0, 1fr);
       column-gap: 2.25rem;
+    }
+    .pr-mod {
+      grid-area: 1 / 1;
+    }
+    .pr-art {
+      grid-area: 1 / 2;
+    }
+    .pr-me {
+      grid-area: 1 / 3;
     }
     .pr-art {
       /* a flex column: the figures' margins never collapse, so a figure's top margin is exactly the gap level() sets */
@@ -1975,14 +1985,15 @@ const tocSecs = [
     .gh-narrow {
       display: inline;
     }
-    .pr-mod {
+    /* The modern line shows unless the switch says Chaucer (html.t-meview). */
+    .pr-me > :global(p) {
       display: none;
     }
-    :global(html.t-modview) .pr-me > :global(p) {
-      display: none;
-    }
-    :global(html.t-modview) .pr-mod {
+    :global(html.t-meview) .pr-me > :global(p) {
       display: block;
+    }
+    :global(html.t-meview) .pr-mod {
+      display: none;
     }
     .t-view {
       display: flex;
@@ -2292,7 +2303,7 @@ const tocSecs = [
     initSky(root);
 
     // --- Two columns (Jes tg 17988, 17995) ----------------------------------
-    // Wide (1000px+): Chaucer | art | modern. The figures leave Chaucer's paragraphs for the centre column of
+    // Wide (1000px+): modern | art | Chaucer (tg 18003). The figures leave Chaucer's paragraphs for the centre column of
     // their row ("I want the art on prologue to be in the center line"), each set level with its ☞ phrase (or
     // its paragraph), never above the one before it. A large step-by-step figure goes above the row instead.
     // Narrow: one column, Chaucer's or the modern line, chosen by the switch at the foot of the screen
@@ -2303,9 +2314,11 @@ const tocSecs = [
       const views = root.querySelectorAll<HTMLButtonElement>(".t-view button");
       const wide = window.matchMedia("(min-width: 1000px)");
       const html = document.documentElement;
-      let view = "me";
+      // Modern first (Jes tg 18003: "can we put the modern text on the left"): the phone opens on the modern
+      // line unless this device chose Chaucer.
+      let view = "mod";
       try {
-        view = localStorage.getItem("treatise-view") === "mod" ? "mod" : "me";
+        view = localStorage.getItem("treatise-view") === "me" ? "me" : "mod";
       } catch {}
       let moved: Win[] = [];
       const park = (w: Win) => {
@@ -2344,6 +2357,7 @@ const tocSecs = [
         const mod = !centre && view === "mod";
         html.classList.toggle("t-centre", centre);
         html.classList.toggle("t-modview", mod);
+        html.classList.toggle("t-meview", !centre && !mod);
         views.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.view === view)));
         root.querySelectorAll<HTMLElement>(".pr").forEach((row) => {
           const p = row.querySelector<HTMLElement>(".pr-me > p");
