@@ -206,3 +206,4 @@ treatise-p2-3-time.js re-copied byte-for-byte from astrolabe-video 6060d72 (inst
 2026-11-16: treatise-p2-37-houses-label-ink.js copied byte-for-byte from astrolabe-video 9c67994.
 2026-11-16: treatise-p2-41-tower.js copied byte-for-byte from astrolabe-video 9c67994.
 2026-11-16: treatise-p2-8-equal-hours-ink.js copied byte-for-byte from astrolabe-video 9c67994.
+2026-11-16: treatise-prologue-causes-ink.js copied byte-for-byte from astrolabe-video 374ece3 (the three causes in one loop; replaces cause-1-ink, cause-2a-ink and cause-2b on the Prologue, jes tg 18066).
