@@ -4,7 +4,8 @@
 //
 // A painted miniature, in its own colours: Chaucer at his desk, Lewis at its far end.  He lifts the pen; on the
 // wall its shadow is a sword; Envy, a small green beast, bolts.  The figures are jointed (shared modules
-// figures-rig.js and figures.js); the poses, desk, bench and branch are the film's own (prologue-data.js).
+// figures-rig.js and figures.js); the poses, desk, bench and branch are the film's own (prologue-data.js).  Under it,
+// always, the line as its caption (jes tg 18018).
 // Our own drawing throughout; nothing is traced.
 
 import RIG from "./lib/figures-rig.js";
@@ -134,6 +135,11 @@ export function mount(el) {
   const feather = [node("path", { fill: "none", stroke: INK, "stroke-width": 4.62, "stroke-linejoin": "round" }, quill), node("path", { fill: "#f4efe2" }, quill)];
   const shaft = node("line", { stroke: INK, "stroke-width": 1.8, "stroke-linecap": "round" }, quill);
   const beast = envy(g);
+  // the line itself as the picture's caption (jes tg 18018), on a band of the page across the floor's foot; Chaucer's
+  // own sentence, in modern spelling
+  node("rect", { x: -96, y: 80, width: 192, height: 17, fill: "#f4efe2", "fill-opacity": 0.93, stroke: INK, "stroke-width": 0.6 }, svg);
+  const cap = node("text", { x: 0, y: 92, "text-anchor": "middle", "font-size": 11.5, "font-weight": 600, "font-style": "italic", fill: "#7d2622", "font-family": "inherit" }, svg);
+  cap.textContent = "\u201cwith this sword shall I slay envy\u201d";
   el.appendChild(svg);
   const s = { shadow, gleam, beast, lewis, chaucer, chPlace, feather, shaft, raf: 0, t0: 0, tm: STILL };
   instances.set(el, s);
