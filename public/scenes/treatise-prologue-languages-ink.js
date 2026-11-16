@@ -6,17 +6,20 @@
 //
 // A map (jes tg 17891), COLOURED WOODCUT on vellum: the coasts of the Mediterranean, the Near East and England from
 // Natural Earth 1:110m land (public domain; lib/map-oldworld-data.js, scripts/web_export_map.py), re-inked with the
-// woodcut's line.  The map stands drawn throughout; on it, in red, the tongues as Chaucer names them, each set over its
-// people's lands (no cities, no dates): Greek, Arabic, Hebrew, Latin; then his "Latin folk han hem furst out of othre
-// diverse langages" as arrows into Latin; then on into English, his own.  Our own drawing over real coasts.
+// woodcut's line.  v2 (jes tg 18011: "the labels stay present the whole time but something is shown moving between
+// them"): the map and all five tongues stand throughout, each over its people's lands (no cities, no dates); what
+// moves is "thise same conclusiouns", a little astrolabe carried along a dotted road, its trail left behind.  It goes
+// into Latin from Greek, Arabic and Hebrew in turn ("han hem furst out of othre diverse langages"; FLAG, as v1: the
+// text does not name which tongues, so the three roads are our reading), then from Latin on into English, his own.
+// The two tongues of the road being travelled are in red; the rest in ink.  Our own drawing over real coasts.
 
 import M from "./lib/map-oldworld-data.js";
 import { woodcut, RED, VELLUM, WASH } from "./lib/woodcut.js";
 
 const NS = "http://www.w3.org/2000/svg";
 const instances = new WeakMap();
-const LOOP = 16000;
-const STILL = 12500; // ms: all the names, the arrows, English
+const LOOP = 18000;
+const STILL = 13800; // ms: every road travelled, the astrolabe come to English
 const O = [0, -10]; // the map's middle in the window
 
 function node(tag, attrs, parent) {
@@ -30,14 +33,30 @@ const ease = (u) => (u < 0 ? 0 : u > 1 ? 1 : u * u * (3 - 2 * u));
 const span = (t, a, b) => ease((t - a) / (b - a));
 // a place (longitude, latitude) on the map, in the window
 const at = (lon, lat) => [O[0] + (lon - M.centre[0]) * M.k * M.scale, O[1] - (lat - M.centre[1]) * M.scale];
-// the tongues, over their peoples' lands, in the order the text names them
+// the tongues, over their peoples' lands, in the order the text names them; English last
 const TONGUES = [
-  { word: "Greek", at: at(22.5, 39.4), t: 0.8 },
-  { word: "Arabic", at: at(44, 27.5), t: 1.8 },
-  { word: "Hebrew", at: at(35.0, 31.6), t: 2.8 },
-  { word: "Latin", at: at(12.8, 42.6), t: 3.8 },
+  { word: "Greek", at: at(23.6, 38.4) },
+  { word: "Arabic", at: at(44, 27.5) },
+  { word: "Hebrew", at: at(35.0, 31.6) },
+  { word: "Latin", at: at(11.8, 43.4) },
+  { word: "English", at: at(-1.5, 52.6) },
 ];
-const ENGLISH = { word: "English", at: at(-1.5, 52.6), t: 10.4 };
+// the roads: from, to, where each leaves and arrives beside the words (window units off the name's middle, so the
+// road never runs under a name), the bend of the curve, and when it is travelled (s).  Arabic's along Africa's coast.
+const ROADS = [
+  { a: 0, b: 3, from: [-18, 2], to: [18, 4], bend: [0, 4], t0: 0.8, t1: 3.0 },
+  { a: 1, b: 3, from: [-22, 2], to: [-4, 10], bend: [6, 34], t0: 3.4, t1: 6.2 },
+  { a: 2, b: 3, from: [-24, 2], to: [8, 10], bend: [4, 10], t0: 6.6, t1: 8.8 },
+  { a: 3, b: 4, from: [-8, -8], to: [8, 10], bend: [-12, -2], t0: 9.6, t1: 12.6 },
+];
+const END = 16.4; // the trails fade; the map and the names stay
+const lerp = (p, q, u) => [p[0] + (q[0] - p[0]) * u, p[1] + (q[1] - p[1]) * u];
+// the first u of a quadratic curve, as its own quadratic (de Casteljau)
+const part = (P0, P1, P2, u) => {
+  const q1 = lerp(P0, P1, u);
+  const q2 = lerp(lerp(P0, P1, u), lerp(P1, P2, u), u);
+  return { d: `M${f(P0[0])} ${f(P0[1])}Q${f(q1[0])} ${f(q1[1])} ${f(q2[0])} ${f(q2[1])}`, end: q2 };
+};
 
 export function mount(el) {
   if (instances.has(el)) return;
@@ -62,35 +81,30 @@ export function mount(el) {
   // the neatline: a double rule
   node("rect", { x: f(x0), y: f(y0), width: f(M.width), height: f(M.height), fill: "none", stroke: "currentColor", "stroke-width": 1.6 }, map);
   node("rect", { x: f(x0 - 2.5), y: f(y0 - 2.5), width: f(M.width + 5), height: f(M.height + 5), fill: "none", stroke: "currentColor", "stroke-width": 0.6 }, map);
-  // the arrows: into Latin from the other tongues; from Latin on into English
-  const arrow = (a, b, bend) => {
-    const m = [(a[0] + b[0]) / 2 + bend[0], (a[1] + b[1]) / 2 + bend[1]];
-    const g = node("g", { opacity: 0 }, svg);
-    const p = node("path", { d: `M${f(a[0])} ${f(a[1])}Q${f(m[0])} ${f(m[1])} ${f(b[0])} ${f(b[1])}`, fill: "none", stroke: RED, "stroke-width": 1.5, "stroke-dasharray": "3 2" }, g);
-    const dx = b[0] - m[0];
-    const dy = b[1] - m[1];
-    const n = Math.hypot(dx, dy);
-    const u = [dx / n, dy / n];
-    const h1 = [b[0] - 6 * u[0] + 3 * u[1], b[1] - 6 * u[1] - 3 * u[0]];
-    const h2 = [b[0] - 6 * u[0] - 3 * u[1], b[1] - 6 * u[1] + 3 * u[0]];
-    node("path", { d: `M${f(b[0])} ${f(b[1])}L${f(h1[0])} ${f(h1[1])}L${f(h2[0])} ${f(h2[1])}Z`, fill: RED }, g);
-    return { g, p };
-  };
-  const L = TONGUES[3].at;
-  const off = (p, q, d) => {
-    const v = [q[0] - p[0], q[1] - p[1]];
-    const n = Math.hypot(...v);
-    return [p[0] + (v[0] / n) * d, p[1] + (v[1] / n) * d];
-  };
-  const into = TONGUES.slice(0, 3).map((T, i) => arrow(off(T.at, L, 12), off(L, T.at, 12), [[0, -14], [6, -18], [0, 14]][i]));
-  const onward = arrow(off(L, ENGLISH.at, 12), off(ENGLISH.at, L, 10), [-14, -8]);
-  const word = (T) => {
-    const t = node("text", { x: f(T.at[0]), y: f(T.at[1] + 4.5), "text-anchor": "middle", "font-size": 13, "font-weight": 700, fill: RED, opacity: 0, "font-family": "inherit", stroke: VELLUM, "stroke-width": 3.5, "stroke-linejoin": "round", "paint-order": "stroke" }, svg);
+  // each road: its whole course faint from the start, its travelled part drawn in red behind the astrolabe
+  const roads = ROADS.map((R) => {
+    const A = TONGUES[R.a].at;
+    const B = TONGUES[R.b].at;
+    const P0 = [A[0] + R.from[0], A[1] + R.from[1]];
+    const P2 = [B[0] + R.to[0], B[1] + R.to[1]];
+    const P1 = [(P0[0] + P2[0]) / 2 + R.bend[0], (P0[1] + P2[1]) / 2 + R.bend[1]];
+    const g = node("g", {}, svg);
+    node("path", { d: part(P0, P1, P2, 1).d, fill: "none", stroke: "currentColor", "stroke-width": 0.9, "stroke-dasharray": "1 3", "stroke-linecap": "round", opacity: 0.45 }, g);
+    const trail = node("path", { fill: "none", stroke: RED, "stroke-width": 1.5, "stroke-dasharray": "3 2" }, g);
+    return { ...R, P0, P1, P2, g, trail };
+  });
+  // the names, always there
+  const words = TONGUES.map((T) => {
+    const t = node("text", { x: f(T.at[0]), y: f(T.at[1] + 4.5), "text-anchor": "middle", "font-size": 12, "font-weight": 700, fill: "currentColor", "font-family": "inherit", stroke: VELLUM, "stroke-width": 3.5, "stroke-linejoin": "round", "paint-order": "stroke" }, svg);
     t.textContent = T.word;
     return t;
-  };
-  const words = TONGUES.map(word);
-  const eng = word(ENGLISH);
+  });
+  // the conclusions: a little astrolabe, its ring, its cross, its shackle
+  const astro = node("g", { opacity: 0 }, svg);
+  node("circle", { cy: -6.2, r: 1.6, fill: "none", stroke: RED, "stroke-width": 1 }, astro);
+  node("circle", { r: 4.6, fill: VELLUM, stroke: RED, "stroke-width": 1.4 }, astro);
+  node("path", { d: "M-4.6 0H4.6M0 -4.6V4.6", stroke: RED, "stroke-width": 0.8 }, astro);
+  node("circle", { r: 2.4, fill: "none", stroke: RED, "stroke-width": 0.7 }, astro);
   const cap = (str) => {
     const t = node("text", { x: 0, y: 84, "text-anchor": "middle", "font-size": 12.5, "font-weight": 600, fill: RED, opacity: 0, "font-family": "inherit", stroke: VELLUM, "stroke-width": 3.5, "stroke-linejoin": "round", "paint-order": "stroke" }, svg);
     t.textContent = str;
@@ -99,21 +113,38 @@ export function mount(el) {
   const c1 = cap("Latin had them from other tongues");
   const c2 = cap("and now in English");
   el.appendChild(svg);
-  const s = { words, eng, into, onward, c1, c2, raf: 0, t0: 0, tm: STILL };
+  const s = { words, roads, astro, c1, c2, raf: 0, t0: 0, tm: STILL };
   instances.set(el, s);
   draw(s, STILL / 1000);
 }
 
 function draw(s, t) {
-  const out = 1 - span(t, 15.0, 15.8); // the marks go; the map stays
-  TONGUES.forEach((T, i) => s.words[i].setAttribute("opacity", f(span(t, T.t, T.t + 0.5) * out)));
-  s.into.forEach((a, i) => {
-    a.g.setAttribute("opacity", f(span(t, 5.0 + 0.4 * i, 5.6 + 0.4 * i) * out));
+  const out = 1 - span(t, END, END + 0.8);
+  // the road being travelled, or the last one begun
+  let cur = -1;
+  s.roads.forEach((R, i) => {
+    if (t >= R.t0 - 0.4) cur = i;
+    const u = span(t, R.t0, R.t1);
+    R.trail.setAttribute("d", u > 0.002 ? part(R.P0, R.P1, R.P2, u).d : "");
+    R.trail.setAttribute("opacity", f(out));
   });
-  s.c1.setAttribute("opacity", f(span(t, 5.4, 6.0) * (1 - span(t, 9.0, 9.4))));
-  s.onward.g.setAttribute("opacity", f(span(t, 9.6, 10.2) * out));
-  s.eng.setAttribute("opacity", f(span(t, ENGLISH.t, ENGLISH.t + 0.5) * out));
-  s.c2.setAttribute("opacity", f(span(t, 10.6, 11.2) * out));
+  const lit = cur < 0 ? [] : [s.roads[cur].a, s.roads[cur].b];
+  s.words.forEach((w, i) => w.setAttribute("fill", lit.includes(i) && t < END ? RED : "currentColor"));
+  if (cur < 0) {
+    s.astro.setAttribute("opacity", 0);
+  } else {
+    const R = s.roads[cur];
+    const u = span(t, R.t0, R.t1);
+    const p = part(R.P0, R.P1, R.P2, u).end;
+    // it appears at each road's start and, but for the last, is gone on arrival (into Latin)
+    const last = cur === s.roads.length - 1;
+    const a = span(t, R.t0 - 0.4, R.t0) * (last ? out : 1 - span(t, R.t1, R.t1 + 0.35));
+    const pulse = 1 + 0.25 * Math.sin(Math.PI * span(t, R.t1, R.t1 + 0.5));
+    s.astro.setAttribute("transform", `translate(${f(p[0])} ${f(p[1])}) scale(${f(pulse)})`);
+    s.astro.setAttribute("opacity", f(a));
+  }
+  s.c1.setAttribute("opacity", f(span(t, 1.0, 1.6) * (1 - span(t, 8.8, 9.2))));
+  s.c2.setAttribute("opacity", f(span(t, 9.6, 10.2) * out));
 }
 
 export function start(el) {
