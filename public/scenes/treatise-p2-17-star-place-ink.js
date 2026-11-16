@@ -23,7 +23,13 @@ import { front, node, f, rim, P, almucantar, SILVER, VELLUM, WASH } from "./lib/
 import { VIEWBOX, layoutOf, watch, stepList } from "./lib/stage.js";
 
 const instances = new WeakMap();
-const LOOP = 34000;
+const SPAN = 34000; // ms: the drawn timeline
+// cut from the loop: stretches where nothing but the bare drawing rested (jes tg 18016; scripts/web_idle_check.sh)
+const CUTS = [[0,150],[33900,34000]];
+const LOOP = SPAN - CUTS.reduce((n, [a, b]) => n + b - a, 0);
+// the loop's time (ms) on the drawn timeline, and back
+const clock = (ms) => CUTS.reduce((t, [a, b]) => (t >= a ? t + b - a : t), ms);
+const unclock = (t) => t - CUTS.reduce((n, [a, b]) => n + (t >= b ? b - a : 0), 0);
 const STILL = 29000; // ms: the middle on the horizon, the star's degree on the meridian named
 const LAYOUT = {
   wide: { C: { x: -76, y: 27, k: 0.67 }, list: { x: 4, y: -78, size: 9.6, lh: 11, gap: 6, indent: 10, width: 142 } },
@@ -103,7 +109,7 @@ const span = (t, a, b) => ease((t - a) / (b - a));
 
 export function mount(el) {
   if (instances.has(el)) return;
-  const s = { raf: 0, t0: 0, tm: STILL };
+  const s = { raf: 0, t0: 0, tm: unclock(STILL) };
   instances.set(el, s);
   build(el, s);
   watch(el, s, () => {
@@ -152,7 +158,7 @@ function build(el, s) {
   medName.textContent = nameOf(MED);
   const { rows } = stepList(node("g", {}, svg), STEPS, Lo.list);
   Object.assign(s, { svg, C, rete: fr.rete.g, eastC, westC, meridian, path, tick, RB, star, m1, m2, mm, med, medName, rows });
-  draw(s, s.tm / 1000);
+  draw(s, clock(s.tm) / 1000);
 }
 
 // the turn through the loop: in to the east sighting; on to the west one; back to the middle; at the end back to the start
@@ -222,7 +228,7 @@ export function start(el) {
   const step = (now) => {
     if (!s.t0) s.t0 = now - s.tm;
     s.tm = (now - s.t0) % LOOP;
-    draw(s, s.tm / 1000);
+    draw(s, clock(s.tm) / 1000);
     s.raf = requestAnimationFrame(step);
   };
   s.raf = requestAnimationFrame(step);
@@ -240,5 +246,5 @@ export function seek(el, ms) {
   const s = instances.get(el);
   if (!s) return;
   s.tm = ((ms % LOOP) + LOOP) % LOOP;
-  draw(s, s.tm / 1000);
+  draw(s, clock(s.tm) / 1000);
 }

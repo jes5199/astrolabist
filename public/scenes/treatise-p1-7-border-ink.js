@@ -15,7 +15,13 @@
 import { back, node, label, f, rim, SILVER, T } from "./lib/back-ink.js";
 
 const instances = new WeakMap();
-const LOOP = 12000;
+const SPAN = 12000; // ms: the drawn timeline
+// cut from the loop: stretches where nothing but the bare drawing rested (jes tg 18016; scripts/web_idle_check.sh)
+const CUTS = [[0,400],[11900,12000]];
+const LOOP = SPAN - CUTS.reduce((n, [a, b]) => n + b - a, 0);
+// the loop's time (ms) on the drawn timeline, and back
+const clock = (ms) => CUTS.reduce((t, [a, b]) => (t >= a ? t + b - a : t), ms);
+const unclock = (t) => t - CUTS.reduce((n, [a, b]) => n + (t >= b ? b - a : 0), 0);
 const STILL = 8000; // ms: the quarter counted, its numbers shown
 const C = { x: -60, y: 60, k: 1.3 }; // the centre (down and to the left) and scale: the quarter fills the glass
 const W = (px) => f(px / C.k); // stroke widths in window units
@@ -58,7 +64,7 @@ export function mount(el) {
   }
   const bead = node("circle", { r: 2.4, fill: SILVER, opacity: 0 }, g);
   el.appendChild(svg);
-  const s = { strokes, rest, nums, bead, raf: 0, t0: 0, tm: STILL };
+  const s = { strokes, rest, nums, bead, raf: 0, t0: 0, tm: unclock(STILL) };
   instances.set(el, s);
   draw(s, STILL / 1000);
 }
@@ -82,7 +88,7 @@ export function start(el) {
   const step = (now) => {
     if (!s.t0) s.t0 = now - s.tm;
     s.tm = (now - s.t0) % LOOP;
-    draw(s, s.tm / 1000);
+    draw(s, clock(s.tm) / 1000);
     s.raf = requestAnimationFrame(step);
   };
   s.raf = requestAnimationFrame(step);
@@ -100,5 +106,5 @@ export function seek(el, ms) {
   const s = instances.get(el);
   if (!s) return;
   s.tm = ((ms % LOOP) + LOOP) % LOOP;
-  draw(s, s.tm / 1000);
+  draw(s, clock(s.tm) / 1000);
 }

@@ -14,7 +14,13 @@
 import { front, node, f, ZENITH, almucantar, SILVER, NIGHT } from "./lib/front-ink.js";
 
 const instances = new WeakMap();
-const LOOP = 12000;
+const SPAN = 12000; // ms: the drawn timeline
+// cut from the loop: stretches where nothing but the bare drawing rested (jes tg 18016; scripts/web_idle_check.sh)
+const CUTS = [[0,650],[1800,2050],[11900,12000]];
+const LOOP = SPAN - CUTS.reduce((n, [a, b]) => n + b - a, 0);
+// the loop's time (ms) on the drawn timeline, and back
+const clock = (ms) => CUTS.reduce((t, [a, b]) => (t >= a ? t + b - a : t), ms);
+const unclock = (t) => t - CUTS.reduce((n, [a, b]) => n + (t >= b ? b - a : 0), 0);
 const STILL = 7600; // ms: every circle up, horizon and zenith named
 const C = { x: 0, y: 6, k: 1.16 };
 const W = (px) => f(px / C.k);
@@ -42,7 +48,7 @@ export function mount(el) {
   const [hc, hr] = almucantar(0);
   const words = [word(0, C.y + C.k * (-hc + hr) + 15, "horizon"), word(0, C.y - C.k * ZENITH - 8, "zenith")];
   el.appendChild(svg);
-  const s = { horizon: fr.plate.horizon, alm: fr.plate.almucantars, zen, words, raf: 0, t0: 0, tm: STILL };
+  const s = { horizon: fr.plate.horizon, alm: fr.plate.almucantars, zen, words, raf: 0, t0: 0, tm: unclock(STILL) };
   instances.set(el, s);
   draw(s, STILL / 1000);
 }
@@ -65,7 +71,7 @@ export function start(el) {
   const step = (now) => {
     if (!s.t0) s.t0 = now - s.tm;
     s.tm = (now - s.t0) % LOOP;
-    draw(s, s.tm / 1000);
+    draw(s, clock(s.tm) / 1000);
     s.raf = requestAnimationFrame(step);
   };
   s.raf = requestAnimationFrame(step);
@@ -83,5 +89,5 @@ export function seek(el, ms) {
   const s = instances.get(el);
   if (!s) return;
   s.tm = ((ms % LOOP) + LOOP) % LOOP;
-  draw(s, s.tm / 1000);
+  draw(s, clock(s.tm) / 1000);
 }

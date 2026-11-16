@@ -12,7 +12,13 @@
 import { front, node, f, SILVER, NIGHT } from "./lib/front-ink.js";
 
 const instances = new WeakMap();
-const LOOP = 12000;
+const SPAN = 12000; // ms: the drawn timeline
+// cut from the loop: stretches where nothing but the bare drawing rested (jes tg 18016; scripts/web_idle_check.sh)
+const CUTS = [[0,650],[11900,12000]];
+const LOOP = SPAN - CUTS.reduce((n, [a, b]) => n + b - a, 0);
+// the loop's time (ms) on the drawn timeline, and back
+const clock = (ms) => CUTS.reduce((t, [a, b]) => (t >= a ? t + b - a : t), ms);
+const unclock = (t) => t - CUTS.reduce((n, [a, b]) => n + (t >= b ? b - a : 0), 0);
 const STILL = 8200; // ms: the cross drawn and named
 const C = { x: 0, y: 22, k: 0.64 }; // the hanging ring inside the window (astrolabist #47901) // hung plumb, as I 1
 const W = (px) => f(px / C.k);
@@ -46,7 +52,7 @@ export function mount(el) {
   const ys = (y) => C.y + C.k * y;
   const words = [word(5, ys(-40), "south", "start"), word(5, ys(62), "north", "start"), word(-62, ys(0) - 6, "east", "middle"), word(62, ys(0) - 6, "west", "middle")];
   el.appendChild(svg);
-  const s = { quarters, ns, ew, words, raf: 0, t0: 0, tm: STILL };
+  const s = { quarters, ns, ew, words, raf: 0, t0: 0, tm: unclock(STILL) };
   instances.set(el, s);
   draw(s, STILL / 1000);
 }
@@ -72,7 +78,7 @@ export function start(el) {
   const step = (now) => {
     if (!s.t0) s.t0 = now - s.tm;
     s.tm = (now - s.t0) % LOOP;
-    draw(s, s.tm / 1000);
+    draw(s, clock(s.tm) / 1000);
     s.raf = requestAnimationFrame(step);
   };
   s.raf = requestAnimationFrame(step);
@@ -90,5 +96,5 @@ export function seek(el, ms) {
   const s = instances.get(el);
   if (!s) return;
   s.tm = ((ms % LOOP) + LOOP) % LOOP;
-  draw(s, s.tm / 1000);
+  draw(s, clock(s.tm) / 1000);
 }

@@ -13,7 +13,13 @@
 import { front, node, f, P, almucantar, ZENITH, SILVER, NIGHT } from "./lib/front-ink.js";
 
 const instances = new WeakMap();
-const LOOP = 14000;
+const SPAN = 14000; // ms: the drawn timeline
+// cut from the loop: stretches where nothing but the bare drawing rested (jes tg 18016; scripts/web_idle_check.sh)
+const CUTS = [[0,400],[13900,14000]];
+const LOOP = SPAN - CUTS.reduce((n, [a, b]) => n + b - a, 0);
+// the loop's time (ms) on the drawn timeline, and back
+const clock = (ms) => CUTS.reduce((t, [a, b]) => (t >= a ? t + b - a : t), ms);
+const unclock = (t) => t - CUTS.reduce((n, [a, b]) => n + (t >= b ? b - a : 0), 0);
 const STILL = 10200; // ms: both counts done, the latitude named
 const C = { x: 0, y: 6, k: 1.12 };
 const W = (px) => f(px / C.k);
@@ -57,7 +63,7 @@ export function mount(el) {
   const words = [text(C.x - 8, C.y + C.k * south(S0) + 4.5, "end"), text(C.x - 8, C.y - C.k * ZENITH + 4.5, "end"), text(C.x - 8, C.y + C.k * north(0) + 4.5, "end"), text(C.x - 8, C.y + 4.5, "end")];
   ["equator", "zenith", "north", "pole"].forEach((w, i) => (words[i].textContent = w));
   el.appendChild(svg);
-  const s = { r1, r2, marks, c1, c2, name, words, raf: 0, t0: 0, tm: STILL };
+  const s = { r1, r2, marks, c1, c2, name, words, raf: 0, t0: 0, tm: unclock(STILL) };
   instances.set(el, s);
   draw(s, STILL / 1000);
 }
@@ -86,7 +92,7 @@ export function start(el) {
   const step = (now) => {
     if (!s.t0) s.t0 = now - s.tm;
     s.tm = (now - s.t0) % LOOP;
-    draw(s, s.tm / 1000);
+    draw(s, clock(s.tm) / 1000);
     s.raf = requestAnimationFrame(step);
   };
   s.raf = requestAnimationFrame(step);
@@ -104,5 +110,5 @@ export function seek(el, ms) {
   const s = instances.get(el);
   if (!s) return;
   s.tm = ((ms % LOOP) + LOOP) % LOOP;
-  draw(s, s.tm / 1000);
+  draw(s, clock(s.tm) / 1000);
 }

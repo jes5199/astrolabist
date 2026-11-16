@@ -20,7 +20,13 @@ import { build } from "./lib/figures.js";
 import { back, node, label, f, SILVER, NIGHT } from "./lib/back.js";
 
 const instances = new WeakMap();
-const LOOP = 16000;
+const SPAN = 16000; // ms: the drawn timeline
+// cut from the loop: stretches where nothing but the bare drawing rested (jes tg 18016; scripts/web_idle_check.sh)
+const CUTS = [[150,900],[1650,2650]];
+const LOOP = SPAN - CUTS.reduce((n, [a, b]) => n + b - a, 0);
+// the loop's time (ms) on the drawn timeline, and back
+const clock = (ms) => CUTS.reduce((t, [a, b]) => (t >= a ? t + b - a : t), ms);
+const unclock = (t) => t - CUTS.reduce((n, [a, b]) => n + (t >= b ? b - a : 0), 0);
 const STILL = 12500; // ms: the reading and all the measures shown
 const RAD = Math.PI / 180;
 const U = 1.85; // window units to a foot
@@ -129,7 +135,7 @@ export function mount(el) {
   const mk = [INSET.x + k * (-SO / 3 - INSET.cx), INSET.y + k * (SO - INSET.cy)];
   const tRead = label(svg, mk[0], mk[1] + 13, "4 of 12", 13);
   el.appendChild(svg);
-  const s = { sight, sightLen, ins, rule, mark, lead, dGround, tGround, dUp, tUp, dEye, tEye, eyeLine, tRead, raf: 0, t0: 0, tm: STILL };
+  const s = { sight, sightLen, ins, rule, mark, lead, dGround, tGround, dUp, tUp, dEye, tEye, eyeLine, tRead, raf: 0, t0: 0, tm: unclock(STILL) };
   instances.set(el, s);
   draw(s, STILL / 1000);
 }
@@ -163,7 +169,7 @@ export function start(el) {
   const step = (now) => {
     if (!s.t0) s.t0 = now - s.tm;
     s.tm = (now - s.t0) % LOOP;
-    draw(s, s.tm / 1000);
+    draw(s, clock(s.tm) / 1000);
     s.raf = requestAnimationFrame(step);
   };
   s.raf = requestAnimationFrame(step);
@@ -181,5 +187,5 @@ export function seek(el, ms) {
   const s = instances.get(el);
   if (!s) return;
   s.tm = ((ms % LOOP) + LOOP) % LOOP;
-  draw(s, s.tm / 1000);
+  draw(s, clock(s.tm) / 1000);
 }
