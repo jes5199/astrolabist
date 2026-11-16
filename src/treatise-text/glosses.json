@@ -20210,6 +20210,559 @@
    "whole": true
   },
   {
+   "section": "p2-41",
+   "match": "yif it so be that thou wilt werke by umbra recta and thou may come to the bas of the toure in this maner thou schalt werke",
+   "line": "If you want to work by _umbra recta_, and you can get to the foot of the tower, this is how to go about it.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-41",
+   "match": "tak the altitude of the tour by bothe holes so that thy rewle ligge even in a poynt",
+   "line": "Sight the top of the tower through both holes, so that your rule rests on a single point of the scale.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-41",
+   "match": "ensample as thus i see him thorw at the poynt of than mete i the space be-tween me and the tour and i finde it feet than be-holde i how is to right so is the space betwixe thee and the tour to the altitude of the tour",
+   "line": "For example, say I see the top at the point marked 4. I then measure the distance between me and the tower and find it is 20 feet. Now, as 4 is to 12, so is the distance between you and the tower to the tower's height.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-41",
+   "match": "for is the thridde part of so is the space be-tween thee and the tour the thridde part of the altitude of the tour than thryes feet is the heyghte of the tour with adding of thyn owne persone to thyn eye",
+   "line": "Since 4 is a third of 12, the distance between you and the tower is a third of the tower's height; so the tower is three times 20 feet high, plus your own height up to your eye.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-41",
+   "match": "and this rewle is so general in umbra recta fro the poynt of oon to and yif thy rewle falle upon than is partyes of the heyght the space be-tween thee and the toure with adding of thyn owne heyght",
+   "line": "This rule holds generally for _umbra recta_, from point 1 to point 12. If your rule falls on 5, the distance between you and the tower is five-twelfths of the height, once your own height is added.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-41a",
+   "match": "yif thy rewle falle upon the poynt on right schadwe than make thy figure of than loke how moche space of feet is be-tween thee and the tour and multiplye that be and whan thou hast multiplied it than divyde it be the same nombre of and kepe the residue and adde therto up to thyn eye to the residue and that shal be the verry heyght of the tour",
+   "line": "If your rule falls on point 8 of the right shadow, take 8 as your divisor. Measure how many feet lie between you and the tower, multiply that by 12, divide the product by 8, and keep the result; add to it your height up to your eye, and that gives the true height of the tower.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-41a",
+   "match": "and thus mayst thou werke on the same wyse fro to",
+   "line": "You can work the same way for any point from 1 to 12.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-41b",
+   "match": "an-other maner of werking upon the same syde",
+   "line": "Another way of working on the same side of the scale.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-41b",
+   "match": "loke upon which poynt thy rewle falleth whan thou seest the top of the tour thorow two litil holes and mete than the space fro thy foot to the baas of the tour and right as the nombre of thy poynt hath him-self to right so the mesure be-tween thee and the tour hath him-self to the heighte of the same tour",
+   "line": "Note which point your rule falls on when you see the top of the tower through the two little holes, and measure the distance from your foot to the base of the tower; then, as the number of your point is to 12, so is the distance between you and the tower to the tower's height.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-41b",
+   "match": "ensample i sette caas thy rewle falle upon than is two-thrid partyes of so the space is the two-thrid partyes of the tour",
+   "line": "For example, suppose your rule falls on 8. Since 8 is two-thirds of 12, the distance is two-thirds of the tower's height.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-42",
+   "match": "another maner of werkinge by vmbra versa",
+   "line": "Another way of working, by _umbra versa_.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-42",
+   "match": "yif so be that thou may nat come to the bas of the tour i see him thorw the nombre of i sette ther a prikke at my fote than go i neer to the tour and i see him thorw at the poynt of and there i sette a-nother prikke and i beholde how hath him to and ther finde i that it hath him twelfe sythes than beholde i how hath him to and thou shalt finde it sexe sythes than thou shalt finde that as above is the numbre of right so is the space between thy two prikkes the space of tymes thyn altitude",
+   "line": "Suppose you cannot get to the foot of the tower. I sight the top through the point marked 1 and put a mark at my foot. Then I go nearer the tower until I see the top at point 2, and put a second mark there. Now 12 contains 1 twelve times, and it contains 2 six times; twelve is more than six by 6, and so the distance between your two marks is 6 times the height.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-42",
+   "match": "and note that at the ferste altitude of thou settest a prikke and afterward whan thou seest him at ther thou settest an-other prikke than thou findest between two prikkys feet than thou shalt finde that is the party of and then is feet the altitude of the tour",
+   "line": "To go through it again: at the first sighting, at 1, you make a mark; later, sighting at 2, you make another; you measure 60 feet between the two marks; 10 is a sixth of 60, so the tower is 10 feet high.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-42",
+   "match": "for other poyntis yif it fille in umbra versa as thus i sette caas it fill upon and at the secunde upon than schalt thou finde that is partyes of and is partyes of than passeth by nombre of so is the space between two prikkes twyes the heyghte of the tour",
+   "line": "With other points of the _umbra versa_ it goes like this. Suppose the first sighting falls on 2 and the second on 3. Then 2 goes into 12 six times, and 3 goes into 12 four times; 6 is more than 4 by 2, so the distance between the two marks is twice the height of the tower.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-42",
+   "match": "and yif the differens were thryes than shulde it be three tymes and thus mayst thou werke fro to and yif it be tymes or tymes et sic de ceteris",
+   "line": "If the difference were three, it would be three times the height; and so you can work for any points from 2 to 12: a difference of 4 means 4 times, of 5 means 5 times, and so on.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-42a",
+   "match": "to knowe the heyghth by thy poyntes of umbra versa",
+   "line": "To find a height with the points of _umbra versa_.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-42a",
+   "match": "yif thy rewle falle upon whan thou seest the top of the tour set a prikke there-as thy foot stont and go ner til thou mayst see the same top at the poynt of and sette ther another lyk prikke",
+   "line": "If your rule falls on 3 when you sight the top of the tower, mark the place where you are standing; then move closer until you see the same top at point 4, and make a second mark there like the first.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-42a",
+   "match": "than mete how many foot ben be-tween the two prikkes and adde the lengthe up to thyn eye ther-to and that shal be the heyght of the tour",
+   "line": "Measure the number of feet between the two marks and add your height up to your eye: that is the height of the tower.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-42a",
+   "match": "and note that is the fourthe party of and is the thridde party of now passeth the nombre of be the distaunce of therfore the same space with thyn heyght to thyn eye is the heyght of the tour",
+   "line": "Note that 3 is a fourth part of 12 and 4 is a third part of 12. Now 4 is more than 3 by 1, and so that same distance, with your height to your eye added, is the height of the tower.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-42a",
+   "match": "and yif it so be that ther be or distaunce in the nombres so shulde the mesures be-tween the prikkes be twyes or thryes the heyghte of the tour",
+   "line": "If the numbers differ by 2 or 3, the distance between the marks will be two or three times the height of the tower.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-42b",
+   "match": "furthermore yif thou wilt knowe in umbra versa by the craft of umbra recta i suppose thou take the altitude at the poynt of and makest a marke and thou goost neer til thou hast it at the poynt of and than makest thou ther a-nother mark",
+   "line": "Again, if you want to work in _umbra versa_ by the method of _umbra recta_: suppose you sight the top at point 4 and make a mark, then move nearer until you have it at point 3, and make another mark there.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-42b",
+   "match": "than muste thou devyde by eche of the poyntes be-fornseyd as thus yif thou devyde be and the nombre that cometh ther-of schal be and yif thou devyde be and the nombre that cometh ther-of schal be thanne loke what is the difference be-tween and and ther shalt thou fynde and right as hath him to right so the space be-tween two prikkes hath him to the altitude of the thing",
+   "line": "Then divide 144 by each of these two points: 144 divided by 4 gives 36, and 144 divided by 3 gives 48. The difference between 36 and 48 is 12; and as 12 is to 12, so is the distance between the two marks to the height of the thing.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-43",
+   "match": "an-other maner of wyrking be umbra recta",
+   "line": "Another way of working by _umbra recta_.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-43",
+   "match": "yif it so be that thou mayst nat come to the baas of the tour in this maner thou schalt werke",
+   "line": "If you cannot get to the foot of the tower, this is how to work.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-43",
+   "match": "sette thy rewle upon till thou see the altitude and sette at thy foot a prikke",
+   "line": "Set your rule at 1, move until you can see the top, and mark the spot where you stand.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-43",
+   "match": "than sette thy rewle upon and beholde what is the differense be-tween and and thou shalt finde that it is than mete the space be-tween two prikkes and that is the partie of the altitude of the tour",
+   "line": "Then set your rule at 2 and see what the difference is between 1 and 2: you will find it is 1. Measure the distance between the two marks, and it is one twelfth of the tower's height.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-43",
+   "match": "and yif ther were it were the partye and yif ther were the partye et sic deinceps",
+   "line": "If the difference were 2, it would be a sixth; if it were 3, a quarter; and so on.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-43",
+   "match": "and note yif it were it were the party of and party of and note at the altitude of thy conclusioun adde the stature of thyn heyghte to thyn eye",
+   "line": "Note that if it were 5, it would be five twelfths, and 7 would be seven twelfths; and when you take the height, add your own height up to your eye.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-43a",
+   "match": "to knowe the heyghte of thinges yif thou mayst nat come to the bas of a thing",
+   "line": "To find the height of something when you cannot get to its foot.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-43a",
+   "match": "sette thy rewle upon what thou wilt so that thou may see the top of the thing thorw the two holes and make a marke ther thy foot standeth and go neer or forther til thou mayst see thorw another poynt and marke ther a-nother marke",
+   "line": "Set your rule at whatever point you like, so that you can see the top of the thing through the two holes, and mark the place where you are standing; then move nearer or further back until you see it through another point, and make another mark there.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-43a",
+   "match": "and loke than what is the differense be-twen the two poyntes in the scale and right as that difference hath him to right so the space be-tween thee and the two markes hath him to the heyghte of the thing",
+   "line": "See what the difference is between the two points on the scale: as that difference is to 12, so is the distance between your two marks to the height of the thing.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-43a",
+   "match": "ensample i set caas thou seest it thorw a poynt of after at the poynt of now passeth the nombre of the nombre of be the difference of and right as this difference hath him-self to right so the mesure be-tween the two markes hath him to the heyghte of the thing putting to the heyghte of thy-self to thyn eye and thus mayst thou werke fro to",
+   "line": "For example, suppose you see it first through point 4 and afterwards through point 3. 4 is more than 3 by 1; and as this difference of 1 is to 12, so is the distance between the two marks to the height of the thing, adding your height up to your eye. You can work like this for any points from 1 to 12.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-44",
+   "match": "in this maner shall thou worche consider thy rote first the whiche is made the beginning of the tables fro the yere of oure lord and entere hit in-to thy slate for the laste meridie of december and than consider the yere of oure lord what is the date and be-hold whether thy date be more or lasse than the yere and yf hit so be that hit be more loke how many yeres hit passeth and with so many entere into thy tables in the first lyne ther-as is writen anni collecti et expansi",
+   "line": "Work like this. First take your root, the starting value the tables give for the year of our Lord 1397, and write it on your slate as the value for the last noon of December. Then take the year of our Lord you want, and see whether it is later or earlier than 1397. If it is later, see by how many years, and with that number go into your tables at the first line, headed _anni collecti et expansi_.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-44",
+   "match": "and loke where the same planet is writen in the hede of thy table and than loke what thou findest in directe of the same yere of oure lord whiche is passid be hit or or or what nombre that evere it be til the tyme that thou come to or or and that thou findest in directe wryte in thy slate under thy rote and adde hit to-geder and that is thy mene mote for the laste meridian of the december for the same yere whiche that thou hast purposed",
+   "line": "Find your planet's column at the head of the table, and read off the value on the line for that number of years, whether 8, 9, 10 or any other, up to 20, 40 or 60. Write that value on your slate under your root and add the two together: the sum is the planet's mean motion at the last noon of December of the year you chose.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-44",
+   "match": "and if hit so be that hit passe consider wel that fro to ben anni expansi and fro to ben anni collecti",
+   "line": "If the number of years is more than 20, remember that years 1 to 20 are the _anni expansi_ and years 20 to 3000 the _anni collecti_.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-44",
+   "match": "and if thy nombere passe than take that thou findest in directe of and if hit be more as or than take that thou findest in directe there-of that is to sayen signes degrees minutes and secoundes and adde to-gedere un-to thy rote",
+   "line": "So for a number above 20, take the value on the line for 20, and for what is left over, say 6 or 18, take the value on that line too, in signs, degrees, minutes and seconds, and add them all to your root;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-44",
+   "match": "and thus to make rotes",
+   "line": "that is how roots are made.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-44",
+   "match": "and note that if hit so be that the yere of oure lord be lasse than the rote whiche is the yere of oure lord than shalt thou wryte in the same wyse furst thy rote in thy slate and after entere in-to thy table in the same yere that be lasse as i taught be-fore",
+   "line": "If instead the year of our Lord is earlier than the root year of 1397, first write your root on your slate in the same way, then go into the table with the number of years by which it is earlier, as I taught before,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-44",
+   "match": "and than consider how many signes degrees minutes and secoundes thyn entringe conteyneth",
+   "line": "and see how many signs, degrees, minutes and seconds that entry gives.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-44",
+   "match": "and so be that ther be entrees than adde hem togeder and after with-drawe hem from the rote the yere of oure lord",
+   "line": "If there are two entries, add them together, and then subtract the total from the root for 1397;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-44",
+   "match": "and the residue that leveth is thy mene mote fro the laste meridie of december the whiche thou hast purposed",
+   "line": "what is left is your mean motion at the last noon of December of the year you chose.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-44",
+   "match": "and if hit so be that thou wolt weten thy mene mote for any day or for any fraccioun of day in this maner thou shalt worche",
+   "line": "And if you want the mean motion for a particular day, or part of a day, work like this.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-44",
+   "match": "make thy rote fro the laste day of decembere in the maner as i have taught and afterward behold how many monethis dayes and houres ben passid from the meridie of decembere and with that entere with the laste moneth that is ful passed and take that thou findest in directe of him and wryte hit in thy slate",
+   "line": "Make your root for the last day of December as I have taught, then see how many months, days and hours have passed since that December noon. Go into the table with the last complete month, and write on your slate the value you find on its line;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-44",
+   "match": "and entere with as mony dayes as be more and wryte that thou findest in directe of the same planete that thou worchest for",
+   "line": "then go in with the extra days, and write down the value on that line for the planet you are working on;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-44",
+   "match": "and in the same wyse in the table of houres for houres that ben passed and adde alle these to thy rote",
+   "line": "do the same in the table of hours for the hours that have passed, and add all these to your root;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-44",
+   "match": "and the residue is the mene mote for the same day and the same houre",
+   "line": "the result is the mean motion for that day and hour.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-45",
+   "match": "whan thou wolt make the mene mote of eny planete to be by arsechieles tables take thy rote the whiche is for the yere of oure lord",
+   "line": "To find the mean motion of any planet by Arzachel's tables, take your root, which is for the year of our Lord 1397.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-45",
+   "match": "and if so be that thy yere be passid the date wryte that date and than wryte the nombere of the yeres",
+   "line": "If your year is later than that, write down your date and then the root year,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-45",
+   "match": "than withdrawe the yeres out of the yeres that ben passed that rote",
+   "line": "and subtract the root year from your year.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-45",
+   "match": "ensampul as thus the yere of oure lord i wolde witen precise my rote than wroot i furst and under that nombere i wrote a than withdraw i the laste nombere out of that and than fond i the residue was yere i wiste that yere was passed fro the rote the whiche was writen in my tables",
+   "line": "For example: in the year of our Lord 1400 I wanted to know my root exactly. First I wrote 1400, and under it 1397; then I subtracted the second from the first and found the difference was 3 years; so I knew that 3 years had passed since the root written in my tables.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-45",
+   "match": "than after-ward soghte i in my tables the annis collectis et expansis and amonge myn expanse yeres fond i yeer",
+   "line": "Next I looked in my tables of _anni collecti et expansi_, and among my single years found the line for 3 years.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-45",
+   "match": "than tok i alle the signes degrees and minutes that i fond directe under the same planete that i wroghte for and wroot so many signes degrees and minutes in my slate and afterward added i to signes degrees minutes and secoundes the whiche i fond in my rote the yere of oure lord",
+   "line": "I took the signs, degrees and minutes I found there under the planet I was working on and wrote them on my slate; then I added them to the signs, degrees, minutes and seconds of my root for 1397,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-45",
+   "match": "and kepte the residue",
+   "line": "kept the result,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-45",
+   "match": "and than had i the mene mote for the laste day of decembere",
+   "line": "and so had the mean motion for the last day of December.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-45",
+   "match": "and if thou woldest wete the mene mote of any planete in march aprile or may other in any other tyme or moneth of the yere loke how many monethes and dayes ben passed from the laste day of decembere the yere of oure lord",
+   "line": "If you want the mean motion of any planet in March, April or May, or any other time of year, see how many months and days have passed since the last day of December 1400,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-45",
+   "match": "and so with monethes and dayes entere in-to thy table ther thou findest thy mene mote y-writen in monethes and dayes and take alle the signes degrees minutes and secoundes that thou findest y-write in directe of thy monethes and adde to signes degrees minutes and secoundes that thou findest with thy rote the yere of oure lord and the residue that leveth is the mene mote for that same day",
+   "line": "go into the table where the mean motion is given by months and days, take all the signs, degrees, minutes and seconds written on the line for your months, and add them to the signs, degrees, minutes and seconds of your root for 1400: the result is the mean motion for that day.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-45",
+   "match": "and note if hit so be that thou woldest wete the mene mote in ony yere that is lasse than thy rote withdrawe the nombere of so many yeres as hit is lasse than the yere of oure lord a and kepe the residue",
+   "line": "Note that if you want the mean motion for a year earlier than your root, work out by how many years it falls short of 1397, keep that number,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-45",
+   "match": "and so many yeres monethes and dayes entere in-to thy tabelis of thy mene mote",
+   "line": "and go into your tables of mean motion with that many years, months and days.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-45",
+   "match": "and take alle the signes degrees and minutes and secoundes that thou findest in directe of alle the yeris monethes and dayes and wryte hem in thy slate",
+   "line": "Take all the signs, degrees, minutes and seconds you find on the lines for those years, months and days, and write them on your slate;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-45",
+   "match": "and above thilke nombere wryte the signes degrees minutes and secoundes the whiche thou findest with thy rote the yere of oure lord a",
+   "line": "above them write the signs, degrees, minutes and seconds of your root for 1397,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-45",
+   "match": "and with-drawe alle the nethere signes and degrees fro the signes and degrees minutes and secoundes of other signes with thy rote",
+   "line": "and subtract the lower figures from the root figures above them;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-45",
+   "match": "and thy residue that leveth is thy mene mote for that day",
+   "line": "what is left is your mean motion for that day.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-46",
+   "match": "first wite thou certeinly how that haven stondeth that thou list to werke for",
+   "line": "First find out exactly how the harbour you are working for lies:",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-46",
+   "match": "that is to say in whiche place of the firmament the mone being maketh fulle see",
+   "line": "that is, where in the sky the moon has to be to bring high tide there.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-46",
+   "match": "than awayte thou redily in what degree of the zodiak that the mone at that tyme is inne",
+   "line": "Then find out promptly which degree of the zodiac the moon is in at the time.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-46",
+   "match": "bringe furth than the labelle and set the point therof in that same cost that the mone maketh flode and set thou there the degree of the mone according with the egge of the label",
+   "line": "Bring the label round and set its point in the direction where the moon makes the flood tide, and set the moon's degree there along the edge of the label.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-46",
+   "match": "than afterward awayte where is than the degree of the sonne at that tyme",
+   "line": "Then see where the sun's degree is at that moment.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-46",
+   "match": "remeve thou than the label fro the mone and bringe and sette it iustly upon the degree of the sonne",
+   "line": "Move the label away from the moon and set it exactly on the sun's degree.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-46",
+   "match": "and the point of the label shal than declare to thee at what houre of the day or of the night shal be flode",
+   "line": "The point of the label will then show you at what hour of the day or night the tide will be high.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-46",
+   "match": "and there also maist thou wite by the same point of the label whether it be at that same tyme flode or ebbe or half flode or quarter flode or ebbe or half or quarter ebbe",
+   "line": "By the same point of the label you can also tell whether, at that time, the tide is in flood or ebb, at half or quarter flood, or at half or quarter ebb;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-46",
+   "match": "or ellis at what houre it was last or shal be next by night or by day thou than shalt esely knowe c",
+   "line": "or you can easily tell when it was last high, or when it will be high next, by night or by day.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-46",
+   "match": "furthermore if it so be that thou happe to worke for this matere aboute the tyme of the coniunccioun bringe furthe the degree of the mone with the labelle to that coste as it is before seyd",
+   "line": "If you happen to be working this out around the time of the conjunction, bring the moon's degree round with the label to that direction, as described above.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-46",
+   "match": "but than thou shalt understonde that thou may not bringe furthe the label fro the degree of the mone as thou dide before",
+   "line": "But understand that you cannot then move the label from the moon's degree as you did before,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-46",
+   "match": "for-why the sonne is than in the same degree with the mone",
+   "line": "because the sun is then in the same degree as the moon.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-46",
+   "match": "and so thou may at that tyme by the point of the labelle unremeved knowe the houre of the flode or of the ebbe as it is before seyd c",
+   "line": "So at that time you can read the hour of flood or ebb from the point of the label without moving it, as described above.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-46",
+   "match": "and evermore as thou findest the mone passe fro the sonne so remeve thou the labelle than fro the degree of the mone and bringe it to the degree of the sonne",
+   "line": "And as the moon moves on from the sun, move the label from the moon's degree to the sun's degree each time,",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-46",
+   "match": "and worke thou than as thou dide before c",
+   "line": "and work as you did before.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-46",
+   "match": "or elles knowe thou what houre it is that thou art inne by thyn instrument",
+   "line": "Or else find the present hour with your instrument;",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
+   "section": "p2-46",
+   "match": "than bringe thou furth fro thennes the labelle and ley it upon the degree of the mone and therby may thou wite also whan it was flode or whan it wol be next be it night or day c",
+   "line": "then bring the label from there and lay it on the moon's degree, and by that you can also tell when the tide was last high, or when it will be next, night or day.",
+   "kind": "sentence",
+   "whole": true
+  },
+  {
    "section": "00-prologue",
    "match": "thyn",
    "line": "your",

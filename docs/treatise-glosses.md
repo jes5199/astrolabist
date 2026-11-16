@@ -118,8 +118,10 @@ error. Its line is printed as written (its own punctuation and capitals; `_word_
 glossed words, popovers and ☞ marks in Chaucer's column are unchanged.
 
 The wording is ours, written from Skeat's Middle English, his glosses and notes, and plain English. No
-modern translation is consulted. Done so far: the Prologue, all of Part I, and Part II §§ 1–40. Still to do: the
-supplementary propositions (II §§ 41–46) and the spurious sections (41a–43a). A unit's
+modern translation is consulted. The whole Treatise is done: every word unit on every page is covered by a sentence span
+(checked on the built pages). A sentence span also takes any bare numerals or punctuation between it and
+its neighbours ("December 31."); before batch 5 such a trailing numeral was set as a separate unit and
+printed a second time after the modern sentence. A unit's
 Middle English is matched by its words only (numbers are ignored), so two clauses that differ only in their
 numbers ("the 3, to Mars" / "the 10, to Mars") must be one unit; the page build fails if one cannot be placed. (The wording
 ledger, `docs/treatise-wording.md`, predates the split pages and does not list these units; `clarity.txt`

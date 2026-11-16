@@ -240,8 +240,19 @@ export function glossSection(slug: string, body: string, stats?: GlossStats, mod
       if (lineLen[a] === 0) continue;
       const endTok = a + lineLen[a];
       const nextStart = endTok < toks.length ? toks[endTok].i : para.length;
-      const from = lead(toks[a].i, pos);
-      const to = trail(toks[endTok - 1].end, nextStart);
+      let from = lead(toks[a].i, pos);
+      let to = trail(toks[endTok - 1].end, nextStart);
+      if (lineWhole[a]) {
+        // A sentence span owns everything between its neighbours: bare numerals and punctuation before its
+        // first word or after its last ("December 31.") go into it, rather than being set as a separate unit
+        // whose numeral would then be printed a second time after the modern sentence.
+        let f = pos;
+        while (f < from && /\s/.test(para[f])) f++;
+        from = f;
+        let k = endTok < toks.length ? lead(toks[endTok].i, to) : para.length;
+        while (k > to && /\s/.test(para[k - 1])) k--;
+        to = Math.max(to, k);
+      }
       html += gap(pos, from);
       // Base: the gloss units inside this line unit, with the text between them.
       let base = fmt(from, toks[a].i);

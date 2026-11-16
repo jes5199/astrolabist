@@ -1409,3 +1409,273 @@ If you want to try this art on the rising of the moon, be sure to reckon its cou
 for, as you well know, it stays in any one degree of its longitude only a short while;
 > but natheles, yif thou rekne hir verreye moeving by thy tables houre after houre, [thou shall do wel y-now].
 but if you reckon its true motion from your tables hour after hour, [you will do well enough].
+
+## p2-41
+> Yif it so be that thou wilt werke by umbra recta, and thou may come to the bas of the toure, in this maner thou schalt werke.
+If you want to work by _umbra recta_, and you can get to the foot of the tower, this is how to go about it.
+> Tak the altitude of the tour by bothe holes, so that thy rewle ligge even in a poynt.
+Sight the top of the tower through both holes, so that your rule rests on a single point of the scale.
+> Ensample as thus: I see him thorw at the poynt of 4;
+For example, say I see the top at the point marked 4. I then measure the distance between me and the tower and find it is 20 feet. Now, as 4 is to 12, so is the distance between you and the tower to the tower's height.
+> than mete I the space be-tween me and the tour, and I finde it 20 feet;
+=
+> than be-holde I how 4 is to 12, right so is the space betwixe thee and the tour to the altitude of the tour.
+=
+> For 4 is the thridde part of 12, so is the space be-tween thee and the tour the thridde part of the altitude of the tour;
+Since 4 is a third of 12, the distance between you and the tower is a third of the tower's height; so the tower is three times 20 feet high, plus your own height up to your eye.
+> than thryes 20 feet is the heyghte of the tour, with adding of thyn owne persone to thyn eye.
+=
+> And this rewle is so general in umbra recta, fro the poynt of oon to 12. And yif thy rewle falle upon 5, than is 5 12-partyes of the heyght the space be-tween thee and the toure;
+This rule holds generally for _umbra recta_, from point 1 to point 12. If your rule falls on 5, the distance between you and the tower is five-twelfths of the height, once your own height is added.
+> with adding of thyn owne heyght.
+=
+
+## p2-41a
+> Yif thy rewle falle upon the 8 poynt on right schadwe, than make thy figure of 8;
+If your rule falls on point 8 of the right shadow, take 8 as your divisor. Measure how many feet lie between you and the tower, multiply that by 12, divide the product by 8, and keep the result; add to it your height up to your eye, and that gives the true height of the tower.
+> than loke how moche space of feet is be-tween thee and the tour, and multiplye that be 12, and whan thou hast multiplied it, than divyde it be the same nombre of 8, and kepe the residue;
+=
+> and adde therto up to thyn eye to the residue, and that shal be the verry heyght of the tour.
+=
+> And thus mayst thou werke on the same wyse, fro 1 to 12.
+You can work the same way for any point from 1 to 12.
+
+## p2-41b
+> An-other maner of werking upon the same syde.
+Another way of working on the same side of the scale.
+> Loke upon which poynt thy rewle falleth whan thou seest the top of the tour thorow two litil holes;
+Note which point your rule falls on when you see the top of the tower through the two little holes, and measure the distance from your foot to the base of the tower; then, as the number of your point is to 12, so is the distance between you and the tower to the tower's height.
+> and mete than the space fro thy foot to the baas of the tour;
+=
+> and right as the nombre of thy poynt hath him-self to 12, right so the mesure be-tween thee and the tour hath him-self to the heighte of the same tour.
+=
+> Ensample: I sette caas thy rewle falle upon 8;
+For example, suppose your rule falls on 8. Since 8 is two-thirds of 12, the distance is two-thirds of the tower's height.
+> than is 8 two-thrid partyes of 12;
+=
+> so the space is the two-thrid partyes of the tour.
+=
+
+## p2-42
+> Another maner of werkinge, by vmbra versa.
+Another way of working, by _umbra versa_.
+> Yif so be that thou may nat come to the bas of the tour, I see him thorw the nombre of 1;
+Suppose you cannot get to the foot of the tower. I sight the top through the point marked 1 and put a mark at my foot. Then I go nearer the tower until I see the top at point 2, and put a second mark there. Now 12 contains 1 twelve times, and it contains 2 six times; twelve is more than six by 6, and so the distance between your two marks is 6 times the height.
+> I sette ther a prikke at my fote;
+=
+> than go I neer to the tour, and I see him thorw at the poynt of 2, and there I sette a-nother prikke;
+=
+> and I beholde how 1 hath him to 12, and ther finde I that it hath him twelfe sythes;
+=
+> than beholde I how 2 hath him to 12, and thou shalt finde it sexe sythes;
+=
+> than thou shalt finde that as 12 above 6 is the numbre of 6, right so is the space between thy two prikkes the space of 6 tymes thyn altitude.
+=
+> And note, that at the ferste altitude of 1, thou settest a prikke;
+To go through it again: at the first sighting, at 1, you make a mark; later, sighting at 2, you make another; you measure 60 feet between the two marks; 10 is a sixth of 60, so the tower is 10 feet high.
+> and afterward, whan thou seest him at 2, ther thou settest an-other prikke;
+=
+> than thou findest between two prikkys 60 feet;
+=
+> than thou shalt finde that 10 is the 6-party of 60. And then is 10 feet the altitude of the tour.
+=
+> For other poyntis, yif it fille in umbra versa, as thus: I sette caas it fill upon 2, and at the secunde upon 3;
+With other points of the _umbra versa_ it goes like this. Suppose the first sighting falls on 2 and the second on 3. Then 2 goes into 12 six times, and 3 goes into 12 four times; 6 is more than 4 by 2, so the distance between the two marks is twice the height of the tower.
+> than schalt thou finde that 2 is 6 partyes of 12;
+=
+> and 3 is 4 partyes of 12;
+=
+> than passeth 6 4, by nombre of 2;
+=
+> so is the space between two prikkes twyes the heyghte of the tour.
+=
+> And yif the differens were thryes, than shulde it be three tymes;
+If the difference were three, it would be three times the height; and so you can work for any points from 2 to 12: a difference of 4 means 4 times, of 5 means 5 times, and so on.
+> and thus mayst thou werke fro 2 to 12;
+=
+> and yif it be 4, 4 tymes;
+=
+> or 5, 5 tymes;
+=
+> et sic de ceteris.
+=
+
+## p2-42a
+> To knowe the heyghth by thy poyntes of umbra versa.
+To find a height with the points of _umbra versa_.
+> Yif thy rewle falle upon 3, whan thou seest the top of the tour, set a prikke there-as thy foot stont;
+If your rule falls on 3 when you sight the top of the tower, mark the place where you are standing; then move closer until you see the same top at point 4, and make a second mark there like the first.
+> and go ner til thou mayst see the same top at the poynt of 4, and sette ther another lyk prikke.
+=
+> Than mete how many foot ben be-tween the two prikkes, and adde the lengthe up to thyn eye ther-to;
+Measure the number of feet between the two marks and add your height up to your eye: that is the height of the tower.
+> and that shal be the heyght of the tour.
+=
+> And note, that 3 is [the] fourthe party of 12, and 4 is the thridde party of 12. Now passeth 4 the nombre of 3 be the distaunce of 1;
+Note that 3 is a fourth part of 12 and 4 is a third part of 12. Now 4 is more than 3 by 1, and so that same distance, with your height to your eye added, is the height of the tower.
+> therfore the same space, with thyn heyght to thyn eye, is the heyght of the tour.
+=
+> And yif it so be that ther be 2 or 3 distaunce in the nombres, so shulde the mesures be-tween the prikkes be twyes or thryes the heyghte of the tour.
+If the numbers differ by 2 or 3, the distance between the marks will be two or three times the height of the tower.
+
+## p2-42b
+> Furthermore, yif thou wilt knowe in umbra versa, by the craft of umbra recta, I suppose thou take the altitude at the poynt of 4, and makest a marke;
+Again, if you want to work in _umbra versa_ by the method of _umbra recta_: suppose you sight the top at point 4 and make a mark, then move nearer until you have it at point 3, and make another mark there.
+> and thou goost neer til thou hast it at the poynt of 3, and than makest thou ther a-nother mark.
+=
+> Than muste thou devyde 144 by eche of the poyntes be-fornseyd, as thus: yif thou devyde 144 be 4, and the nombre that cometh ther-of schal be 36, and yif thou devyde 144 be 3, and the nombre that cometh ther-of schal be 48, thanne loke what is the difference be-tween 36 and 48, and ther shalt thou fynde 12;
+Then divide 144 by each of these two points: 144 divided by 4 gives 36, and 144 divided by 3 gives 48. The difference between 36 and 48 is 12; and as 12 is to 12, so is the distance between the two marks to the height of the thing.
+> and right as 12 hath him to 12, right so the space be-tween two prikkes hath him to the altitude of the thing.
+=
+
+## p2-43
+> An-other maner of wyrking be umbra recta.
+Another way of working by _umbra recta_.
+> Yif it so be that thou mayst nat come to the baas of the tour, in this maner thou schalt werke.
+If you cannot get to the foot of the tower, this is how to work.
+> Sette thy rewle upon 1 till thou see the altitude, and sette at thy foot a prikke.
+Set your rule at 1, move until you can see the top, and mark the spot where you stand.
+> Than sette thy rewle upon 2, and beholde what is the differense be-tween 1 and 2, and thou shalt finde that it is 1. Than mete the space be-tween two prikkes, and that is the 12 partie of the altitude of the tour.
+Then set your rule at 2 and see what the difference is between 1 and 2: you will find it is 1. Measure the distance between the two marks, and it is one twelfth of the tower's height.
+> And yif ther were 2, it were the 6 partye;
+If the difference were 2, it would be a sixth; if it were 3, a quarter; and so on.
+> and yif ther were 3, the 4 partye;
+=
+> et sic deinceps.
+=
+> And note, yif it were 5, it were the 5 party of 12;
+Note that if it were 5, it would be five twelfths, and 7 would be seven twelfths; and when you take the height, add your own height up to your eye.
+> and 7, 7 party of 12;
+=
+> and note, at the altitude of thy conclusioun, adde the stature of thyn heyghte to thyn eye.
+=
+
+## p2-43a
+> To knowe the heyghte of thinges, yif thou mayst nat come to the bas of a thing.
+To find the height of something when you cannot get to its foot.
+> Sette thy rewle upon what thou wilt, so that thou may see the top of the thing thorw the two holes, and make a marke ther thy foot standeth;
+Set your rule at whatever point you like, so that you can see the top of the thing through the two holes, and mark the place where you are standing; then move nearer or further back until you see it through another point, and make another mark there.
+> and go neer or forther, til thou mayst see thorw another poynt, and marke ther a-nother marke.
+=
+> And loke than what is the differense be-twen the two poyntes in the scale;
+See what the difference is between the two points on the scale: as that difference is to 12, so is the distance between your two marks to the height of the thing.
+> and right as that difference hath him to 12, right so the space be-tween thee and the two markes hath him to the heyghte of the thing.
+=
+> Ensample: I set caas thou seest it thorw a poynt of 4;
+For example, suppose you see it first through point 4 and afterwards through point 3. 4 is more than 3 by 1; and as this difference of 1 is to 12, so is the distance between the two marks to the height of the thing, adding your height up to your eye. You can work like this for any points from 1 to 12.
+> after, at the poynt of 3. Now passeth the nombre of 4 the nombre of 3 be the difference of 1;
+=
+> and right as this difference 1 hath him-self to 12, right so the mesure be-tween the two markes hath him to the heyghte of the thing, putting to the heyghte of thy-self to thyn eye;
+=
+> and thus mayst thou werke fro 1 to 12.
+=
+
+## p2-44
+> In this maner shall thou worche: consider thy rote first, the whiche is made the beginning of the tables fro the yere of oure lord 1397, and entere hit in-to thy slate for the laste meridie of December;
+Work like this. First take your root, the starting value the tables give for the year of our Lord 1397, and write it on your slate as the value for the last noon of December. Then take the year of our Lord you want, and see whether it is later or earlier than 1397. If it is later, see by how many years, and with that number go into your tables at the first line, headed _anni collecti et expansi_.
+> and than consider the yere of oure lord, what is the date, and be-hold whether thy date be more or lasse than the yere 1397. And yf hit so be that hit be more, loke how many yeres hit passeth, and with so many entere into thy tables in the first lyne ther-as is writen anni collecti et expansi.
+=
+> And loke where the same planet is writen in the hede of thy table, and than loke what thou findest in directe of the same yere of oure lord whiche is passid, be hit 8, or 9, or 10, or what nombre that evere it be, til the tyme that thou come to 20, or 40, or 60. And that thou findest in directe wryte in thy slate under thy rote, and adde hit to-geder, and that is thy mene mote, for the laste meridian of the December, for the same yere whiche that thou hast purposed.
+Find your planet's column at the head of the table, and read off the value on the line for that number of years, whether 8, 9, 10 or any other, up to 20, 40 or 60. Write that value on your slate under your root and add the two together: the sum is the planet's mean motion at the last noon of December of the year you chose.
+> And if hit so be that hit passe 20, consider wel that fro 1 to 20 ben anni expansi, and fro 20 to 3000 ben anni collecti;
+If the number of years is more than 20, remember that years 1 to 20 are the _anni expansi_ and years 20 to 3000 the _anni collecti_.
+> and if thy nombere passe 20, than take that thou findest in directe of 20, and if hit be more, as 6 or 18, than take that thou findest in directe there-of, that is to sayen, signes, degrees, minutes, and secoundes, and adde to-gedere un-to thy rote;
+So for a number above 20, take the value on the line for 20, and for what is left over, say 6 or 18, take the value on that line too, in signs, degrees, minutes and seconds, and add them all to your root;
+> and thus to make rotes;
+that is how roots are made.
+> and note, that if hit so be that the yere of oure lord be lasse than the rote, whiche is the yere of oure lord 1397, than shalt thou wryte in the same wyse furst thy rote in thy slate, and after entere in-to thy table in the same yere that be lasse, as I taught be-fore;
+If instead the year of our Lord is earlier than the root year of 1397, first write your root on your slate in the same way, then go into the table with the number of years by which it is earlier, as I taught before,
+> and than consider how many signes, degrees, minutes, and secoundes thyn entringe conteyneth.
+and see how many signs, degrees, minutes and seconds that entry gives.
+> And so be that ther be 2 entrees, than adde hem togeder, and after with-drawe hem from the rote, the yere of oure lord 1397;
+If there are two entries, add them together, and then subtract the total from the root for 1397;
+> and the residue that leveth is thy mene mote fro the laste meridie of December, the whiche thou hast purposed;
+what is left is your mean motion at the last noon of December of the year you chose.
+> and if hit so be that thou wolt weten thy mene mote for any day, or for any fraccioun of day, in this maner thou shalt worche.
+And if you want the mean motion for a particular day, or part of a day, work like this.
+> Make thy rote fro the laste day of Decembere in the maner as I have taught, and afterward behold how many monethis, dayes, and houres ben passid from the meridie of Decembere, and with that entere with the laste moneth that is ful passed, and take that thou findest in directe of him, and wryte hit in thy slate;
+Make your root for the last day of December as I have taught, then see how many months, days and hours have passed since that December noon. Go into the table with the last complete month, and write on your slate the value you find on its line;
+> and entere with as mony dayes as be more, and wryte that thou findest in directe of the same planete that thou worchest for;
+then go in with the extra days, and write down the value on that line for the planet you are working on;
+> and in the same wyse in the table of houres, for houres that ben passed, and adde alle these to thy rote;
+do the same in the table of hours for the hours that have passed, and add all these to your root;
+> and the residue is the mene mote for the same day and the same houre.
+the result is the mean motion for that day and hour.
+
+## p2-45
+> Whan thou wolt make the mene mote of eny planete to be by Arsechieles tables, take thy rote, the whiche is for the yere of oure lord 1397;
+To find the mean motion of any planet by Arzachel's tables, take your root, which is for the year of our Lord 1397.
+> and if so be that thy yere be passid the date, wryte that date, and than wryte the nombere of the yeres.
+If your year is later than that, write down your date and then the root year,
+> Than withdrawe the yeres out of the yeres that ben passed that rote.
+and subtract the root year from your year.
+> Ensampul as thus: the yere of oure lord 1400, I wolde witen, precise, my rote;
+For example: in the year of our Lord 1400 I wanted to know my root exactly. First I wrote 1400, and under it 1397; then I subtracted the second from the first and found the difference was 3 years; so I knew that 3 years had passed since the root written in my tables.
+> than wroot I furst 1400. And under that nombere I wrote a 1397;
+=
+> than withdraw I the laste nombere out of that, and than fond I the residue was 3 yere;
+=
+> I wiste that 3 yere was passed fro the rote, the whiche was writen in my tables.
+=
+> Than after-ward soghte I in my tables the annis collectis et expansis, and amonge myn expanse yeres fond I 3 yeer.
+Next I looked in my tables of _anni collecti et expansi_, and among my single years found the line for 3 years.
+> Than tok I alle the signes, degrees, and minutes, that I fond directe under the same planete that I wroghte for, and wroot so many signes, degrees, and minutes in my slate, and afterward added I to signes, degrees, minutes, and secoundes, the whiche I fond in my rote the yere of oure lord 1397;
+I took the signs, degrees and minutes I found there under the planet I was working on and wrote them on my slate; then I added them to the signs, degrees, minutes and seconds of my root for 1397,
+> and kepte the residue;
+kept the result,
+> and than had I the mene mote for the laste day of Decembere.
+and so had the mean motion for the last day of December.
+> And if thou woldest wete the mene mote of any planete in March, Aprile, or May, other in any other tyme or moneth of the yere, loke how many monethes and dayes ben passed from the laste day of Decembere, the yere of oure lord 1400;
+If you want the mean motion of any planet in March, April or May, or any other time of year, see how many months and days have passed since the last day of December 1400,
+> and so with monethes and dayes entere in-to thy table ther thou findest thy mene mote y-writen in monethes and dayes, and take alle the signes, degrees, minutes, and secoundes that thou findest y-write in directe of thy monethes, and adde to signes, degrees, minutes, and secoundes that thou findest with thy rote the yere of oure lord 1400, and the residue that leveth is the mene mote for that same day.
+go into the table where the mean motion is given by months and days, take all the signs, degrees, minutes and seconds written on the line for your months, and add them to the signs, degrees, minutes and seconds of your root for 1400: the result is the mean motion for that day.
+> And note, if hit so be that thou woldest wete the mene mote in ony yere that is lasse than thy rote, withdrawe the nombere of so many yeres as hit is lasse than the yere of oure lord a 1397, and kepe the residue;
+Note that if you want the mean motion for a year earlier than your root, work out by how many years it falls short of 1397, keep that number,
+> and so many yeres, monethes, and dayes entere in-to thy tabelis of thy mene mote.
+and go into your tables of mean motion with that many years, months and days.
+> And take alle the signes, degrees, and minutes, and secoundes, that thou findest in directe of alle the yeris, monethes, and dayes, and wryte hem in thy slate;
+Take all the signs, degrees, minutes and seconds you find on the lines for those years, months and days, and write them on your slate;
+> and above thilke nombere wryte the signes, degrees, minutes, and secoundes, the whiche thou findest with thy rote the yere of oure lord a 1397;
+above them write the signs, degrees, minutes and seconds of your root for 1397,
+> and with-drawe alle the nethere signes and degrees fro the signes and degrees, minutes, and secoundes of other signes with thy rote;
+and subtract the lower figures from the root figures above them;
+> and thy residue that leveth is thy mene mote for that day.
+what is left is your mean motion for that day.
+
+## p2-46
+> First wite thou certeinly, how that haven stondeth, that thou list to werke for;
+First find out exactly how the harbour you are working for lies:
+> that is to say in whiche place of the firmament the mone being, maketh fulle see.
+that is, where in the sky the moon has to be to bring high tide there.
+> Than awayte thou redily in what degree of the zodiak that the mone at that tyme is inne.
+Then find out promptly which degree of the zodiac the moon is in at the time.
+> Bringe furth than the labelle, and set the point therof in that same cost that the mone maketh flode, and set thou there the degree of the mone according with the egge of the label.
+Bring the label round and set its point in the direction where the moon makes the flood tide, and set the moon's degree there along the edge of the label.
+> Than afterward awayte where is than the degree of the sonne, at that tyme.
+Then see where the sun's degree is at that moment.
+> Remeve thou than the label fro the mone, and bringe and sette it iustly upon the degree of the sonne.
+Move the label away from the moon and set it exactly on the sun's degree.
+> And the point of the label shal than declare to thee, at what houre of the day or of the night shal be flode.
+The point of the label will then show you at what hour of the day or night the tide will be high.
+> And there also maist thou wite by the same point of the label, whether it be, at that same tyme, flode or ebbe, or half flode, or quarter flode, or ebbe, or half or quarter ebbe;
+By the same point of the label you can also tell whether, at that time, the tide is in flood or ebb, at half or quarter flood, or at half or quarter ebb;
+> or ellis at what houre it was last, or shal be next by night or by day, thou than shalt esely knowe, &c.
+or you can easily tell when it was last high, or when it will be high next, by night or by day.
+> Furthermore, if it so be that thou happe to worke for this matere aboute the tyme of the coniunccioun, bringe furthe the degree of the mone with the labelle to that coste as it is before seyd.
+If you happen to be working this out around the time of the conjunction, bring the moon's degree round with the label to that direction, as described above.
+> But than thou shalt understonde that thou may not bringe furthe the label fro the degree of the mone as thou dide before;
+But understand that you cannot then move the label from the moon's degree as you did before,
+> for-why the sonne is than in the same degree with the mone.
+because the sun is then in the same degree as the moon.
+> And so thou may at that tyme by the point of the labelle unremeved knowe the houre of the flode or of the ebbe, as it is before seyd, &c.
+So at that time you can read the hour of flood or ebb from the point of the label without moving it, as described above.
+> And evermore as thou findest the mone passe fro the sonne, so remeve thou the labelle than fro the degree of the mone, and bringe it to the degree of the sonne.
+And as the moon moves on from the sun, move the label from the moon's degree to the sun's degree each time,
+> And worke thou than as thou dide before, &c.
+and work as you did before.
+> Or elles knowe thou what houre it is that thou art inne, by thyn instrument.
+Or else find the present hour with your instrument;
+> Than bringe thou furth fro thennes the labelle and ley it upon the degree of the mone, and therby may thou wite also whan it was flode, or whan it wol be next, be it night or day;
+then bring the label from there and lay it on the moon's degree, and by that you can also tell when the tide was last high, or when it will be next, night or day.
+> &c.
+=
