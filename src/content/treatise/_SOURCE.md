@@ -24,6 +24,12 @@ Editing applied:
   a run of spaces, or a single space when the line reaches Skeat's right
   margin (72+ characters). All 231 removed were multiples of 5. Text lines
   that really end in a number are no longer than 67 characters.
+- Paragraph breaks added in the Prologue (Jes tg 18054: "can we introduce
+  plausible paragraph breaks to treatise prologue"). Skeat prints the
+  Prologue before the five parts as one paragraph; it is divided here, at
+  sentence ends only, before "I seye a certein of conclusiouns", "This
+  tretis, divided in fyve parties", "Now wol I prey meekly", "And Lowis,
+  yif so be" and "But considere wel". No words or punctuation changed.
 - Gutenberg's `_underscores_` for Skeat's italics are kept (Markdown renders
   them as italics). Skeat's square brackets (e.g. "[thou shall do wel
   y-now]") are kept. Occasional double spaces inside a line are as in the
